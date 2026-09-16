@@ -1,0 +1,50 @@
+<svg viewBox="0 0 760 380" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .node { font-size: 12.5px; font-weight: 700; fill: #ffffff; }
+    .q { font-size: 13px; font-weight: 700; fill: #1e293b; }
+    .opt { font-size: 12px; font-weight: 700; fill: #ffffff; }
+    .note { font-size: 11px; fill: #64748b; }
+    .edge { font-size: 11px; font-weight: 700; fill: #475569; }
+  </style>
+
+  <text x="24" y="30" class="title">PACELC: the fuller picture (CAP + the everyday tradeoff)</text>
+  <text x="24" y="50" class="note">CAP only describes a partition. PACELC adds: even with no failure, you still trade latency against consistency.</text>
+
+  <!-- root -->
+  <rect x="300" y="70" width="160" height="44" rx="10" fill="#1e293b"/>
+  <text x="318" y="97" class="node">Is there a Partition?</text>
+
+  <!-- left branch: yes (PAC) -->
+  <path d="M 300 92 C 200 92, 160 110, 150 140" fill="none" stroke="#dc2626" stroke-width="2"/>
+  <text x="180" y="120" class="edge" fill="#dc2626">P — yes</text>
+  <rect x="60" y="142" width="200" height="40" rx="8" fill="#dc2626"/>
+  <text x="72" y="167" class="node">choose A  or  C</text>
+
+  <rect x="40" y="200" width="110" height="40" rx="8" fill="#059669"/>
+  <text x="66" y="225" class="opt">A</text><text x="88" y="225" class="note" fill="#dcfce7">available</text>
+  <rect x="170" y="200" width="110" height="40" rx="8" fill="#2563eb"/>
+  <text x="196" y="225" class="opt">C</text><text x="218" y="225" class="note" fill="#dbeafe">consistent</text>
+  <line x1="105" y1="182" x2="95" y2="200" stroke="#94a3b8"/>
+  <line x1="215" y1="182" x2="225" y2="200" stroke="#94a3b8"/>
+
+  <!-- right branch: else (ELC) -->
+  <path d="M 460 92 C 560 92, 600 110, 610 140" fill="none" stroke="#059669" stroke-width="2"/>
+  <text x="560" y="120" class="edge" fill="#059669">E — else (normal)</text>
+  <rect x="500" y="142" width="200" height="40" rx="8" fill="#059669"/>
+  <text x="512" y="167" class="node">choose L  or  C</text>
+
+  <rect x="480" y="200" width="110" height="40" rx="8" fill="#d97706"/>
+  <text x="506" y="225" class="opt">L</text><text x="528" y="225" class="note" fill="#fff7ed">low latency</text>
+  <rect x="610" y="200" width="110" height="40" rx="8" fill="#2563eb"/>
+  <text x="636" y="225" class="opt">C</text><text x="658" y="225" class="note" fill="#dbeafe">consistent</text>
+  <line x1="545" y1="182" x2="535" y2="200" stroke="#94a3b8"/>
+  <line x1="655" y1="182" x2="665" y2="200" stroke="#94a3b8"/>
+
+  <!-- classifications -->
+  <rect x="24" y="270" width="712" height="94" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="40" y="294" class="q">Reading a system's PACELC class</text>
+  <text x="40" y="316" class="note"><tspan font-weight="700">PA/EL</tspan> (Cassandra, DynamoDB default): stay available under partition, favor low latency otherwise → eventual consistency.</text>
+  <text x="40" y="336" class="note"><tspan font-weight="700">PC/EC</tspan> (fully strongly-consistent stores): keep consistency always, accepting lower availability under partition and higher latency otherwise.</text>
+  <text x="40" y="356" class="note">The insight: consistency has a cost <tspan font-weight="700">all the time</tspan> (latency), not only when the network breaks.</text>
+</svg>

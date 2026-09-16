@@ -1,0 +1,81 @@
+<svg viewBox="0 0 800 490" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .tier { font-size: 12.5px; font-weight: 700; fill: #ffffff; }
+    .tierd { font-size: 10.5px; fill: #ffffff; }
+    .meta { font-size: 11px; fill: #334155; }
+    .side { font-size: 12px; font-weight: 700; fill: #475569; }
+    .note { font-size: 11px; fill: #64748b; }
+    .hdr { font-size: 10.5px; font-weight: 700; fill: #64748b; }
+  </style>
+
+  <text x="24" y="30" class="title">The memory &amp; storage hierarchy</text>
+  <text x="24" y="50" class="note">As you go down: bigger and cheaper, but slower. As you go up: faster, but smaller and costlier. There is no "fast, big, and cheap."</text>
+
+  <!-- side labels -->
+  <text x="30" y="90" class="side" transform="rotate(-90 30 300)">◄ faster · smaller · costlier   |   slower · bigger · cheaper ►</text>
+
+  <!-- column headers -->
+  <text x="470" y="82" class="hdr">TYPICAL SIZE</text>
+  <text x="600" y="82" class="hdr">~LATENCY</text>
+  <text x="700" y="82" class="hdr">VOLATILE?</text>
+
+  <!-- tiers as stacked trapezoids (approximated with rects of increasing width) -->
+  <!-- Registers -->
+  <rect x="300" y="92" width="150" height="40" rx="4" fill="#1e293b"/>
+  <text x="315" y="112" class="tier">CPU Registers</text>
+  <text x="315" y="127" class="tierd">inside the core</text>
+  <text x="470" y="116" class="meta">bytes–KB</text>
+  <text x="600" y="116" class="meta">&lt; 1 ns</text>
+  <text x="705" y="116" class="meta">yes</text>
+
+  <!-- L1/L2 -->
+  <rect x="270" y="138" width="210" height="40" rx="4" fill="#2563eb"/>
+  <text x="285" y="158" class="tier">L1 / L2 Cache</text>
+  <text x="285" y="173" class="tierd">on-chip, per core</text>
+  <text x="470" y="162" class="meta">KB – MB</text>
+  <text x="600" y="162" class="meta">~1–10 ns</text>
+  <text x="705" y="162" class="meta">yes</text>
+
+  <!-- L3 -->
+  <rect x="240" y="184" width="270" height="40" rx="4" fill="#3b82f6"/>
+  <text x="255" y="204" class="tier">L3 Cache</text>
+  <text x="255" y="219" class="tierd">shared across cores</text>
+  <text x="470" y="208" class="meta">MB (tens)</text>
+  <text x="600" y="208" class="meta">~10–30 ns</text>
+  <text x="705" y="208" class="meta">yes</text>
+
+  <!-- RAM -->
+  <rect x="200" y="230" width="350" height="46" rx="4" fill="#059669"/>
+  <text x="215" y="252" class="tier">Main Memory (RAM)</text>
+  <text x="215" y="268" class="tierd">the working set of running programs</text>
+  <text x="470" y="257" class="meta">GB (tens–100s)</text>
+  <text x="600" y="257" class="meta">~100 ns</text>
+  <text x="705" y="257" class="meta">yes</text>
+
+  <!-- SSD -->
+  <rect x="150" y="282" width="450" height="46" rx="4" fill="#0ea5e9"/>
+  <text x="165" y="304" class="tier">SSD (flash storage)</text>
+  <text x="165" y="320" class="tierd">fast persistent storage</text>
+  <text x="470" y="309" class="meta">TB</text>
+  <text x="600" y="309" class="meta">~100 µs</text>
+  <text x="700" y="309" class="meta" fill="#065f46">NO</text>
+
+  <!-- HDD -->
+  <rect x="100" y="334" width="550" height="46" rx="4" fill="#94a3b8"/>
+  <text x="115" y="356" class="tier">Hard Disk (HDD)</text>
+  <text x="115" y="372" class="tierd">cheap bulk / archival storage</text>
+  <text x="470" y="361" class="meta">TB (many)</text>
+  <text x="600" y="361" class="meta">~10 ms</text>
+  <text x="700" y="361" class="meta" fill="#334155">NO</text>
+
+  <!-- divider between volatile and non-volatile -->
+  <line x1="90" y1="278" x2="760" y2="278" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <text x="90" y="294" class="note" fill="#dc2626">↑ volatile (in the CPU/RAM, lost on power off)  ·  ↓ non-volatile (persists)</text>
+
+  <!-- takeaway -->
+  <rect x="24" y="398" width="752" height="82" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="40" y="422" class="side" font-size="12">The gap is enormous</text>
+  <text x="40" y="444" class="note">RAM is roughly <tspan font-weight="700">1,000×</tspan> faster than an SSD and <tspan font-weight="700">100,000×</tspan> faster than a spinning disk; a cache hit is faster still. The CPU would sit</text>
+  <text x="40" y="462" class="note">idle waiting for slow memory — so hardware keeps the data you're likely to use next in the fast upper tiers. That is <tspan font-weight="700">caching</tspan>, built into the machine.</text>
+</svg>

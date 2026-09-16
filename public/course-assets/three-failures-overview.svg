@@ -1,0 +1,61 @@
+<svg viewBox="0 0 820 470" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <rect width="820" height="470" fill="#f8fafc"/>
+  <text x="410" y="34" text-anchor="middle" font-size="22" font-weight="700" fill="#0f172a">Three Liveness Failures: Nobody Making Progress</text>
+  <text x="410" y="58" text-anchor="middle" font-size="13" fill="#64748b">Safety bugs (races) produce wrong results; liveness bugs mean threads never finish at all</text>
+
+  <!-- Deadlock -->
+  <rect x="30" y="82" width="250" height="330" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="155" y="108" text-anchor="middle" font-size="15" font-weight="700" fill="#b91c1c">Deadlock</text>
+  <text x="155" y="128" text-anchor="middle" font-size="10.5" fill="#991b1b">Frozen forever</text>
+  <circle cx="105" cy="175" r="22" fill="#fecaca" stroke="#dc2626" stroke-width="2"/><text x="105" y="180" text-anchor="middle" font-size="11" font-weight="700" fill="#b91c1c">T1</text>
+  <circle cx="205" cy="175" r="22" fill="#fecaca" stroke="#dc2626" stroke-width="2"/><text x="205" y="180" text-anchor="middle" font-size="11" font-weight="700" fill="#b91c1c">T2</text>
+  <path d="M127,168 L183,168" stroke="#dc2626" stroke-width="2" marker-end="url(#dl_a)"/>
+  <path d="M183,185 L127,185" stroke="#dc2626" stroke-width="2" marker-end="url(#dl_a)"/>
+  <defs><marker id="dl_a" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto"><path d="M0,0 L7,4 L0,8 Z" fill="#dc2626"/></marker></defs>
+  <text x="155" y="222" text-anchor="middle" font-size="9" fill="#991b1b">each holds what the</text>
+  <text x="155" y="236" text-anchor="middle" font-size="9" fill="#991b1b">other needs</text>
+  <rect x="46" y="256" width="218" height="140" rx="8" fill="#ffffff" stroke="#fca5a5"/>
+  <text x="155" y="278" text-anchor="middle" font-size="10.5" font-weight="700" fill="#b91c1c">Threads BLOCKED</text>
+  <text x="56" y="300" font-size="9.5" fill="#334155">&#8226; Circular wait for locks</text>
+  <text x="56" y="320" font-size="9.5" fill="#334155">&#8226; 0% CPU — all asleep</text>
+  <text x="56" y="340" font-size="9.5" fill="#334155">&#8226; Never resolves itself</text>
+  <text x="56" y="360" font-size="9.5" fill="#334155">&#8226; Analogy: 4-way gridlock,</text>
+  <text x="66" y="374" font-size="9.5" fill="#334155">nobody can move</text>
+  <text x="56" y="392" font-size="9" fill="#b91c1c">Cure: lock ordering</text>
+
+  <!-- Livelock -->
+  <rect x="290" y="82" width="250" height="330" rx="12" fill="#fff7ed" stroke="#d97706" stroke-width="2"/>
+  <text x="415" y="108" text-anchor="middle" font-size="15" font-weight="700" fill="#b45309">Livelock</text>
+  <text x="415" y="128" text-anchor="middle" font-size="10.5" fill="#7c2d12">Busy but stuck</text>
+  <circle cx="365" cy="175" r="22" fill="#fed7aa" stroke="#d97706" stroke-width="2"/><text x="365" y="180" text-anchor="middle" font-size="11" font-weight="700" fill="#b45309">T1</text>
+  <circle cx="465" cy="175" r="22" fill="#fed7aa" stroke="#d97706" stroke-width="2"/><text x="465" y="180" text-anchor="middle" font-size="11" font-weight="700" fill="#b45309">T2</text>
+  <path d="M365,197 C365,225 465,225 465,197" fill="none" stroke="#d97706" stroke-width="2" marker-end="url(#ll_a)"/>
+  <path d="M465,153 C465,125 365,125 365,153" fill="none" stroke="#d97706" stroke-width="2" marker-end="url(#ll_a)"/>
+  <defs><marker id="ll_a" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto"><path d="M0,0 L7,4 L0,8 Z" fill="#d97706"/></marker></defs>
+  <text x="415" y="240" text-anchor="middle" font-size="9" fill="#7c2d12">endlessly reacting</text>
+  <rect x="306" y="256" width="218" height="140" rx="8" fill="#ffffff" stroke="#fdba74"/>
+  <text x="415" y="278" text-anchor="middle" font-size="10.5" font-weight="700" fill="#b45309">Threads ACTIVE</text>
+  <text x="316" y="300" font-size="9.5" fill="#334155">&#8226; Keep responding to each</text>
+  <text x="326" y="314" font-size="9.5" fill="#334155">other, retrying</text>
+  <text x="316" y="334" font-size="9.5" fill="#334155">&#8226; 100% CPU — all spinning</text>
+  <text x="316" y="354" font-size="9.5" fill="#334155">&#8226; Analogy: two people</text>
+  <text x="326" y="368" font-size="9.5" fill="#334155">side-stepping in a hallway</text>
+  <text x="316" y="390" font-size="9" fill="#b45309">Cure: randomized backoff</text>
+
+  <!-- Starvation -->
+  <rect x="550" y="82" width="240" height="330" rx="12" fill="#faf5ff" stroke="#7c3aed" stroke-width="2"/>
+  <text x="670" y="108" text-anchor="middle" font-size="15" font-weight="700" fill="#6d28d9">Starvation</text>
+  <text x="670" y="128" text-anchor="middle" font-size="10.5" fill="#5b21b6">Perpetually skipped</text>
+  <circle cx="620" cy="175" r="20" fill="#ddd6fe" stroke="#7c3aed" stroke-width="2"/><text x="620" y="180" text-anchor="middle" font-size="10" font-weight="700" fill="#6d28d9">greedy</text>
+  <circle cx="720" cy="175" r="20" fill="#f1f5f9" stroke="#94a3b8" stroke-width="2"/><text x="720" y="180" text-anchor="middle" font-size="9" fill="#64748b">victim</text>
+  <text x="670" y="222" text-anchor="middle" font-size="9" fill="#5b21b6">high-priority threads</text>
+  <text x="670" y="236" text-anchor="middle" font-size="9" fill="#5b21b6">always jump ahead</text>
+  <rect x="566" y="256" width="208" height="140" rx="8" fill="#ffffff" stroke="#c4b5fd"/>
+  <text x="670" y="278" text-anchor="middle" font-size="10.5" font-weight="700" fill="#6d28d9">One thread WAITS</text>
+  <text x="576" y="300" font-size="9.5" fill="#334155">&#8226; Others make progress</text>
+  <text x="576" y="320" font-size="9.5" fill="#334155">&#8226; One is denied resources</text>
+  <text x="576" y="340" font-size="9.5" fill="#334155">&#8226; Unfair scheduling/locks</text>
+  <text x="576" y="360" font-size="9.5" fill="#334155">&#8226; Analogy: always let others</text>
+  <text x="586" y="374" font-size="9.5" fill="#334155">cut the line ahead of you</text>
+  <text x="576" y="392" font-size="9" fill="#6d28d9">Cure: fairness policies</text>
+</svg>

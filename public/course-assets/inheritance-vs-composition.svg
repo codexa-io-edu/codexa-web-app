@@ -1,0 +1,66 @@
+<svg viewBox="0 0 820 440" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <rect width="820" height="440" fill="#f8fafc"/>
+  <text x="410" y="30" text-anchor="middle" font-size="20" font-weight="700" fill="#0f172a">Inheritance vs Composition: The Decision</text>
+  <text x="410" y="52" text-anchor="middle" font-size="12.5" fill="#64748b">The most important hierarchy decision — get it wrong and the whole model fights you later</text>
+
+  <defs>
+    <marker id="dt_a" markerWidth="11" markerHeight="11" refX="8" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#475569"/></marker>
+    <marker id="dt_y" markerWidth="11" markerHeight="11" refX="8" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#059669"/></marker>
+    <marker id="dt_n" markerWidth="11" markerHeight="11" refX="8" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#dc2626"/></marker>
+  </defs>
+
+  <!-- Start -->
+  <rect x="310" y="72" width="200" height="44" rx="8" fill="#334155"/>
+  <text x="410" y="99" text-anchor="middle" font-size="12" font-weight="700" fill="#f1f5f9">Relationship between A and B?</text>
+
+  <!-- Q1: is-a -->
+  <rect x="300" y="148" width="220" height="44" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.8"/>
+  <text x="410" y="175" text-anchor="middle" font-size="11" fill="#1e3a8a">Is A genuinely a kind of B?</text>
+  <line x1="410" y1="116" x2="410" y2="146" stroke="#475569" stroke-width="1.8" marker-end="url(#dt_a)"/>
+
+  <!-- Yes → more Q -->
+  <line x1="410" y1="192" x2="410" y2="218" stroke="#059669" stroke-width="1.8" marker-end="url(#dt_y)"/>
+  <text x="420" y="210" font-size="9" fill="#059669" font-weight="700">YES</text>
+
+  <rect x="276" y="220" width="268" height="44" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.8"/>
+  <text x="410" y="240" text-anchor="middle" font-size="10.5" fill="#1e3a8a">Will it ALWAYS be that type?</text>
+  <text x="410" y="256" text-anchor="middle" font-size="9.5" fill="#1e3a8a">(not just right now)</text>
+
+  <!-- Yes → Inheritance -->
+  <line x1="544" y1="242" x2="590" y2="242" stroke="#059669" stroke-width="1.8" marker-end="url(#dt_y)"/>
+  <text x="549" y="233" font-size="9" fill="#059669" font-weight="700">YES</text>
+  <rect x="592" y="216" width="198" height="52" rx="8" fill="#dcfce7" stroke="#059669" stroke-width="2"/>
+  <text x="691" y="238" text-anchor="middle" font-size="11.5" font-weight="700" fill="#047857">Use Inheritance</text>
+  <text x="691" y="256" text-anchor="middle" font-size="9" fill="#334155">extends / implements</text>
+
+  <!-- No from always → Composition -->
+  <line x1="410" y1="264" x2="410" y2="292" stroke="#dc2626" stroke-width="1.8" marker-end="url(#dt_n)"/>
+  <text x="420" y="284" font-size="9" fill="#dc2626" font-weight="700">NO</text>
+
+  <!-- No from is-a → Composition direct -->
+  <line x1="300" y1="170" x2="176" y2="170" stroke="#dc2626" stroke-width="1.8"/>
+  <line x1="176" y1="170" x2="176" y2="304" stroke="#dc2626" stroke-width="1.8" marker-end="url(#dt_n)"/>
+  <text x="120" y="162" font-size="9" fill="#dc2626" font-weight="700">NO (has-a)</text>
+
+  <rect x="278" y="294" width="264" height="62" rx="8" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+  <text x="410" y="318" text-anchor="middle" font-size="11.5" font-weight="700" fill="#b91c1c">Use Composition</text>
+  <text x="410" y="338" text-anchor="middle" font-size="9" fill="#334155">A has-a B as a field; inject or construct B</text>
+
+  <!-- Inheritance examples -->
+  <rect x="592" y="288" width="198" height="68" rx="6" fill="#f0fdf4" stroke="#6ee7b7"/>
+  <text x="602" y="306" font-size="9" fill="#065f46" font-weight="700">Good examples:</text>
+  <text x="602" y="322" font-size="8.5" fill="#334155">Dog extends Animal ✓</text>
+  <text x="602" y="337" font-size="8.5" fill="#334155">CardPayment extends Payment ✓</text>
+  <text x="602" y="352" font-size="8.5" fill="#334155">Square extends Shape ✓</text>
+
+  <!-- Composition examples -->
+  <rect x="30" y="294" width="228" height="100" rx="6" fill="#fef2f2" stroke="#fca5a5"/>
+  <text x="40" y="312" font-size="9" fill="#b91c1c" font-weight="700">Inheritance mistakes:</text>
+  <text x="40" y="328" font-size="8.5" fill="#334155">Stack extends Vector ✗</text>
+  <text x="40" y="344" font-size="8.5" fill="#334155">  (can push/pop but also add(idx))</text>
+  <text x="40" y="360" font-size="8.5" fill="#334155">Logger extends File ✗</text>
+  <text x="40" y="376" font-size="8.5" fill="#334155">  (Logger HAS-A file, not IS-A file)</text>
+
+  <rect x="30" y="404" width="760" height="30" rx="6" fill="#fffbeb" stroke="#f59e0b" stroke-width="1.4"/>
+  <text x="410" y="423" text-anchor="middle" font-size="10.5" font-weight="700" fill="#b45309">Rule of thumb: if you can replace the relationship with "has-a" and it still makes sense → use Composition</text>
+</svg>

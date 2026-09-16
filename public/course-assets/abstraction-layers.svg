@@ -1,0 +1,49 @@
+<svg viewBox="0 0 760 400" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <rect width="760" height="400" fill="#f8fafc"/>
+  <text x="380" y="36" text-anchor="middle" font-size="21" font-weight="700" fill="#0f172a">Abstraction: A Simple Contract Hides Complex Machinery</text>
+
+  <!-- caller -->
+  <rect x="250" y="70" width="260" height="52" rx="10" fill="#dcfce7" stroke="#059669" stroke-width="2"/>
+  <text x="380" y="93" text-anchor="middle" font-size="14" font-weight="700" fill="#047857">Your code</text>
+  <text x="380" y="112" text-anchor="middle" font-size="12" fill="#065f46" font-family="monospace">payments.charge(order)</text>
+
+  <defs>
+    <marker id="da" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#475569"/>
+    </marker>
+  </defs>
+  <line x1="380" y1="124" x2="380" y2="150" stroke="#475569" stroke-width="2" marker-end="url(#da)"/>
+
+  <!-- interface / contract -->
+  <rect x="200" y="152" width="360" height="52" rx="10" fill="#e0e7ff" stroke="#4338ca" stroke-width="2.5"/>
+  <text x="380" y="175" text-anchor="middle" font-size="14" font-weight="700" fill="#3730a3">interface PaymentGateway  (the WHAT)</text>
+  <text x="380" y="194" text-anchor="middle" font-size="11.5" fill="#4f46e5" font-family="monospace">charge(Order) : Receipt</text>
+
+  <text x="600" y="182" font-size="12" fill="#64748b">&#8592; stable, simple surface</text>
+
+  <line x1="380" y1="206" x2="380" y2="232" stroke="#475569" stroke-width="2" marker-end="url(#da)"/>
+  <text x="470" y="224" font-size="11.5" fill="#64748b">hidden below the line (the HOW)</text>
+  <line x1="60" y1="232" x2="700" y2="232" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="5 5"/>
+
+  <!-- hidden implementations -->
+  <rect x="70" y="252" width="190" height="120" rx="10" fill="#fff7ed" stroke="#f59e0b" stroke-width="1.8"/>
+  <text x="165" y="276" text-anchor="middle" font-size="13" font-weight="700" fill="#b45309">StripeGateway</text>
+  <text x="165" y="300" text-anchor="middle" font-size="10.5" fill="#7c2d12">HTTP calls, retries,</text>
+  <text x="165" y="318" text-anchor="middle" font-size="10.5" fill="#7c2d12">tokenization,</text>
+  <text x="165" y="336" text-anchor="middle" font-size="10.5" fill="#7c2d12">idempotency keys,</text>
+  <text x="165" y="354" text-anchor="middle" font-size="10.5" fill="#7c2d12">webhook handling</text>
+
+  <rect x="285" y="252" width="190" height="120" rx="10" fill="#fff7ed" stroke="#f59e0b" stroke-width="1.8"/>
+  <text x="380" y="276" text-anchor="middle" font-size="13" font-weight="700" fill="#b45309">PayPalGateway</text>
+  <text x="380" y="300" text-anchor="middle" font-size="10.5" fill="#7c2d12">OAuth tokens,</text>
+  <text x="380" y="318" text-anchor="middle" font-size="10.5" fill="#7c2d12">different API shape,</text>
+  <text x="380" y="336" text-anchor="middle" font-size="10.5" fill="#7c2d12">currency conversion,</text>
+  <text x="380" y="354" text-anchor="middle" font-size="10.5" fill="#7c2d12">rate limits</text>
+
+  <rect x="500" y="252" width="190" height="120" rx="10" fill="#fff7ed" stroke="#f59e0b" stroke-width="1.8"/>
+  <text x="595" y="276" text-anchor="middle" font-size="13" font-weight="700" fill="#b45309">FakeGateway</text>
+  <text x="595" y="300" text-anchor="middle" font-size="10.5" fill="#7c2d12">in-memory,</text>
+  <text x="595" y="318" text-anchor="middle" font-size="10.5" fill="#7c2d12">used in tests,</text>
+  <text x="595" y="336" text-anchor="middle" font-size="10.5" fill="#7c2d12">no network,</text>
+  <text x="595" y="354" text-anchor="middle" font-size="10.5" fill="#7c2d12">instant results</text>
+</svg>

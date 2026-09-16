@@ -1,0 +1,61 @@
+<svg viewBox="0 0 800 430" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .h { font-size: 12px; font-weight: 700; fill: #ffffff; }
+    .box { font-size: 10px; font-weight: 700; fill: #ffffff; }
+    .note { font-size: 10px; fill: #64748b; }
+    .lbl { font-size: 10px; font-weight: 700; fill: #1e293b; }
+  </style>
+
+  <text x="24" y="30" class="title">Producer durability: the acks setting and the ISR</text>
+
+  <!-- acks=0 -->
+  <rect x="24" y="50" width="245" height="180" rx="10" fill="#fef2f2" stroke="#fecaca"/>
+  <rect x="24" y="50" width="245" height="32" rx="10" fill="#dc2626"/><text x="40" y="72" class="h">acks = 0 — fire &amp; forget</text>
+  <rect x="44" y="98" width="70" height="30" rx="5" fill="#2563eb"/><text x="79" y="118" text-anchor="middle" class="box">producer</text>
+  <rect x="160" y="98" width="80" height="30" rx="5" fill="#059669"/><text x="200" y="118" text-anchor="middle" class="box">leader</text>
+  <line x1="114" y1="113" x2="158" y2="113" stroke="#334155" stroke-width="1.6" marker-end="url(#d)"/>
+  <text x="44" y="156" class="note">No wait for any ack.</text>
+  <text x="44" y="176" class="note">Fastest, lowest latency.</text>
+  <text x="44" y="200" class="note" fill="#dc2626">May silently lose data.</text>
+
+  <!-- acks=1 -->
+  <rect x="278" y="50" width="245" height="180" rx="10" fill="#fffbeb" stroke="#fde68a"/>
+  <rect x="278" y="50" width="245" height="32" rx="10" fill="#d97706"/><text x="294" y="72" class="h">acks = 1 — leader only</text>
+  <rect x="298" y="98" width="70" height="30" rx="5" fill="#2563eb"/><text x="333" y="118" text-anchor="middle" class="box">producer</text>
+  <rect x="414" y="98" width="80" height="30" rx="5" fill="#059669"/><text x="454" y="118" text-anchor="middle" class="box">leader</text>
+  <line x1="368" y1="113" x2="412" y2="113" stroke="#334155" stroke-width="1.6" marker-end="url(#d)"/>
+  <line x1="412" y1="120" x2="370" y2="120" stroke="#059669" stroke-width="1.4" marker-end="url(#g)"/>
+  <text x="298" y="156" class="note">Leader confirms once it</text>
+  <text x="298" y="172" class="note">writes locally.</text>
+  <text x="298" y="196" class="note" fill="#d97706">Loss if leader dies before</text>
+  <text x="298" y="212" class="note" fill="#d97706">followers copy it.</text>
+
+  <!-- acks=all -->
+  <rect x="532" y="50" width="244" height="180" rx="10" fill="#f0fdf4" stroke="#bbf7d0"/>
+  <rect x="532" y="50" width="244" height="32" rx="10" fill="#059669"/><text x="548" y="72" class="h">acks = all (-1) — full ISR</text>
+  <rect x="548" y="92" width="66" height="26" rx="5" fill="#2563eb"/><text x="581" y="110" text-anchor="middle" class="box">producer</text>
+  <rect x="656" y="92" width="70" height="26" rx="5" fill="#059669"/><text x="691" y="110" text-anchor="middle" class="box">leader</text>
+  <rect x="656" y="124" width="70" height="22" rx="4" fill="#94a3b8"/><text x="691" y="140" text-anchor="middle" class="box">follower</text>
+  <rect x="656" y="150" width="70" height="22" rx="4" fill="#94a3b8"/><text x="691" y="166" text-anchor="middle" class="box">follower</text>
+  <line x1="614" y1="105" x2="654" y2="105" stroke="#334155" stroke-width="1.6" marker-end="url(#d)"/>
+  <line x1="691" y1="118" x2="691" y2="122" stroke="#059669" stroke-width="1.4"/>
+  <line x1="691" y1="146" x2="691" y2="150" stroke="#059669" stroke-width="1.4"/>
+  <text x="548" y="192" class="note">Waits until all in-sync</text>
+  <text x="548" y="208" class="note" fill="#059669">replicas have it. Durable.</text>
+
+  <!-- min.insync footer -->
+  <rect x="24" y="248" width="752" height="164" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="40" y="272" class="lbl">The ISR (in-sync replicas) and min.insync.replicas</text>
+  <text x="40" y="294" class="note">• The <tspan font-weight="700">ISR</tspan> is the set of replicas currently caught up with the leader. Only in-sync replicas are eligible to become leader.</text>
+  <text x="40" y="314" class="note">• With <tspan font-weight="700">acks=all</tspan>, a write is acknowledged only after every ISR member has it — but "all ISR" could shrink to just the leader.</text>
+  <text x="40" y="334" class="note">• <tspan font-weight="700">min.insync.replicas=2</tspan> guards against that: if fewer than 2 replicas are in sync, the broker rejects the write rather than</text>
+  <text x="40" y="350" class="note">  accept something under-replicated. Together, acks=all + RF=3 + min.insync=2 is the standard durable configuration.</text>
+  <text x="40" y="376" class="note">• <tspan font-weight="700">unclean.leader.election</tspan> = false keeps an out-of-sync replica from becoming leader (which would lose data). Leave it off</text>
+  <text x="40" y="392" class="note">  for durability; turning it on trades data safety for availability.</text>
+
+  <defs>
+    <marker id="d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#334155"/></marker>
+    <marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#059669"/></marker>
+  </defs>
+</svg>

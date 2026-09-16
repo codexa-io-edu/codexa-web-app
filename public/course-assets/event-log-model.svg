@@ -1,0 +1,51 @@
+<svg viewBox="0 0 800 410" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .box { font-size: 11px; font-weight: 700; fill: #ffffff; }
+    .off { font-size: 10px; font-weight: 700; fill: #ffffff; }
+    .note { font-size: 10.5px; fill: #64748b; }
+    .lbl { font-size: 10.5px; font-weight: 700; fill: #1e293b; }
+    .ptr { font-size: 10px; font-weight: 700; fill: #1e293b; }
+  </style>
+
+  <text x="24" y="30" class="title">Event streaming: an append-only log many readers share</text>
+
+  <!-- producer -->
+  <rect x="30" y="70" width="100" height="34" rx="6" fill="#2563eb"/><text x="80" y="92" text-anchor="middle" class="box">Producer</text>
+  <text x="150" y="92" class="note">appends to the end →</text>
+
+  <!-- log -->
+  <text x="30" y="140" class="lbl">Log (immutable, ordered by offset)</text>
+  <g>
+    <rect x="30" y="150" width="60" height="44" rx="4" fill="#7c3aed"/><text x="60" y="177" text-anchor="middle" class="off">e0</text>
+    <rect x="92" y="150" width="60" height="44" rx="4" fill="#7c3aed"/><text x="122" y="177" text-anchor="middle" class="off">e1</text>
+    <rect x="154" y="150" width="60" height="44" rx="4" fill="#7c3aed"/><text x="184" y="177" text-anchor="middle" class="off">e2</text>
+    <rect x="216" y="150" width="60" height="44" rx="4" fill="#7c3aed"/><text x="246" y="177" text-anchor="middle" class="off">e3</text>
+    <rect x="278" y="150" width="60" height="44" rx="4" fill="#7c3aed"/><text x="308" y="177" text-anchor="middle" class="off">e4</text>
+    <rect x="340" y="150" width="60" height="44" rx="4" fill="#7c3aed"/><text x="370" y="177" text-anchor="middle" class="off">e5</text>
+    <rect x="402" y="150" width="60" height="44" rx="4" fill="#7c3aed"/><text x="432" y="177" text-anchor="middle" class="off">e6</text>
+    <rect x="464" y="150" width="60" height="44" rx="4" fill="#a78bfa"/><text x="494" y="177" text-anchor="middle" class="off">e7</text>
+    <rect x="526" y="150" width="60" height="44" rx="4" fill="#cbd5e1"/><text x="556" y="177" text-anchor="middle" class="off">…</text>
+  </g>
+  <text x="30" y="212" class="note">offset: 0        1        2        3        4        5        6        7</text>
+
+  <!-- consumer groups with their own offsets -->
+  <text x="120" y="152" class="ptr" fill="#059669">▲</text>
+  <line x1="184" y1="196" x2="184" y2="250" stroke="#059669" stroke-width="2"/>
+  <rect x="120" y="252" width="180" height="34" rx="6" fill="#059669"/><text x="210" y="274" text-anchor="middle" class="box">Analytics — at offset 2</text>
+
+  <line x1="370" y1="196" x2="370" y2="250" stroke="#2563eb" stroke-width="2"/>
+  <rect x="300" y="252" width="170" height="34" rx="6" fill="#2563eb"/><text x="385" y="274" text-anchor="middle" class="box">Billing — at offset 5</text>
+
+  <line x1="494" y1="196" x2="494" y2="250" stroke="#d97706" stroke-width="2"/>
+  <rect x="480" y="252" width="180" height="34" rx="6" fill="#d97706"/><text x="570" y="274" text-anchor="middle" class="box">Search index — offset 7</text>
+
+  <text x="120" y="240" class="note">each consumer tracks its OWN position — reading does not remove events</text>
+
+  <!-- footer -->
+  <rect x="24" y="304" width="752" height="90" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="40" y="326" class="lbl">Key differences from a queue</text>
+  <text x="40" y="348" class="note">• <tspan font-weight="700">Events aren't deleted on read</tspan> — they're kept for a retention window (e.g. 7 days), so many independent consumers replay the same stream.</text>
+  <text x="40" y="368" class="note">• <tspan font-weight="700">Replay</tspan> — a consumer can rewind its offset to reprocess history (great for a new service, a bug fix, or rebuilding a view).</text>
+  <text x="40" y="388" class="note">• <tspan font-weight="700">Ordering</tspan> is preserved by offset, and throughput is very high because appends and sequential reads are cheap.</text>
+</svg>

@@ -1,0 +1,56 @@
+<svg viewBox="0 0 800 380" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .h { font-size: 14px; font-weight: 700; fill: #ffffff; }
+    .q { font-size: 10px; font-weight: 700; fill: #ffffff; }
+    .note { font-size: 9.5px; fill: #64748b; }
+    .ex { font-size: 9px; font-family: 'Consolas','Courier New',monospace; fill: #334155; }
+  </style>
+
+  <text x="24" y="30" class="title">The three pillars of observability</text>
+  <text x="24" y="50" class="note">Complementary signals. This topic covers logs; metrics and traces are the next topics in this step.</text>
+
+  <!-- LOGS (highlighted) -->
+  <rect x="24" y="64" width="240" height="250" rx="10" fill="#2563eb" stroke="#1e40af" stroke-width="3"/>
+  <text x="44" y="92" class="h">Logs</text>
+  <rect x="44" y="104" width="200" height="24" rx="4" fill="#1d4ed8"/><text x="144" y="121" text-anchor="middle" class="q">"what happened, and when?"</text>
+  <text x="44" y="150" class="note" fill="#dbeafe">Discrete, timestamped records</text>
+  <text x="44" y="166" class="note" fill="#dbeafe">of individual events.</text>
+  <text x="44" y="188" class="note" fill="#dbeafe">• Highest detail / context</text>
+  <text x="44" y="206" class="note" fill="#dbeafe">• Best for debugging &amp; forensics</text>
+  <text x="44" y="224" class="note" fill="#dbeafe">• Voluminous &amp; costlier to store</text>
+  <rect x="44" y="244" width="200" height="52" rx="4" fill="#eff6ff"/>
+  <text x="52" y="262" class="ex">ERROR payment_failed</text>
+  <text x="52" y="277" class="ex">order=123 amount=99.50</text>
+  <text x="52" y="290" class="ex">trace=abc123</text>
+
+  <!-- METRICS -->
+  <rect x="280" y="64" width="240" height="250" rx="10" fill="#059669"/>
+  <text x="300" y="92" class="h">Metrics</text>
+  <rect x="300" y="104" width="200" height="24" rx="4" fill="#047857"/><text x="400" y="121" text-anchor="middle" class="q">"how much / how many?"</text>
+  <text x="300" y="150" class="note" fill="#dcfce7">Numeric measurements</text>
+  <text x="300" y="166" class="note" fill="#dcfce7">aggregated over time.</text>
+  <text x="300" y="188" class="note" fill="#dcfce7">• Cheap, compact, fast to query</text>
+  <text x="300" y="206" class="note" fill="#dcfce7">• Best for dashboards &amp; alerts</text>
+  <text x="300" y="224" class="note" fill="#dcfce7">• Low detail (aggregated)</text>
+  <rect x="300" y="244" width="200" height="52" rx="4" fill="#f0fdf4"/>
+  <text x="308" y="262" class="ex">requests_total 1.2M/s</text>
+  <text x="308" y="277" class="ex">p99_latency 240ms</text>
+  <text x="308" y="290" class="ex">error_rate 0.3%</text>
+
+  <!-- TRACES -->
+  <rect x="536" y="64" width="240" height="250" rx="10" fill="#7c3aed"/>
+  <text x="556" y="92" class="h">Traces</text>
+  <rect x="556" y="104" width="200" height="24" rx="4" fill="#6d28d9"/><text x="656" y="121" text-anchor="middle" class="q">"where did it go / fail?"</text>
+  <text x="556" y="150" class="note" fill="#ede9fe">The path of one request</text>
+  <text x="556" y="166" class="note" fill="#ede9fe">across services (spans).</text>
+  <text x="556" y="188" class="note" fill="#ede9fe">• Shows latency per hop</text>
+  <text x="556" y="206" class="note" fill="#ede9fe">• Best for distributed debugging</text>
+  <text x="556" y="224" class="note" fill="#ede9fe">• Pinpoints the slow/failing service</text>
+  <rect x="556" y="244" width="200" height="52" rx="4" fill="#faf5ff"/>
+  <text x="564" y="261" class="ex">gateway 5ms</text>
+  <text x="564" y="274" class="ex"> └ orders 40ms</text>
+  <text x="564" y="287" class="ex">   └ payments 190ms</text>
+
+  <text x="24" y="338" class="note">They connect: a <tspan font-weight="700">trace_id</tspan> on every log line links logs to traces, and metrics tell you WHEN to go read the logs.</text>
+</svg>

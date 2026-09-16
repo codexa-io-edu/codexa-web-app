@@ -1,0 +1,48 @@
+<svg viewBox="0 0 800 440" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .lbl { font-size: 10.5px; font-weight: 700; fill: #1e293b; }
+    .seg { font-size: 10px; font-weight: 700; fill: #ffffff; }
+    .file { font-size: 9px; font-family: 'Consolas','Courier New',monospace; fill: #475569; }
+    .note { font-size: 10px; fill: #64748b; }
+  </style>
+
+  <text x="24" y="30" class="title">How a partition is stored: segment files on disk</text>
+
+  <!-- partition as segments -->
+  <text x="24" y="66" class="lbl">Partition 0 (an append-only log split into segment files)</text>
+  <rect x="24" y="76" width="200" height="48" rx="6" fill="#94a3b8"/><text x="124" y="98" text-anchor="middle" class="seg">Segment (closed)</text><text x="124" y="114" text-anchor="middle" class="seg">offsets 0–999</text>
+  <rect x="234" y="76" width="200" height="48" rx="6" fill="#94a3b8"/><text x="334" y="98" text-anchor="middle" class="seg">Segment (closed)</text><text x="334" y="114" text-anchor="middle" class="seg">offsets 1000–1999</text>
+  <rect x="444" y="76" width="230" height="48" rx="6" fill="#2563eb"/><text x="559" y="98" text-anchor="middle" class="seg">Active segment (being written)</text><text x="559" y="114" text-anchor="middle" class="seg">offsets 2000 →</text>
+  <text x="684" y="104" class="note">appends →</text>
+
+  <!-- files per segment -->
+  <text x="24" y="152" class="lbl">Each segment = three files</text>
+  <rect x="24" y="162" width="220" height="24" rx="4" fill="#f1f5f9" stroke="#cbd5e1"/><text x="34" y="179" class="file">00..000.log      (the records)</text>
+  <rect x="254" y="162" width="220" height="24" rx="4" fill="#f1f5f9" stroke="#cbd5e1"/><text x="264" y="179" class="file">00..000.index    (offset→pos)</text>
+  <rect x="484" y="162" width="230" height="24" rx="4" fill="#f1f5f9" stroke="#cbd5e1"/><text x="494" y="179" class="file">00..000.timeindex (time→off)</text>
+
+  <!-- retention -->
+  <rect x="24" y="210" width="366" height="200" rx="8" fill="#fef2f2" stroke="#fecaca"/>
+  <text x="40" y="234" class="lbl">cleanup.policy = delete (default)</text>
+  <text x="40" y="256" class="note">Whole segments are removed once they age past</text>
+  <text x="40" y="272" class="note">retention.ms (time) or retention.bytes (size).</text>
+  <rect x="40" y="286" width="90" height="30" rx="4" fill="#cbd5e1"/><text x="85" y="306" text-anchor="middle" class="note">old ✗</text>
+  <rect x="136" y="286" width="90" height="30" rx="4" fill="#cbd5e1"/><text x="181" y="306" text-anchor="middle" class="note">old ✗</text>
+  <rect x="232" y="286" width="90" height="30" rx="4" fill="#059669"/><text x="277" y="306" text-anchor="middle" class="seg">kept ✓</text>
+  <text x="40" y="344" class="note">Consumers can replay anything still on disk;</text>
+  <text x="40" y="360" class="note">once a segment is deleted, it's gone.</text>
+  <text x="40" y="388" class="note">Segments roll by segment.bytes or segment.ms.</text>
+
+  <!-- compaction -->
+  <rect x="410" y="210" width="366" height="200" rx="8" fill="#f0fdf4" stroke="#bbf7d0"/>
+  <text x="426" y="234" class="lbl">cleanup.policy = compact</text>
+  <text x="426" y="256" class="note">Keeps only the LATEST value per key (a changelog).</text>
+  <text x="426" y="278" class="file">before:  k1=v1  k2=v9  k1=v2  k1=v3  k2=v9</text>
+  <line x1="426" y1="288" x2="760" y2="288" stroke="#cbd5e1"/>
+  <text x="426" y="306" class="file">after:                        k1=v3  k2=v9</text>
+  <text x="426" y="336" class="note">A record with a null value is a "tombstone" that</text>
+  <text x="426" y="352" class="note">deletes the key. Great for "current state per key"</text>
+  <text x="426" y="368" class="note">topics (e.g. latest profile per user).</text>
+  <text x="426" y="396" class="note">"compact,delete" combines both policies.</text>
+</svg>

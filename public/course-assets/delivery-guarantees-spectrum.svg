@@ -1,0 +1,49 @@
+<svg viewBox="0 0 800 380" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .h { font-size: 14px; font-weight: 700; fill: #ffffff; }
+    .count { font-size: 11px; fill: #f1f5f9; }
+    .prop { font-size: 11px; font-weight: 700; }
+    .note { font-size: 10px; fill: #64748b; }
+    .axis { font-size: 10.5px; font-weight: 700; fill: #475569; }
+  </style>
+
+  <text x="24" y="30" class="title">Three guarantees: how many times a message can take effect</text>
+
+  <!-- at most once -->
+  <rect x="24" y="54" width="240" height="180" rx="10" fill="#2563eb"/>
+  <text x="44" y="82" class="h">At-most-once</text>
+  <text x="44" y="104" class="count">delivered 0 or 1 times</text>
+  <rect x="44" y="120" width="200" height="30" rx="5" fill="#ffffff"/><text x="54" y="140" class="prop" fill="#dc2626">may LOSE messages</text>
+  <rect x="44" y="156" width="200" height="30" rx="5" fill="#ffffff"/><text x="54" y="176" class="prop" fill="#059669">never DUPLICATES</text>
+  <text x="44" y="210" class="count">simplest · fastest ·</text>
+  <text x="44" y="226" class="count">fire-and-forget</text>
+
+  <!-- at least once -->
+  <rect x="280" y="54" width="240" height="180" rx="10" fill="#059669"/>
+  <text x="300" y="82" class="h">At-least-once</text>
+  <text x="300" y="104" class="count">delivered 1 or more times</text>
+  <rect x="300" y="120" width="200" height="30" rx="5" fill="#ffffff"/><text x="310" y="140" class="prop" fill="#059669">never LOSES messages</text>
+  <rect x="300" y="156" width="200" height="30" rx="5" fill="#ffffff"/><text x="310" y="176" class="prop" fill="#dc2626">may DUPLICATE</text>
+  <text x="300" y="210" class="count">the common default ·</text>
+  <text x="300" y="226" class="count">needs idempotent consumers</text>
+
+  <!-- exactly once -->
+  <rect x="536" y="54" width="240" height="180" rx="10" fill="#7c3aed"/>
+  <text x="556" y="82" class="h">Exactly-once</text>
+  <text x="556" y="104" class="count">exactly 1 effect</text>
+  <rect x="556" y="120" width="200" height="30" rx="5" fill="#ffffff"/><text x="566" y="140" class="prop" fill="#059669">never LOSES</text>
+  <rect x="556" y="156" width="200" height="30" rx="5" fill="#ffffff"/><text x="566" y="176" class="prop" fill="#059669">never DUPLICATES</text>
+  <text x="556" y="210" class="count">hardest · costliest ·</text>
+  <text x="556" y="226" class="count">"effectively once"</text>
+
+  <!-- axis -->
+  <line x1="60" y1="288" x2="740" y2="288" stroke="#94a3b8" stroke-width="2"/>
+  <polygon points="740,288 730,283 730,293" fill="#94a3b8"/>
+  <polygon points="60,288 70,283 70,293" fill="#94a3b8"/>
+  <text x="60" y="312" class="axis">◄ higher throughput, simpler</text>
+  <text x="560" y="312" class="axis">stronger safety, more complex ►</text>
+
+  <rect x="24" y="330" width="752" height="40" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="40" y="355" class="note">The guarantee is a contract about behavior under failure (crashes, dropped acks, retries). Pick the weakest one your use case can tolerate.</text>
+</svg>

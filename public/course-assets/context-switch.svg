@@ -1,0 +1,46 @@
+<svg viewBox="0 0 800 340" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <rect width="800" height="340" fill="#f8fafc"/>
+  <text x="400" y="34" text-anchor="middle" font-size="21" font-weight="700" fill="#0f172a">Context Switching Isn't Free</text>
+  <text x="400" y="58" text-anchor="middle" font-size="13" fill="#64748b">Each switch saves one task's state and restores another's — pure overhead that does no useful work</text>
+
+  <!-- CPU timeline -->
+  <text x="50" y="130" font-size="12" font-weight="700" fill="#475569">CPU</text>
+
+  <!-- run T1 -->
+  <rect x="90" y="110" width="150" height="40" fill="#93c5fd" stroke="#2563eb"/>
+  <text x="165" y="135" text-anchor="middle" font-size="12" font-weight="700" fill="#1e3a8a">run Thread 1</text>
+  <!-- switch -->
+  <rect x="240" y="110" width="50" height="40" fill="#fecaca" stroke="#dc2626"/>
+  <text x="265" y="130" text-anchor="middle" font-size="8.5" fill="#b91c1c">save/</text>
+  <text x="265" y="142" text-anchor="middle" font-size="8.5" fill="#b91c1c">load</text>
+  <!-- run T2 -->
+  <rect x="290" y="110" width="150" height="40" fill="#fdba74" stroke="#d97706"/>
+  <text x="365" y="135" text-anchor="middle" font-size="12" font-weight="700" fill="#7c2d12">run Thread 2</text>
+  <!-- switch -->
+  <rect x="440" y="110" width="50" height="40" fill="#fecaca" stroke="#dc2626"/>
+  <text x="465" y="130" text-anchor="middle" font-size="8.5" fill="#b91c1c">save/</text>
+  <text x="465" y="142" text-anchor="middle" font-size="8.5" fill="#b91c1c">load</text>
+  <!-- run T1 again -->
+  <rect x="490" y="110" width="150" height="40" fill="#93c5fd" stroke="#2563eb"/>
+  <text x="565" y="135" text-anchor="middle" font-size="12" font-weight="700" fill="#1e3a8a">run Thread 1</text>
+  <rect x="640" y="110" width="50" height="40" fill="#fecaca" stroke="#dc2626"/>
+  <text x="665" y="136" text-anchor="middle" font-size="8.5" fill="#b91c1c">...</text>
+
+  <!-- time axis -->
+  <defs>
+    <marker id="cs_t" markerWidth="11" markerHeight="11" refX="8" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+  <line x1="90" y1="172" x2="710" y2="172" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#cs_t)"/>
+  <text x="705" y="190" text-anchor="end" font-size="11" fill="#64748b">time</text>
+
+  <!-- legend -->
+  <rect x="150" y="220" width="16" height="16" fill="#93c5fd" stroke="#2563eb"/><text x="174" y="233" font-size="11" fill="#334155">useful work (Thread 1)</text>
+  <rect x="150" y="244" width="16" height="16" fill="#fdba74" stroke="#d97706"/><text x="174" y="257" font-size="11" fill="#334155">useful work (Thread 2)</text>
+  <rect x="450" y="220" width="16" height="16" fill="#fecaca" stroke="#dc2626"/><text x="474" y="233" font-size="11" fill="#334155">context switch = wasted overhead</text>
+
+  <rect x="120" y="282" width="560" height="42" rx="8" fill="#fff7ed" stroke="#f59e0b" stroke-width="1.4"/>
+  <text x="400" y="300" text-anchor="middle" font-size="11.5" font-weight="700" fill="#b45309">Too many threads &#8594; too much switching &#8594; the CPU spends more time switching than working.</text>
+  <text x="400" y="317" text-anchor="middle" font-size="10.5" fill="#7c2d12">This is called "thrashing." Thread switches are cheaper than process switches, but neither is free.</text>
+</svg>

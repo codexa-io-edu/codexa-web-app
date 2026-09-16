@@ -1,0 +1,41 @@
+<svg viewBox="0 0 780 360" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .box { font-size: 13px; font-weight: 700; fill: #ffffff; }
+    .sub { font-size: 10px; fill: #e2e8f0; }
+    .lbl { font-size: 11px; font-weight: 700; fill: #1e293b; }
+    .note { font-size: 10.5px; fill: #64748b; }
+  </style>
+
+  <text x="24" y="30" class="title">Don't let the load balancer become the single point of failure</text>
+  <text x="24" y="50" class="note">One LB in front of many servers just moves the risk onto the LB. Run a pair that can take over for each other.</text>
+
+  <!-- floating IP -->
+  <rect x="300" y="80" width="180" height="46" rx="10" fill="#0f172a"/>
+  <text x="390" y="102" text-anchor="middle" class="box">Floating / Virtual IP</text>
+  <text x="390" y="118" text-anchor="middle" class="sub">clients always hit this address</text>
+
+  <!-- active LB -->
+  <rect x="120" y="180" width="200" height="70" rx="10" fill="#2563eb"/>
+  <text x="220" y="210" text-anchor="middle" class="box">LB — ACTIVE</text>
+  <text x="220" y="230" text-anchor="middle" class="sub">currently holds the VIP</text>
+
+  <!-- passive LB -->
+  <rect x="460" y="180" width="200" height="70" rx="10" fill="#94a3b8"/>
+  <text x="560" y="210" text-anchor="middle" class="box">LB — STANDBY</text>
+  <text x="560" y="230" text-anchor="middle" class="sub">ready to take the VIP</text>
+
+  <!-- VIP to active -->
+  <line x1="360" y1="126" x2="240" y2="178" stroke="#2563eb" stroke-width="2.5" marker-end="url(#g)"/>
+  <line x1="420" y1="126" x2="545" y2="178" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="5,4"/>
+  <defs><marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#2563eb"/></marker></defs>
+
+  <!-- heartbeat -->
+  <line x1="320" y1="215" x2="460" y2="215" stroke="#dc2626" stroke-width="2" stroke-dasharray="3,3"/>
+  <text x="390" y="208" text-anchor="middle" font-size="10" font-weight="700" fill="#dc2626">heartbeat</text>
+
+  <!-- footer -->
+  <rect x="24" y="286" width="732" height="62" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="40" y="310" class="note">A <tspan font-weight="700">heartbeat</tspan> runs between the two. If the active LB stops responding, the standby <tspan font-weight="700">takes over the floating IP</tspan> within seconds —</text>
+  <text x="40" y="330" class="note">clients keep using the same address, unaware. Cloud load balancers (AWS ELB, Google Cloud LB) do this for you, spread across zones.</text>
+</svg>

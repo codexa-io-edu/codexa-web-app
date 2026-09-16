@@ -1,0 +1,56 @@
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .h { font-size: 11.5px; font-weight: 700; fill: #ffffff; }
+    .note { font-size: 9.5px; fill: #475569; }
+    .box { font-size: 9px; font-weight: 700; fill: #ffffff; }
+  </style>
+
+  <text x="24" y="30" class="title">The migration pattern toolkit</text>
+
+  <!-- strangler fig -->
+  <rect x="24" y="48" width="365" height="106" rx="10" fill="#059669"/>
+  <text x="40" y="70" class="h">Strangler Fig</text>
+  <text x="40" y="90" class="note" fill="#dcfce7">Route requests at a facade/gateway: send extracted</text>
+  <text x="40" y="104" class="note" fill="#dcfce7">capabilities to new services, the rest to the monolith,</text>
+  <text x="40" y="118" class="note" fill="#dcfce7">until it's fully replaced. The default overall strategy.</text>
+  <text x="40" y="140" class="note" fill="#bbf7d0">Best when you can intercept traffic at the edge.</text>
+
+  <!-- branch by abstraction -->
+  <rect x="411" y="48" width="365" height="106" rx="10" fill="#2563eb"/>
+  <text x="427" y="70" class="h">Branch by Abstraction</text>
+  <text x="427" y="90" class="note" fill="#dbeafe">For seams DEEP in the code you can't route around:</text>
+  <text x="427" y="104" class="note" fill="#dbeafe">introduce an abstraction (interface), build the new</text>
+  <text x="427" y="118" class="note" fill="#dbeafe">implementation behind it, switch over, delete the old.</text>
+  <text x="427" y="140" class="note" fill="#bfdbfe">Lets you refactor safely without a long-lived branch.</text>
+
+  <!-- parallel run -->
+  <rect x="24" y="166" width="365" height="106" rx="10" fill="#7c3aed"/>
+  <text x="40" y="188" class="h">Parallel Run</text>
+  <text x="40" y="208" class="note" fill="#ede9fe">Run old and new implementations side by side on the</text>
+  <text x="40" y="222" class="note" fill="#ede9fe">same input and COMPARE outputs (new one's result is</text>
+  <text x="40" y="236" class="note" fill="#ede9fe">not yet used). Builds confidence before cutover.</text>
+  <text x="40" y="258" class="note" fill="#ddd6fe">Best for high-risk / correctness-critical extractions.</text>
+
+  <!-- anti-corruption layer -->
+  <rect x="411" y="166" width="365" height="106" rx="10" fill="#d97706"/>
+  <text x="427" y="188" class="h">Anti-Corruption Layer (ACL)</text>
+  <text x="427" y="208" class="note" fill="#fff7ed">A translation layer between the new service and the old</text>
+  <text x="427" y="222" class="note" fill="#fff7ed">monolith model, so the monolith's legacy concepts don't</text>
+  <text x="427" y="236" class="note" fill="#fff7ed">leak into and corrupt the new clean design (DDD).</text>
+  <text x="427" y="258" class="note" fill="#fed7aa">Use whenever integrating with the legacy model.</text>
+
+  <!-- feature toggle -->
+  <rect x="24" y="284" width="365" height="96" rx="10" fill="#0ea5e9"/>
+  <text x="40" y="306" class="h">Feature Toggle / Flag</text>
+  <text x="40" y="326" class="note" fill="#e0f2fe">Switch traffic between old and new paths with a config</text>
+  <text x="40" y="340" class="note" fill="#e0f2fe">flag — enabling canary %s and INSTANT rollback if the</text>
+  <text x="40" y="354" class="note" fill="#e0f2fe">new service misbehaves. The safety switch for cutover.</text>
+
+  <!-- CDC / event interception -->
+  <rect x="411" y="284" width="365" height="96" rx="10" fill="#64748b"/>
+  <text x="427" y="306" class="h">Change Data Capture / Events</text>
+  <text x="427" y="326" class="note" fill="#f1f5f9">Stream the monolith's data changes (from its DB log)</text>
+  <text x="427" y="340" class="note" fill="#f1f5f9">to keep the new service's data in sync — or to trigger</text>
+  <text x="427" y="354" class="note" fill="#f1f5f9">new behavior — without modifying the monolith's code.</text>
+</svg>

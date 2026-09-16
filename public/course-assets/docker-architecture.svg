@@ -1,0 +1,41 @@
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .box { font-size: 11px; font-weight: 700; fill: #ffffff; }
+    .sub { font-size: 9px; fill: #e2e8f0; }
+    .note { font-size: 10px; fill: #64748b; }
+    .lbl { font-size: 10px; font-weight: 700; fill: #1e293b; }
+  </style>
+
+  <text x="24" y="30" class="title">Docker architecture: from CLI down to the running process</text>
+
+  <!-- client -->
+  <rect x="24" y="70" width="150" height="70" rx="8" fill="#0ea5e9"/><text x="99" y="100" text-anchor="middle" class="box">docker CLI</text><text x="99" y="118" text-anchor="middle" class="sub">(client)</text><text x="99" y="132" text-anchor="middle" class="sub">docker run/build/ps</text>
+
+  <!-- daemon host box -->
+  <rect x="220" y="56" width="410" height="290" rx="10" fill="#eff6ff" stroke="#bfdbfe"/>
+  <text x="236" y="78" class="lbl">Docker host</text>
+
+  <rect x="240" y="92" width="370" height="60" rx="8" fill="#2563eb"/><text x="425" y="118" text-anchor="middle" class="box">dockerd (Docker daemon)</text><text x="425" y="136" text-anchor="middle" class="sub">builds images, manages networks/volumes, REST API</text>
+
+  <rect x="240" y="166" width="370" height="54" rx="8" fill="#1d4ed8"/><text x="425" y="190" text-anchor="middle" class="box">containerd</text><text x="425" y="207" text-anchor="middle" class="sub">high-level runtime: image pull, container lifecycle</text>
+
+  <rect x="240" y="234" width="370" height="50" rx="8" fill="#1e40af"/><text x="425" y="256" text-anchor="middle" class="box">runc</text><text x="425" y="272" text-anchor="middle" class="sub">low-level OCI runtime: creates the container via namespaces + cgroups</text>
+
+  <rect x="300" y="298" width="250" height="36" rx="6" fill="#059669"/><text x="425" y="321" text-anchor="middle" class="box">Container (isolated process)</text>
+
+  <line x1="174" y1="105" x2="238" y2="115" stroke="#94a3b8" stroke-width="2" marker-end="url(#a)"/><text x="176" y="98" class="note">REST API</text>
+  <line x1="425" y1="152" x2="425" y2="164" stroke="#94a3b8" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="425" y1="220" x2="425" y2="232" stroke="#94a3b8" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="425" y1="284" x2="425" y2="296" stroke="#94a3b8" stroke-width="2" marker-end="url(#a)"/>
+
+  <!-- registry -->
+  <rect x="660" y="92" width="116" height="60" rx="8" fill="#7c3aed"/><text x="718" y="118" text-anchor="middle" class="box">Registry</text><text x="718" y="136" text-anchor="middle" class="sub">pull / push</text>
+  <line x1="610" y1="122" x2="658" y2="122" stroke="#94a3b8" stroke-width="2" marker-end="url(#a)"/>
+
+  <!-- footer -->
+  <rect x="24" y="358" width="752" height="34" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="40" y="380" class="note">The runtime is layered &amp; standardized: dockerd → <tspan font-weight="700">containerd</tspan> (a CNCF runtime, usable without Docker) → <tspan font-weight="700">runc</tspan> (the OCI reference runtime). Alternatives: Podman (daemonless), CRI-O.</text>
+
+  <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#94a3b8"/></marker></defs>
+</svg>

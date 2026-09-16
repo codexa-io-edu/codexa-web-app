@@ -1,0 +1,49 @@
+<svg viewBox="0 0 820 400" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <rect width="820" height="400" fill="#f8fafc"/>
+  <text x="410" y="34" text-anchor="middle" font-size="21" font-weight="700" fill="#0f172a">Copy-On-Write: Cheap Reads, Expensive Writes</text>
+  <text x="410" y="58" text-anchor="middle" font-size="13" fill="#64748b">Every mutation copies the whole backing array — so readers never need a lock and never see a half-change</text>
+
+  <defs>
+    <marker id="cow_arr" markerWidth="11" markerHeight="11" refX="8" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#475569"/>
+    </marker>
+  </defs>
+
+  <!-- before -->
+  <text x="150" y="96" text-anchor="middle" font-size="12.5" font-weight="700" fill="#334155">Original array (v1)</text>
+  <rect x="60" y="110" width="180" height="40" rx="6" fill="#dbeafe" stroke="#2563eb"/>
+  <text x="90" y="135" text-anchor="middle" font-size="11" fill="#1e3a8a">A</text>
+  <text x="150" y="135" text-anchor="middle" font-size="11" fill="#1e3a8a">B</text>
+  <text x="210" y="135" text-anchor="middle" font-size="11" fill="#1e3a8a">C</text>
+  <line x1="120" y1="110" x2="120" y2="150" stroke="#93c5fd"/><line x1="180" y1="110" x2="180" y2="150" stroke="#93c5fd"/>
+
+  <!-- readers -->
+  <rect x="40" y="180" width="220" height="80" rx="8" fill="#f0fdf4" stroke="#059669"/>
+  <text x="150" y="202" text-anchor="middle" font-size="11" font-weight="700" fill="#047857">Readers (many)</text>
+  <text x="150" y="222" text-anchor="middle" font-size="9.5" fill="#065f46">iterate v1 with NO lock</text>
+  <text x="150" y="240" text-anchor="middle" font-size="9.5" fill="#065f46">snapshot is stable &amp; safe</text>
+  <line x1="150" y1="150" x2="150" y2="178" stroke="#059669" stroke-width="1.8" marker-end="url(#cow_arr)"/>
+
+  <!-- write op -->
+  <rect x="300" y="150" width="220" height="60" rx="8" fill="#fef2f2" stroke="#dc2626"/>
+  <text x="410" y="174" text-anchor="middle" font-size="11" font-weight="700" fill="#b91c1c">add("D") &#8594; copy entire array</text>
+  <text x="410" y="194" text-anchor="middle" font-size="9.5" fill="#991b1b">under a lock, build v2 = [A,B,C,D]</text>
+  <line x1="240" y1="130" x2="298" y2="165" stroke="#475569" stroke-width="1.6" marker-end="url(#cow_arr)"/>
+
+  <!-- after -->
+  <text x="620" y="96" text-anchor="middle" font-size="12.5" font-weight="700" fill="#334155">New array (v2)</text>
+  <rect x="520" y="110" width="240" height="40" rx="6" fill="#dcfce7" stroke="#059669"/>
+  <text x="545" y="135" text-anchor="middle" font-size="11" fill="#065f46">A</text>
+  <text x="595" y="135" text-anchor="middle" font-size="11" fill="#065f46">B</text>
+  <text x="645" y="135" text-anchor="middle" font-size="11" fill="#065f46">C</text>
+  <text x="700" y="135" text-anchor="middle" font-size="11" font-weight="700" fill="#047857">D</text>
+  <line x1="570" y1="110" x2="570" y2="150" stroke="#6ee7b7"/><line x1="620" y1="110" x2="620" y2="150" stroke="#6ee7b7"/><line x1="672" y1="110" x2="672" y2="150" stroke="#6ee7b7"/>
+  <line x1="520" y1="180" x2="470" y2="180" stroke="#475569" stroke-width="1.6" marker-end="url(#cow_arr)"/>
+  <text x="620" y="170" text-anchor="middle" font-size="9" fill="#047857">reference swapped to v2 atomically</text>
+
+  <rect x="60" y="290" width="700" height="94" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="410" y="314" text-anchor="middle" font-size="12.5" font-weight="700" fill="#334155">The trade</text>
+  <text x="410" y="337" text-anchor="middle" font-size="10.5" fill="#047857">&#10003; Reads &amp; iteration are lock-free and never throw ConcurrentModificationException</text>
+  <text x="410" y="357" text-anchor="middle" font-size="10.5" fill="#b91c1c">&#10007; Every write copies the entire array &#8594; O(n) and garbage-heavy</text>
+  <text x="410" y="377" text-anchor="middle" font-size="10.5" fill="#64748b">&#8658; Use ONLY when reads vastly outnumber writes (e.g. listener lists, config read on every request)</text>
+</svg>

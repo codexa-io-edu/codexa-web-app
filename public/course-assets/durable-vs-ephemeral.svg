@@ -1,0 +1,42 @@
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .h { font-size: 12px; font-weight: 700; fill: #1e293b; }
+    .note { font-size: 10px; fill: #64748b; }
+    .ev { font-size: 9.5px; font-weight: 700; fill: #ffffff; }
+    .state { font-size: 10px; font-weight: 700; fill: #475569; }
+  </style>
+
+  <text x="24" y="30" class="title">What happens to messages while a subscriber is offline?</text>
+
+  <!-- timeline base -->
+  <text x="24" y="64" class="note">Publisher emits e1…e6 over time. The subscriber is OFFLINE during e3–e4.</text>
+
+  <!-- events row -->
+  <g>
+    <rect x="60" y="80" width="50" height="30" rx="4" fill="#7c3aed"/><text x="85" y="100" text-anchor="middle" class="ev">e1</text>
+    <rect x="170" y="80" width="50" height="30" rx="4" fill="#7c3aed"/><text x="195" y="100" text-anchor="middle" class="ev">e2</text>
+    <rect x="330" y="80" width="50" height="30" rx="4" fill="#dc2626"/><text x="355" y="100" text-anchor="middle" class="ev">e3</text>
+    <rect x="440" y="80" width="50" height="30" rx="4" fill="#dc2626"/><text x="465" y="100" text-anchor="middle" class="ev">e4</text>
+    <rect x="600" y="80" width="50" height="30" rx="4" fill="#7c3aed"/><text x="625" y="100" text-anchor="middle" class="ev">e5</text>
+    <rect x="690" y="80" width="50" height="30" rx="4" fill="#7c3aed"/><text x="715" y="100" text-anchor="middle" class="ev">e6</text>
+  </g>
+  <!-- offline band -->
+  <rect x="300" y="72" width="220" height="46" fill="#fee2e2" opacity="0.5"/>
+  <text x="410" y="132" text-anchor="middle" class="state">subscriber OFFLINE</text>
+
+  <!-- ephemeral -->
+  <rect x="24" y="160" width="752" height="90" rx="8" fill="#fef2f2" stroke="#fecaca"/>
+  <text x="40" y="184" class="h">Ephemeral (non-durable) subscription</text>
+  <text x="40" y="206" class="note">Only receives messages published <tspan font-weight="700">while connected</tspan>. Gets e1, e2, e5, e6 —</text>
+  <text x="40" y="222" class="note" fill="#dc2626">e3 and e4 are missed forever.</text>
+  <text x="40" y="242" class="note">Fire-and-forget. Examples: Redis Pub/Sub, MQTT QoS 0 without a persistent session, NATS core.</text>
+
+  <!-- durable -->
+  <rect x="24" y="264" width="752" height="118" rx="8" fill="#f0fdf4" stroke="#bbf7d0"/>
+  <text x="40" y="288" class="h">Durable subscription</text>
+  <text x="40" y="310" class="note">The broker <tspan font-weight="700">retains</tspan> e3 and e4 for this subscriber while it's away and <tspan font-weight="700">delivers the backlog on reconnect</tspan>.</text>
+  <text x="40" y="326" class="note" fill="#059669">Gets all of e1–e6. Nothing lost to a temporary outage.</text>
+  <text x="40" y="346" class="note">Examples: Kafka consumer-group offsets (replay from last committed), JMS durable subscriptions,</text>
+  <text x="40" y="362" class="note">MQTT persistent sessions / QoS 1–2, AWS SNS→SQS, Google Cloud Pub/Sub subscriptions, NATS JetStream.</text>
+</svg>

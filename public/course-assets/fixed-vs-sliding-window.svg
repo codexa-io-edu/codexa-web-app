@@ -1,0 +1,50 @@
+<svg viewBox="0 0 800 440" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .h { font-size: 13px; font-weight: 700; fill: #1e293b; }
+    .note { font-size: 10.5px; fill: #64748b; }
+    .tick { font-size: 10px; font-weight: 700; fill: #475569; }
+    .warn { font-size: 11px; font-weight: 700; fill: #dc2626; }
+    .good { font-size: 11px; font-weight: 700; fill: #059669; }
+  </style>
+
+  <text x="24" y="30" class="title">The fixed-window edge problem — and how sliding windows fix it</text>
+  <text x="24" y="50" class="note">Limit = 5 requests per 60-second window.</text>
+
+  <!-- FIXED WINDOW -->
+  <text x="24" y="86" class="h">Fixed Window — resets on the clock boundary</text>
+
+  <!-- window 1 box -->
+  <rect x="60" y="100" width="300" height="70" rx="6" fill="#eff6ff" stroke="#bfdbfe"/>
+  <text x="70" y="118" class="tick">window 1 · 00:00–01:00</text>
+  <!-- 5 requests near end -->
+  <circle cx="300" cy="150" r="6" fill="#2563eb"/><circle cx="315" cy="150" r="6" fill="#2563eb"/><circle cx="330" cy="150" r="6" fill="#2563eb"/><circle cx="345" cy="150" r="6" fill="#2563eb"/><circle cx="285" cy="150" r="6" fill="#2563eb"/>
+  <text x="270" y="138" class="tick">5 near 00:59</text>
+
+  <!-- window 2 box -->
+  <rect x="360" y="100" width="300" height="70" rx="6" fill="#eff6ff" stroke="#bfdbfe"/>
+  <text x="370" y="118" class="tick">window 2 · 01:00–02:00</text>
+  <circle cx="375" cy="150" r="6" fill="#7c3aed"/><circle cx="390" cy="150" r="6" fill="#7c3aed"/><circle cx="405" cy="150" r="6" fill="#7c3aed"/><circle cx="420" cy="150" r="6" fill="#7c3aed"/><circle cx="435" cy="150" r="6" fill="#7c3aed"/>
+  <text x="375" y="138" class="tick">5 near 01:01</text>
+
+  <!-- boundary -->
+  <line x1="360" y1="94" x2="360" y2="176" stroke="#dc2626" stroke-width="2" stroke-dasharray="4,3"/>
+  <text x="270" y="196" class="warn">→ 10 requests in ~2 seconds across the boundary (2× the limit!)</text>
+
+  <!-- SLIDING WINDOW -->
+  <text x="24" y="248" class="h">Sliding Window — counts the trailing 60 s from "now"</text>
+
+  <rect x="60" y="262" width="600" height="70" rx="6" fill="#f0fdf4" stroke="#bbf7d0"/>
+  <!-- window bracket -->
+  <rect x="300" y="270" width="150" height="54" rx="5" fill="#dcfce7" stroke="#059669"/>
+  <text x="308" y="288" class="tick">trailing 60 s at 01:01</text>
+  <circle cx="330" cy="312" r="6" fill="#2563eb"/><circle cx="345" cy="312" r="6" fill="#2563eb"/><circle cx="360" cy="312" r="6" fill="#2563eb"/>
+  <circle cx="390" cy="312" r="6" fill="#7c3aed"/><circle cx="405" cy="312" r="6" fill="#7c3aed"/>
+  <text x="470" y="300" class="good">sees the recent 5+, so the 6th is blocked</text>
+
+  <!-- footer -->
+  <rect x="24" y="352" width="752" height="76" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="40" y="376" class="note"><tspan font-weight="700">Fixed window</tspan> is cheap (one counter per window) but allows a burst of up to 2× the limit around the reset.</text>
+  <text x="40" y="396" class="note"><tspan font-weight="700">Sliding window log</tspan> is exact but stores every timestamp. <tspan font-weight="700">Sliding window counter</tspan> approximates it cheaply by</text>
+  <text x="40" y="412" class="note">weighting the previous window's count by how much of it still overlaps — the sweet spot most systems use.</text>
+</svg>

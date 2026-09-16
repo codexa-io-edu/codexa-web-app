@@ -1,0 +1,63 @@
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .h { font-size: 12px; font-weight: 700; fill: #ffffff; }
+    .note { font-size: 9.5px; fill: #475569; }
+  </style>
+
+  <text x="24" y="30" class="title">The tenets that make something "microservices"</text>
+
+  <!-- row 1 -->
+  <rect x="24" y="50" width="240" height="90" rx="8" fill="#2563eb"/>
+  <text x="40" y="74" class="h">Business-capability aligned</text>
+  <text x="40" y="96" class="note" fill="#dbeafe">Each service owns one clear</text>
+  <text x="40" y="110" class="note" fill="#dbeafe">business responsibility, not a</text>
+  <text x="40" y="124" class="note" fill="#dbeafe">technical layer.</text>
+
+  <rect x="280" y="50" width="240" height="90" rx="8" fill="#059669"/>
+  <text x="296" y="74" class="h">Independently deployable</text>
+  <text x="296" y="96" class="note" fill="#dcfce7">Ship one service without</text>
+  <text x="296" y="110" class="note" fill="#dcfce7">rebuilding or redeploying</text>
+  <text x="296" y="124" class="note" fill="#dcfce7">the others. THE key property.</text>
+
+  <rect x="536" y="50" width="240" height="90" rx="8" fill="#7c3aed"/>
+  <text x="552" y="74" class="h">Decentralized data</text>
+  <text x="552" y="96" class="note" fill="#ede9fe">Database per service; a service</text>
+  <text x="552" y="110" class="note" fill="#ede9fe">owns its data and exposes it</text>
+  <text x="552" y="124" class="note" fill="#ede9fe">only via its API.</text>
+
+  <!-- row 2 -->
+  <rect x="24" y="150" width="240" height="90" rx="8" fill="#0ea5e9"/>
+  <text x="40" y="174" class="h">Loose coupling, high cohesion</text>
+  <text x="40" y="196" class="note" fill="#e0f2fe">Things that change together</text>
+  <text x="40" y="210" class="note" fill="#e0f2fe">live together; minimal, clean</text>
+  <text x="40" y="224" class="note" fill="#e0f2fe">dependencies between services.</text>
+
+  <rect x="280" y="150" width="240" height="90" rx="8" fill="#d97706"/>
+  <text x="296" y="174" class="h">Design for failure</text>
+  <text x="296" y="196" class="note" fill="#fff7ed">The network will fail; services</text>
+  <text x="296" y="210" class="note" fill="#fff7ed">must tolerate a dependency</text>
+  <text x="296" y="224" class="note" fill="#fff7ed">being slow or down.</text>
+
+  <rect x="536" y="150" width="240" height="90" rx="8" fill="#2563eb"/>
+  <text x="552" y="174" class="h">Team autonomy</text>
+  <text x="552" y="196" class="note" fill="#dbeafe">One team owns a service end</text>
+  <text x="552" y="210" class="note" fill="#dbeafe">to end — build, deploy, run</text>
+  <text x="552" y="224" class="note" fill="#dbeafe">(aligns with Conway's Law).</text>
+
+  <!-- row 3 -->
+  <rect x="24" y="250" width="365" height="90" rx="8" fill="#059669"/>
+  <text x="40" y="274" class="h">Smart endpoints, dumb pipes</text>
+  <text x="40" y="296" class="note" fill="#dcfce7">Business logic lives in the services; the transport (HTTP, a</text>
+  <text x="40" y="310" class="note" fill="#dcfce7">message broker) stays simple and does no clever routing/logic.</text>
+  <text x="40" y="330" class="note" fill="#dcfce7">(Contrast with heavyweight ESBs of the SOA era.)</text>
+
+  <rect x="405" y="250" width="371" height="90" rx="8" fill="#64748b"/>
+  <text x="421" y="274" class="h">Automation is a prerequisite</text>
+  <text x="421" y="296" class="note" fill="#f1f5f9">Many services are only manageable with mature CI/CD, automated</text>
+  <text x="421" y="310" class="note" fill="#f1f5f9">provisioning, and observability. Without them, don't attempt this.</text>
+  <text x="421" y="330" class="note" fill="#f1f5f9">(See the "prerequisites" gate in the Why doc.)</text>
+
+  <rect x="24" y="352" width="752" height="34" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="40" y="374" class="note" fill="#64748b">If a design violates <tspan font-weight="700">independent deployability</tspan> or <tspan font-weight="700">decentralized data</tspan>, it isn't really microservices — it's a distributed monolith.</text>
+</svg>

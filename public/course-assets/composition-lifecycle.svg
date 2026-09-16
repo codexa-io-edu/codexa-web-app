@@ -1,0 +1,42 @@
+<svg viewBox="0 0 780 380" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <rect width="780" height="380" fill="#f8fafc"/>
+  <text x="390" y="34" text-anchor="middle" font-size="21" font-weight="700" fill="#0f172a">Composition: The Part's Lifetime Is Bound to the Whole</text>
+  <text x="390" y="58" text-anchor="middle" font-size="13" fill="#64748b">Order &#9670;&#8212; LineItems : the items are born with the order and die with it.</text>
+
+  <!-- timeline axis -->
+  <line x1="70" y1="200" x2="720" y2="200" stroke="#94a3b8" stroke-width="2"/>
+  <defs>
+    <marker id="tl" markerWidth="12" markerHeight="12" refX="8" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L9,4 L0,8 Z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+  <line x1="720" y1="200" x2="740" y2="200" stroke="#94a3b8" stroke-width="2" marker-end="url(#tl)"/>
+  <text x="740" y="222" text-anchor="end" font-size="11" fill="#64748b">time</text>
+
+  <!-- create event -->
+  <line x1="180" y1="120" x2="180" y2="280" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="4 4"/>
+  <circle cx="180" cy="200" r="6" fill="#dc2626"/>
+  <text x="180" y="108" text-anchor="middle" font-size="12" font-weight="700" fill="#b91c1c">new Order()</text>
+  <text x="180" y="300" text-anchor="middle" font-size="11" fill="#991b1b">Order creates its</text>
+  <text x="180" y="316" text-anchor="middle" font-size="11" fill="#991b1b">own LineItems inside</text>
+
+  <!-- destroy event -->
+  <line x1="600" y1="120" x2="600" y2="280" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="4 4"/>
+  <circle cx="600" cy="200" r="6" fill="#dc2626"/>
+  <text x="600" y="108" text-anchor="middle" font-size="12" font-weight="700" fill="#b91c1c">Order destroyed</text>
+  <text x="600" y="300" text-anchor="middle" font-size="11" fill="#991b1b">LineItems become</text>
+  <text x="600" y="316" text-anchor="middle" font-size="11" fill="#991b1b">unreachable &amp; die too</text>
+
+  <!-- lifespan bars -->
+  <rect x="180" y="150" width="420" height="20" rx="6" fill="#fecaca" stroke="#dc2626" stroke-width="1.4"/>
+  <text x="390" y="165" text-anchor="middle" font-size="11.5" font-weight="600" fill="#991b1b">Order alive</text>
+
+  <rect x="192" y="176" width="396" height="16" rx="5" fill="#fee2e2" stroke="#f87171" stroke-width="1.2"/>
+  <text x="390" y="188" text-anchor="middle" font-size="10.5" fill="#b91c1c">LineItem #1 (exists only within this window)</text>
+
+  <rect x="204" y="216" width="384" height="16" rx="5" fill="#fee2e2" stroke="#f87171" stroke-width="1.2"/>
+  <text x="390" y="228" text-anchor="middle" font-size="10.5" fill="#b91c1c">LineItem #2 (exists only within this window)</text>
+
+  <!-- caption -->
+  <text x="390" y="352" text-anchor="middle" font-size="12" fill="#334155">The parts never exist before the whole and never survive it. That total lifetime binding is composition.</text>
+</svg>

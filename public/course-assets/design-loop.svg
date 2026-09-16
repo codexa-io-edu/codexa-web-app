@@ -1,0 +1,50 @@
+<svg viewBox="0 0 820 420" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <rect width="820" height="420" fill="#f8fafc"/>
+  <text x="410" y="30" text-anchor="middle" font-size="20" font-weight="700" fill="#0f172a">The OO Design Iterative Loop</text>
+  <text x="410" y="52" text-anchor="middle" font-size="12.5" fill="#64748b">Design is not a linear process — you cycle through these stages, refining with each pass</text>
+
+  <defs>
+    <marker id="loop_a" markerWidth="12" markerHeight="12" refX="9" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 Z" fill="#2563eb"/></marker>
+  </defs>
+
+  <!-- Stages as circles in a cycle -->
+  <!-- Understand -->
+  <circle cx="410" cy="130" r="62" fill="#eff6ff" stroke="#2563eb" stroke-width="2.4"/>
+  <text x="410" y="122" text-anchor="middle" font-size="13" font-weight="700" fill="#1d4ed8">Understand</text>
+  <text x="410" y="140" text-anchor="middle" font-size="9.5" fill="#334155">Requirements, scope,</text>
+  <text x="410" y="155" text-anchor="middle" font-size="9.5" fill="#334155">actors, use cases</text>
+
+  <!-- Model -->
+  <circle cx="640" cy="240" r="62" fill="#f0fdf4" stroke="#059669" stroke-width="2.4"/>
+  <text x="640" y="232" text-anchor="middle" font-size="13" font-weight="700" fill="#047857">Model</text>
+  <text x="640" y="250" text-anchor="middle" font-size="9.5" fill="#334155">Entities, relationships,</text>
+  <text x="640" y="265" text-anchor="middle" font-size="9.5" fill="#334155">class diagram sketch</text>
+
+  <!-- Refine -->
+  <circle cx="530" cy="360" r="62" fill="#fff7ed" stroke="#d97706" stroke-width="2.4"/>
+  <text x="530" y="352" text-anchor="middle" font-size="13" font-weight="700" fill="#b45309">Refine</text>
+  <text x="530" y="370" text-anchor="middle" font-size="9.5" fill="#334155">Apply patterns, fix</text>
+  <text x="530" y="385" text-anchor="middle" font-size="9.5" fill="#334155">coupling, check SRP</text>
+
+  <!-- Validate -->
+  <circle cx="290" cy="360" r="62" fill="#faf5ff" stroke="#7c3aed" stroke-width="2.4"/>
+  <text x="290" y="352" text-anchor="middle" font-size="13" font-weight="700" fill="#6d28d9">Validate</text>
+  <text x="290" y="370" text-anchor="middle" font-size="9.5" fill="#334155">Walk through use cases,</text>
+  <text x="290" y="385" text-anchor="middle" font-size="9.5" fill="#334155">spot gaps, test design</text>
+
+  <!-- Arrows between stages -->
+  <path d="M462 160 C540 160 600 188 596 240" fill="none" stroke="#2563eb" stroke-width="2.2" marker-end="url(#loop_a)"/>
+  <path d="M606 294 C595 330 575 345 558 358" fill="none" stroke="#059669" stroke-width="2.2" marker-end="url(#loop_a)"/>
+  <path d="M478 375 C450 390 380 390 355 378" fill="none" stroke="#d97706" stroke-width="2.2" marker-end="url(#loop_a)"/>
+  <path d="M242 325 C230 260 300 175 350 148" fill="none" stroke="#7c3aed" stroke-width="2.2" marker-end="url(#loop_a)"/>
+
+  <!-- Stage labels on arrows -->
+  <text x="554" y="183" font-size="9" fill="#059669" font-weight="700">extract</text>
+  <text x="599" y="318" font-size="9" fill="#d97706" font-weight="700">improve</text>
+  <text x="378" y="398" font-size="9" fill="#6d28d9" font-weight="700">check</text>
+  <text x="222" y="236" font-size="9" fill="#2563eb" font-weight="700">revisit</text>
+
+  <!-- Center note -->
+  <text x="410" y="268" text-anchor="middle" font-size="10" fill="#64748b" font-style="italic">iterate until</text>
+  <text x="410" y="284" text-anchor="middle" font-size="10" fill="#64748b" font-style="italic">all use cases pass</text>
+</svg>

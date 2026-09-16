@@ -1,0 +1,49 @@
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .h { font-size: 12px; font-weight: 700; fill: #ffffff; }
+    .note { font-size: 10px; fill: #64748b; }
+    .lbl { font-size: 9.5px; font-weight: 700; fill: #1e293b; }
+  </style>
+
+  <text x="24" y="30" class="title">It's a spectrum — with a trap on the side</text>
+
+  <!-- spectrum arrow -->
+  <line x1="60" y1="80" x2="740" y2="80" stroke="#cbd5e1" stroke-width="2"/>
+  <text x="60" y="72" class="note">simpler, more coupled</text>
+  <text x="620" y="72" class="note">more independent, more complex</text>
+
+  <!-- Monolith -->
+  <rect x="40" y="100" width="220" height="150" rx="10" fill="#2563eb"/>
+  <text x="60" y="124" class="h">Monolith</text>
+  <rect x="60" y="138" width="180" height="90" rx="6" fill="#3b82f6"/>
+  <rect x="72" y="150" width="70" height="30" rx="3" fill="#93c5fd"/><rect x="150" y="150" width="78" height="30" rx="3" fill="#93c5fd"/>
+  <rect x="72" y="188" width="70" height="30" rx="3" fill="#93c5fd"/><rect x="150" y="188" width="78" height="30" rx="3" fill="#93c5fd"/>
+  <text x="150" y="245" text-anchor="middle" class="note" fill="#dbeafe">one unit, tangled modules</text>
+
+  <!-- Modular Monolith -->
+  <rect x="290" y="100" width="220" height="150" rx="10" fill="#0ea5e9"/>
+  <text x="310" y="124" class="h">Modular Monolith</text>
+  <rect x="310" y="138" width="180" height="90" rx="6" fill="#38bdf8"/>
+  <rect x="322" y="150" width="76" height="30" rx="3" fill="#e0f2fe" stroke="#0369a1" stroke-width="1.5"/><rect x="406" y="150" width="72" height="30" rx="3" fill="#e0f2fe" stroke="#0369a1" stroke-width="1.5"/>
+  <rect x="322" y="188" width="76" height="30" rx="3" fill="#e0f2fe" stroke="#0369a1" stroke-width="1.5"/><rect x="406" y="188" width="72" height="30" rx="3" fill="#e0f2fe" stroke="#0369a1" stroke-width="1.5"/>
+  <text x="400" y="245" text-anchor="middle" class="note" fill="#075985">one unit, STRONG internal boundaries</text>
+
+  <!-- Microservices -->
+  <rect x="540" y="100" width="230" height="150" rx="10" fill="#059669"/>
+  <text x="560" y="124" class="h">Microservices</text>
+  <rect x="558" y="140" width="60" height="34" rx="4" fill="#34d399"/><rect x="626" y="140" width="60" height="34" rx="4" fill="#34d399"/><rect x="694" y="140" width="60" height="34" rx="4" fill="#34d399"/>
+  <rect x="558" y="182" width="60" height="34" rx="4" fill="#34d399"/><rect x="626" y="182" width="60" height="34" rx="4" fill="#34d399"/><rect x="694" y="182" width="60" height="34" rx="4" fill="#34d399"/>
+  <text x="655" y="245" text-anchor="middle" class="note" fill="#dcfce7">many independent units + own DBs</text>
+
+  <!-- distributed monolith trap -->
+  <rect x="290" y="290" width="480" height="96" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="306" y="314" class="lbl" fill="#dc2626">⚠ Distributed Monolith (the anti-pattern)</text>
+  <text x="306" y="336" class="note">Split into "microservices" but so tightly coupled they must be deployed together, share a database, or</text>
+  <text x="306" y="352" class="note">break when one changes. You get the <tspan font-weight="700">operational cost</tspan> of microservices with the <tspan font-weight="700">coupling</tspan> of a monolith —</text>
+  <text x="306" y="368" class="note">the worst of both worlds. Independence is what makes microservices worth it; without it, don't split.</text>
+
+  <line x1="200" y1="386" x2="288" y2="340" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="40" y="360" class="note">A bad split lands</text>
+  <text x="40" y="374" class="note">here, not on the line →</text>
+</svg>

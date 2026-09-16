@@ -1,0 +1,54 @@
+<svg viewBox="0 0 800 460" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .h { font-size: 12px; font-weight: 700; fill: #ffffff; }
+    .dim { font-size: 10.5px; font-weight: 700; fill: #1e293b; }
+    .v { font-size: 10px; fill: #334155; }
+  </style>
+
+  <text x="24" y="28" class="title">Monolith vs. microservices, dimension by dimension</text>
+
+  <!-- header -->
+  <rect x="24" y="44" width="200" height="34" fill="#1e293b"/><text x="34" y="66" class="h">Dimension</text>
+  <rect x="224" y="44" width="276" height="34" fill="#2563eb"/><text x="234" y="66" class="h">Monolith</text>
+  <rect x="500" y="44" width="276" height="34" fill="#059669"/><text x="510" y="66" class="h">Microservices</text>
+
+  <g>
+    <rect x="24" y="78" width="752" height="30" fill="#f8fafc"/>
+    <text x="34" y="98" class="dim">Deployment</text><text x="234" y="98" class="v">one unit, all at once</text><text x="510" y="98" class="v">each service independently</text>
+
+    <rect x="24" y="108" width="752" height="30" fill="#ffffff"/>
+    <text x="34" y="128" class="dim">Scaling</text><text x="234" y="128" class="v">replicate the whole app</text><text x="510" y="128" class="v">scale each service on its own</text>
+
+    <rect x="24" y="138" width="752" height="30" fill="#f8fafc"/>
+    <text x="34" y="158" class="dim">Tech stack</text><text x="234" y="158" class="v">single language/framework</text><text x="510" y="158" class="v">polyglot — best fit per service</text>
+
+    <rect x="24" y="168" width="752" height="30" fill="#ffffff"/>
+    <text x="34" y="188" class="dim">Data</text><text x="234" y="188" class="v">one shared database</text><text x="510" y="188" class="v">database per service</text>
+
+    <rect x="24" y="198" width="752" height="30" fill="#f8fafc"/>
+    <text x="34" y="218" class="dim">Communication</text><text x="234" y="218" class="v">in-process function calls</text><text x="510" y="218" class="v">network: HTTP / gRPC / messaging</text>
+
+    <rect x="24" y="228" width="752" height="30" fill="#ffffff"/>
+    <text x="34" y="248" class="dim">Consistency</text><text x="234" y="248" class="v">ACID transactions, easy</text><text x="510" y="248" class="v">eventual / saga across services</text>
+
+    <rect x="24" y="258" width="752" height="30" fill="#f8fafc"/>
+    <text x="34" y="278" class="dim">Teams (Conway)</text><text x="234" y="278" class="v">coordinated on one codebase</text><text x="510" y="278" class="v">small autonomous teams per service</text>
+
+    <rect x="24" y="288" width="752" height="30" fill="#ffffff"/>
+    <text x="34" y="308" class="dim">Fault isolation</text><text x="234" y="308" class="v">a crash can take all down</text><text x="510" y="308" class="v">isolated — but new distributed failures</text>
+
+    <rect x="24" y="318" width="752" height="30" fill="#f8fafc"/>
+    <text x="34" y="338" class="dim">Testing</text><text x="234" y="338" class="v">simple end-to-end in one process</text><text x="510" y="338" class="v">contract + integration across services</text>
+
+    <rect x="24" y="348" width="752" height="30" fill="#ffffff"/>
+    <text x="34" y="368" class="dim">Debugging</text><text x="234" y="368" class="v">single stack trace &amp; logs</text><text x="510" y="368" class="v">needs distributed tracing</text>
+
+    <rect x="24" y="378" width="752" height="30" fill="#f8fafc"/>
+    <text x="34" y="398" class="dim">Ops complexity</text><text x="234" y="398" class="v">low — one thing to run</text><text x="510" y="398" class="v">high — orchestration, discovery, CI/CD</text>
+
+    <rect x="24" y="408" width="752" height="34" fill="#ffffff"/>
+    <text x="34" y="429" class="dim">Best fit</text><text x="234" y="429" class="v">small team, early stage, simple app</text><text x="510" y="429" class="v">large org, clear domains, big scale</text>
+  </g>
+  <rect x="24" y="78" width="752" height="364" fill="none" stroke="#e2e8f0"/>
+</svg>

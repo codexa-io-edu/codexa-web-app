@@ -1,0 +1,93 @@
+<svg viewBox="0 0 820 470" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <rect width="820" height="470" fill="#f8fafc"/>
+  <text x="410" y="30" text-anchor="middle" font-size="20" font-weight="700" fill="#0f172a">A Worked Example: An Order Domain</text>
+  <text x="410" y="52" text-anchor="middle" font-size="12.5" fill="#64748b">Reading the notation together: inheritance, composition, aggregation, association, multiplicity</text>
+
+  <defs>
+    <marker id="ex_open" markerWidth="14" markerHeight="14" refX="11" refY="5" orient="auto"><path d="M1,1 L11,5 L1,9" fill="none" stroke="#334155" stroke-width="1.6"/></marker>
+    <marker id="ex_tri" markerWidth="16" markerHeight="16" refX="13" refY="6" orient="auto"><path d="M1,1 L13,6 L1,11 Z" fill="#ffffff" stroke="#334155" stroke-width="1.6"/></marker>
+  </defs>
+
+  <!-- Customer -->
+  <rect x="40" y="80" width="150" height="70" rx="3" fill="#ffffff" stroke="#1e293b" stroke-width="1.8"/>
+  <rect x="40" y="80" width="150" height="26" fill="#dbeafe" stroke="#1e293b" stroke-width="1.8"/>
+  <text x="115" y="98" text-anchor="middle" font-size="12" font-weight="700" fill="#1e3a8a">Customer</text>
+  <text x="48" y="122" font-size="9" fill="#334155" font-family="monospace">- name: String</text>
+  <text x="48" y="138" font-size="9" fill="#334155" font-family="monospace">- email: String</text>
+
+  <!-- Order -->
+  <rect x="330" y="80" width="160" height="70" rx="3" fill="#ffffff" stroke="#1e293b" stroke-width="1.8"/>
+  <rect x="330" y="80" width="160" height="26" fill="#dbeafe" stroke="#1e293b" stroke-width="1.8"/>
+  <text x="410" y="98" text-anchor="middle" font-size="12" font-weight="700" fill="#1e3a8a">Order</text>
+  <text x="338" y="122" font-size="9" fill="#334155" font-family="monospace">- orderId: String</text>
+  <text x="338" y="138" font-size="9" fill="#334155" font-family="monospace">- date: LocalDate</text>
+
+  <!-- OrderLine -->
+  <rect x="330" y="250" width="160" height="70" rx="3" fill="#ffffff" stroke="#1e293b" stroke-width="1.8"/>
+  <rect x="330" y="250" width="160" height="26" fill="#ede9fe" stroke="#1e293b" stroke-width="1.8"/>
+  <text x="410" y="268" text-anchor="middle" font-size="12" font-weight="700" fill="#6d28d9">OrderLine</text>
+  <text x="338" y="292" font-size="9" fill="#334155" font-family="monospace">- qty: int</text>
+  <text x="338" y="308" font-size="9" fill="#334155" font-family="monospace">- unitPrice: double</text>
+
+  <!-- Product -->
+  <rect x="620" y="250" width="160" height="70" rx="3" fill="#ffffff" stroke="#1e293b" stroke-width="1.8"/>
+  <rect x="620" y="250" width="160" height="26" fill="#dcfce7" stroke="#1e293b" stroke-width="1.8"/>
+  <text x="700" y="268" text-anchor="middle" font-size="12" font-weight="700" fill="#065f46">Product</text>
+  <text x="628" y="292" font-size="9" fill="#334155" font-family="monospace">- sku: String</text>
+  <text x="628" y="308" font-size="9" fill="#334155" font-family="monospace">- name: String</text>
+
+  <!-- Payment abstract -->
+  <rect x="40" y="250" width="170" height="60" rx="3" fill="#ffffff" stroke="#1e293b" stroke-width="1.8"/>
+  <rect x="40" y="250" width="170" height="30" fill="#fef3c7" stroke="#1e293b" stroke-width="1.8"/>
+  <text x="125" y="263" text-anchor="middle" font-size="11.5" font-weight="700" font-style="italic" fill="#b45309">Payment</text>
+  <text x="125" y="275" text-anchor="middle" font-size="7.5" font-style="italic" fill="#64748b">&#171;abstract&#187;</text>
+  <text x="48" y="298" font-size="9" fill="#334155" font-family="monospace">+ pay(amt): boolean</text>
+
+  <!-- CardPayment -->
+  <rect x="40" y="370" width="150" height="50" rx="3" fill="#ffffff" stroke="#1e293b" stroke-width="1.8"/>
+  <rect x="40" y="370" width="150" height="26" fill="#fee2e2" stroke="#1e293b" stroke-width="1.8"/>
+  <text x="115" y="388" text-anchor="middle" font-size="11" font-weight="700" fill="#b91c1c">CardPayment</text>
+  <text x="48" y="410" font-size="8.5" fill="#334155" font-family="monospace">- cardNo: String</text>
+
+  <!-- PaypalPayment -->
+  <rect x="220" y="370" width="150" height="50" rx="3" fill="#ffffff" stroke="#1e293b" stroke-width="1.8"/>
+  <rect x="220" y="370" width="150" height="26" fill="#fee2e2" stroke="#1e293b" stroke-width="1.8"/>
+  <text x="295" y="388" text-anchor="middle" font-size="11" font-weight="700" fill="#b91c1c">PaypalPayment</text>
+  <text x="228" y="410" font-size="8.5" fill="#334155" font-family="monospace">- account: String</text>
+
+  <!-- Customer -> Order association with multiplicity -->
+  <line x1="190" y1="115" x2="328" y2="115" stroke="#334155" stroke-width="1.7" marker-end="url(#ex_open)"/>
+  <text x="200" y="108" font-size="9" fill="#334155">1</text>
+  <text x="312" y="108" font-size="9" fill="#334155">0..*</text>
+  <text x="258" y="130" text-anchor="middle" font-size="8.5" font-style="italic" fill="#64748b">places</text>
+
+  <!-- Order composition of OrderLine (filled diamond at Order) -->
+  <path d="M410,150 L403,165 L410,180 L417,165 Z" fill="#334155"/>
+  <line x1="410" y1="180" x2="410" y2="248" stroke="#334155" stroke-width="1.7"/>
+  <text x="420" y="170" font-size="9" fill="#334155">1</text>
+  <text x="420" y="242" font-size="9" fill="#334155">1..*</text>
+  <text x="450" y="215" text-anchor="middle" font-size="8.5" font-style="italic" fill="#64748b">contains</text>
+
+  <!-- OrderLine -> Product association -->
+  <line x1="490" y1="285" x2="618" y2="285" stroke="#334155" stroke-width="1.7" marker-end="url(#ex_open)"/>
+  <text x="500" y="278" font-size="9" fill="#334155">*</text>
+  <text x="602" y="278" font-size="9" fill="#334155">1</text>
+  <text x="554" y="300" text-anchor="middle" font-size="8.5" font-style="italic" fill="#64748b">refers to</text>
+
+  <!-- Order -> Payment aggregation (hollow diamond at Order) -->
+  <path d="M330,128 L315,121 L300,128 L315,135 Z" fill="#ffffff" stroke="#334155" stroke-width="1.5"/>
+  <line x1="210" y1="270" x2="300" y2="132" stroke="#334155" stroke-width="1.5"/>
+  <text x="250" y="210" text-anchor="middle" font-size="8.5" font-style="italic" fill="#64748b">paid by 0..1</text>
+
+  <!-- Payment inheritance -->
+  <line x1="115" y1="370" x2="115" y2="312" stroke="#334155" stroke-width="1.7" marker-end="url(#ex_tri)"/>
+  <line x1="295" y1="370" x2="140" y2="312" stroke="#334155" stroke-width="1.7" marker-end="url(#ex_tri)"/>
+
+  <rect x="540" y="90" width="250" height="120" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="665" y="110" text-anchor="middle" font-size="10.5" font-weight="700" fill="#334155">How to read it</text>
+  <text x="552" y="130" font-size="9" fill="#334155">&#8226; A Customer places 0..* Orders</text>
+  <text x="552" y="148" font-size="9" fill="#334155">&#8226; An Order is composed of 1..* OrderLines</text>
+  <text x="552" y="166" font-size="9" fill="#334155">&#8226; Each OrderLine refers to 1 Product</text>
+  <text x="552" y="184" font-size="9" fill="#334155">&#8226; An Order is paid by a Payment</text>
+  <text x="552" y="202" font-size="9" fill="#334155">&#8226; Card/Paypal are kinds of Payment</text>
+</svg>

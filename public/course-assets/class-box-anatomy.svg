@@ -1,0 +1,46 @@
+<svg viewBox="0 0 820 430" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <rect width="820" height="430" fill="#f8fafc"/>
+  <text x="410" y="34" text-anchor="middle" font-size="21" font-weight="700" fill="#0f172a">Anatomy of a Class Box</text>
+  <text x="410" y="58" text-anchor="middle" font-size="13" fill="#64748b">Three compartments: name, attributes (fields), operations (methods)</text>
+
+  <!-- the class box -->
+  <rect x="250" y="90" width="320" height="230" rx="4" fill="#ffffff" stroke="#1e293b" stroke-width="2"/>
+  <!-- name compartment -->
+  <rect x="250" y="90" width="320" height="44" fill="#dbeafe" stroke="#1e293b" stroke-width="2"/>
+  <text x="410" y="112" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a">BankAccount</text>
+  <text x="410" y="128" text-anchor="middle" font-size="9" font-style="italic" fill="#64748b">&#171;class&#187;  (name compartment)</text>
+
+  <!-- attributes -->
+  <line x1="250" y1="134" x2="570" y2="134" stroke="#1e293b" stroke-width="2"/>
+  <text x="266" y="156" font-size="12" fill="#334155" font-family="monospace">- accountId: String</text>
+  <text x="266" y="178" font-size="12" fill="#334155" font-family="monospace">- balance: double</text>
+  <text x="266" y="200" font-size="12" fill="#334155" font-family="monospace"># owner: Customer</text>
+  <text x="266" y="222" font-size="12" fill="#334155" font-family="monospace">+ MAX_LIMIT: double</text>
+
+  <!-- operations -->
+  <line x1="250" y1="234" x2="570" y2="234" stroke="#1e293b" stroke-width="2"/>
+  <text x="266" y="256" font-size="12" fill="#334155" font-family="monospace">+ deposit(amt: double): void</text>
+  <text x="266" y="278" font-size="12" fill="#334155" font-family="monospace">+ withdraw(amt: double): boolean</text>
+  <text x="266" y="300" font-size="12" fill="#334155" font-family="monospace">- validate(amt: double): boolean</text>
+
+  <!-- labels -->
+  <text x="600" y="115" font-size="11" font-weight="700" fill="#1d4ed8">Name</text>
+  <line x1="596" y1="112" x2="574" y2="112" stroke="#1d4ed8" stroke-width="1.4"/>
+  <text x="600" y="185" font-size="11" font-weight="700" fill="#047857">Attributes</text>
+  <line x1="596" y1="182" x2="574" y2="182" stroke="#047857" stroke-width="1.4"/>
+  <text x="600" y="275" font-size="11" font-weight="700" fill="#b45309">Operations</text>
+  <line x1="596" y1="272" x2="574" y2="272" stroke="#b45309" stroke-width="1.4"/>
+
+  <text x="120" y="160" font-size="11" font-weight="700" fill="#334155">Format:</text>
+  <text x="40" y="182" font-size="10" fill="#334155" font-family="monospace">visibility name: type</text>
+  <text x="40" y="204" font-size="10" fill="#334155" font-family="monospace">vis name(p: T): return</text>
+
+  <!-- visibility legend -->
+  <rect x="150" y="344" width="520" height="70" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="410" y="364" text-anchor="middle" font-size="11.5" font-weight="700" fill="#334155">Visibility markers</text>
+  <text x="170" y="388" font-size="10.5" fill="#334155"><tspan font-weight="700" fill="#dc2626">+</tspan> public</text>
+  <text x="290" y="388" font-size="10.5" fill="#334155"><tspan font-weight="700" fill="#dc2626">-</tspan> private</text>
+  <text x="410" y="388" font-size="10.5" fill="#334155"><tspan font-weight="700" fill="#dc2626">#</tspan> protected</text>
+  <text x="540" y="388" font-size="10.5" fill="#334155"><tspan font-weight="700" fill="#dc2626">~</tspan> package</text>
+  <text x="410" y="406" text-anchor="middle" font-size="9.5" font-style="italic" fill="#64748b">underlined = static &#8226; italic = abstract</text>
+</svg>

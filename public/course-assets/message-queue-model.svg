@@ -1,0 +1,54 @@
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .box { font-size: 12px; font-weight: 700; fill: #ffffff; }
+    .msg { font-size: 10px; font-weight: 700; fill: #ffffff; }
+    .note { font-size: 10.5px; fill: #64748b; }
+    .lbl { font-size: 10px; font-weight: 700; fill: #1e293b; }
+  </style>
+
+  <text x="24" y="30" class="title">Message queue: share work across competing consumers</text>
+
+  <!-- producer -->
+  <rect x="30" y="150" width="100" height="40" rx="6" fill="#2563eb"/><text x="80" y="175" text-anchor="middle" class="box">Producer</text>
+
+  <!-- queue -->
+  <rect x="180" y="140" width="260" height="60" rx="8" fill="#f1f5f9" stroke="#d97706" stroke-width="2"/>
+  <text x="310" y="132" text-anchor="middle" class="note">Queue (FIFO)</text>
+  <rect x="196" y="152" width="34" height="36" rx="4" fill="#d97706"/><text x="213" y="174" text-anchor="middle" class="msg">m5</text>
+  <rect x="234" y="152" width="34" height="36" rx="4" fill="#d97706"/><text x="251" y="174" text-anchor="middle" class="msg">m4</text>
+  <rect x="272" y="152" width="34" height="36" rx="4" fill="#d97706"/><text x="289" y="174" text-anchor="middle" class="msg">m3</text>
+  <rect x="310" y="152" width="34" height="36" rx="4" fill="#94a3b8"/><text x="327" y="174" text-anchor="middle" class="msg">m2</text>
+  <rect x="348" y="152" width="34" height="36" rx="4" fill="#94a3b8"/><text x="365" y="174" text-anchor="middle" class="msg">m1</text>
+
+  <line x1="130" y1="170" x2="178" y2="170" stroke="#94a3b8" stroke-width="2" marker-end="url(#a)"/>
+
+  <!-- consumers -->
+  <rect x="620" y="90" width="140" height="36" rx="6" fill="#059669"/><text x="690" y="113" text-anchor="middle" class="box">Consumer 1 ← m1</text>
+  <rect x="620" y="152" width="140" height="36" rx="6" fill="#059669"/><text x="690" y="175" text-anchor="middle" class="box">Consumer 2 ← m2</text>
+  <rect x="620" y="214" width="140" height="36" rx="6" fill="#059669"/><text x="690" y="237" text-anchor="middle" class="box">Consumer 3 ← m3</text>
+
+  <line x1="440" y1="165" x2="618" y2="110" stroke="#059669" stroke-width="1.8" marker-end="url(#g)"/>
+  <line x1="440" y1="170" x2="618" y2="170" stroke="#059669" stroke-width="1.8" marker-end="url(#g)"/>
+  <line x1="440" y1="175" x2="618" y2="230" stroke="#059669" stroke-width="1.8" marker-end="url(#g)"/>
+
+  <text x="455" y="95" class="lbl">each message → exactly ONE consumer</text>
+
+  <!-- ack + dlq -->
+  <rect x="180" y="270" width="300" height="110" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="196" y="292" class="lbl">Lifecycle of one message</text>
+  <text x="196" y="314" class="note">1. consumer receives it (becomes invisible to others)</text>
+  <text x="196" y="332" class="note">2. processes it, then sends an <tspan font-weight="700">ack</tspan></text>
+  <text x="196" y="350" class="note">3. ack → broker <tspan font-weight="700">deletes</tspan> it. No ack → redelivered</text>
+  <text x="196" y="368" class="note">4. repeatedly fails → moved to a Dead Letter Queue</text>
+
+  <rect x="520" y="290" width="240" height="70" rx="8" fill="#fef2f2" stroke="#fecaca"/>
+  <text x="536" y="312" class="lbl">Dead Letter Queue (DLQ)</text>
+  <text x="536" y="332" class="note">"poison" messages that keep failing are</text>
+  <text x="536" y="348" class="note">parked here for inspection, not lost.</text>
+
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#94a3b8"/></marker>
+    <marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#059669"/></marker>
+  </defs>
+</svg>

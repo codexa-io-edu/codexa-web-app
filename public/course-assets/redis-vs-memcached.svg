@@ -1,0 +1,68 @@
+<svg viewBox="0 0 780 460" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .h { font-size: 13px; font-weight: 700; fill: #ffffff; }
+    .dim { font-size: 11px; font-weight: 700; fill: #1e293b; }
+    .r { font-size: 11px; fill: #334155; }
+    .note { font-size: 10.5px; fill: #64748b; }
+  </style>
+
+  <text x="24" y="30" class="title">Redis vs. Memcached at a glance</text>
+
+  <!-- header row -->
+  <rect x="24" y="50" width="220" height="40" fill="#1e293b"/>
+  <text x="38" y="75" class="h">Dimension</text>
+  <rect x="244" y="50" width="266" height="40" fill="#dc2626"/>
+  <text x="258" y="75" class="h">Redis</text>
+  <rect x="510" y="50" width="246" height="40" fill="#2563eb"/>
+  <text x="524" y="75" class="h">Memcached</text>
+
+  <!-- rows -->
+  <!-- helper: row bg alternation -->
+  <g>
+    <rect x="24" y="90" width="732" height="38" fill="#f8fafc"/>
+    <text x="38" y="114" class="dim">Data model</text>
+    <text x="258" y="114" class="r">rich data structures</text>
+    <text x="524" y="114" class="r">simple key → value (blob)</text>
+
+    <rect x="24" y="128" width="732" height="38" fill="#ffffff"/>
+    <text x="38" y="152" class="dim">Threading</text>
+    <text x="258" y="152" class="r">mostly single-threaded core</text>
+    <text x="524" y="152" class="r">multi-threaded (scales on cores)</text>
+
+    <rect x="24" y="166" width="732" height="38" fill="#f8fafc"/>
+    <text x="38" y="190" class="dim">Persistence</text>
+    <text x="258" y="190" class="r">optional (snapshot / log)</text>
+    <text x="524" y="190" class="r">none — purely in-memory</text>
+
+    <rect x="24" y="204" width="732" height="38" fill="#ffffff"/>
+    <text x="38" y="228" class="dim">Replication / cluster</text>
+    <text x="258" y="228" class="r">built-in replication &amp; clustering</text>
+    <text x="524" y="228" class="r">none native (client-side sharding)</text>
+
+    <rect x="24" y="242" width="732" height="38" fill="#f8fafc"/>
+    <text x="38" y="266" class="dim">Extra features</text>
+    <text x="258" y="266" class="r">Pub/Sub, TTL, Lua, transactions</text>
+    <text x="524" y="266" class="r">TTL only — deliberately minimal</text>
+
+    <rect x="24" y="280" width="732" height="38" fill="#ffffff"/>
+    <text x="38" y="304" class="dim">Eviction</text>
+    <text x="258" y="304" class="r">several policies (see Eviction topic)</text>
+    <text x="524" y="304" class="r">LRU (see Eviction topic)</text>
+
+    <rect x="24" y="318" width="732" height="38" fill="#f8fafc"/>
+    <text x="38" y="342" class="dim">Value size / memory</text>
+    <text x="258" y="342" class="r">large values; flexible</text>
+    <text x="524" y="342" class="r">efficient slab memory for small objects</text>
+
+    <rect x="24" y="356" width="732" height="46" fill="#ecfdf5" stroke="#a7f3d0"/>
+    <text x="38" y="378" class="dim">Best for</text>
+    <text x="258" y="378" class="r">most caching + data structures,</text>
+    <text x="258" y="393" class="r">counters, queues, pub/sub, persistence</text>
+    <text x="524" y="378" class="r">simple, huge-scale object caching</text>
+    <text x="524" y="393" class="r">where raw multi-core speed wins</text>
+  </g>
+
+  <text x="24" y="428" class="note">Rule of thumb: default to <tspan font-weight="700">Redis</tspan> for its versatility; choose <tspan font-weight="700">Memcached</tspan> when you want the simplest possible, multi-threaded object cache.</text>
+  <text x="24" y="446" class="note">Both are fast in-memory stores; the difference is Redis's feature breadth vs. Memcached's minimalist, multi-threaded simplicity.</text>
+</svg>

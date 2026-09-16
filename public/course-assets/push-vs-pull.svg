@@ -1,0 +1,52 @@
+<svg viewBox="0 0 780 400" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .panel { font-size: 14px; font-weight: 700; fill: #1e293b; }
+    .box { font-size: 12px; font-weight: 700; fill: #ffffff; }
+    .note { font-size: 10.5px; fill: #64748b; }
+    .ok { font-size: 10.5px; font-weight: 700; fill: #059669; }
+    .warn { font-size: 10.5px; font-weight: 700; fill: #d97706; }
+  </style>
+
+  <text x="24" y="30" class="title">Two ways content gets onto the edge: Pull vs. Push</text>
+
+  <!-- PULL -->
+  <rect x="24" y="50" width="366" height="330" rx="10" fill="#eff6ff" stroke="#93c5fd"/>
+  <text x="44" y="74" class="panel" fill="#2563eb">Pull CDN (origin pull)</text>
+  <text x="44" y="94" class="note">The CDN fetches from your origin the first time it's requested.</text>
+
+  <rect x="44" y="120" width="90" height="42" rx="8" fill="#1e293b"/><text x="72" y="146" class="box">User</text>
+  <rect x="200" y="120" width="90" height="42" rx="8" fill="#2563eb"/><text x="222" y="146" class="box">Edge</text>
+  <rect x="290" y="200" width="90" height="42" rx="8" fill="#64748b"/><text x="308" y="226" class="box">Origin</text>
+
+  <path d="M 134 141 L 198 141" stroke="#334155" stroke-width="2"/><polygon points="194,136 204,141 194,146" fill="#334155"/>
+  <text x="120" y="112" class="warn">1st request → MISS</text>
+  <path d="M 270 162 L 320 198" stroke="#d97706" stroke-width="2" stroke-dasharray="4,3"/><polygon points="316,193 324,202 310,200" fill="#d97706"/>
+  <text x="150" y="185" class="note">edge pulls from origin, caches it</text>
+
+  <text x="44" y="278" class="ok">✓ zero setup — just point the CDN at your origin</text>
+  <text x="44" y="296" class="ok">✓ only requested content is cached (efficient)</text>
+  <text x="44" y="314" class="warn">✗ first request per object is slow (cold)</text>
+  <text x="44" y="332" class="warn">✗ origin must be up to serve first hits</text>
+  <text x="44" y="360" class="note">Best for: websites &amp; typical assets — the common default.</text>
+
+  <!-- PUSH -->
+  <rect x="410" y="50" width="366" height="330" rx="10" fill="#f0fdf4" stroke="#86efac"/>
+  <text x="430" y="74" class="panel" fill="#059669">Push CDN</text>
+  <text x="430" y="94" class="note">You upload content to the CDN ahead of time.</text>
+
+  <rect x="430" y="120" width="90" height="42" rx="8" fill="#1e293b"/><text x="446" y="146" class="box">You</text>
+  <rect x="620" y="120" width="90" height="42" rx="8" fill="#059669"/><text x="638" y="146" class="box">Edge</text>
+  <rect x="530" y="210" width="110" height="42" rx="8" fill="#1e293b"/><text x="548" y="236" class="box">User</text>
+
+  <path d="M 520 141 L 618 141" stroke="#059669" stroke-width="2"/><polygon points="614,136 624,141 614,146" fill="#059669"/>
+  <text x="470" y="112" class="note">upload / publish in advance</text>
+  <path d="M 640 162 L 620 208" stroke="#059669" stroke-width="2"/><polygon points="615,200 618,212 625,203" fill="#059669"/>
+  <text x="500" y="196" class="ok">always a HIT for users</text>
+
+  <text x="430" y="288" class="ok">✓ no cold-start; first user is fast too</text>
+  <text x="430" y="306" class="ok">✓ works even if origin is offline</text>
+  <text x="430" y="324" class="warn">✗ you manage what's uploaded &amp; storage</text>
+  <text x="430" y="342" class="warn">✗ wasteful if much of it is never requested</text>
+  <text x="430" y="368" class="note">Best for: large, infrequently-changing files (software, big media).</text>
+</svg>

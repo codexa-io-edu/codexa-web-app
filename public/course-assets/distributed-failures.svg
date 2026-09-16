@@ -1,0 +1,51 @@
+<svg viewBox="0 0 800 410" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .h { font-size: 12px; font-weight: 700; fill: #ffffff; }
+    .item { font-size: 10px; fill: #334155; }
+    .note { font-size: 10px; fill: #64748b; }
+    .box { font-size: 10px; font-weight: 700; fill: #ffffff; }
+  </style>
+
+  <text x="24" y="30" class="title">Why distributed systems fail differently</text>
+
+  <!-- fallacies -->
+  <rect x="24" y="48" width="380" height="250" rx="10" fill="#eff6ff" stroke="#bfdbfe"/>
+  <rect x="24" y="48" width="380" height="32" rx="10" fill="#2563eb"/>
+  <text x="40" y="70" class="h">The 8 fallacies of distributed computing</text>
+  <text x="40" y="102" class="item">1 · The network is reliable</text>
+  <text x="40" y="124" class="item">2 · Latency is zero</text>
+  <text x="40" y="146" class="item">3 · Bandwidth is infinite</text>
+  <text x="40" y="168" class="item">4 · The network is secure</text>
+  <text x="40" y="190" class="item">5 · Topology doesn't change</text>
+  <text x="40" y="212" class="item">6 · There is one administrator</text>
+  <text x="40" y="234" class="item">7 · Transport cost is zero</text>
+  <text x="40" y="256" class="item">8 · The network is homogeneous</text>
+  <text x="40" y="286" class="note">Every one of these is false — assuming any of them breaks systems.</text>
+
+  <!-- partial failure -->
+  <rect x="424" y="48" width="352" height="250" rx="10" fill="#fef2f2" stroke="#fecaca"/>
+  <rect x="424" y="48" width="352" height="32" rx="10" fill="#dc2626"/>
+  <text x="440" y="70" class="h">The defining challenge: partial failure</text>
+
+  <rect x="450" y="100" width="70" height="30" rx="5" fill="#059669"/><text x="485" y="120" text-anchor="middle" class="box">A ✓</text>
+  <rect x="560" y="100" width="70" height="30" rx="5" fill="#059669"/><text x="595" y="120" text-anchor="middle" class="box">B ✓</text>
+  <rect x="670" y="100" width="70" height="30" rx="5" fill="#dc2626"/><text x="705" y="120" text-anchor="middle" class="box">C ✗</text>
+  <line x1="520" y1="115" x2="558" y2="115" stroke="#94a3b8" stroke-width="1.6"/>
+  <line x1="630" y1="115" x2="668" y2="115" stroke="#dc2626" stroke-width="1.6" stroke-dasharray="4,3"/>
+
+  <text x="440" y="160" class="note">In a monolith, code either runs or it doesn't. In a</text>
+  <text x="440" y="176" class="note">distributed system, <tspan font-weight="700">some parts work while others fail</tspan> —</text>
+  <text x="440" y="192" class="note">and a caller often <tspan font-weight="700">can't tell "slow" from "dead."</tspan></text>
+  <text x="440" y="216" class="note">Failure types you must handle:</text>
+  <text x="440" y="234" class="note">• crash / fail-stop   • omission (lost messages)</text>
+  <text x="440" y="250" class="note">• timing (too slow)   • network partition (split)</text>
+  <text x="440" y="266" class="note">• gray / partial (degraded — the hardest to detect)</text>
+  <text x="440" y="286" class="note">• Byzantine (wrong/corrupt responses)</text>
+
+  <!-- philosophy -->
+  <rect x="24" y="312" width="752" height="80" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="40" y="336" class="note" fill="#1e293b" font-weight="700">"Everything fails, all the time." — design for failure, not against it.</text>
+  <text x="40" y="358" class="note">More components + an unreliable network + partial failure = you must ASSUME failures and contain their blast radius.</text>
+  <text x="40" y="378" class="note">The two failure themes that dominate: single points of failure (one thing takes all down) and cascading failures (failure spreads).</text>
+</svg>

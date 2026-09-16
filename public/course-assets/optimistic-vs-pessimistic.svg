@@ -1,0 +1,56 @@
+<svg viewBox="0 0 820 450" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <rect width="820" height="450" fill="#f8fafc"/>
+  <text x="410" y="34" text-anchor="middle" font-size="21" font-weight="700" fill="#0f172a">Pessimistic vs Optimistic Locking</text>
+  <text x="410" y="58" text-anchor="middle" font-size="13" fill="#64748b">Lock upfront and block others, or proceed freely and verify nothing changed before committing</text>
+
+  <line x1="410" y1="76" x2="410" y2="424" stroke="#e2e8f0" stroke-width="2"/>
+
+  <defs>
+    <marker id="pl_arr" markerWidth="11" markerHeight="11" refX="8" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#475569"/>
+    </marker>
+    <marker id="pl_red" markerWidth="11" markerHeight="11" refX="8" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#dc2626"/>
+    </marker>
+  </defs>
+
+  <!-- LEFT pessimistic -->
+  <text x="205" y="94" text-anchor="middle" font-size="15" font-weight="700" fill="#1d4ed8">Pessimistic: "assume conflict"</text>
+  <text x="205" y="112" text-anchor="middle" font-size="11" fill="#64748b">lock first, then work</text>
+
+  <rect x="60" y="128" width="290" height="34" rx="6" fill="#dbeafe" stroke="#2563eb"/><text x="205" y="150" text-anchor="middle" font-size="11" fill="#1e3a8a">1. ACQUIRE lock (others now block)</text>
+  <rect x="60" y="170" width="290" height="34" rx="6" fill="#eff6ff" stroke="#2563eb"/><text x="205" y="192" text-anchor="middle" font-size="11" fill="#1e3a8a">2. read → modify → write</text>
+  <rect x="60" y="212" width="290" height="34" rx="6" fill="#dbeafe" stroke="#2563eb"/><text x="205" y="234" text-anchor="middle" font-size="11" fill="#1e3a8a">3. RELEASE lock</text>
+  <line x1="205" y1="162" x2="205" y2="170" stroke="#475569" stroke-width="1.6" marker-end="url(#pl_arr)"/>
+  <line x1="205" y1="204" x2="205" y2="212" stroke="#475569" stroke-width="1.6" marker-end="url(#pl_arr)"/>
+
+  <rect x="60" y="272" width="290" height="130" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="1.4"/>
+  <text x="205" y="294" text-anchor="middle" font-size="11.5" font-weight="700" fill="#1d4ed8">Good when: contention is HIGH</text>
+  <text x="205" y="314" text-anchor="middle" font-size="10.5" fill="#334155">conflicts are likely, so blocking</text>
+  <text x="205" y="329" text-anchor="middle" font-size="10.5" fill="#334155">avoids wasted, repeated work.</text>
+  <text x="205" y="356" text-anchor="middle" font-size="10.5" fill="#b91c1c">Cost: threads wait; risk of</text>
+  <text x="205" y="371" text-anchor="middle" font-size="10.5" fill="#b91c1c">deadlock &amp; reduced throughput.</text>
+  <text x="205" y="392" text-anchor="middle" font-size="9.5" fill="#64748b">e.g. synchronized, ReentrantLock, SELECT ... FOR UPDATE</text>
+
+  <!-- RIGHT optimistic -->
+  <text x="615" y="94" text-anchor="middle" font-size="15" font-weight="700" fill="#7c3aed">Optimistic: "assume no conflict"</text>
+  <text x="615" y="112" text-anchor="middle" font-size="11" fill="#64748b">work first, verify before commit</text>
+
+  <rect x="470" y="128" width="290" height="34" rx="6" fill="#ede9fe" stroke="#7c3aed"/><text x="615" y="150" text-anchor="middle" font-size="11" fill="#6d28d9">1. read value + its VERSION (no lock)</text>
+  <rect x="470" y="170" width="290" height="34" rx="6" fill="#faf5ff" stroke="#7c3aed"/><text x="615" y="192" text-anchor="middle" font-size="11" fill="#6d28d9">2. compute new value</text>
+  <rect x="470" y="212" width="290" height="34" rx="6" fill="#ede9fe" stroke="#7c3aed"/><text x="615" y="234" text-anchor="middle" font-size="10.5" fill="#6d28d9">3. commit ONLY IF version unchanged</text>
+  <line x1="615" y1="162" x2="615" y2="170" stroke="#475569" stroke-width="1.6" marker-end="url(#pl_arr)"/>
+  <line x1="615" y1="204" x2="615" y2="212" stroke="#475569" stroke-width="1.6" marker-end="url(#pl_arr)"/>
+
+  <!-- retry loop -->
+  <path d="M470,229 C420,229 420,145 468,145" fill="none" stroke="#dc2626" stroke-width="1.8" marker-end="url(#pl_red)"/>
+  <text x="405" y="190" text-anchor="middle" font-size="9" fill="#b91c1c" transform="rotate(-90 405 190)">changed? RETRY</text>
+
+  <rect x="470" y="272" width="290" height="130" rx="10" fill="#faf5ff" stroke="#7c3aed" stroke-width="1.4"/>
+  <text x="615" y="294" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6d28d9">Good when: contention is LOW</text>
+  <text x="615" y="314" text-anchor="middle" font-size="10.5" fill="#334155">conflicts are rare, so no locking</text>
+  <text x="615" y="329" text-anchor="middle" font-size="10.5" fill="#334155">cost — just occasional retries.</text>
+  <text x="615" y="356" text-anchor="middle" font-size="10.5" fill="#b91c1c">Cost: wasted work &amp; retries if</text>
+  <text x="615" y="371" text-anchor="middle" font-size="10.5" fill="#b91c1c">conflicts turn out to be frequent.</text>
+  <text x="615" y="392" text-anchor="middle" font-size="9.5" fill="#64748b">e.g. CAS / AtomicInteger, JPA @Version column</text>
+</svg>

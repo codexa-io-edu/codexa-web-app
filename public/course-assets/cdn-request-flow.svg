@@ -1,0 +1,43 @@
+<svg viewBox="0 0 780 400" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .box { font-size: 12px; font-weight: 700; fill: #ffffff; }
+    .bsub { font-size: 9.5px; fill: #e2e8f0; }
+    .step { font-size: 11px; font-weight: 700; fill: #1e293b; }
+    .note { font-size: 11px; fill: #64748b; }
+    .hit { font-size: 11px; font-weight: 700; fill: #059669; }
+    .miss { font-size: 11px; font-weight: 700; fill: #d97706; }
+  </style>
+
+  <text x="24" y="30" class="title">A request's journey through a CDN</text>
+
+  <rect x="30" y="120" width="110" height="54" rx="8" fill="#1e293b"/><text x="58" y="144" class="box">User</text><text x="44" y="162" class="bsub">wants image.jpg</text>
+  <rect x="220" y="120" width="120" height="54" rx="8" fill="#7c3aed"/><text x="238" y="144" class="box">DNS / Anycast</text><text x="236" y="162" class="bsub">picks nearest edge</text>
+  <rect x="420" y="120" width="130" height="54" rx="8" fill="#2563eb"/><text x="446" y="144" class="box">Edge server</text><text x="436" y="162" class="bsub">(nearest PoP)</text>
+  <rect x="630" y="120" width="120" height="54" rx="8" fill="#64748b"/><text x="656" y="144" class="box">Origin</text><text x="646" y="162" class="bsub">source of truth</text>
+
+  <!-- 1 dns -->
+  <path d="M 140 138 L 218 138" stroke="#334155" stroke-width="2"/><polygon points="214,133 224,138 214,143" fill="#334155"/>
+  <text x="150" y="130" class="step">1 · resolve</text>
+  <!-- 2 to edge -->
+  <path d="M 140 158 C 250 200, 340 200, 418 160" fill="none" stroke="#334155" stroke-width="2"/><polygon points="422,164 428,153 414,155" fill="#334155"/>
+  <text x="230" y="200" class="step">2 · request goes to nearest edge</text>
+
+  <!-- HIT -->
+  <path d="M 420 138 C 340 108, 220 108, 142 128" fill="none" stroke="#059669" stroke-width="2.5"/><polygon points="146,123 136,129 147,134" fill="#059669"/>
+  <text x="220" y="104" class="hit">3a · cache HIT → return instantly ✓</text>
+
+  <!-- MISS to origin -->
+  <path d="M 550 138 L 628 138" stroke="#d97706" stroke-width="2" stroke-dasharray="5,4"/><polygon points="624,133 634,138 624,143" fill="#d97706"/>
+  <text x="470" y="112" class="miss">3b · on MISS, fetch from origin,</text>
+  <text x="470" y="126" class="miss">cache it (per TTL), then return</text>
+
+  <!-- footer -->
+  <rect x="24" y="228" width="732" height="152" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="40" y="252" class="step">Key ideas</text>
+  <text x="40" y="276" class="note">• <tspan font-weight="700">Routing</tspan> (step 1–2): DNS or Anycast sends each user to the closest edge (the mechanics are in "How the Internet Works").</text>
+  <text x="40" y="298" class="note">• <tspan font-weight="700">Hit</tspan> (3a): most requests are served entirely at the edge — fast for the user, zero load on the origin.</text>
+  <text x="40" y="320" class="note">• <tspan font-weight="700">Miss</tspan> (3b): the edge fetches once from the origin, caches per the <tspan font-weight="700">Cache-Control / TTL</tspan> the origin set, and serves everyone after.</text>
+  <text x="40" y="342" class="note">• <tspan font-weight="700">Offload ratio</tspan>: the fraction of requests served at the edge — the CDN's headline metric, like a cache's hit ratio.</text>
+  <text x="40" y="364" class="note">• The origin only ever sees <tspan font-weight="700">misses</tspan>, so a global audience of millions can be served by a modest origin.</text>
+</svg>

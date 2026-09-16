@@ -1,0 +1,49 @@
+<svg viewBox="0 0 760 420" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <rect width="760" height="420" fill="#f8fafc"/>
+  <text x="380" y="40" text-anchor="middle" font-size="24" font-weight="700" fill="#0f172a">The Four Pillars of OOP</text>
+  <text x="380" y="66" text-anchor="middle" font-size="14" fill="#64748b">All built on top of Classes &amp; Objects</text>
+
+  <!-- Foundation bar -->
+  <rect x="80" y="330" width="600" height="54" rx="10" fill="#0f172a"/>
+  <text x="380" y="363" text-anchor="middle" font-size="16" font-weight="600" fill="#ffffff">Classes &amp; Objects  (the foundation)</text>
+
+  <!-- Pillar 1: Encapsulation -->
+  <rect x="88" y="110" width="140" height="200" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="158" y="150" text-anchor="middle" font-size="16" font-weight="700" fill="#1e40af">Encapsulation</text>
+  <line x1="108" y1="164" x2="208" y2="164" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="158" y="196" text-anchor="middle" font-size="12" fill="#1e3a8a">Bundle data +</text>
+  <text x="158" y="214" text-anchor="middle" font-size="12" fill="#1e3a8a">behavior; hide</text>
+  <text x="158" y="232" text-anchor="middle" font-size="12" fill="#1e3a8a">internal state</text>
+  <text x="158" y="262" text-anchor="middle" font-size="12" fill="#1e3a8a">"Protect the</text>
+  <text x="158" y="280" text-anchor="middle" font-size="12" fill="#1e3a8a">invariants"</text>
+
+  <!-- Pillar 2: Abstraction -->
+  <rect x="240" y="110" width="140" height="200" rx="10" fill="#dcfce7" stroke="#059669" stroke-width="2"/>
+  <text x="310" y="150" text-anchor="middle" font-size="16" font-weight="700" fill="#047857">Abstraction</text>
+  <line x1="260" y1="164" x2="360" y2="164" stroke="#86efac" stroke-width="1.5"/>
+  <text x="310" y="196" text-anchor="middle" font-size="12" fill="#065f46">Expose only</text>
+  <text x="310" y="214" text-anchor="middle" font-size="12" fill="#065f46">what matters;</text>
+  <text x="310" y="232" text-anchor="middle" font-size="12" fill="#065f46">hide complexity</text>
+  <text x="310" y="262" text-anchor="middle" font-size="12" fill="#065f46">"Show the</text>
+  <text x="310" y="280" text-anchor="middle" font-size="12" fill="#065f46">what, not how"</text>
+
+  <!-- Pillar 3: Inheritance -->
+  <rect x="392" y="110" width="140" height="200" rx="10" fill="#ffedd5" stroke="#d97706" stroke-width="2"/>
+  <text x="462" y="150" text-anchor="middle" font-size="16" font-weight="700" fill="#b45309">Inheritance</text>
+  <line x1="412" y1="164" x2="512" y2="164" stroke="#fdba74" stroke-width="1.5"/>
+  <text x="462" y="196" text-anchor="middle" font-size="12" fill="#7c2d12">Reuse &amp; extend</text>
+  <text x="462" y="214" text-anchor="middle" font-size="12" fill="#7c2d12">via IS-A</text>
+  <text x="462" y="232" text-anchor="middle" font-size="12" fill="#7c2d12">relationships</text>
+  <text x="462" y="262" text-anchor="middle" font-size="12" fill="#7c2d12">"A Dog IS-A</text>
+  <text x="462" y="280" text-anchor="middle" font-size="12" fill="#7c2d12">Animal"</text>
+
+  <!-- Pillar 4: Polymorphism -->
+  <rect x="544" y="110" width="140" height="200" rx="10" fill="#fae8ff" stroke="#c026d3" stroke-width="2"/>
+  <text x="614" y="150" text-anchor="middle" font-size="15" font-weight="700" fill="#a21caf">Polymorphism</text>
+  <line x1="564" y1="164" x2="664" y2="164" stroke="#f0abfc" stroke-width="1.5"/>
+  <text x="614" y="196" text-anchor="middle" font-size="12" fill="#701a75">One interface,</text>
+  <text x="614" y="214" text-anchor="middle" font-size="12" fill="#701a75">many behaviors</text>
+  <text x="614" y="244" text-anchor="middle" font-size="12" fill="#701a75">"Same call,</text>
+  <text x="614" y="262" text-anchor="middle" font-size="12" fill="#701a75">different</text>
+  <text x="614" y="280" text-anchor="middle" font-size="12" fill="#701a75">outcome"</text>
+</svg>

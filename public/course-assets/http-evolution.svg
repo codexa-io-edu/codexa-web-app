@@ -1,0 +1,69 @@
+<svg viewBox="0 0 800 420" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .ver { font-size: 15px; font-weight: 700; fill: #ffffff; }
+    .vsub { font-size: 10px; fill: #e2e8f0; }
+    .h { font-size: 11px; font-weight: 700; fill: #1e293b; }
+    .b { font-size: 10.5px; fill: #334155; }
+    .prob { font-size: 10.5px; font-weight: 700; fill: #dc2626; }
+    .trans { font-size: 10px; font-weight: 700; fill: #7c3aed; }
+  </style>
+
+  <text x="24" y="30" class="title">The evolution of HTTP: each version fixed the last one's bottleneck</text>
+
+  <!-- HTTP/1.1 -->
+  <rect x="24" y="56" width="240" height="46" rx="8" fill="#1e293b"/>
+  <text x="40" y="80" class="ver">HTTP/1.1</text><text x="130" y="80" class="vsub">1997</text>
+  <text x="40" y="95" class="vsub">over TCP · text-based</text>
+
+  <rect x="24" y="112" width="240" height="260" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="40" y="136" class="h">What it added</text>
+  <text x="40" y="156" class="b">• persistent (keep-alive) connections</text>
+  <text x="40" y="172" class="b">• Host header (virtual hosting)</text>
+  <text x="40" y="188" class="b">• human-readable text protocol</text>
+  <text x="40" y="222" class="h">Bottleneck left behind</text>
+  <text x="40" y="242" class="prob">✗ one request at a time per</text>
+  <text x="40" y="256" class="prob">   connection → app-layer HOL</text>
+  <text x="40" y="272" class="prob">✗ browsers open ~6 TCP conns</text>
+  <text x="40" y="288" class="prob">✗ verbose, uncompressed headers</text>
+  <text x="40" y="320" class="trans">transport: TCP</text>
+
+  <!-- arrow -->
+  <path d="M 266 235 L 288 235" stroke="#94a3b8" stroke-width="2"/><polygon points="284,230 294,235 284,240" fill="#94a3b8"/>
+
+  <!-- HTTP/2 -->
+  <rect x="296" y="56" width="240" height="46" rx="8" fill="#2563eb"/>
+  <text x="312" y="80" class="ver">HTTP/2</text><text x="392" y="80" class="vsub">2015</text>
+  <text x="312" y="95" class="vsub">over TCP · binary framing</text>
+
+  <rect x="296" y="112" width="240" height="260" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="312" y="136" class="h">What it added</text>
+  <text x="312" y="156" class="b">• multiplexing: many streams</text>
+  <text x="312" y="170" class="b">   over ONE connection</text>
+  <text x="312" y="186" class="b">• HPACK header compression</text>
+  <text x="312" y="202" class="b">• stream prioritization</text>
+  <text x="312" y="236" class="h">Bottleneck left behind</text>
+  <text x="312" y="256" class="prob">✗ all streams share one TCP</text>
+  <text x="312" y="270" class="prob">   conn → one lost packet stalls</text>
+  <text x="312" y="284" class="prob">   ALL streams (TCP-level HOL)</text>
+  <text x="312" y="320" class="trans">transport: TCP</text>
+
+  <path d="M 538 235 L 560 235" stroke="#94a3b8" stroke-width="2"/><polygon points="556,230 566,235 556,240" fill="#94a3b8"/>
+
+  <!-- HTTP/3 -->
+  <rect x="568" y="56" width="208" height="46" rx="8" fill="#059669"/>
+  <text x="584" y="80" class="ver">HTTP/3</text><text x="664" y="80" class="vsub">2022</text>
+  <text x="584" y="95" class="vsub">over QUIC / UDP</text>
+
+  <rect x="568" y="112" width="208" height="260" rx="8" fill="#f0fdf4" stroke="#86efac"/>
+  <text x="584" y="136" class="h">What it added</text>
+  <text x="584" y="156" class="b">• independent streams — no</text>
+  <text x="584" y="170" class="b">   cross-stream HOL blocking</text>
+  <text x="584" y="186" class="b">• built-in TLS 1.3 (always</text>
+  <text x="584" y="200" class="b">   encrypted)</text>
+  <text x="584" y="216" class="b">• faster 1-RTT / 0-RTT setup</text>
+  <text x="584" y="232" class="b">• connection migration</text>
+  <text x="584" y="248" class="b">   (survives WiFi ↔ cellular)</text>
+  <text x="584" y="290" class="h" fill="#059669">✓ fixes transport-layer HOL</text>
+  <text x="584" y="320" class="trans">transport: QUIC over UDP</text>
+</svg>

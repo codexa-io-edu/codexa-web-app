@@ -1,0 +1,52 @@
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .axis { font-size: 10px; font-weight: 700; fill: #475569; }
+    .cell { font-size: 10px; font-weight: 700; fill: #1e293b; }
+    .sub { font-size: 9px; fill: #64748b; }
+    .note { font-size: 10px; fill: #64748b; }
+    .lbl { font-size: 10.5px; font-weight: 700; fill: #1e293b; }
+  </style>
+
+  <text x="24" y="30" class="title">What to extract first: high value, low risk — at the edges</text>
+
+  <!-- matrix -->
+  <text x="30" y="60" class="axis">Business value ↑</text>
+  <line x1="70" y1="70" x2="70" y2="320" stroke="#94a3b8" stroke-width="1.5"/>
+  <line x1="70" y1="320" x2="430" y2="320" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="250" y="342" text-anchor="middle" class="axis">Risk / effort to extract →</text>
+
+  <!-- quadrants -->
+  <rect x="72" y="72" width="178" height="122" fill="#dcfce7" stroke="#86efac"/>
+  <text x="161" y="120" text-anchor="middle" class="cell" fill="#065f46">START HERE</text>
+  <text x="161" y="138" text-anchor="middle" class="sub">high value, low risk</text>
+  <text x="161" y="154" text-anchor="middle" class="sub">edge / leaf capabilities</text>
+
+  <rect x="252" y="72" width="178" height="122" fill="#fef9c3" stroke="#fde047"/>
+  <text x="341" y="126" text-anchor="middle" class="cell" fill="#854d0e">later, carefully</text>
+  <text x="341" y="144" text-anchor="middle" class="sub">high value, high risk</text>
+
+  <rect x="72" y="196" width="178" height="122" fill="#f1f5f9" stroke="#cbd5e1"/>
+  <text x="161" y="250" text-anchor="middle" class="cell" fill="#475569">maybe / quick wins</text>
+  <text x="161" y="268" text-anchor="middle" class="sub">low value, low risk</text>
+
+  <rect x="252" y="196" width="178" height="122" fill="#fee2e2" stroke="#fca5a5"/>
+  <text x="341" y="250" text-anchor="middle" class="cell" fill="#991b1b">avoid for now</text>
+  <text x="341" y="268" text-anchor="middle" class="sub">low value, high risk</text>
+
+  <!-- criteria -->
+  <rect x="456" y="60" width="320" height="280" rx="10" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="472" y="84" class="lbl">Good first candidates have…</text>
+  <text x="472" y="110" class="note">• A <tspan font-weight="700">clear boundary</tspan> — a real bounded context /</text>
+  <text x="484" y="124" class="note">seam (see Microservices Fundamentals).</text>
+  <text x="472" y="148" class="note">• <tspan font-weight="700">Loose coupling</tspan> to the rest of the monolith —</text>
+  <text x="484" y="162" class="note">few tangled dependencies &amp; shared tables.</text>
+  <text x="472" y="186" class="note">• An <tspan font-weight="700">edge / leaf</tspan> position (e.g. notifications,</text>
+  <text x="484" y="200" class="note">search) — not the deeply-entangled core.</text>
+  <text x="472" y="224" class="note">• <tspan font-weight="700">High change frequency</tspan> — benefits most from</text>
+  <text x="484" y="238" class="note">independent deployment.</text>
+  <text x="472" y="262" class="note">• <tspan font-weight="700">Different scaling</tspan> needs than the monolith.</text>
+  <text x="472" y="286" class="note">• Owned (or ownable) by <tspan font-weight="700">one team</tspan>.</text>
+  <text x="472" y="316" class="note" font-weight="700" fill="#991b1b">Don't start with the hardest, most central</text>
+  <text x="472" y="330" class="note" font-weight="700" fill="#991b1b">module — you'll stall early and lose trust.</text>
+</svg>

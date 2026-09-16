@@ -1,0 +1,56 @@
+<svg viewBox="0 0 820 430" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <rect width="820" height="430" fill="#f8fafc"/>
+  <text x="410" y="30" text-anchor="middle" font-size="20" font-weight="700" fill="#0f172a">HTTP Status Code Families</text>
+  <text x="410" y="52" text-anchor="middle" font-size="12.5" fill="#64748b">The first digit tells you the category &#8212; use the right code, not just 200 and 500</text>
+
+  <!-- 2xx -->
+  <rect x="30" y="72" width="250" height="160" rx="10" fill="#f0fdf4" stroke="#059669" stroke-width="2"/>
+  <text x="155" y="96" text-anchor="middle" font-size="15" font-weight="700" fill="#047857">2xx &#183; Success</text>
+  <text x="45" y="120" font-size="10.5" fill="#334155"><tspan font-weight="700" fill="#047857" font-family="monospace">200</tspan> OK &#8212; general success</text>
+  <text x="45" y="142" font-size="10.5" fill="#334155"><tspan font-weight="700" fill="#047857" font-family="monospace">201</tspan> Created &#8212; POST made a resource</text>
+  <text x="45" y="164" font-size="10.5" fill="#334155"><tspan font-weight="700" fill="#047857" font-family="monospace">202</tspan> Accepted &#8212; async, in progress</text>
+  <text x="45" y="186" font-size="10.5" fill="#334155"><tspan font-weight="700" fill="#047857" font-family="monospace">204</tspan> No Content &#8212; success, no body</text>
+  <text x="45" y="214" font-size="9.5" font-style="italic" fill="#64748b">"Your request worked."</text>
+
+  <!-- 3xx -->
+  <rect x="290" y="72" width="240" height="160" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="410" y="96" text-anchor="middle" font-size="15" font-weight="700" fill="#1d4ed8">3xx &#183; Redirection</text>
+  <text x="305" y="120" font-size="10.5" fill="#334155"><tspan font-weight="700" fill="#1d4ed8" font-family="monospace">301</tspan> Moved Permanently</text>
+  <text x="305" y="142" font-size="10.5" fill="#334155"><tspan font-weight="700" fill="#1d4ed8" font-family="monospace">302</tspan> Found (temporary)</text>
+  <text x="305" y="164" font-size="10.5" fill="#334155"><tspan font-weight="700" fill="#1d4ed8" font-family="monospace">304</tspan> Not Modified (cache)</text>
+  <text x="305" y="214" font-size="9.5" font-style="italic" fill="#64748b">"Look elsewhere / use your cache."</text>
+
+  <!-- 4xx -->
+  <rect x="540" y="72" width="250" height="160" rx="10" fill="#fff7ed" stroke="#d97706" stroke-width="2"/>
+  <text x="665" y="96" text-anchor="middle" font-size="15" font-weight="700" fill="#b45309">4xx &#183; Client error</text>
+  <text x="555" y="120" font-size="10.5" fill="#334155"><tspan font-weight="700" fill="#b45309" font-family="monospace">400</tspan> Bad Request &#8212; malformed</text>
+  <text x="555" y="142" font-size="10.5" fill="#334155"><tspan font-weight="700" fill="#b45309" font-family="monospace">401</tspan> Unauthorized &#8212; not logged in</text>
+  <text x="555" y="164" font-size="10.5" fill="#334155"><tspan font-weight="700" fill="#b45309" font-family="monospace">403</tspan> Forbidden &#8212; no permission</text>
+  <text x="555" y="186" font-size="10.5" fill="#334155"><tspan font-weight="700" fill="#b45309" font-family="monospace">404</tspan> Not Found</text>
+  <text x="555" y="214" font-size="9.5" font-style="italic" fill="#64748b">"YOU did something wrong."</text>
+
+  <!-- 5xx -->
+  <rect x="290" y="248" width="240" height="120" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="410" y="272" text-anchor="middle" font-size="15" font-weight="700" fill="#b91c1c">5xx &#183; Server error</text>
+  <text x="305" y="296" font-size="10.5" fill="#334155"><tspan font-weight="700" fill="#b91c1c" font-family="monospace">500</tspan> Internal Server Error</text>
+  <text x="305" y="318" font-size="10.5" fill="#334155"><tspan font-weight="700" fill="#b91c1c" font-family="monospace">502</tspan> Bad Gateway</text>
+  <text x="305" y="340" font-size="10.5" fill="#334155"><tspan font-weight="700" fill="#b91c1c" font-family="monospace">503</tspan> Service Unavailable</text>
+  <text x="410" y="360" text-anchor="middle" font-size="9.5" font-style="italic" fill="#64748b">"WE did something wrong."</text>
+
+  <!-- 1xx note + key distinction -->
+  <rect x="30" y="248" width="250" height="120" rx="10" fill="#faf5ff" stroke="#7c3aed" stroke-width="1.6"/>
+  <text x="155" y="272" text-anchor="middle" font-size="13" font-weight="700" fill="#6d28d9">1xx &#183; Informational</text>
+  <text x="45" y="296" font-size="10" fill="#334155"><tspan font-weight="700" font-family="monospace" fill="#6d28d9">100</tspan> Continue</text>
+  <text x="45" y="316" font-size="10" fill="#334155"><tspan font-weight="700" font-family="monospace" fill="#6d28d9">101</tspan> Switching Protocols</text>
+  <text x="155" y="348" text-anchor="middle" font-size="9" font-style="italic" fill="#64748b">rarely used directly</text>
+
+  <rect x="540" y="248" width="250" height="120" rx="10" fill="#fffbeb" stroke="#f59e0b" stroke-width="1.6"/>
+  <text x="665" y="270" text-anchor="middle" font-size="11.5" font-weight="700" fill="#b45309">The 4xx vs 5xx rule</text>
+  <text x="665" y="294" text-anchor="middle" font-size="9.8" fill="#334155">4xx = the client must FIX the</text>
+  <text x="665" y="310" text-anchor="middle" font-size="9.8" fill="#334155">request (don't blindly retry).</text>
+  <text x="665" y="332" text-anchor="middle" font-size="9.8" fill="#334155">5xx = server problem; the client</text>
+  <text x="665" y="348" text-anchor="middle" font-size="9.8" fill="#334155">MAY retry (with backoff).</text>
+
+  <text x="410" y="400" text-anchor="middle" font-size="11" font-weight="700" fill="#0f172a">Returning 200 with an error inside the body is an anti-pattern &#8212; the status line is part of the contract.</text>
+  <text x="410" y="420" text-anchor="middle" font-size="10" fill="#64748b">Clients, proxies, and caches all rely on the numeric code being accurate.</text>
+</svg>

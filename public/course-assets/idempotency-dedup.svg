@@ -1,0 +1,45 @@
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .box { font-size: 11px; font-weight: 700; fill: #ffffff; }
+    .note { font-size: 10px; fill: #64748b; }
+    .lbl { font-size: 10.5px; font-weight: 700; fill: #1e293b; }
+    .mono { font-size: 10px; font-family: 'Consolas','Courier New',monospace; fill: #1e293b; }
+    .ok { font-size: 10px; font-weight: 700; fill: #059669; }
+    .skip { font-size: 10px; font-weight: 700; fill: #d97706; }
+  </style>
+
+  <text x="24" y="30" class="title">Handling duplicates: idempotency &amp; a dedup store</text>
+
+  <!-- first arrival -->
+  <rect x="24" y="56" width="752" height="120" rx="10" fill="#f0fdf4" stroke="#bbf7d0"/>
+  <text x="40" y="80" class="lbl">First arrival of message id = "abc"</text>
+  <rect x="40" y="94" width="120" height="34" rx="6" fill="#2563eb"/><text x="100" y="115" text-anchor="middle" class="box">msg id=abc</text>
+  <rect x="220" y="94" width="150" height="34" rx="6" fill="#7c3aed"/><text x="295" y="115" text-anchor="middle" class="box">dedup store: seen?</text>
+  <rect x="430" y="94" width="150" height="34" rx="6" fill="#059669"/><text x="505" y="115" text-anchor="middle" class="box">process + record id</text>
+  <rect x="640" y="94" width="110" height="34" rx="6" fill="#64748b"/><text x="695" y="115" text-anchor="middle" class="box">ack</text>
+  <line x1="160" y1="111" x2="218" y2="111" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#a)"/>
+  <line x1="370" y1="111" x2="428" y2="111" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#a)"/>
+  <line x1="580" y1="111" x2="638" y2="111" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#a)"/>
+  <text x="230" y="152" class="ok">not seen → do the work, then remember "abc"</text>
+
+  <!-- duplicate arrival -->
+  <rect x="24" y="188" width="752" height="120" rx="10" fill="#fffbeb" stroke="#fde68a"/>
+  <text x="40" y="212" class="lbl">Duplicate arrival of the same id = "abc"</text>
+  <rect x="40" y="226" width="120" height="34" rx="6" fill="#2563eb"/><text x="100" y="247" text-anchor="middle" class="box">msg id=abc</text>
+  <rect x="220" y="226" width="150" height="34" rx="6" fill="#7c3aed"/><text x="295" y="247" text-anchor="middle" class="box">dedup store: seen?</text>
+  <rect x="430" y="226" width="150" height="34" rx="6" fill="#d97706"/><text x="505" y="247" text-anchor="middle" class="box">SKIP (no effect)</text>
+  <rect x="640" y="226" width="110" height="34" rx="6" fill="#64748b"/><text x="695" y="247" text-anchor="middle" class="box">ack</text>
+  <line x1="160" y1="243" x2="218" y2="243" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#a)"/>
+  <line x1="370" y1="243" x2="428" y2="243" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#a)"/>
+  <line x1="580" y1="243" x2="638" y2="243" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#a)"/>
+  <text x="230" y="284" class="skip">already seen → do nothing → the effect happens exactly once</text>
+
+  <!-- ways -->
+  <rect x="24" y="320" width="752" height="72" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="40" y="342" class="lbl">Three ways to be idempotent</text>
+  <text x="40" y="362" class="note">• <tspan font-weight="700">Naturally idempotent op</tspan> — e.g. <tspan font-family="'Consolas'">SET status='paid'</tspan> (repeatable) rather than <tspan font-family="'Consolas'">balance += 10</tspan> (not).</text>
+  <text x="40" y="380" class="note">• <tspan font-weight="700">Dedup by id / idempotency key</tspan> (store seen IDs; a dedup window bounds storage).   • <tspan font-weight="700">Upsert / conditional write</tspan>: <tspan font-family="'Consolas'">INSERT … ON CONFLICT DO NOTHING</tspan>.</text>
+
+  <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#94a3b8"/></marker></defs>
+</svg>

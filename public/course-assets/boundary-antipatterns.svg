@@ -1,0 +1,59 @@
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .h { font-size: 11.5px; font-weight: 700; fill: #dc2626; }
+    .box { font-size: 9px; font-weight: 700; fill: #ffffff; }
+    .note { font-size: 9.5px; fill: #64748b; }
+  </style>
+
+  <text x="24" y="30" class="title">Boundary anti-patterns to avoid</text>
+
+  <!-- nano-services -->
+  <rect x="24" y="48" width="240" height="150" rx="10" fill="#fef2f2" stroke="#fecaca"/>
+  <text x="40" y="72" class="h">Nano-services</text>
+  <rect x="40" y="86" width="40" height="24" rx="3" fill="#f87171"/><rect x="88" y="86" width="40" height="24" rx="3" fill="#f87171"/><rect x="136" y="86" width="40" height="24" rx="3" fill="#f87171"/><rect x="184" y="86" width="40" height="24" rx="3" fill="#f87171"/>
+  <rect x="40" y="116" width="40" height="24" rx="3" fill="#f87171"/><rect x="88" y="116" width="40" height="24" rx="3" fill="#f87171"/><rect x="136" y="116" width="40" height="24" rx="3" fill="#f87171"/><rect x="184" y="116" width="40" height="24" rx="3" fill="#f87171"/>
+  <text x="40" y="164" class="note">Too many tiny services → chatty network</text>
+  <text x="40" y="178" class="note">calls, huge operational overhead. "Micro"</text>
+  <text x="40" y="192" class="note">is not about size — map to a capability.</text>
+
+  <!-- shared database -->
+  <rect x="280" y="48" width="240" height="150" rx="10" fill="#fef2f2" stroke="#fecaca"/>
+  <text x="296" y="72" class="h">Shared database</text>
+  <rect x="300" y="86" width="80" height="26" rx="4" fill="#f87171"/><text x="340" y="104" text-anchor="middle" class="box">Service A</text>
+  <rect x="420" y="86" width="80" height="26" rx="4" fill="#f87171"/><text x="460" y="104" text-anchor="middle" class="box">Service B</text>
+  <rect x="350" y="140" width="100" height="30" rx="4" fill="#7f1d1d"/><text x="400" y="160" text-anchor="middle" class="box">one DB</text>
+  <line x1="340" y1="112" x2="390" y2="138" stroke="#dc2626" stroke-width="1.6"/>
+  <line x1="460" y1="112" x2="410" y2="138" stroke="#dc2626" stroke-width="1.6"/>
+  <text x="296" y="188" class="note">Two services on one DB are coupled by schema — the fastest route to a distributed monolith.</text>
+
+  <!-- distributed monolith -->
+  <rect x="536" y="48" width="240" height="150" rx="10" fill="#fef2f2" stroke="#fecaca"/>
+  <text x="552" y="72" class="h">Distributed monolith</text>
+  <rect x="560" y="92" width="60" height="26" rx="4" fill="#f87171"/><text x="590" y="110" text-anchor="middle" class="box">A</text>
+  <rect x="690" y="92" width="60" height="26" rx="4" fill="#f87171"/><text x="720" y="110" text-anchor="middle" class="box">B</text>
+  <rect x="625" y="140" width="60" height="26" rx="4" fill="#f87171"/><text x="655" y="158" text-anchor="middle" class="box">C</text>
+  <line x1="620" y1="105" x2="688" y2="105" stroke="#dc2626" stroke-width="1.6" marker-end="url(#r)"/>
+  <line x1="710" y1="118" x2="670" y2="140" stroke="#dc2626" stroke-width="1.6" marker-end="url(#r)"/>
+  <line x1="640" y1="140" x2="600" y2="118" stroke="#dc2626" stroke-width="1.6" marker-end="url(#r)"/>
+  <text x="552" y="184" class="note">Cyclic deps; must deploy together. All the cost, none of the independence.</text>
+
+  <!-- entity/CRUD services -->
+  <rect x="24" y="210" width="360" height="150" rx="10" fill="#fef2f2" stroke="#fecaca"/>
+  <text x="40" y="234" class="h">Entity / CRUD services</text>
+  <rect x="40" y="248" width="80" height="26" rx="4" fill="#f87171"/><text x="80" y="266" text-anchor="middle" class="box">User svc</text>
+  <rect x="130" y="248" width="90" height="26" rx="4" fill="#f87171"/><text x="175" y="266" text-anchor="middle" class="box">Address svc</text>
+  <rect x="230" y="248" width="90" height="26" rx="4" fill="#f87171"/><text x="275" y="266" text-anchor="middle" class="box">Order svc</text>
+  <text x="40" y="298" class="note">A service per database table (anemic CRUD wrappers) has no real behavior of its own, so</text>
+  <text x="40" y="314" class="note">every use case must orchestrate many of them → extremely chatty. Model capabilities and</text>
+  <text x="40" y="330" class="note">behavior, not tables.</text>
+
+  <!-- god service -->
+  <rect x="416" y="210" width="360" height="150" rx="10" fill="#fef2f2" stroke="#fecaca"/>
+  <text x="432" y="234" class="h">God service</text>
+  <rect x="470" y="250" width="250" height="70" rx="8" fill="#7f1d1d"/><text x="595" y="290" text-anchor="middle" class="box">one service does everything</text>
+  <text x="432" y="340" class="note">The opposite extreme — one huge service everyone depends on becomes a bottleneck and a SPOF.</text>
+  <text x="432" y="354" class="note">Aim for balanced, capability-sized services.</text>
+
+  <defs><marker id="r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#dc2626"/></marker></defs>
+</svg>

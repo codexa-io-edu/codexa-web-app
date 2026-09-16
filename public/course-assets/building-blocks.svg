@@ -1,0 +1,75 @@
+<svg viewBox="0 0 820 470" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <rect width="820" height="470" fill="#f8fafc"/>
+  <text x="410" y="30" text-anchor="middle" font-size="20" font-weight="700" fill="#0f172a">The Three Domain Building Blocks</text>
+  <text x="410" y="52" text-anchor="middle" font-size="12.5" fill="#64748b">Entity, Value Object, and Aggregate are the vocabulary for structuring a domain model</text>
+
+  <!-- Entity -->
+  <rect x="30" y="72" width="240" height="360" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="150" y="98" text-anchor="middle" font-size="14" font-weight="700" fill="#1d4ed8">Entity</text>
+  <text x="150" y="116" text-anchor="middle" font-size="9.5" fill="#64748b">identified by identity, not value</text>
+
+  <rect x="46" y="126" width="208" height="80" rx="6" fill="#0f172a"/>
+  <text x="56" y="144" font-family="monospace" font-size="8.5" fill="#93c5fd">class Order {</text>
+  <text x="56" y="160" font-family="monospace" font-size="8.5" fill="#4ade80">  Long id;        // identity</text>
+  <text x="56" y="176" font-family="monospace" font-size="8.5" fill="#e2e8f0">  OrderStatus status;</text>
+  <text x="56" y="192" font-family="monospace" font-size="8.5" fill="#e2e8f0">  List&lt;Item&gt; items;</text>
+  <text x="56" y="204" font-family="monospace" font-size="8.5" fill="#94a3b8">}</text>
+
+  <text x="46" y="232" font-size="9.5" font-weight="700" fill="#1d4ed8">Key properties</text>
+  <text x="46" y="250" font-size="9" fill="#334155">&#8226; Has a unique, persistent identity (id)</text>
+  <text x="46" y="268" font-size="9" fill="#334155">&#8226; Two entities with the same id are the</text>
+  <text x="56" y="284" font-size="9" fill="#334155">same entity, even if fields differ</text>
+  <text x="46" y="302" font-size="9" fill="#334155">&#8226; Mutable — state changes over lifecycle</text>
+  <text x="46" y="320" font-size="9" fill="#334155">&#8226; Has a lifecycle (created, active, closed)</text>
+  <rect x="46" y="342" width="208" height="40" rx="6" fill="#dbeafe"/>
+  <text x="150" y="358" text-anchor="middle" font-size="9" fill="#1e3a8a" font-weight="700">Examples:</text>
+  <text x="150" y="374" text-anchor="middle" font-size="9" fill="#334155">Order, Customer, Product, Account</text>
+  <text x="150" y="424" text-anchor="middle" font-size="10" font-weight="700" fill="#1d4ed8">equals() by ID</text>
+
+  <!-- Value Object -->
+  <rect x="290" y="72" width="240" height="360" rx="12" fill="#f0fdf4" stroke="#059669" stroke-width="2"/>
+  <text x="410" y="98" text-anchor="middle" font-size="14" font-weight="700" fill="#047857">Value Object</text>
+  <text x="410" y="116" text-anchor="middle" font-size="9.5" fill="#64748b">identified by value, immutable</text>
+
+  <rect x="306" y="126" width="208" height="80" rx="6" fill="#0f172a"/>
+  <text x="316" y="144" font-family="monospace" font-size="8.5" fill="#86efac">record Money(</text>
+  <text x="316" y="160" font-family="monospace" font-size="8.5" fill="#4ade80">  BigDecimal amount,</text>
+  <text x="316" y="176" font-family="monospace" font-size="8.5" fill="#4ade80">  Currency currency</text>
+  <text x="316" y="192" font-family="monospace" font-size="8.5" fill="#86efac">) {}</text>
+  <text x="316" y="204" font-family="monospace" font-size="8.5" fill="#94a3b8">// equals by fields, immutable</text>
+
+  <text x="306" y="232" font-size="9.5" font-weight="700" fill="#047857">Key properties</text>
+  <text x="306" y="250" font-size="9" fill="#334155">&#8226; No identity — two VOs with same fields</text>
+  <text x="316" y="266" font-size="9" fill="#334155">ARE the same thing</text>
+  <text x="306" y="284" font-size="9" fill="#334155">&#8226; Immutable — never changed, replaced</text>
+  <text x="306" y="302" font-size="9" fill="#334155">&#8226; Self-validating — invalid state impossible</text>
+  <text x="306" y="320" font-size="9" fill="#334155">&#8226; Can hold domain logic (add, convert)</text>
+  <rect x="306" y="342" width="208" height="40" rx="6" fill="#dcfce7"/>
+  <text x="410" y="358" text-anchor="middle" font-size="9" fill="#065f46" font-weight="700">Examples:</text>
+  <text x="410" y="374" text-anchor="middle" font-size="9" fill="#334155">Money, Address, EmailAddress,</text>
+  <text x="410" y="424" text-anchor="middle" font-size="10" font-weight="700" fill="#047857">equals() by all fields</text>
+
+  <!-- Aggregate -->
+  <rect x="550" y="72" width="240" height="360" rx="12" fill="#fff7ed" stroke="#d97706" stroke-width="2"/>
+  <text x="670" y="98" text-anchor="middle" font-size="14" font-weight="700" fill="#b45309">Aggregate</text>
+  <text x="670" y="116" text-anchor="middle" font-size="9.5" fill="#64748b">cluster with one root, one boundary</text>
+
+  <rect x="566" y="126" width="208" height="96" rx="6" fill="#0f172a"/>
+  <text x="576" y="144" font-family="monospace" font-size="8" fill="#fbbf24">// Order = Aggregate Root</text>
+  <text x="576" y="160" font-family="monospace" font-size="8" fill="#fdba74">class Order {  // the root</text>
+  <text x="576" y="176" font-family="monospace" font-size="8" fill="#e2e8f0">  Long id;</text>
+  <text x="576" y="192" font-family="monospace" font-size="8" fill="#e2e8f0">  List&lt;OrderItem&gt; items; // child</text>
+  <text x="576" y="208" font-family="monospace" font-size="8" fill="#e2e8f0">  Money total;  // value object</text>
+  <text x="576" y="218" font-family="monospace" font-size="8" fill="#94a3b8">}</text>
+
+  <text x="566" y="242" font-size="9.5" font-weight="700" fill="#b45309">Key properties</text>
+  <text x="566" y="260" font-size="9" fill="#334155">&#8226; A cluster of entities + value objects</text>
+  <text x="566" y="278" font-size="9" fill="#334155">&#8226; One entity is the Root — only entry point</text>
+  <text x="566" y="296" font-size="9" fill="#334155">&#8226; Enforces invariants for the whole cluster</text>
+  <text x="566" y="314" font-size="9" fill="#334155">&#8226; Loaded and saved as one unit</text>
+  <text x="566" y="332" font-size="9" fill="#334155">&#8226; No direct external refs to children</text>
+  <rect x="566" y="342" width="208" height="40" rx="6" fill="#fef3c7"/>
+  <text x="670" y="358" text-anchor="middle" font-size="9" fill="#92400e" font-weight="700">Examples:</text>
+  <text x="670" y="374" text-anchor="middle" font-size="9" fill="#334155">Order+Items, Account+Entries</text>
+  <text x="670" y="424" text-anchor="middle" font-size="10" font-weight="700" fill="#b45309">Transactional boundary</text>
+</svg>

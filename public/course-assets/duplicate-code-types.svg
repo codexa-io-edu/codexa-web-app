@@ -1,0 +1,70 @@
+<svg viewBox="0 0 820 460" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <rect width="820" height="460" fill="#f8fafc"/>
+  <text x="410" y="28" text-anchor="middle" font-size="20" font-weight="700" fill="#0f172a">Duplicate Code: Types and Refactoring Moves</text>
+  <text x="410" y="50" text-anchor="middle" font-size="12.5" fill="#64748b">Different flavours of duplication call for different refactoring techniques</text>
+
+  <!-- headers -->
+  <rect x="30" y="68" width="230" height="28" rx="5" fill="#dbeafe" stroke="#2563eb"/><text x="145" y="86" text-anchor="middle" font-size="11" font-weight="700" fill="#1e3a8a">Type of Duplication</text>
+  <rect x="270" y="68" width="230" height="28" rx="5" fill="#dbeafe" stroke="#2563eb"/><text x="385" y="86" text-anchor="middle" font-size="11" font-weight="700" fill="#1e3a8a">Where it lives</text>
+  <rect x="510" y="68" width="280" height="28" rx="5" fill="#dcfce7" stroke="#059669"/><text x="650" y="86" text-anchor="middle" font-size="11" font-weight="700" fill="#065f46">Refactoring move</text>
+
+  <!-- Row 1 -->
+  <rect x="30" y="100" width="230" height="56" rx="5" fill="#fef2f2" stroke="#fca5a5"/>
+  <text x="40" y="120" font-size="10.5" font-weight="700" fill="#b91c1c">Exact copy</text>
+  <text x="40" y="138" font-size="9" fill="#334155">Identical code block in the</text>
+  <text x="40" y="152" font-size="9" fill="#334155">same or different class</text>
+  <rect x="270" y="100" width="230" height="56" rx="5" fill="#fef2f2" stroke="#fca5a5"/>
+  <text x="280" y="126" font-size="9.5" fill="#334155">Two methods in the same class;</text>
+  <text x="280" y="144" font-size="9.5" fill="#334155">or two sibling classes</text>
+  <rect x="510" y="100" width="280" height="56" rx="5" fill="#f0fdf4" stroke="#6ee7b7"/>
+  <text x="520" y="120" font-size="10.5" font-weight="700" fill="#047857">Extract Method</text>
+  <text x="520" y="138" font-size="9" fill="#334155">Move block to a shared private method</text>
+  <text x="520" y="152" font-size="9" fill="#334155">or utility; both call it</text>
+
+  <!-- Row 2 -->
+  <rect x="30" y="162" width="230" height="56" rx="5" fill="#fef2f2" stroke="#fca5a5"/>
+  <text x="40" y="182" font-size="10.5" font-weight="700" fill="#b91c1c">Near-copy (slight variation)</text>
+  <text x="40" y="198" font-size="9" fill="#334155">Same logic, small differences</text>
+  <text x="40" y="212" font-size="9" fill="#334155">e.g. a constant or field name</text>
+  <rect x="270" y="162" width="230" height="56" rx="5" fill="#fef2f2" stroke="#fca5a5"/>
+  <text x="280" y="188" font-size="9.5" fill="#334155">Two related classes (sibling</text>
+  <text x="280" y="206" font-size="9.5" fill="#334155">subclasses or similar services)</text>
+  <rect x="510" y="162" width="280" height="56" rx="5" fill="#f0fdf4" stroke="#6ee7b7"/>
+  <text x="520" y="182" font-size="10.5" font-weight="700" fill="#047857">Extract + Parameterise</text>
+  <text x="520" y="200" font-size="9" fill="#334155">Extract Method, make the difference</text>
+  <text x="520" y="214" font-size="9" fill="#334155">a parameter</text>
+
+  <!-- Row 3 -->
+  <rect x="30" y="224" width="230" height="56" rx="5" fill="#fef2f2" stroke="#fca5a5"/>
+  <text x="40" y="244" font-size="10.5" font-weight="700" fill="#b91c1c">Sibling duplication</text>
+  <text x="40" y="260" font-size="9" fill="#334155">Same method in two subclasses</text>
+  <text x="40" y="274" font-size="9" fill="#334155">that share a parent</text>
+  <rect x="270" y="224" width="230" height="56" rx="5" fill="#fef2f2" stroke="#fca5a5"/>
+  <text x="280" y="250" font-size="9.5" fill="#334155">Two subclasses with identical</text>
+  <text x="280" y="268" font-size="9.5" fill="#334155">implementations</text>
+  <rect x="510" y="224" width="280" height="56" rx="5" fill="#f0fdf4" stroke="#6ee7b7"/>
+  <text x="520" y="244" font-size="10.5" font-weight="700" fill="#047857">Pull Up Method</text>
+  <text x="520" y="262" font-size="9" fill="#334155">Move to the shared superclass;</text>
+  <text x="520" y="276" font-size="9" fill="#334155">subclasses inherit it</text>
+
+  <!-- Row 4 -->
+  <rect x="30" y="286" width="230" height="68" rx="5" fill="#fef2f2" stroke="#fca5a5"/>
+  <text x="40" y="306" font-size="10.5" font-weight="700" fill="#b91c1c">Structural duplication</text>
+  <text x="40" y="322" font-size="9" fill="#334155">Same skeleton / algorithm</text>
+  <text x="40" y="336" font-size="9" fill="#334155">with different steps (sort,</text>
+  <text x="40" y="350" font-size="9" fill="#334155">filter, format differ)</text>
+  <rect x="270" y="286" width="230" height="68" rx="5" fill="#fef2f2" stroke="#fca5a5"/>
+  <text x="280" y="312" font-size="9.5" fill="#334155">Two or more methods with the</text>
+  <text x="280" y="330" font-size="9.5" fill="#334155">same sequence of steps but</text>
+  <text x="280" y="348" font-size="9.5" fill="#334155">different implementations</text>
+  <rect x="510" y="286" width="280" height="68" rx="5" fill="#f0fdf4" stroke="#6ee7b7"/>
+  <text x="520" y="306" font-size="10.5" font-weight="700" fill="#047857">Form Template Method</text>
+  <text x="520" y="324" font-size="9" fill="#334155">Skeleton in superclass / shared method;</text>
+  <text x="520" y="342" font-size="9" fill="#334155">override the varying steps via abstract</text>
+  <text x="520" y="356" font-size="9" fill="#334155">methods or strategy objects</text>
+
+  <rect x="30" y="368" width="760" height="60" rx="8" fill="#fffbeb" stroke="#f59e0b" stroke-width="1.4"/>
+  <text x="410" y="388" text-anchor="middle" font-size="11" font-weight="700" fill="#b45309">The refactoring rule: the structure of the duplicate tells you the move to make.</text>
+  <text x="410" y="408" text-anchor="middle" font-size="10" fill="#334155">Same class → Extract private method. Sibling classes → Pull Up to parent. Same algorithm shape → Template Method / Strategy.</text>
+  <text x="410" y="425" text-anchor="middle" font-size="9.5" fill="#64748b">Always: extract first, verify tests pass, then move/promote. Small safe steps.</text>
+</svg>

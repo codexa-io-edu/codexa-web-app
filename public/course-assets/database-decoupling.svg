@@ -1,0 +1,57 @@
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .ph { font-size: 11.5px; font-weight: 700; fill: #1e293b; }
+    .box { font-size: 9.5px; font-weight: 700; fill: #ffffff; }
+    .note { font-size: 9px; fill: #64748b; }
+  </style>
+
+  <text x="24" y="30" class="title">The hard part: splitting the shared database</text>
+
+  <!-- STAGE 1 -->
+  <text x="30" y="60" class="ph">1 · Shared DB (still coupled)</text>
+  <rect x="24" y="70" width="240" height="280" rx="10" fill="#fef2f2" stroke="#fecaca"/>
+  <rect x="52" y="90" width="80" height="34" rx="6" fill="#2563eb"/><text x="92" y="111" text-anchor="middle" class="box">Monolith</text>
+  <rect x="156" y="90" width="84" height="34" rx="6" fill="#059669"/><text x="198" y="111" text-anchor="middle" class="box">Service</text>
+  <rect x="72" y="200" width="144" height="60" rx="8" fill="#7f1d1d"/><text x="144" y="228" text-anchor="middle" class="box">one shared DB</text><text x="144" y="244" text-anchor="middle" class="note" fill="#fecaca">both read/write all tables</text>
+  <line x1="92" y1="124" x2="130" y2="198" stroke="#dc2626" stroke-width="1.6"/>
+  <line x1="198" y1="124" x2="160" y2="198" stroke="#dc2626" stroke-width="1.6"/>
+  <text x="40" y="292" class="note" fill="#991b1b">A "service" on the monolith's DB is</text>
+  <text x="40" y="306" class="note" fill="#991b1b">still a distributed monolith — no</text>
+  <text x="40" y="320" class="note" fill="#991b1b">real independence yet.</text>
+
+  <!-- STAGE 2 -->
+  <text x="290" y="60" class="ph">2 · Separate schemas / ownership</text>
+  <rect x="280" y="70" width="240" height="280" rx="10" fill="#fffbeb" stroke="#fde68a"/>
+  <rect x="308" y="90" width="80" height="34" rx="6" fill="#2563eb"/><text x="348" y="111" text-anchor="middle" class="box">Monolith</text>
+  <rect x="412" y="90" width="84" height="34" rx="6" fill="#059669"/><text x="454" y="111" text-anchor="middle" class="box">Service</text>
+  <rect x="300" y="190" width="96" height="60" rx="8" fill="#1d4ed8"/><text x="348" y="216" text-anchor="middle" class="box">monolith</text><text x="348" y="232" text-anchor="middle" class="box">tables</text>
+  <rect x="404" y="190" width="96" height="60" rx="8" fill="#047857"/><text x="452" y="216" text-anchor="middle" class="box">service</text><text x="452" y="232" text-anchor="middle" class="box">tables</text>
+  <line x1="348" y1="124" x2="348" y2="188" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#a)"/>
+  <line x1="454" y1="124" x2="453" y2="188" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#a)"/>
+  <line x1="412" y1="107" x2="390" y2="107" stroke="#7c3aed" stroke-width="1.6" stroke-dasharray="3,2" marker-end="url(#p)"/>
+  <text x="290" y="284" class="note" fill="#854d0e">Split ownership: each owns its tables.</text>
+  <text x="290" y="298" class="note" fill="#854d0e">Cross-boundary access now goes via</text>
+  <text x="290" y="312" class="note" fill="#854d0e">the API (purple), NOT direct SQL.</text>
+  <text x="290" y="326" class="note" fill="#854d0e">Break cross-schema joins &amp; FKs.</text>
+
+  <!-- STAGE 3 -->
+  <text x="546" y="60" class="ph">3 · Separate databases</text>
+  <rect x="536" y="70" width="240" height="280" rx="10" fill="#f0fdf4" stroke="#bbf7d0"/>
+  <rect x="556" y="90" width="90" height="34" rx="6" fill="#2563eb"/><text x="601" y="111" text-anchor="middle" class="box">Monolith</text>
+  <rect x="666" y="90" width="90" height="34" rx="6" fill="#059669"/><text x="711" y="111" text-anchor="middle" class="box">Service</text>
+  <rect x="556" y="190" width="90" height="56" rx="8" fill="#1d4ed8"/><text x="601" y="222" text-anchor="middle" class="box">DB 1</text>
+  <rect x="666" y="190" width="90" height="56" rx="8" fill="#047857"/><text x="711" y="222" text-anchor="middle" class="box">DB 2</text>
+  <line x1="601" y1="124" x2="601" y2="188" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#a)"/>
+  <line x1="711" y1="124" x2="711" y2="188" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#a)"/>
+  <line x1="666" y1="107" x2="646" y2="107" stroke="#7c3aed" stroke-width="1.6" stroke-dasharray="3,2" marker-end="url(#p)"/>
+  <text x="546" y="284" class="note" fill="#065f46">Physically separate DBs — full data</text>
+  <text x="546" y="298" class="note" fill="#065f46">ownership &amp; independence achieved.</text>
+  <text x="546" y="312" class="note" fill="#065f46">A former join becomes an API call or</text>
+  <text x="546" y="326" class="note" fill="#065f46">a small replicated copy of the data.</text>
+
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#94a3b8"/></marker>
+    <marker id="p" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#7c3aed"/></marker>
+  </defs>
+</svg>

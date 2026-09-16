@@ -1,0 +1,47 @@
+<svg viewBox="0 0 780 460" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .box { font-size: 12px; font-weight: 700; fill: #ffffff; }
+    .bsub { font-size: 9.5px; fill: #e2e8f0; }
+    .lbl { font-size: 11px; font-weight: 700; fill: #1e293b; }
+    .note { font-size: 10.5px; fill: #64748b; }
+    .setup { font-size: 10px; font-weight: 700; fill: #7c3aed; }
+    .media { font-size: 11px; font-weight: 700; fill: #059669; }
+  </style>
+
+  <text x="24" y="30" class="title">WebRTC: set up via a server, then stream media peer-to-peer</text>
+
+  <!-- peers -->
+  <rect x="40" y="150" width="130" height="60" rx="8" fill="#2563eb"/><text x="66" y="176" class="box">Peer A</text><text x="52" y="194" class="bsub">(browser, behind NAT)</text>
+  <rect x="610" y="150" width="130" height="60" rx="8" fill="#2563eb"/><text x="636" y="176" class="box">Peer B</text><text x="622" y="194" class="bsub">(browser, behind NAT)</text>
+
+  <!-- signaling server -->
+  <rect x="300" y="60" width="180" height="54" rx="8" fill="#7c3aed"/><text x="316" y="84" class="box">Signaling server</text><text x="316" y="101" class="bsub">(you build it — often WebSocket)</text>
+
+  <!-- STUN/TURN -->
+  <rect x="300" y="360" width="180" height="54" rx="8" fill="#64748b"/><text x="316" y="384" class="box">STUN / TURN</text><text x="316" y="401" class="bsub">NAT discovery / relay fallback</text>
+
+  <!-- signaling exchange (dashed setup) -->
+  <path d="M 105 150 C 150 90, 250 82, 298 84" fill="none" stroke="#7c3aed" stroke-width="1.8" stroke-dasharray="5,4"/><polygon points="302,80 296,90 294,80" fill="#7c3aed"/>
+  <path d="M 482 84 C 540 82, 640 90, 680 150" fill="none" stroke="#7c3aed" stroke-width="1.8" stroke-dasharray="5,4"/><polygon points="676,142 684,150 672,151" fill="#7c3aed"/>
+  <text x="180" y="128" class="setup">1 · exchange SDP offer/answer</text>
+  <text x="180" y="142" class="setup">   + ICE candidates</text>
+
+  <!-- STUN/TURN lines -->
+  <path d="M 105 210 C 180 300, 260 340, 300 372" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <path d="M 680 210 C 600 300, 520 340, 480 372" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="150" y="330" class="note">2 · discover public IP:port (STUN);</text>
+  <text x="150" y="345" class="note">   relay through TURN if direct fails</text>
+
+  <!-- ICE note -->
+  <text x="330" y="300" class="note">ICE tries all candidate paths,</text>
+  <text x="330" y="315" class="note">picks the best working one</text>
+
+  <!-- P2P media (solid, direct) -->
+  <path d="M 170 180 L 608 180" stroke="#059669" stroke-width="3.5"/><polygon points="604,175 614,180 604,185" fill="#059669"/><polygon points="176,175 166,180 176,185" fill="#059669"/>
+  <text x="300" y="172" class="media">3 · media &amp; data flow DIRECTLY (UDP)</text>
+
+  <!-- footer -->
+  <rect x="24" y="424" width="752" height="30" rx="6" fill="#f0fdf4" stroke="#86efac"/>
+  <text x="40" y="444" class="note">The server only helps peers <tspan font-weight="700">find</tspan> each other; the actual audio/video never passes through it (unless TURN relays). Media is always encrypted (DTLS/SRTP).</text>
+</svg>

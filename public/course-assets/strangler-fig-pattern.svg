@@ -1,0 +1,52 @@
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .ph { font-size: 12px; font-weight: 700; fill: #1e293b; }
+    .box { font-size: 9.5px; font-weight: 700; fill: #ffffff; }
+    .note { font-size: 9px; fill: #64748b; }
+  </style>
+
+  <text x="24" y="30" class="title">The strangler fig: route around the monolith until it's gone</text>
+
+  <!-- PHASE 1 -->
+  <text x="30" y="62" class="ph">Phase 1 — facade in front</text>
+  <rect x="24" y="72" width="240" height="290" rx="10" fill="#f8fafc" stroke="#e2e8f0"/>
+  <rect x="60" y="90" width="80" height="26" rx="5" fill="#64748b"/><text x="100" y="107" text-anchor="middle" class="box">Clients</text>
+  <rect x="52" y="140" width="184" height="30" rx="6" fill="#7c3aed"/><text x="144" y="160" text-anchor="middle" class="box">Facade / router (proxy)</text>
+  <rect x="72" y="210" width="144" height="120" rx="8" fill="#2563eb"/><text x="144" y="255" text-anchor="middle" class="box">Monolith</text><text x="144" y="275" text-anchor="middle" class="note" fill="#dbeafe">handles everything</text>
+  <line x1="100" y1="116" x2="130" y2="138" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#a)"/>
+  <line x1="144" y1="170" x2="144" y2="208" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#a)"/>
+  <text x="40" y="352" class="note">Insert a routing layer; all traffic still → monolith.</text>
+
+  <!-- PHASE 2 -->
+  <text x="290" y="62" class="ph">Phase 2 — strangling</text>
+  <rect x="280" y="72" width="240" height="290" rx="10" fill="#f8fafc" stroke="#e2e8f0"/>
+  <rect x="316" y="90" width="80" height="26" rx="5" fill="#64748b"/><text x="356" y="107" text-anchor="middle" class="box">Clients</text>
+  <rect x="308" y="140" width="184" height="30" rx="6" fill="#7c3aed"/><text x="400" y="160" text-anchor="middle" class="box">Facade / router</text>
+  <rect x="292" y="210" width="96" height="120" rx="8" fill="#2563eb"/><text x="340" y="262" text-anchor="middle" class="box">Monolith</text><text x="340" y="278" text-anchor="middle" class="note" fill="#dbeafe">(shrinking)</text>
+  <rect x="404" y="206" width="104" height="40" rx="6" fill="#059669"/><text x="456" y="230" text-anchor="middle" class="box">Service A</text>
+  <rect x="404" y="256" width="104" height="40" rx="6" fill="#059669"/><text x="456" y="280" text-anchor="middle" class="box">Service B</text>
+  <line x1="356" y1="116" x2="386" y2="138" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#a)"/>
+  <line x1="380" y1="170" x2="352" y2="208" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#a)"/>
+  <line x1="430" y1="170" x2="452" y2="204" stroke="#059669" stroke-width="1.6" marker-end="url(#g)"/>
+  <line x1="440" y1="170" x2="456" y2="254" stroke="#059669" stroke-width="1.6" marker-end="url(#g)"/>
+  <text x="290" y="352" class="note">Some capabilities routed to new services.</text>
+
+  <!-- PHASE 3 -->
+  <text x="546" y="62" class="ph">Phase 3 — monolith retired</text>
+  <rect x="536" y="72" width="240" height="290" rx="10" fill="#f8fafc" stroke="#e2e8f0"/>
+  <rect x="572" y="90" width="80" height="26" rx="5" fill="#64748b"/><text x="612" y="107" text-anchor="middle" class="box">Clients</text>
+  <rect x="564" y="140" width="184" height="30" rx="6" fill="#7c3aed"/><text x="656" y="160" text-anchor="middle" class="box">Facade / gateway</text>
+  <rect x="556" y="200" width="90" height="34" rx="6" fill="#059669"/><text x="601" y="221" text-anchor="middle" class="box">Service A</text>
+  <rect x="656" y="200" width="90" height="34" rx="6" fill="#059669"/><text x="701" y="221" text-anchor="middle" class="box">Service B</text>
+  <rect x="556" y="244" width="90" height="34" rx="6" fill="#059669"/><text x="601" y="265" text-anchor="middle" class="box">Service C</text>
+  <rect x="656" y="244" width="90" height="34" rx="6" fill="#059669"/><text x="701" y="265" text-anchor="middle" class="box">Service D</text>
+  <rect x="580" y="292" width="150" height="30" rx="6" fill="#e2e8f0" stroke="#cbd5e1" stroke-dasharray="4,3"/><text x="655" y="312" text-anchor="middle" class="note">monolith removed</text>
+  <line x1="612" y1="116" x2="642" y2="138" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#a)"/>
+  <text x="546" y="352" class="note">All traffic → services; monolith decommissioned.</text>
+
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#94a3b8"/></marker>
+    <marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#059669"/></marker>
+  </defs>
+</svg>

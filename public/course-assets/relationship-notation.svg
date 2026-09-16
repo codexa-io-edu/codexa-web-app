@@ -1,0 +1,72 @@
+<svg viewBox="0 0 820 500" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <rect width="820" height="500" fill="#f8fafc"/>
+  <text x="410" y="34" text-anchor="middle" font-size="21" font-weight="700" fill="#0f172a">The Relationship Notation Vocabulary</text>
+  <text x="410" y="58" text-anchor="middle" font-size="13" fill="#64748b">The arrowhead and line style encode the KIND of relationship — this is what makes a class diagram precise</text>
+
+  <defs>
+    <marker id="cd_open" markerWidth="14" markerHeight="14" refX="11" refY="5" orient="auto"><path d="M1,1 L11,5 L1,9" fill="none" stroke="#334155" stroke-width="1.6"/></marker>
+    <marker id="cd_tri" markerWidth="16" markerHeight="16" refX="13" refY="6" orient="auto"><path d="M1,1 L13,6 L1,11 Z" fill="#ffffff" stroke="#334155" stroke-width="1.6"/></marker>
+  </defs>
+
+  <!-- Association -->
+  <text x="40" y="98" font-size="13" font-weight="700" fill="#1d4ed8">Association</text>
+  <text x="40" y="115" font-size="9.5" fill="#64748b">"uses / knows a"</text>
+  <line x1="230" y1="105" x2="360" y2="105" stroke="#334155" stroke-width="1.8" marker-end="url(#cd_open)"/>
+  <rect x="200" y="92" width="34" height="26" rx="3" fill="#dbeafe" stroke="#2563eb"/><text x="217" y="109" text-anchor="middle" font-size="9" fill="#1e3a8a">A</text>
+  <rect x="360" y="92" width="34" height="26" rx="3" fill="#dbeafe" stroke="#2563eb"/><text x="377" y="109" text-anchor="middle" font-size="9" fill="#1e3a8a">B</text>
+  <text x="430" y="103" font-size="10" fill="#334155">A general "has a link to" B. Plain line,</text>
+  <text x="430" y="118" font-size="10" fill="#334155">open arrow shows navigability.</text>
+
+  <!-- Aggregation -->
+  <text x="40" y="168" font-size="13" font-weight="700" fill="#047857">Aggregation</text>
+  <text x="40" y="185" font-size="9.5" fill="#64748b">"has a" (shared)</text>
+  <path d="M200,175 L217,168 L234,175 L217,182 Z" fill="#ffffff" stroke="#334155" stroke-width="1.6"/>
+  <line x1="234" y1="175" x2="360" y2="175" stroke="#334155" stroke-width="1.8"/>
+  <rect x="360" y="162" width="34" height="26" rx="3" fill="#dcfce7" stroke="#059669"/><text x="377" y="179" text-anchor="middle" font-size="9" fill="#065f46">Part</text>
+  <text x="430" y="173" font-size="10" fill="#334155">Whole HAS parts, but parts outlive it</text>
+  <text x="430" y="188" font-size="10" fill="#334155">(hollow diamond). Team &#8594; Player.</text>
+
+  <!-- Composition -->
+  <text x="40" y="238" font-size="13" font-weight="700" fill="#7c3aed">Composition</text>
+  <text x="40" y="255" font-size="9.5" fill="#64748b">"owns a" (strong)</text>
+  <path d="M200,245 L217,238 L234,245 L217,252 Z" fill="#334155" stroke="#334155" stroke-width="1.6"/>
+  <line x1="234" y1="245" x2="360" y2="245" stroke="#334155" stroke-width="1.8"/>
+  <rect x="360" y="232" width="34" height="26" rx="3" fill="#ede9fe" stroke="#7c3aed"/><text x="377" y="249" text-anchor="middle" font-size="9" fill="#6d28d9">Part</text>
+  <text x="430" y="243" font-size="10" fill="#334155">Whole OWNS parts; parts die with it</text>
+  <text x="430" y="258" font-size="10" fill="#334155">(filled diamond). House &#8594; Room.</text>
+
+  <!-- Inheritance -->
+  <text x="40" y="308" font-size="13" font-weight="700" fill="#dc2626">Inheritance</text>
+  <text x="40" y="325" font-size="9.5" fill="#64748b">"is a"</text>
+  <line x1="200" y1="315" x2="356" y2="315" stroke="#334155" stroke-width="1.8" marker-end="url(#cd_tri)"/>
+  <rect x="166" y="302" width="34" height="26" rx="3" fill="#fee2e2" stroke="#dc2626"/><text x="183" y="319" text-anchor="middle" font-size="8" fill="#b91c1c">Sub</text>
+  <rect x="380" y="302" width="40" height="26" rx="3" fill="#fee2e2" stroke="#dc2626"/><text x="400" y="319" text-anchor="middle" font-size="8" fill="#b91c1c">Super</text>
+  <text x="440" y="313" font-size="10" fill="#334155">Subclass IS A superclass. Solid line,</text>
+  <text x="440" y="328" font-size="10" fill="#334155">hollow triangle points to parent.</text>
+
+  <!-- Realization -->
+  <text x="40" y="378" font-size="13" font-weight="700" fill="#0891b2">Realization</text>
+  <text x="40" y="395" font-size="9.5" fill="#64748b">"implements"</text>
+  <line x1="200" y1="385" x2="356" y2="385" stroke="#334155" stroke-width="1.8" stroke-dasharray="6 4" marker-end="url(#cd_tri)"/>
+  <rect x="166" y="372" width="34" height="26" rx="3" fill="#cffafe" stroke="#0891b2"/><text x="183" y="389" text-anchor="middle" font-size="8" fill="#0e7490">Impl</text>
+  <rect x="380" y="372" width="44" height="26" rx="3" fill="#cffafe" stroke="#0891b2"/><text x="402" y="389" text-anchor="middle" font-size="7.5" fill="#0e7490">&#171;iface&#187;</text>
+  <text x="444" y="383" font-size="10" fill="#334155">Class implements an interface. Dashed</text>
+  <text x="444" y="398" font-size="10" fill="#334155">line, hollow triangle to the interface.</text>
+
+  <!-- Dependency -->
+  <text x="40" y="448" font-size="13" font-weight="700" fill="#b45309">Dependency</text>
+  <text x="40" y="465" font-size="9.5" fill="#64748b">"depends on"</text>
+  <line x1="200" y1="455" x2="358" y2="455" stroke="#334155" stroke-width="1.8" stroke-dasharray="6 4" marker-end="url(#cd_open)"/>
+  <rect x="166" y="442" width="34" height="26" rx="3" fill="#fef3c7" stroke="#d97706"/><text x="183" y="459" text-anchor="middle" font-size="9" fill="#b45309">A</text>
+  <rect x="360" y="442" width="34" height="26" rx="3" fill="#fef3c7" stroke="#d97706"/><text x="377" y="459" text-anchor="middle" font-size="9" fill="#b45309">B</text>
+  <text x="430" y="453" font-size="10" fill="#334155">A uses B transiently (e.g. a parameter).</text>
+  <text x="430" y="468" font-size="10" fill="#334155">Dashed line, open arrow. Weakest link.</text>
+
+  <rect x="620" y="150" width="170" height="150" rx="8" fill="#ecfdf5" stroke="#059669" stroke-width="1.4"/>
+  <text x="705" y="172" text-anchor="middle" font-size="10.5" font-weight="700" fill="#047857">Strength order</text>
+  <text x="705" y="196" text-anchor="middle" font-size="9.5" fill="#334155">Composition (strongest)</text>
+  <text x="705" y="216" text-anchor="middle" font-size="9.5" fill="#334155">&#8595; Aggregation</text>
+  <text x="705" y="236" text-anchor="middle" font-size="9.5" fill="#334155">&#8595; Association</text>
+  <text x="705" y="256" text-anchor="middle" font-size="9.5" fill="#334155">&#8595; Dependency</text>
+  <text x="705" y="276" text-anchor="middle" font-size="9" fill="#64748b">(weakest / most transient)</text>
+</svg>

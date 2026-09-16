@@ -1,0 +1,44 @@
+<svg viewBox="0 0 760 390" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <rect width="760" height="390" fill="#f8fafc"/>
+  <text x="380" y="34" text-anchor="middle" font-size="21" font-weight="700" fill="#0f172a">Prototype: Copy an Existing Object Instead of Building Anew</text>
+
+  <defs>
+    <marker id="p_arr" markerWidth="11" markerHeight="11" refX="8" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#0891b2"/>
+    </marker>
+  </defs>
+
+  <!-- prototype registry -->
+  <rect x="40" y="90" width="220" height="210" rx="12" fill="#ecfeff" stroke="#0891b2" stroke-width="2.2"/>
+  <text x="150" y="116" text-anchor="middle" font-size="14" font-weight="700" fill="#0e7490">Prototype Registry</text>
+  <text x="150" y="134" text-anchor="middle" font-size="10.5" fill="#0891b2">pre-configured masters</text>
+  <line x1="58" y1="146" x2="242" y2="146" stroke="#67e8f9" stroke-width="1.3"/>
+
+  <rect x="60" y="160" width="180" height="56" rx="8" fill="#ffffff" stroke="#22d3ee" stroke-width="1.6"/>
+  <text x="150" y="182" text-anchor="middle" font-size="12" font-weight="700" fill="#0e7490">"warrior" master</text>
+  <text x="150" y="202" text-anchor="middle" font-size="10" fill="#0891b2">hp=100, gear=[sword]</text>
+
+  <rect x="60" y="228" width="180" height="56" rx="8" fill="#ffffff" stroke="#22d3ee" stroke-width="1.6"/>
+  <text x="150" y="250" text-anchor="middle" font-size="12" font-weight="700" fill="#0e7490">"mage" master</text>
+  <text x="150" y="270" text-anchor="middle" font-size="10" fill="#0891b2">hp=70, gear=[staff]</text>
+
+  <!-- clone action -->
+  <text x="380" y="150" text-anchor="middle" font-size="12" font-weight="700" fill="#0e7490">clone()</text>
+  <line x1="260" y1="188" x2="500" y2="150" stroke="#0891b2" stroke-width="2" marker-end="url(#p_arr)"/>
+  <line x1="260" y1="256" x2="500" y2="290" stroke="#0891b2" stroke-width="2" marker-end="url(#p_arr)"/>
+
+  <!-- clones -->
+  <rect x="510" y="120" width="200" height="60" rx="8" fill="#cffafe" stroke="#0891b2" stroke-width="1.8"/>
+  <text x="610" y="144" text-anchor="middle" font-size="12" font-weight="700" fill="#0e7490">warrior copy #1</text>
+  <text x="610" y="164" text-anchor="middle" font-size="10" fill="#0891b2">independent, then customized</text>
+
+  <rect x="510" y="200" width="200" height="60" rx="8" fill="#cffafe" stroke="#0891b2" stroke-width="1.8"/>
+  <text x="610" y="224" text-anchor="middle" font-size="12" font-weight="700" fill="#0e7490">warrior copy #2</text>
+  <text x="610" y="244" text-anchor="middle" font-size="10" fill="#0891b2">independent, then customized</text>
+
+  <rect x="510" y="280" width="200" height="60" rx="8" fill="#cffafe" stroke="#0891b2" stroke-width="1.8"/>
+  <text x="610" y="304" text-anchor="middle" font-size="12" font-weight="700" fill="#0e7490">mage copy #1</text>
+  <text x="610" y="324" text-anchor="middle" font-size="10" fill="#0891b2">independent, then customized</text>
+
+  <text x="380" y="372" text-anchor="middle" font-size="11.5" fill="#334155">Configure a master once, then stamp out copies cheaply — the client never touches concrete classes or long setup.</text>
+</svg>

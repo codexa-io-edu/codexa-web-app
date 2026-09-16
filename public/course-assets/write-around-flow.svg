@@ -1,0 +1,40 @@
+<svg viewBox="0 0 760 390" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .box { font-size: 13px; font-weight: 700; fill: #ffffff; }
+    .bsub { font-size: 10px; fill: #e2e8f0; }
+    .step { font-size: 11px; font-weight: 700; fill: #1e293b; }
+    .note { font-size: 11px; fill: #64748b; }
+    .miss { font-size: 11px; font-weight: 700; fill: #d97706; }
+  </style>
+
+  <text x="24" y="30" class="title">Write-Around: write straight to the DB, skip the cache</text>
+
+  <!-- WRITE row -->
+  <text x="30" y="66" class="step" fill="#d97706">WRITE — bypasses the cache</text>
+  <rect x="40" y="78" width="110" height="48" rx="8" fill="#1e293b"/><text x="70" y="106" class="box">App</text>
+  <rect x="620" y="78" width="120" height="48" rx="8" fill="#64748b"/><text x="646" y="106" class="box">Database</text>
+  <rect x="330" y="78" width="120" height="48" rx="8" fill="#cbd5e1"/><text x="352" y="106" class="box" fill="#475569">Cache</text>
+  <path d="M 150 102 C 260 60, 520 60, 618 96" fill="none" stroke="#334155" stroke-width="2"/><polygon points="614,91 624,98 612,101" fill="#334155"/>
+  <text x="300" y="58" class="step">write X = 2 directly to DB</text>
+  <path d="M 390 78 L 390 60" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <text x="330" y="146" class="note">(invalidate any stale cached copy of X)</text>
+
+  <line x1="24" y1="168" x2="736" y2="168" stroke="#e2e8f0"/>
+
+  <!-- READ row (later) -->
+  <text x="30" y="196" class="step" fill="#2563eb">READ (later) — normal cache-aside miss then populate</text>
+  <rect x="40" y="210" width="110" height="48" rx="8" fill="#1e293b"/><text x="70" y="238" class="box">App</text>
+  <rect x="330" y="210" width="120" height="48" rx="8" fill="#2563eb"/><text x="352" y="238" class="box">Cache</text>
+  <rect x="620" y="210" width="120" height="48" rx="8" fill="#64748b"/><text x="646" y="238" class="box">Database</text>
+  <path d="M 150 234 L 328 234" stroke="#334155" stroke-width="2"/><polygon points="324,229 334,234 324,239" fill="#334155"/>
+  <text x="170" y="226" class="miss">1 · MISS (not cached)</text>
+  <path d="M 450 234 L 618 234" stroke="#d97706" stroke-width="2" stroke-dasharray="5,4"/><polygon points="614,229 624,234 614,239" fill="#d97706"/>
+  <text x="470" y="226" class="step">2 · read DB, populate cache</text>
+
+  <rect x="24" y="282" width="712" height="98" rx="8" fill="#fffbeb" stroke="#fcd34d"/>
+  <text x="40" y="306" class="step" fill="#92400e">The point</text>
+  <text x="40" y="328" class="note">✓ Write-only data (logs, audit records, bulk imports) never pollutes the cache, keeping memory for actually-read hot data.</text>
+  <text x="40" y="346" class="miss">✗ A read right after a write is a guaranteed miss — the just-written value isn't in the cache yet.</text>
+  <text x="40" y="366" class="note">Always invalidate an existing cached entry on write, or a later read could return a stale value. Pairs with cache-aside for reads.</text>
+</svg>

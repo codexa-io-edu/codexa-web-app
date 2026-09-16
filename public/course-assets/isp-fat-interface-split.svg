@@ -1,0 +1,66 @@
+<svg viewBox="0 0 820 430" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <rect width="820" height="430" fill="#f8fafc"/>
+  <text x="410" y="34" text-anchor="middle" font-size="21" font-weight="700" fill="#0f172a">ISP: Don't Force Clients to Depend on What They Don't Use</text>
+
+  <line x1="410" y1="56" x2="410" y2="410" stroke="#e2e8f0" stroke-width="2"/>
+
+  <!-- LEFT: fat interface -->
+  <text x="205" y="80" text-anchor="middle" font-size="15" font-weight="700" fill="#b91c1c">&#10007; One fat interface</text>
+  <rect x="70" y="96" width="270" height="120" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="205" y="120" text-anchor="middle" font-size="14" font-weight="700" fill="#b91c1c">&#171;interface&#187; MultiFunctionDevice</text>
+  <line x1="88" y1="130" x2="322" y2="130" stroke="#fca5a5" stroke-width="1.4"/>
+  <text x="100" y="150" font-size="12" fill="#991b1b" font-family="monospace">print()</text>
+  <text x="100" y="170" font-size="12" fill="#991b1b" font-family="monospace">scan()</text>
+  <text x="100" y="190" font-size="12" fill="#991b1b" font-family="monospace">fax()</text>
+  <text x="100" y="210" font-size="12" fill="#991b1b" font-family="monospace">staple()</text>
+
+  <defs>
+    <marker id="tri4" markerWidth="13" markerHeight="13" refX="6.5" refY="6.5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L13,6.5 L0,13 Z" fill="#ffffff" stroke="#475569" stroke-width="1.3"/>
+    </marker>
+  </defs>
+
+  <rect x="110" y="270" width="190" height="60" rx="8" fill="#fff1f2" stroke="#f87171" stroke-width="1.8"/>
+  <text x="205" y="292" text-anchor="middle" font-size="12.5" font-weight="700" fill="#b91c1c">SimplePrinter</text>
+  <text x="205" y="312" text-anchor="middle" font-size="10" fill="#991b1b">forced to implement all 4</text>
+  <line x1="205" y1="270" x2="205" y2="218" stroke="#475569" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#tri4)"/>
+
+  <rect x="70" y="346" width="270" height="56" rx="8" fill="#fff1f2" stroke="#f87171" stroke-width="1.4"/>
+  <text x="205" y="368" text-anchor="middle" font-size="11.5" fill="#991b1b">scan(), fax(), staple() &#8594; throw</text>
+  <text x="205" y="388" text-anchor="middle" font-size="11.5" fill="#dc2626" font-weight="700">UnsupportedOperationException</text>
+
+  <!-- RIGHT: segregated -->
+  <text x="615" y="80" text-anchor="middle" font-size="15" font-weight="700" fill="#047857">&#10003; Small role interfaces</text>
+
+  <rect x="450" y="96" width="100" height="42" rx="8" fill="#e0e7ff" stroke="#4338ca" stroke-width="1.8"/>
+  <text x="500" y="118" text-anchor="middle" font-size="11.5" font-weight="700" fill="#3730a3">Printer</text>
+  <text x="500" y="132" text-anchor="middle" font-size="10" fill="#4f46e5" font-family="monospace">print()</text>
+
+  <rect x="565" y="96" width="100" height="42" rx="8" fill="#e0e7ff" stroke="#4338ca" stroke-width="1.8"/>
+  <text x="615" y="118" text-anchor="middle" font-size="11.5" font-weight="700" fill="#3730a3">Scanner</text>
+  <text x="615" y="132" text-anchor="middle" font-size="10" fill="#4f46e5" font-family="monospace">scan()</text>
+
+  <rect x="680" y="96" width="100" height="42" rx="8" fill="#e0e7ff" stroke="#4338ca" stroke-width="1.8"/>
+  <text x="730" y="118" text-anchor="middle" font-size="11.5" font-weight="700" fill="#3730a3">Fax</text>
+  <text x="730" y="132" text-anchor="middle" font-size="10" fill="#4f46e5" font-family="monospace">fax()</text>
+
+  <!-- SimplePrinter implements only Printer -->
+  <rect x="450" y="200" width="120" height="52" rx="8" fill="#f0fdf4" stroke="#059669" stroke-width="1.8"/>
+  <text x="510" y="222" text-anchor="middle" font-size="12" font-weight="700" fill="#047857">SimplePrinter</text>
+  <text x="510" y="240" text-anchor="middle" font-size="9.5" fill="#065f46">needs only Printer</text>
+  <line x1="510" y1="200" x2="500" y2="140" stroke="#475569" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#tri4)"/>
+
+  <!-- OfficeMFP implements all three -->
+  <rect x="620" y="200" width="150" height="52" rx="8" fill="#f0fdf4" stroke="#059669" stroke-width="1.8"/>
+  <text x="695" y="222" text-anchor="middle" font-size="12" font-weight="700" fill="#047857">OfficeMFP</text>
+  <text x="695" y="240" text-anchor="middle" font-size="9.5" fill="#065f46">implements all three</text>
+  <line x1="660" y1="200" x2="615" y2="140" stroke="#475569" stroke-width="1.3" stroke-dasharray="4 3" marker-end="url(#tri4)"/>
+  <line x1="695" y1="200" x2="615" y2="140" stroke="#475569" stroke-width="1.3" stroke-dasharray="4 3"/>
+  <line x1="720" y1="200" x2="725" y2="140" stroke="#475569" stroke-width="1.3" stroke-dasharray="4 3" marker-end="url(#tri4)"/>
+
+  <rect x="450" y="300" width="320" height="90" rx="10" fill="#f0fdf4" stroke="#059669" stroke-width="1.5"/>
+  <text x="610" y="324" text-anchor="middle" font-size="12.5" font-weight="700" fill="#047857">Each class implements only what it can do</text>
+  <text x="466" y="348" font-size="11.5" fill="#065f46">&#8226; no empty / throwing methods</text>
+  <text x="466" y="368" font-size="11.5" fill="#065f46">&#8226; a client needing printing depends on Printer only</text>
+  <text x="466" y="386" font-size="11.5" fill="#065f46">&#8226; changing Fax never affects SimplePrinter</text>
+</svg>

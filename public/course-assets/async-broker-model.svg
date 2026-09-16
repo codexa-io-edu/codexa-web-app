@@ -1,0 +1,59 @@
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .box { font-size: 12px; font-weight: 700; fill: #ffffff; }
+    .sub { font-size: 9.5px; fill: #e2e8f0; }
+    .bh { font-size: 11px; font-weight: 700; fill: #1e293b; }
+    .note { font-size: 10px; fill: #64748b; }
+  </style>
+
+  <text x="24" y="30" class="title">The building block: producer → broker → consumer</text>
+
+  <!-- producers -->
+  <rect x="40" y="90" width="110" height="34" rx="6" fill="#2563eb"/><text x="95" y="112" text-anchor="middle" class="box">Producer</text>
+  <rect x="40" y="134" width="110" height="34" rx="6" fill="#2563eb"/><text x="95" y="156" text-anchor="middle" class="box">Producer</text>
+
+  <!-- broker -->
+  <rect x="300" y="86" width="200" height="90" rx="10" fill="#d97706"/>
+  <text x="400" y="120" text-anchor="middle" class="box">Broker</text>
+  <text x="400" y="140" text-anchor="middle" class="sub">queue / log — holds messages</text>
+  <text x="400" y="156" text-anchor="middle" class="sub">until consumers process them</text>
+
+  <!-- consumers -->
+  <rect x="650" y="90" width="110" height="34" rx="6" fill="#059669"/><text x="705" y="112" text-anchor="middle" class="box">Consumer</text>
+  <rect x="650" y="134" width="110" height="34" rx="6" fill="#059669"/><text x="705" y="156" text-anchor="middle" class="box">Consumer</text>
+
+  <line x1="150" y1="107" x2="298" y2="120" stroke="#94a3b8" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="150" y1="151" x2="298" y2="140" stroke="#94a3b8" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="500" y1="120" x2="648" y2="107" stroke="#94a3b8" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="500" y1="140" x2="648" y2="151" stroke="#94a3b8" stroke-width="2" marker-end="url(#a)"/>
+
+  <text x="180" y="98" class="note">write &amp; move on</text>
+  <text x="540" y="98" class="note">read at own pace</text>
+
+  <!-- benefits -->
+  <rect x="24" y="210" width="366" height="80" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="40" y="232" class="bh">Decoupling</text>
+  <text x="40" y="252" class="note">Producer and consumer never talk directly, don't</text>
+  <text x="40" y="268" class="note">need to be up at the same time, and can be built,</text>
+  <text x="40" y="284" class="note">deployed, and scaled independently.</text>
+
+  <rect x="410" y="210" width="366" height="80" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="426" y="232" class="bh">Buffering (absorbs spikes)</text>
+  <text x="426" y="252" class="note">A traffic burst piles up in the broker instead of</text>
+  <text x="426" y="268" class="note">crushing the consumer; the producer stays fast</text>
+  <text x="426" y="284" class="note">while the consumer drains at a steady rate.</text>
+
+  <rect x="24" y="300" width="366" height="80" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="40" y="322" class="bh">Independent scaling</text>
+  <text x="40" y="342" class="note">Falling behind? Add more consumers to drain the</text>
+  <text x="40" y="358" class="note">backlog faster — no change to the producer.</text>
+
+  <rect x="410" y="300" width="366" height="80" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="426" y="322" class="bh">Resilience</text>
+  <text x="426" y="342" class="note">If a consumer crashes, messages persist in the</text>
+  <text x="426" y="358" class="note">broker and are processed when it recovers —</text>
+  <text x="426" y="374" class="note">nothing is lost to a temporary outage.</text>
+
+  <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#94a3b8"/></marker></defs>
+</svg>

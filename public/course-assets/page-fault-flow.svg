@@ -1,0 +1,64 @@
+<svg viewBox="0 0 800 560" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="fm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b"/>
+    </marker>
+  </defs>
+  <rect width="800" height="560" fill="#ffffff"/>
+  <text x="400" y="32" text-anchor="middle" fill="#0f172a" font-size="18" font-weight="700">What Happens on a Page Fault</text>
+
+  <!-- 1 access -->
+  <rect x="262" y="50" width="276" height="46" rx="10" fill="#1e293b"/>
+  <text x="400" y="78" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">CPU accesses a virtual address</text>
+  <line x1="400" y1="96" x2="400" y2="120" stroke="#64748b" stroke-width="2" marker-end="url(#fm)"/>
+
+  <!-- decision: present? -->
+  <polygon points="400,124 530,166 400,208 270,166" fill="#f1f5f9" stroke="#94a3b8" stroke-width="2"/>
+  <text x="400" y="163" text-anchor="middle" fill="#0f172a" font-size="13" font-weight="600">Page in RAM?</text>
+  <text x="400" y="181" text-anchor="middle" fill="#64748b" font-size="11">(valid bit set)</text>
+
+  <!-- YES -> access -->
+  <line x1="530" y1="166" x2="640" y2="166" stroke="#16a34a" stroke-width="2" marker-end="url(#fm)"/>
+  <text x="560" y="156" fill="#16a34a" font-size="12" font-weight="700">YES</text>
+  <rect x="640" y="142" width="140" height="48" rx="9" fill="#16a34a"/>
+  <text x="710" y="164" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">Translate &amp;</text>
+  <text x="710" y="180" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">access (fast)</text>
+
+  <!-- NO down -> page fault -->
+  <line x1="400" y1="208" x2="400" y2="234" stroke="#dc2626" stroke-width="2" marker-end="url(#fm)"/>
+  <text x="416" y="226" fill="#dc2626" font-size="12" font-weight="700">NO</text>
+  <rect x="285" y="236" width="230" height="44" rx="9" fill="#dc2626"/>
+  <text x="400" y="263" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">PAGE FAULT → trap to OS</text>
+  <line x1="400" y1="280" x2="400" y2="304" stroke="#64748b" stroke-width="2" marker-end="url(#fm)"/>
+
+  <!-- locate on disk -->
+  <rect x="280" y="306" width="240" height="42" rx="9" fill="#0891b2"/>
+  <text x="400" y="332" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">OS locates the page on disk</text>
+  <line x1="400" y1="348" x2="400" y2="372" stroke="#64748b" stroke-width="2" marker-end="url(#fm)"/>
+
+  <!-- decision: free frame? -->
+  <polygon points="400,376 530,414 400,452 270,414" fill="#f1f5f9" stroke="#94a3b8" stroke-width="2"/>
+  <text x="400" y="411" text-anchor="middle" fill="#0f172a" font-size="13" font-weight="600">Free frame?</text>
+
+  <!-- NO -> evict -->
+  <line x1="530" y1="414" x2="600" y2="414" stroke="#64748b" stroke-width="2" marker-end="url(#fm)"/>
+  <text x="558" y="404" fill="#dc2626" font-size="12" font-weight="700">NO</text>
+  <rect x="600" y="388" width="185" height="54" rx="9" fill="#f59e0b"/>
+  <text x="692" y="410" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">Evict a victim page</text>
+  <text x="692" y="427" text-anchor="middle" fill="#fff" font-size="11">(LRU/FIFO; write if dirty)</text>
+  <line x1="692" y1="442" x2="692" y2="486" stroke="#64748b" stroke-width="2"/>
+  <line x1="692" y1="486" x2="472" y2="486" stroke="#64748b" stroke-width="2" marker-end="url(#fm)"/>
+
+  <!-- YES down -->
+  <line x1="400" y1="452" x2="400" y2="478" stroke="#64748b" stroke-width="2" marker-end="url(#fm)"/>
+  <text x="416" y="470" fill="#16a34a" font-size="12" font-weight="700">YES</text>
+
+  <!-- load + update -->
+  <rect x="255" y="480" width="290" height="44" rx="9" fill="#0d9488"/>
+  <text x="400" y="500" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">Load page into frame · update</text>
+  <text x="400" y="516" text-anchor="middle" fill="#ccfbf1" font-size="12">page table &amp; TLB · retry the instruction</text>
+
+  <!-- retry loops back up (dashed) -->
+  <path d="M 255 502 C 120 502, 120 166, 266 166" fill="none" stroke="#94a3b8" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#fm)"/>
+  <text x="96" y="336" text-anchor="middle" fill="#94a3b8" font-size="11" transform="rotate(-90 96 336)">retry — now the page is present</text>
+</svg>

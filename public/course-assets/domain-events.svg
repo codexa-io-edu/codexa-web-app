@@ -1,0 +1,51 @@
+<svg viewBox="0 0 820 400" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <rect width="820" height="400" fill="#f8fafc"/>
+  <text x="410" y="28" text-anchor="middle" font-size="20" font-weight="700" fill="#0f172a">Domain Events: Something Important Happened</text>
+  <text x="410" y="50" text-anchor="middle" font-size="12.5" fill="#64748b">The aggregate records what happened; listeners react independently — no direct coupling to side effects</text>
+
+  <defs>
+    <marker id="de_a" markerWidth="11" markerHeight="11" refX="8" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#475569"/></marker>
+  </defs>
+
+  <!-- Aggregate -->
+  <rect x="40" y="80" width="200" height="130" rx="10" fill="#fff7ed" stroke="#d97706" stroke-width="2"/>
+  <text x="140" y="104" text-anchor="middle" font-size="12" font-weight="700" fill="#b45309">Order (Aggregate)</text>
+  <text x="56" y="128" font-size="9.5" font-family="monospace" fill="#334155">void confirm() {</text>
+  <text x="56" y="146" font-size="9.5" font-family="monospace" fill="#334155">  status = CONFIRMED;</text>
+  <text x="56" y="164" font-size="9.5" font-family="monospace" fill="#d97706">  record(new OrderConfirmed</text>
+  <text x="56" y="180" font-size="9.5" font-family="monospace" fill="#d97706">    (id, total, email));</text>
+  <text x="56" y="196" font-size="9.5" font-family="monospace" fill="#334155">}</text>
+
+  <!-- Event -->
+  <rect x="288" y="108" width="200" height="74" rx="10" fill="#fef3c7" stroke="#ca8a04" stroke-width="2"/>
+  <text x="388" y="130" text-anchor="middle" font-size="11.5" font-weight="700" fill="#a16207">OrderConfirmed</text>
+  <text x="388" y="150" text-anchor="middle" font-size="9.5" fill="#334155">orderId, total, customerEmail</text>
+  <text x="388" y="168" text-anchor="middle" font-size="9.5" fill="#334155">occurredAt: Instant</text>
+  <line x1="240" y1="145" x2="286" y2="145" stroke="#d97706" stroke-width="2" marker-end="url(#de_a)"/>
+
+  <!-- Publishers fan-out -->
+  <line x1="490" y1="120" x2="542" y2="90" stroke="#475569" stroke-width="1.6" marker-end="url(#de_a)"/>
+  <line x1="490" y1="145" x2="542" y2="180" stroke="#475569" stroke-width="1.6" marker-end="url(#de_a)"/>
+  <line x1="490" y1="165" x2="542" y2="270" stroke="#475569" stroke-width="1.6" marker-end="url(#de_a)"/>
+
+  <!-- Handlers -->
+  <rect x="544" y="64" width="230" height="52" rx="8" fill="#f0fdf4" stroke="#059669" stroke-width="1.6"/>
+  <text x="659" y="86" text-anchor="middle" font-size="10.5" font-weight="700" fill="#047857">EmailNotificationHandler</text>
+  <text x="659" y="104" text-anchor="middle" font-size="9" fill="#334155">sends confirmation email to customer</text>
+
+  <rect x="544" y="154" width="230" height="52" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="1.6"/>
+  <text x="659" y="176" text-anchor="middle" font-size="10.5" font-weight="700" fill="#1d4ed8">InventoryReservationHandler</text>
+  <text x="659" y="194" text-anchor="middle" font-size="9" fill="#334155">reserves stock for the order items</text>
+
+  <rect x="544" y="244" width="230" height="52" rx="8" fill="#faf5ff" stroke="#7c3aed" stroke-width="1.6"/>
+  <text x="659" y="266" text-anchor="middle" font-size="10.5" font-weight="700" fill="#6d28d9">AuditLogHandler</text>
+  <text x="659" y="284" text-anchor="middle" font-size="9" fill="#334155">records the event in the audit log</text>
+
+  <rect x="40" y="252" width="200" height="120" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="1.4"/>
+  <text x="140" y="272" text-anchor="middle" font-size="11" font-weight="700" fill="#047857">The payoff</text>
+  <text x="52" y="294" font-size="9.5" fill="#334155">&#10003; Order.confirm() stays pure</text>
+  <text x="52" y="312" font-size="9.5" fill="#334155">&#10003; Adding new side-effects = new</text>
+  <text x="62" y="328" font-size="9.5" fill="#334155">listener, zero changes to Order</text>
+  <text x="52" y="346" font-size="9.5" fill="#334155">&#10003; Each handler is independently</text>
+  <text x="62" y="362" font-size="9.5" fill="#334155">testable and deployable</text>
+</svg>

@@ -1,0 +1,58 @@
+<svg viewBox="0 0 800 460" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .box { font-size: 13px; font-weight: 700; fill: #ffffff; }
+    .sub { font-size: 10.5px; fill: #f1f5f9; }
+    .key { font-size: 11px; font-weight: 700; fill: #ffffff; }
+    .note { font-size: 11px; fill: #64748b; }
+    .hard { font-size: 11px; fill: #7f1d1d; }
+    .lbl { font-size: 12px; font-weight: 700; fill: #1e293b; }
+  </style>
+
+  <text x="24" y="30" class="title">Sharding: horizontal partitions on independent servers</text>
+  <text x="24" y="50" class="note">Sharding = horizontal partitioning (see the Partitioning topic) where each partition lives on its own database server, so writes &amp; storage scale out.</text>
+
+  <!-- app -->
+  <rect x="320" y="66" width="160" height="40" rx="8" fill="#1e293b"/>
+  <text x="356" y="91" class="box">Application</text>
+
+  <!-- router -->
+  <rect x="290" y="124" width="220" height="48" rx="8" fill="#7c3aed"/>
+  <text x="320" y="147" class="box">Shard router</text>
+  <text x="320" y="163" class="sub">shard = f(shard key)  — routes each request</text>
+  <path d="M 400 106 L 400 122" stroke="#64748b" stroke-width="2"/><polygon points="395,118 400,128 405,118" fill="#64748b"/>
+
+  <!-- shards -->
+  <g>
+    <rect x="40" y="222" width="210" height="96" rx="10" fill="#2563eb"/>
+    <text x="60" y="248" class="box">Shard A</text>
+    <text x="60" y="268" class="key">user_id 1 – 1M</text>
+    <text x="60" y="292" class="sub">own server · own indexes</text>
+    <text x="60" y="308" class="sub">own backups · full DB</text>
+  </g>
+  <g>
+    <rect x="295" y="222" width="210" height="96" rx="10" fill="#2563eb"/>
+    <text x="315" y="248" class="box">Shard B</text>
+    <text x="315" y="268" class="key">user_id 1M – 2M</text>
+    <text x="315" y="292" class="sub">independent node</text>
+    <text x="315" y="308" class="sub">scales writes + storage</text>
+  </g>
+  <g>
+    <rect x="550" y="222" width="210" height="96" rx="10" fill="#2563eb"/>
+    <text x="570" y="248" class="box">Shard C</text>
+    <text x="570" y="268" class="key">user_id 2M – 3M</text>
+    <text x="570" y="292" class="sub">add shards → add capacity</text>
+  </g>
+
+  <path d="M 360 172 L 160 220" stroke="#7c3aed" stroke-width="2"/><polygon points="156,214 152,226 166,222" fill="#7c3aed"/>
+  <path d="M 400 172 L 400 220" stroke="#7c3aed" stroke-width="2"/><polygon points="395,216 400,226 405,216" fill="#7c3aed"/>
+  <path d="M 440 172 L 640 220" stroke="#7c3aed" stroke-width="2"/><polygon points="634,222 648,226 644,214" fill="#7c3aed"/>
+
+  <!-- hard parts -->
+  <rect x="24" y="340" width="752" height="112" rx="8" fill="#fef2f2" stroke="#fca5a5"/>
+  <text x="40" y="364" class="lbl" fill="#b91c1c">What sharding costs you (the hard parts)</text>
+  <text x="40" y="388" class="hard">• <tspan font-weight="700">Cross-shard queries &amp; joins</tspan> — data on different shards must be gathered and merged in the app.</text>
+  <text x="40" y="408" class="hard">• <tspan font-weight="700">Cross-shard transactions</tspan> — atomicity across shards is hard; most designs avoid needing it.</text>
+  <text x="40" y="428" class="hard">• <tspan font-weight="700">Rebalancing / resharding</tspan> — adding shards means moving live data (consistent hashing helps — see the Load-Balancing topic).</text>
+  <text x="40" y="446" class="hard">• <tspan font-weight="700">Hotspots</tspan> — a bad shard key (or a "celebrity" key) overloads one shard while others idle.</text>
+</svg>

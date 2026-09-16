@@ -1,0 +1,60 @@
+<svg viewBox="0 0 780 470" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .box { font-size: 13px; font-weight: 700; fill: #ffffff; }
+    .bsub { font-size: 10.5px; fill: #e0e7ff; }
+    .lbl { font-size: 12px; font-weight: 700; fill: #1e293b; }
+    .note { font-size: 11px; fill: #64748b; }
+    .mono { font-size: 11px; fill: #334155; font-family: 'SFMono-Regular', Consolas, monospace; }
+    .step { font-size: 12px; font-weight: 700; fill: #d97706; }
+  </style>
+
+  <text x="24" y="30" class="title">LSM-Tree: why many NoSQL stores absorb huge write volumes</text>
+  <text x="24" y="52" class="note">Writes never seek the disk — they land in memory and are flushed sequentially. This is the opposite of a B-Tree's in-place updates.</text>
+
+  <!-- write in -->
+  <rect x="24" y="80" width="130" height="42" rx="8" fill="#1e293b"/>
+  <text x="40" y="106" class="box">write(k, v)</text>
+
+  <!-- step 1: WAL + memtable -->
+  <path d="M 154 101 L 186 101" stroke="#64748b" stroke-width="2"/><polygon points="182,96 192,101 182,106" fill="#64748b"/>
+
+  <rect x="196" y="72" width="200" height="60" rx="8" fill="#2563eb"/>
+  <text x="212" y="96" class="box">1 · Commit log (WAL)</text>
+  <text x="212" y="116" class="bsub">append-only, for crash safety</text>
+
+  <rect x="196" y="146" width="200" height="60" rx="8" fill="#2563eb"/>
+  <text x="212" y="170" class="box">2 · Memtable (RAM)</text>
+  <text x="212" y="190" class="bsub">sorted in-memory buffer</text>
+
+  <path d="M 296 132 L 296 144" stroke="#64748b" stroke-width="2"/><polygon points="291,140 296,150 301,140" fill="#64748b"/>
+  <text x="410" y="105" class="step">✓ write ACK'd here — fast!</text>
+  <text x="410" y="123" class="note">Two sequential appends,</text>
+  <text x="410" y="139" class="note">no random disk seeks.</text>
+
+  <!-- step 3: flush -->
+  <path d="M 296 206 L 296 236" stroke="#64748b" stroke-width="2"/><polygon points="291,232 296,242 301,232" fill="#64748b"/>
+  <text x="310" y="228" class="note">when memtable is full → flush to disk</text>
+
+  <!-- SSTables -->
+  <text x="24" y="266" class="lbl">3 · Immutable SSTables on disk (sorted string tables)</text>
+  <rect x="24" y="278" width="150" height="52" rx="6" fill="#e2e8f0" stroke="#94a3b8"/>
+  <text x="38" y="300" class="mono">SSTable v3</text><text x="38" y="318" class="note">newest</text>
+  <rect x="190" y="278" width="150" height="52" rx="6" fill="#e2e8f0" stroke="#94a3b8"/>
+  <text x="204" y="300" class="mono">SSTable v2</text>
+  <rect x="356" y="278" width="150" height="52" rx="6" fill="#e2e8f0" stroke="#94a3b8"/>
+  <text x="370" y="300" class="mono">SSTable v1</text><text x="370" y="318" class="note">oldest</text>
+
+  <!-- compaction -->
+  <path d="M 100 330 C 130 360, 240 360, 265 340" fill="none" stroke="#059669" stroke-width="2" stroke-dasharray="5,4"/>
+  <path d="M 265 330 C 340 360, 400 360, 431 340" fill="none" stroke="#059669" stroke-width="2" stroke-dasharray="5,4"/>
+  <rect x="180" y="356" width="220" height="34" rx="8" fill="#059669"/>
+  <text x="196" y="378" class="box">4 · Compaction (background)</text>
+  <text x="420" y="378" class="note">merges SSTables, drops old/deleted keys</text>
+
+  <!-- read path -->
+  <rect x="24" y="408" width="732" height="52" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="40" y="430" class="lbl">Reads:</text>
+  <text x="92" y="430" class="note">check the memtable first, then SSTables newest-to-oldest. <tspan font-weight="700">Bloom filters</tspan> let a read skip SSTables</text>
+  <text x="40" y="448" class="note">that can't contain the key, so reads stay fast despite data being spread across files.</text>
+</svg>

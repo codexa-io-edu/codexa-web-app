@@ -1,0 +1,65 @@
+<svg viewBox="0 0 800 440" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .phase { font-size: 12.5px; font-weight: 700; fill: #ffffff; }
+    .step { font-size: 11px; fill: #334155; }
+    .lbl { font-size: 11px; font-weight: 700; fill: #1e293b; }
+    .note { font-size: 10.5px; fill: #64748b; }
+    .db { font-size: 11px; font-weight: 700; fill: #1e293b; }
+  </style>
+
+  <text x="24" y="30" class="title">Zero-downtime migration: move data with no outage, and a way back</text>
+
+  <!-- phase ribbon -->
+  <g>
+    <rect x="24" y="52" width="130" height="30" rx="6" fill="#2563eb"/><text x="40" y="72" class="phase">1 · Dual write</text>
+    <rect x="160" y="52" width="130" height="30" rx="6" fill="#2563eb"/><text x="176" y="72" class="phase">2 · Backfill</text>
+    <rect x="296" y="52" width="150" height="30" rx="6" fill="#d97706"/><text x="312" y="72" class="phase">3 · Verify (shadow)</text>
+    <rect x="452" y="52" width="150" height="30" rx="6" fill="#059669"/><text x="468" y="72" class="phase">4 · Cutover reads</text>
+    <rect x="608" y="52" width="168" height="30" rx="6" fill="#64748b"/><text x="624" y="72" class="phase">5 · Decommission old</text>
+  </g>
+
+  <!-- App -->
+  <rect x="330" y="104" width="140" height="40" rx="8" fill="#1e293b"/>
+  <text x="366" y="129" class="phase">Application</text>
+
+  <!-- OLD store -->
+  <rect x="90" y="210" width="180" height="70" rx="8" fill="#93c5fd"/>
+  <text x="110" y="238" class="db">OLD store</text>
+  <text x="110" y="258" class="note">current source of truth</text>
+
+  <!-- NEW store -->
+  <rect x="530" y="210" width="180" height="70" rx="8" fill="#86efac"/>
+  <text x="550" y="238" class="db">NEW store</text>
+  <text x="550" y="258" class="note">target (new DB / sharded / cloud)</text>
+
+  <!-- writes to both -->
+  <path d="M 360 144 C 300 170, 240 185, 200 210" fill="none" stroke="#dc2626" stroke-width="2"/>
+  <polygon points="204,204 196,214 210,214" fill="#dc2626"/>
+  <path d="M 440 144 C 520 170, 580 185, 610 210" fill="none" stroke="#dc2626" stroke-width="2"/>
+  <polygon points="604,214 616,214 610,204" fill="#dc2626"/>
+  <text x="250" y="168" class="lbl" fill="#dc2626">write</text>
+  <text x="520" y="168" class="lbl" fill="#dc2626">write (also)</text>
+
+  <!-- backfill arrow -->
+  <path d="M 270 250 L 528 250" stroke="#7c3aed" stroke-width="2" stroke-dasharray="6,4"/>
+  <polygon points="524,245 536,250 524,255" fill="#7c3aed"/>
+  <text x="330" y="242" class="lbl" fill="#7c3aed">backfill old rows → new (throttled, idempotent)</text>
+
+  <!-- verify -->
+  <text x="330" y="300" class="note">Shadow-read both stores and compare results until they match consistently.</text>
+
+  <!-- reads switch -->
+  <path d="M 360 144 C 300 320, 250 300, 200 282" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <text x="120" y="300" class="note">reads (phase 1–3)</text>
+  <path d="M 440 144 C 560 320, 620 300, 640 282" fill="none" stroke="#059669" stroke-width="2"/>
+  <polygon points="636,286 646,282 640,274" fill="#059669"/>
+  <text x="560" y="300" class="lbl" fill="#059669">reads switch here (phase 4)</text>
+
+  <!-- footer notes -->
+  <rect x="24" y="336" width="752" height="96" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="40" y="360" class="lbl">The safety comes from the ordering</text>
+  <text x="40" y="382" class="note">Keep <tspan font-weight="700">dual writes</tspan> so both stores stay current → <tspan font-weight="700">backfill</tspan> history in the background → <tspan font-weight="700">verify</tspan> they agree → only then</text>
+  <text x="40" y="400" class="note">move reads to NEW. If anything looks wrong at any step, reads are still on OLD, so you <tspan font-weight="700">roll back instantly</tspan>. Retire OLD last.</text>
+  <text x="40" y="422" class="note">For in-place schema changes, the same idea is called <tspan font-weight="700">expand → migrate → contract</tspan> (add new, write both, backfill, switch, remove old).</text>
+</svg>

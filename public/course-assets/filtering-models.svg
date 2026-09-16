@@ -1,0 +1,51 @@
+<svg viewBox="0 0 800 380" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .h { font-size: 12px; font-weight: 700; fill: #ffffff; }
+    .note { font-size: 10px; fill: #64748b; }
+    .mono { font-size: 9.5px; font-family: 'Consolas','Courier New',monospace; fill: #1e293b; }
+    .lbl { font-size: 10px; font-weight: 700; fill: #1e293b; }
+  </style>
+
+  <text x="24" y="30" class="title">How subscribers choose what they receive</text>
+
+  <!-- topic-based -->
+  <rect x="24" y="48" width="243" height="310" rx="10" fill="#eff6ff" stroke="#bfdbfe"/>
+  <rect x="24" y="48" width="243" height="34" rx="10" fill="#2563eb"/>
+  <text x="40" y="71" class="h">Topic-based</text>
+  <text x="40" y="106" class="note">Subscribe to named topics/channels.</text>
+  <rect x="40" y="120" width="210" height="24" rx="4" fill="#ffffff" stroke="#cbd5e1"/><text x="50" y="137" class="mono">subscribe("orders")</text>
+  <rect x="40" y="150" width="210" height="24" rx="4" fill="#ffffff" stroke="#cbd5e1"/><text x="50" y="167" class="mono">subscribe("payments")</text>
+  <text x="40" y="206" class="note">Simple &amp; fast — a message routes by</text>
+  <text x="40" y="222" class="note">its topic name only.</text>
+  <text x="40" y="252" class="lbl">Coarse-grained.</text>
+  <text x="40" y="282" class="note">Most common model. Kafka topics,</text>
+  <text x="40" y="298" class="note">Redis channels, SNS topics.</text>
+
+  <!-- content-based -->
+  <rect x="279" y="48" width="243" height="310" rx="10" fill="#f5f3ff" stroke="#ddd6fe"/>
+  <rect x="279" y="48" width="243" height="34" rx="10" fill="#7c3aed"/>
+  <text x="295" y="71" class="h">Content-based</text>
+  <text x="295" y="106" class="note">Subscribe by a predicate on the</text>
+  <text x="295" y="122" class="note">message's attributes/content.</text>
+  <rect x="295" y="134" width="210" height="40" rx="4" fill="#ffffff" stroke="#cbd5e1"/><text x="305" y="151" class="mono">where price &gt; 100</text><text x="305" y="167" class="mono">  and region = "EU"</text>
+  <text x="295" y="210" class="note">Fine-grained; broker evaluates the</text>
+  <text x="295" y="226" class="note">filter per message (more work).</text>
+  <text x="295" y="256" class="lbl">Flexible, costlier.</text>
+  <text x="295" y="286" class="note">SNS filter policies, JMS selectors,</text>
+  <text x="295" y="302" class="note">Google Pub/Sub filters.</text>
+
+  <!-- hierarchical -->
+  <rect x="534" y="48" width="242" height="310" rx="10" fill="#f0fdf4" stroke="#bbf7d0"/>
+  <rect x="534" y="48" width="242" height="34" rx="10" fill="#059669"/>
+  <text x="550" y="71" class="h">Hierarchical / wildcard</text>
+  <text x="550" y="106" class="note">Topics form a hierarchy; subscribe</text>
+  <text x="550" y="122" class="note">with wildcards.</text>
+  <rect x="550" y="134" width="210" height="24" rx="4" fill="#ffffff" stroke="#cbd5e1"/><text x="560" y="151" class="mono">sport/tennis/#</text>
+  <rect x="550" y="164" width="210" height="24" rx="4" fill="#ffffff" stroke="#cbd5e1"/><text x="560" y="181" class="mono">order.*.created</text>
+  <text x="550" y="220" class="note">One subscription covers a whole</text>
+  <text x="550" y="236" class="note">subtree of topics.</text>
+  <text x="550" y="266" class="lbl">Structured &amp; expressive.</text>
+  <text x="550" y="296" class="note">MQTT (+ / #), AMQP topic (* / #),</text>
+  <text x="550" y="312" class="note">NATS subjects (* / &gt;).</text>
+</svg>

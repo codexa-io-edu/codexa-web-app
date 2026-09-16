@@ -1,0 +1,49 @@
+<svg viewBox="0 0 800 380" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .h { font-size: 13px; font-weight: 700; fill: #ffffff; }
+    .box { font-size: 10px; font-weight: 700; fill: #ffffff; }
+    .note { font-size: 9.5px; fill: #64748b; }
+  </style>
+
+  <text x="24" y="30" class="title">Logging in containers: treat logs as event streams</text>
+
+  <!-- GOOD -->
+  <rect x="24" y="48" width="470" height="300" rx="10" fill="#f0fdf4" stroke="#bbf7d0"/>
+  <rect x="24" y="48" width="470" height="34" rx="10" fill="#059669"/>
+  <text x="44" y="71" class="h">✓ Write to stdout/stderr; let the platform collect</text>
+
+  <rect x="50" y="100" width="120" height="44" rx="6" fill="#059669"/><text x="110" y="120" text-anchor="middle" class="box">App container</text><text x="110" y="135" text-anchor="middle" class="note" fill="#dcfce7">writes to stdout</text>
+  <rect x="200" y="100" width="120" height="44" rx="6" fill="#059669"/><text x="260" y="120" text-anchor="middle" class="box">App container</text><text x="260" y="135" text-anchor="middle" class="note" fill="#dcfce7">writes to stdout</text>
+  <rect x="350" y="100" width="120" height="44" rx="6" fill="#059669"/><text x="410" y="120" text-anchor="middle" class="box">App container</text><text x="410" y="135" text-anchor="middle" class="note" fill="#dcfce7">writes to stdout</text>
+
+  <rect x="90" y="188" width="340" height="40" rx="6" fill="#0ea5e9"/><text x="260" y="213" text-anchor="middle" class="box">Node logging agent (Fluent Bit DaemonSet — one per node)</text>
+  <line x1="110" y1="144" x2="200" y2="186" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#a)"/>
+  <line x1="260" y1="144" x2="260" y2="186" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#a)"/>
+  <line x1="410" y1="144" x2="320" y2="186" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#a)"/>
+
+  <rect x="150" y="270" width="220" height="40" rx="6" fill="#1e293b"/><text x="260" y="295" text-anchor="middle" class="box">Central log store</text>
+  <line x1="260" y1="228" x2="260" y2="268" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#a)"/>
+
+  <text x="44" y="336" class="note" fill="#065f46">Twelve-factor "logs as event streams": the app owns nothing about routing/storage; the platform ships them out.</text>
+
+  <!-- BAD -->
+  <rect x="510" y="48" width="266" height="300" rx="10" fill="#fef2f2" stroke="#fecaca"/>
+  <rect x="510" y="48" width="266" height="34" rx="10" fill="#dc2626"/>
+  <text x="530" y="71" class="h">✗ Log to a file inside</text>
+
+  <rect x="560" y="110" width="166" height="50" rx="6" fill="#f87171"/><text x="643" y="132" text-anchor="middle" class="box">App container</text><text x="643" y="148" text-anchor="middle" class="note" fill="#fee2e2">writes /var/log/app.log</text>
+  <rect x="580" y="188" width="126" height="40" rx="6" fill="#7f1d1d"/><text x="643" y="212" text-anchor="middle" class="box">file in container</text>
+  <line x1="643" y1="160" x2="643" y2="186" stroke="#dc2626" stroke-width="1.6" marker-end="url(#r)"/>
+
+  <text x="643" y="258" text-anchor="middle" class="box" fill="#dc2626" font-size="22">✗</text>
+  <text x="530" y="290" class="note" fill="#991b1b">Container is ephemeral — when it</text>
+  <text x="530" y="306" class="note" fill="#991b1b">dies or is rescheduled, the file (and</text>
+  <text x="530" y="322" class="note" fill="#991b1b">all its logs) is gone. Also fills the</text>
+  <text x="530" y="338" class="note" fill="#991b1b">writable layer &amp; is invisible centrally.</text>
+
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#94a3b8"/></marker>
+    <marker id="r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#dc2626"/></marker>
+  </defs>
+</svg>

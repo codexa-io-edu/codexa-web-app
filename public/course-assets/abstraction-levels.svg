@@ -1,0 +1,34 @@
+<svg viewBox="0 0 780 420" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <rect width="780" height="420" fill="#f8fafc"/>
+  <text x="390" y="38" text-anchor="middle" font-size="22" font-weight="700" fill="#0f172a">Where Design Patterns Sit</text>
+  <text x="390" y="63" text-anchor="middle" font-size="13" fill="#64748b">Same idea at three scales &#8212; patterns are the middle rung</text>
+
+  <!-- scale arrow -->
+  <defs>
+    <marker id="up" markerWidth="12" markerHeight="12" refX="4" refY="8" orient="auto" markerUnits="strokeWidth">
+      <path d="M4,0 L8,8 L0,8 Z" fill="#334155"/>
+    </marker>
+  </defs>
+  <line x1="60" y1="360" x2="60" y2="95" stroke="#334155" stroke-width="2" marker-end="url(#up)"/>
+  <text x="46" y="235" font-size="12" fill="#334155" transform="rotate(-90 46 235)">scope / scale increases</text>
+
+  <!-- Architectural (top, broadest) -->
+  <rect x="100" y="92" width="620" height="82" rx="10" fill="#fdf4ff" stroke="#c026d3" stroke-width="2"/>
+  <text x="120" y="118" font-size="15" font-weight="700" fill="#a21caf">Architectural Patterns</text>
+  <text x="120" y="140" font-size="12" fill="#334155">Shape of the whole system &#8212; Layered, MVC, Hexagonal, Microservices, Event-Driven.</text>
+  <text x="120" y="160" font-size="11.5" fill="#64748b">Answers: "how are the big pieces of the application arranged?"</text>
+
+  <!-- Design patterns (middle) -->
+  <rect x="100" y="184" width="620" height="82" rx="10" fill="#f0fdf4" stroke="#059669" stroke-width="2.5"/>
+  <text x="120" y="210" font-size="15" font-weight="700" fill="#047857">Design Patterns  &#9664; this module</text>
+  <text x="120" y="232" font-size="12" fill="#334155">Arrangement of a handful of classes/objects &#8212; Strategy, Factory, Observer, Decorator...</text>
+  <text x="120" y="252" font-size="11.5" fill="#64748b">Answers: "how do these few objects collaborate to solve a recurring problem?"</text>
+
+  <!-- Idioms (bottom, narrowest) -->
+  <rect x="100" y="276" width="620" height="82" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="120" y="302" font-size="15" font-weight="700" fill="#1d4ed8">Idioms</text>
+  <text x="120" y="324" font-size="12" fill="#334155">Low-level, language-specific habits &#8212; try-with-resources, RAII, list comprehensions.</text>
+  <text x="120" y="344" font-size="11.5" fill="#64748b">Answers: "what's the idiomatic way to write this in <tspan font-style="italic">this</tspan> language?"</text>
+
+  <text x="410" y="396" text-anchor="middle" font-size="11.5" fill="#475569">Separate axis: <tspan font-weight="700">Principles</tspan> (like SOLID) tell you <tspan font-style="italic">why</tspan>; <tspan font-weight="700">patterns</tspan> tell you <tspan font-style="italic">how</tspan>; <tspan font-weight="700">libraries/frameworks</tspan> are the concrete code.</text>
+</svg>

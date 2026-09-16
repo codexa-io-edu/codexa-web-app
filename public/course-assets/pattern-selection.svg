@@ -1,0 +1,60 @@
+<svg viewBox="0 0 820 470" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <rect width="820" height="470" fill="#f8fafc"/>
+  <text x="410" y="30" text-anchor="middle" font-size="20" font-weight="700" fill="#0f172a">Pattern Selection: Match the Problem to the Solution</text>
+  <text x="410" y="52" text-anchor="middle" font-size="12.5" fill="#64748b">The design problem tells you the pattern — not the other way around</text>
+
+  <!-- headers -->
+  <rect x="30" y="72" width="330" height="28" rx="5" fill="#e0e7ff" stroke="#6366f1"/><text x="195" y="91" text-anchor="middle" font-size="11.5" font-weight="700" fill="#4338ca">If the problem is...</text>
+  <rect x="370" y="72" width="420" height="28" rx="5" fill="#e0e7ff" stroke="#6366f1"/><text x="580" y="91" text-anchor="middle" font-size="11.5" font-weight="700" fill="#4338ca">Consider...</text>
+
+  <g font-size="10">
+    <rect x="30" y="106" width="330" height="44" rx="5" fill="#ffffff" stroke="#cbd5e1"/>
+    <text x="44" y="124" fill="#334155">"There should only be one instance; provide a</text>
+    <text x="44" y="140" fill="#334155">global access point"</text>
+    <rect x="370" y="106" width="420" height="44" rx="5" fill="#eff6ff" stroke="#93c5fd"/>
+    <text x="384" y="124" font-weight="700" fill="#1d4ed8">Singleton</text>
+    <text x="384" y="140" fill="#334155">use holder idiom; inject via DI rather than static access</text>
+
+    <rect x="30" y="156" width="330" height="44" rx="5" fill="#ffffff" stroke="#cbd5e1"/>
+    <text x="44" y="174" fill="#334155">"The creation is complex / the type to create</text>
+    <text x="44" y="190" fill="#334155">varies at runtime"</text>
+    <rect x="370" y="156" width="420" height="44" rx="5" fill="#eff6ff" stroke="#93c5fd"/>
+    <text x="384" y="174" font-weight="700" fill="#1d4ed8">Factory Method / Abstract Factory</text>
+    <text x="384" y="190" fill="#334155">encapsulate creation; return the interface, not the impl</text>
+
+    <rect x="30" y="206" width="330" height="44" rx="5" fill="#ffffff" stroke="#cbd5e1"/>
+    <text x="44" y="224" fill="#334155">"Build a complex object step by step with</text>
+    <text x="44" y="240" fill="#334155">many optional parts"</text>
+    <rect x="370" y="206" width="420" height="44" rx="5" fill="#eff6ff" stroke="#93c5fd"/>
+    <text x="384" y="224" font-weight="700" fill="#1d4ed8">Builder</text>
+    <text x="384" y="240" fill="#334155">fluent API; validate in build(); immutable result</text>
+
+    <rect x="30" y="256" width="330" height="44" rx="5" fill="#ffffff" stroke="#cbd5e1"/>
+    <text x="44" y="274" fill="#334155">"Multiple observers must react when an</text>
+    <text x="44" y="290" fill="#334155">object's state changes"</text>
+    <rect x="370" y="256" width="420" height="44" rx="5" fill="#f0fdf4" stroke="#6ee7b7"/>
+    <text x="384" y="274" font-weight="700" fill="#047857">Observer / Domain Event</text>
+    <text x="384" y="290" fill="#334155">decouple notifier from handlers; use event bus for scale</text>
+
+    <rect x="30" y="306" width="330" height="44" rx="5" fill="#ffffff" stroke="#cbd5e1"/>
+    <text x="44" y="324" fill="#334155">"The algorithm or behaviour varies, and should</text>
+    <text x="44" y="340" fill="#334155">be swappable at runtime"</text>
+    <rect x="370" y="306" width="420" height="44" rx="5" fill="#f0fdf4" stroke="#6ee7b7"/>
+    <text x="384" y="324" font-weight="700" fill="#047857">Strategy</text>
+    <text x="384" y="340" fill="#334155">inject the variant; eliminates if/switch on type</text>
+
+    <rect x="30" y="356" width="330" height="44" rx="5" fill="#ffffff" stroke="#cbd5e1"/>
+    <text x="44" y="374" fill="#334155">"An object can be in different states; behaviour</text>
+    <text x="44" y="390" fill="#334155">depends on current state"</text>
+    <rect x="370" y="356" width="420" height="44" rx="5" fill="#fff7ed" stroke="#fdba74"/>
+    <text x="384" y="374" font-weight="700" fill="#b45309">State</text>
+    <text x="384" y="390" fill="#334155">each state a class; transitions inside state objects</text>
+
+    <rect x="30" y="406" width="330" height="44" rx="5" fill="#ffffff" stroke="#cbd5e1"/>
+    <text x="44" y="424" fill="#334155">"A chain of handlers, each deciding to process</text>
+    <text x="44" y="440" fill="#334155">or pass on a request"</text>
+    <rect x="370" y="406" width="420" height="44" rx="5" fill="#fff7ed" stroke="#fdba74"/>
+    <text x="384" y="424" font-weight="700" fill="#b45309">Chain of Responsibility</text>
+    <text x="384" y="440" fill="#334155">middleware pipelines, approval workflows, auth filters</text>
+  </g>
+</svg>

@@ -1,0 +1,51 @@
+<svg viewBox="0 0 800 380" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .h { font-size: 13px; font-weight: 700; fill: #ffffff; }
+    .mono { font-size: 9px; font-family: 'Consolas','Courier New',monospace; fill: #1e293b; }
+    .note { font-size: 10px; fill: #64748b; }
+    .good { font-size: 10px; font-weight: 700; fill: #059669; }
+    .bad { font-size: 10px; font-weight: 700; fill: #dc2626; }
+  </style>
+
+  <text x="24" y="30" class="title">Unstructured vs. structured logs</text>
+
+  <!-- unstructured -->
+  <rect x="24" y="48" width="360" height="300" rx="10" fill="#fef2f2" stroke="#fecaca"/>
+  <rect x="24" y="48" width="360" height="34" rx="10" fill="#dc2626"/>
+  <text x="44" y="71" class="h">✗ Unstructured (plain text)</text>
+
+  <rect x="44" y="98" width="320" height="70" rx="6" fill="#ffffff" stroke="#fecaca"/>
+  <text x="54" y="118" class="mono">2026-01-05 12:00:03 payment</text>
+  <text x="54" y="132" class="mono">failed for order 123 user 45</text>
+  <text x="54" y="146" class="mono">amount 99.50 (gateway timeout)</text>
+  <text x="54" y="160" class="mono" fill="#94a3b8">...free-form prose...</text>
+
+  <text x="44" y="196" class="bad">✗ Must be parsed with fragile regex</text>
+  <text x="44" y="218" class="bad">✗ Field names/order vary by developer</text>
+  <text x="44" y="240" class="bad">✗ Hard to filter, aggregate, or alert on</text>
+  <text x="44" y="262" class="bad">✗ "amount &gt; 50" queries are painful</text>
+  <text x="44" y="300" class="note">Fine for a human reading one file;</text>
+  <text x="44" y="316" class="note">terrible for machines at scale.</text>
+
+  <!-- structured -->
+  <rect x="416" y="48" width="360" height="300" rx="10" fill="#f0fdf4" stroke="#bbf7d0"/>
+  <rect x="416" y="48" width="360" height="34" rx="10" fill="#059669"/>
+  <text x="436" y="71" class="h">✓ Structured (JSON / key-value)</text>
+
+  <rect x="436" y="98" width="320" height="112" rx="6" fill="#ffffff" stroke="#bbf7d0"/>
+  <text x="446" y="116" class="mono">{</text>
+  <text x="446" y="130" class="mono">  "ts": "2026-01-05T12:00:03Z",</text>
+  <text x="446" y="144" class="mono">  "level": "ERROR",</text>
+  <text x="446" y="158" class="mono">  "service": "payments",</text>
+  <text x="446" y="172" class="mono">  "event": "payment_failed",</text>
+  <text x="446" y="186" class="mono">  "order_id": 123, "amount": 99.50,</text>
+  <text x="446" y="200" class="mono">  "trace_id": "abc123" }</text>
+
+  <text x="436" y="234" class="good">✓ Machine-parseable — no regex</text>
+  <text x="436" y="256" class="good">✓ Consistent, named fields</text>
+  <text x="436" y="278" class="good">✓ Directly queryable &amp; aggregatable:</text>
+  <rect x="446" y="288" width="300" height="20" rx="3" fill="#dcfce7"/>
+  <text x="452" y="302" class="mono" fill="#065f46">level=ERROR AND service=payments AND amount&gt;50</text>
+  <text x="436" y="330" class="good">✓ Alerts &amp; dashboards build on fields</text>
+</svg>

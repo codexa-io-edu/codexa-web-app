@@ -1,0 +1,46 @@
+<svg viewBox="0 0 800 420" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .box { font-size: 11px; font-weight: 700; fill: #ffffff; }
+    .sub { font-size: 9.5px; fill: #e2e8f0; }
+    .note { font-size: 10.5px; fill: #64748b; }
+    .lbl { font-size: 10.5px; font-weight: 700; fill: #1e293b; }
+  </style>
+
+  <text x="24" y="30" class="title">Publish-subscribe: one event, delivered to every interested subscriber</text>
+
+  <!-- publisher -->
+  <rect x="30" y="170" width="130" height="60" rx="8" fill="#2563eb"/><text x="95" y="196" text-anchor="middle" class="box">Order service</text><text x="95" y="214" text-anchor="middle" class="sub">publisher</text>
+
+  <!-- topic -->
+  <rect x="270" y="160" width="150" height="80" rx="10" fill="#d97706"/><text x="345" y="192" text-anchor="middle" class="box">Topic</text><text x="345" y="210" text-anchor="middle" class="sub">"OrderPlaced"</text><text x="345" y="226" text-anchor="middle" class="sub">(broker / event bus)</text>
+
+  <line x1="160" y1="200" x2="268" y2="200" stroke="#2563eb" stroke-width="2.4" marker-end="url(#b)"/>
+  <text x="175" y="192" class="note">publish once</text>
+
+  <!-- subscribers -->
+  <rect x="600" y="70" width="170" height="34" rx="6" fill="#059669"/><text x="685" y="92" text-anchor="middle" class="box">Inventory service</text>
+  <rect x="600" y="130" width="170" height="34" rx="6" fill="#059669"/><text x="685" y="152" text-anchor="middle" class="box">Email service</text>
+  <rect x="600" y="190" width="170" height="34" rx="6" fill="#059669"/><text x="685" y="212" text-anchor="middle" class="box">Analytics service</text>
+  <rect x="600" y="250" width="170" height="34" rx="6" fill="#059669"/><text x="685" y="272" text-anchor="middle" class="box">Shipping service</text>
+  <rect x="600" y="310" width="170" height="34" rx="6" fill="#cbd5e1"/><text x="685" y="332" text-anchor="middle" class="box" fill="#475569">Fraud service (added later)</text>
+
+  <line x1="420" y1="190" x2="598" y2="90" stroke="#059669" stroke-width="1.8" marker-end="url(#g)"/>
+  <line x1="420" y1="195" x2="598" y2="147" stroke="#059669" stroke-width="1.8" marker-end="url(#g)"/>
+  <line x1="420" y1="205" x2="598" y2="207" stroke="#059669" stroke-width="1.8" marker-end="url(#g)"/>
+  <line x1="420" y1="212" x2="598" y2="267" stroke="#059669" stroke-width="1.8" marker-end="url(#g)"/>
+  <line x1="420" y1="220" x2="598" y2="327" stroke="#94a3b8" stroke-width="1.6" stroke-dasharray="4,3" marker-end="url(#a)"/>
+
+  <text x="440" y="120" class="lbl">each subscriber gets its OWN copy</text>
+
+  <!-- footer -->
+  <rect x="24" y="360" width="752" height="52" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="40" y="382" class="note">The publisher emits one <tspan font-weight="700">OrderPlaced</tspan> event and knows nothing about who consumes it. Four services react independently —</text>
+  <text x="40" y="400" class="note">and a new <tspan font-weight="700">Fraud service</tspan> can subscribe later with <tspan font-weight="700">zero changes to the publisher</tspan>. That extensibility is the whole point.</text>
+
+  <defs>
+    <marker id="b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#2563eb"/></marker>
+    <marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#059669"/></marker>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#94a3b8"/></marker>
+  </defs>
+</svg>

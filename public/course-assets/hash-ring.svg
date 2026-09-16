@@ -1,0 +1,64 @@
+<svg viewBox="0 0 780 470" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .node { font-size: 12px; font-weight: 700; fill: #ffffff; }
+    .key { font-size: 11px; font-weight: 700; fill: #1e293b; }
+    .note { font-size: 10.5px; fill: #64748b; }
+    .cap { font-size: 11px; font-weight: 700; fill: #2563eb; }
+  </style>
+
+  <text x="24" y="30" class="title">The hash ring: place keys AND nodes on one circle</text>
+
+  <!-- ring -->
+  <circle cx="300" cy="250" r="150" fill="none" stroke="#cbd5e1" stroke-width="2.5"/>
+  <!-- clockwise arrow -->
+  <path d="M 430 175 A 150 150 0 0 1 445 262" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#cw)"/>
+  <text x="452" y="210" class="note">clockwise</text>
+  <text x="292" y="255" class="note" text-anchor="middle">hash space</text>
+  <text x="292" y="270" class="note" text-anchor="middle">0 … 2³²−1</text>
+
+  <!-- nodes: A top(300,100) B right(450,250) C bottom-left(194,356) -->
+  <rect x="270" y="82" width="60" height="34" rx="6" fill="#2563eb"/><text x="300" y="104" text-anchor="middle" class="node">Node A</text>
+  <rect x="452" y="233" width="60" height="34" rx="6" fill="#2563eb"/><text x="482" y="255" text-anchor="middle" class="node">Node B</text>
+  <rect x="150" y="352" width="60" height="34" rx="6" fill="#2563eb"/><text x="180" y="374" text-anchor="middle" class="node">Node C</text>
+
+  <!-- keys (small circles) -->
+  <!-- k1 at 45 (406,144) -> B -->
+  <circle cx="406" cy="144" r="8" fill="#d97706"/><text x="418" y="140" class="key">k1</text>
+  <line x1="406" y1="144" x2="452" y2="243" stroke="#059669" stroke-width="1.6" stroke-dasharray="4,3" marker-end="url(#g)"/>
+  <!-- k2 at 135 (406,356) -> C -->
+  <circle cx="406" cy="356" r="8" fill="#d97706"/><text x="418" y="360" class="key">k2</text>
+  <line x1="406" y1="356" x2="212" y2="360" stroke="#059669" stroke-width="1.6" stroke-dasharray="4,3" marker-end="url(#g)"/>
+  <!-- k3 at 180 (300,400) -> C -->
+  <circle cx="300" cy="400" r="8" fill="#d97706"/><text x="308" y="418" class="key">k3</text>
+  <line x1="300" y1="400" x2="205" y2="372" stroke="#059669" stroke-width="1.6" stroke-dasharray="4,3" marker-end="url(#g)"/>
+  <!-- k4 at 270 (150,250) -> A -->
+  <circle cx="150" cy="250" r="8" fill="#d97706"/><text x="120" y="254" class="key">k4</text>
+  <line x1="150" y1="250" x2="288" y2="108" stroke="#059669" stroke-width="1.6" stroke-dasharray="4,3" marker-end="url(#g)"/>
+  <!-- k5 at 315 (194,144) -> A -->
+  <circle cx="194" cy="144" r="8" fill="#d97706"/><text x="164" y="140" class="key">k5</text>
+  <line x1="194" y1="144" x2="286" y2="112" stroke="#059669" stroke-width="1.6" stroke-dasharray="4,3" marker-end="url(#g)"/>
+
+  <defs>
+    <marker id="cw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#94a3b8"/></marker>
+    <marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#059669"/></marker>
+  </defs>
+
+  <!-- explanation -->
+  <rect x="530" y="90" width="230" height="320" rx="10" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="548" y="118" class="cap">The rule</text>
+  <text x="548" y="142" class="note">1 · Hash each node to a point</text>
+  <text x="548" y="158" class="note">   on the ring.</text>
+  <text x="548" y="182" class="note">2 · Hash each key to a point</text>
+  <text x="548" y="198" class="note">   on the same ring.</text>
+  <text x="548" y="222" class="note">3 · A key belongs to the first</text>
+  <text x="548" y="238" class="note">   node found going clockwise.</text>
+
+  <text x="548" y="278" class="cap">Here</text>
+  <text x="548" y="302" class="note">k1 → Node B</text>
+  <text x="548" y="320" class="note">k2, k3 → Node C</text>
+  <text x="548" y="338" class="note">k4, k5 → Node A</text>
+
+  <text x="548" y="378" class="note">Each node owns the arc that</text>
+  <text x="548" y="394" class="note">ends at its position.</text>
+</svg>

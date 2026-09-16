@@ -1,0 +1,59 @@
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .h { font-size: 12px; font-weight: 700; fill: #ffffff; }
+    .tech { font-size: 12px; font-weight: 700; fill: #1e293b; }
+    .v { font-size: 10.5px; fill: #334155; }
+    .note { font-size: 10.5px; fill: #64748b; }
+  </style>
+
+  <text x="24" y="30" class="title">Which real-time technique for which job?</text>
+
+  <!-- header -->
+  <rect x="24" y="48" width="150" height="38" fill="#1e293b"/><text x="38" y="72" class="h">Technique</text>
+  <rect x="174" y="48" width="130" height="38" fill="#334155"/><text x="188" y="72" class="h">Direction</text>
+  <rect x="304" y="48" width="130" height="38" fill="#334155"/><text x="318" y="72" class="h">Transport</text>
+  <rect x="434" y="48" width="110" height="38" fill="#334155"/><text x="448" y="72" class="h">Latency</text>
+  <rect x="544" y="48" width="232" height="38" fill="#334155"/><text x="558" y="72" class="h">Best for</text>
+
+  <g>
+    <rect x="24" y="86" width="752" height="46" fill="#f8fafc"/>
+    <text x="38" y="106" class="tech">SSE</text><text x="38" y="122" class="note">server-sent events</text>
+    <text x="188" y="113" class="v">server → client</text>
+    <text x="318" y="113" class="v">HTTP (TCP)</text>
+    <text x="448" y="113" class="v">low</text>
+    <text x="558" y="113" class="v">live feeds, notifications, tickers</text>
+
+    <rect x="24" y="132" width="752" height="46" fill="#ffffff"/>
+    <text x="38" y="152" class="tech">WebSocket</text>
+    <text x="188" y="159" class="v">bidirectional</text>
+    <text x="318" y="159" class="v">TCP (WSS=TLS)</text>
+    <text x="448" y="159" class="v">low</text>
+    <text x="558" y="159" class="v">chat, collab editing, dashboards, games</text>
+
+    <rect x="24" y="178" width="752" height="46" fill="#f8fafc"/>
+    <text x="38" y="198" class="tech">WebRTC</text>
+    <text x="188" y="205" class="v">peer-to-peer</text>
+    <text x="318" y="205" class="v">UDP (DTLS/SRTP)</text>
+    <text x="448" y="205" class="v">ultra-low</text>
+    <text x="558" y="205" class="v">video/voice calls, screen share, P2P data</text>
+
+    <rect x="24" y="224" width="752" height="46" fill="#ffffff"/>
+    <text x="38" y="244" class="tech">HLS / DASH</text><text x="38" y="260" class="note">adaptive streaming</text>
+    <text x="188" y="251" class="v">one → many</text>
+    <text x="318" y="251" class="v">HTTP over CDN</text>
+    <text x="448" y="251" class="v">seconds</text>
+    <text x="558" y="251" class="v">VOD &amp; live to huge audiences (Netflix, Twitch)</text>
+
+    <rect x="24" y="270" width="752" height="46" fill="#fef2f2" stroke="#fecaca"/>
+    <text x="38" y="290" class="tech">(polling)</text>
+    <text x="188" y="297" class="v">client-pull</text>
+    <text x="318" y="297" class="v">HTTP (TCP)</text>
+    <text x="448" y="297" class="v">high</text>
+    <text x="558" y="297" class="v">simple fallback only — avoid for real real-time</text>
+  </g>
+
+  <text x="24" y="342" class="note">Rule of thumb: one-way updates → <tspan font-weight="700">SSE</tspan>; two-way app messages → <tspan font-weight="700">WebSocket</tspan>; direct low-latency media → <tspan font-weight="700">WebRTC</tspan>;</text>
+  <text x="24" y="360" class="note">broadcast video to millions → <tspan font-weight="700">HLS/DASH</tspan> over a CDN. These often combine (e.g. WebSocket signaling to set up a WebRTC call).</text>
+  <text x="24" y="382" class="note">Latency vs. scale is the recurring tradeoff — WebRTC is lowest-latency but hardest to scale; HLS/DASH is highest-latency but scales endlessly.</text>
+</svg>

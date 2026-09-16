@@ -1,0 +1,57 @@
+<svg viewBox="0 0 780 430" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <rect width="780" height="430" fill="#f8fafc"/>
+  <text x="390" y="36" text-anchor="middle" font-size="22" font-weight="700" fill="#0f172a">One Class = Blueprint &#8594; Many Objects = Instances</text>
+
+  <!-- Class (blueprint) -->
+  <rect x="60" y="90" width="220" height="250" rx="12" fill="#e0e7ff" stroke="#4338ca" stroke-width="2.5"/>
+  <text x="170" y="120" text-anchor="middle" font-size="16" font-weight="700" fill="#3730a3">class  Car</text>
+  <text x="170" y="140" text-anchor="middle" font-size="12" fill="#4f46e5">(the blueprint)</text>
+  <line x1="80" y1="152" x2="260" y2="152" stroke="#a5b4fc" stroke-width="1.5"/>
+  <text x="80" y="178" font-size="13" fill="#312e81">fields:</text>
+  <text x="96" y="200" font-size="12.5" fill="#3730a3" font-family="monospace">String color</text>
+  <text x="96" y="220" font-size="12.5" fill="#3730a3" font-family="monospace">int speed</text>
+  <text x="80" y="252" font-size="13" fill="#312e81">methods:</text>
+  <text x="96" y="274" font-size="12.5" fill="#3730a3" font-family="monospace">accelerate()</text>
+  <text x="96" y="294" font-size="12.5" fill="#3730a3" font-family="monospace">brake()</text>
+  <text x="170" y="326" text-anchor="middle" font-size="11" fill="#4f46e5">Defined once. No memory yet.</text>
+
+  <!-- Arrow -->
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#475569"/>
+    </marker>
+  </defs>
+  <line x1="285" y1="215" x2="360" y2="215" stroke="#475569" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <text x="322" y="205" text-anchor="middle" font-size="12" font-weight="600" fill="#475569">new</text>
+
+  <!-- Object 1 -->
+  <rect x="375" y="95" width="180" height="95" rx="10" fill="#dcfce7" stroke="#059669" stroke-width="2"/>
+  <text x="465" y="118" text-anchor="middle" font-size="14" font-weight="700" fill="#047857">car1 : Car</text>
+  <line x1="390" y1="128" x2="540" y2="128" stroke="#86efac" stroke-width="1.2"/>
+  <text x="400" y="150" font-size="12" fill="#065f46" font-family="monospace">color = "red"</text>
+  <text x="400" y="170" font-size="12" fill="#065f46" font-family="monospace">speed = 80</text>
+
+  <!-- Object 2 -->
+  <rect x="375" y="205" width="180" height="95" rx="10" fill="#dcfce7" stroke="#059669" stroke-width="2"/>
+  <text x="465" y="228" text-anchor="middle" font-size="14" font-weight="700" fill="#047857">car2 : Car</text>
+  <line x1="390" y1="238" x2="540" y2="238" stroke="#86efac" stroke-width="1.2"/>
+  <text x="400" y="260" font-size="12" fill="#065f46" font-family="monospace">color = "blue"</text>
+  <text x="400" y="280" font-size="12" fill="#065f46" font-family="monospace">speed = 0</text>
+
+  <!-- Object 3 -->
+  <rect x="375" y="315" width="180" height="95" rx="10" fill="#dcfce7" stroke="#059669" stroke-width="2"/>
+  <text x="465" y="338" text-anchor="middle" font-size="14" font-weight="700" fill="#047857">car3 : Car</text>
+  <line x1="390" y1="348" x2="540" y2="348" stroke="#86efac" stroke-width="1.2"/>
+  <text x="400" y="370" font-size="12" fill="#065f46" font-family="monospace">color = "black"</text>
+  <text x="400" y="390" font-size="12" fill="#065f46" font-family="monospace">speed = 120</text>
+
+  <!-- note -->
+  <rect x="590" y="150" width="170" height="150" rx="10" fill="#fff7ed" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="675" y="176" text-anchor="middle" font-size="13" font-weight="700" fill="#b45309">Key idea</text>
+  <text x="605" y="202" font-size="11.5" fill="#7c2d12">Same structure</text>
+  <text x="605" y="220" font-size="11.5" fill="#7c2d12">(fields + methods),</text>
+  <text x="605" y="238" font-size="11.5" fill="#7c2d12">but each object</text>
+  <text x="605" y="256" font-size="11.5" fill="#7c2d12">holds its OWN</text>
+  <text x="605" y="274" font-size="11.5" fill="#7c2d12">independent state</text>
+  <text x="605" y="292" font-size="11.5" fill="#7c2d12">and identity.</text>
+</svg>

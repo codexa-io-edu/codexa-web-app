@@ -1,0 +1,70 @@
+<svg viewBox="0 0 820 430" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <rect width="820" height="430" fill="#f8fafc"/>
+  <text x="410" y="34" text-anchor="middle" font-size="21" font-weight="700" fill="#0f172a">The GoF Matrix: Purpose &#215; Scope</text>
+  <text x="410" y="56" text-anchor="middle" font-size="12.5" fill="#64748b">Purpose = what the pattern does; Scope = whether it works through inheritance (class) or composition (object)</text>
+
+  <!-- column header band -->
+  <rect x="150" y="72" width="216" height="42" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="258" y="98" text-anchor="middle" font-size="14" font-weight="700" fill="#1d4ed8">Creational</text>
+  <rect x="366" y="72" width="216" height="42" fill="#dcfce7" stroke="#059669" stroke-width="1.5"/>
+  <text x="474" y="98" text-anchor="middle" font-size="14" font-weight="700" fill="#047857">Structural</text>
+  <rect x="582" y="72" width="216" height="42" fill="#ffedd5" stroke="#d97706" stroke-width="1.5"/>
+  <text x="690" y="98" text-anchor="middle" font-size="14" font-weight="700" fill="#b45309">Behavioral</text>
+
+  <!-- corner cell -->
+  <rect x="22" y="72" width="128" height="42" fill="#0f172a"/>
+  <text x="86" y="90" text-anchor="middle" font-size="11" font-weight="600" fill="#cbd5e1">Scope</text>
+  <text x="86" y="106" text-anchor="middle" font-size="11" font-weight="600" fill="#cbd5e1">&#8595;</text>
+
+  <!-- ==== CLASS row ==== -->
+  <rect x="22" y="114" width="128" height="96" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.2"/>
+  <text x="86" y="150" text-anchor="middle" font-size="13" font-weight="700" fill="#334155">Class</text>
+  <text x="86" y="170" text-anchor="middle" font-size="10" fill="#64748b">inheritance,</text>
+  <text x="86" y="184" text-anchor="middle" font-size="10" fill="#64748b">compile-time</text>
+
+  <rect x="150" y="114" width="216" height="96" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+  <rect x="180" y="148" width="156" height="26" rx="6" fill="#dbeafe"/><text x="258" y="166" text-anchor="middle" font-size="11.5" fill="#1e3a8a">Factory Method</text>
+
+  <rect x="366" y="114" width="216" height="96" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+  <rect x="396" y="148" width="156" height="26" rx="6" fill="#dcfce7"/><text x="474" y="166" text-anchor="middle" font-size="11.5" fill="#065f46">Adapter (class form)</text>
+
+  <rect x="582" y="114" width="216" height="96" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+  <rect x="612" y="148" width="156" height="26" rx="6" fill="#ffedd5"/><text x="690" y="166" text-anchor="middle" font-size="11.5" fill="#7c2d12">Template Method</text>
+
+  <!-- ==== OBJECT row ==== -->
+  <rect x="22" y="210" width="128" height="180" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.2"/>
+  <text x="86" y="286" text-anchor="middle" font-size="13" font-weight="700" fill="#334155">Object</text>
+  <text x="86" y="306" text-anchor="middle" font-size="10" fill="#64748b">composition,</text>
+  <text x="86" y="320" text-anchor="middle" font-size="10" fill="#64748b">runtime</text>
+
+  <!-- Creational / Object -->
+  <rect x="150" y="210" width="216" height="180" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+  <g font-size="11.5" fill="#1e3a8a">
+    <rect x="180" y="224" width="156" height="24" rx="6" fill="#dbeafe"/><text x="258" y="240" text-anchor="middle">Singleton</text>
+    <rect x="180" y="252" width="156" height="24" rx="6" fill="#dbeafe"/><text x="258" y="268" text-anchor="middle">Abstract Factory</text>
+    <rect x="180" y="280" width="156" height="24" rx="6" fill="#dbeafe"/><text x="258" y="296" text-anchor="middle">Builder</text>
+    <rect x="180" y="308" width="156" height="24" rx="6" fill="#dbeafe"/><text x="258" y="324" text-anchor="middle">Prototype</text>
+  </g>
+
+  <!-- Structural / Object -->
+  <rect x="366" y="210" width="216" height="180" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+  <g font-size="11.5" fill="#065f46">
+    <rect x="396" y="224" width="156" height="24" rx="6" fill="#dcfce7"/><text x="474" y="240" text-anchor="middle">Adapter (object form)</text>
+    <rect x="396" y="252" width="156" height="24" rx="6" fill="#dcfce7"/><text x="474" y="268" text-anchor="middle">Bridge</text>
+    <rect x="396" y="280" width="156" height="24" rx="6" fill="#dcfce7"/><text x="474" y="296" text-anchor="middle">Decorator</text>
+    <rect x="396" y="308" width="156" height="24" rx="6" fill="#dcfce7"/><text x="474" y="324" text-anchor="middle">Facade</text>
+    <rect x="396" y="336" width="156" height="24" rx="6" fill="#dcfce7"/><text x="474" y="352" text-anchor="middle">Proxy</text>
+  </g>
+
+  <!-- Behavioral / Object -->
+  <rect x="582" y="210" width="216" height="180" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+  <g font-size="11.5" fill="#7c2d12">
+    <rect x="612" y="224" width="156" height="24" rx="6" fill="#ffedd5"/><text x="690" y="240" text-anchor="middle">Strategy</text>
+    <rect x="612" y="252" width="156" height="24" rx="6" fill="#ffedd5"/><text x="690" y="268" text-anchor="middle">Observer</text>
+    <rect x="612" y="280" width="156" height="24" rx="6" fill="#ffedd5"/><text x="690" y="296" text-anchor="middle">Command</text>
+    <rect x="612" y="308" width="156" height="24" rx="6" fill="#ffedd5"/><text x="690" y="324" text-anchor="middle">State</text>
+    <rect x="612" y="336" width="156" height="24" rx="6" fill="#ffedd5"/><text x="690" y="352" text-anchor="middle">Chain of Responsibility</text>
+  </g>
+
+  <text x="410" y="414" text-anchor="middle" font-size="11" fill="#64748b">Most useful patterns are Object-scope &#8212; they favor composition over inheritance, echoing the SOLID mindset.</text>
+</svg>

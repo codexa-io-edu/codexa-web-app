@@ -1,0 +1,72 @@
+<svg viewBox="0 0 800 470" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .panel { font-size: 14px; font-weight: 700; fill: #1e293b; }
+    .box { font-size: 12.5px; font-weight: 700; fill: #ffffff; }
+    .bsub { font-size: 10.5px; fill: #e2e8f0; }
+    .note { font-size: 11px; fill: #64748b; }
+    .tag { font-size: 11px; font-weight: 700; fill: #1e293b; }
+  </style>
+
+  <text x="24" y="30" class="title">The flip: where the data actually lives</text>
+
+  <!-- LEFT: disk-based -->
+  <text x="40" y="64" class="panel">Disk-based database</text>
+  <text x="40" y="82" class="note">Disk is the source of truth; RAM caches the hot part.</text>
+
+  <!-- RAM (buffer pool) -->
+  <rect x="40" y="96" width="320" height="90" rx="8" fill="#93c5fd"/>
+  <text x="56" y="120" class="box" fill="#1e293b">RAM — buffer pool (cache)</text>
+  <text x="56" y="140" class="note">holds recently-used pages only</text>
+  <rect x="56" y="150" width="60" height="24" rx="3" fill="#bfdbfe" stroke="#2563eb"/><text x="66" y="167" class="note">page</text>
+  <rect x="124" y="150" width="60" height="24" rx="3" fill="#bfdbfe" stroke="#2563eb"/><text x="134" y="167" class="note">page</text>
+  <rect x="192" y="150" width="60" height="24" rx="3" fill="#e2e8f0" stroke="#94a3b8" stroke-dasharray="3,2"/><text x="200" y="167" class="note">miss</text>
+
+  <!-- arrows -->
+  <path d="M 200 186 L 200 214" stroke="#dc2626" stroke-width="2"/><polygon points="195,210 200,220 205,210" fill="#dc2626"/>
+  <text x="210" y="206" class="note" fill="#dc2626">cache miss → slow disk read</text>
+
+  <!-- DISK -->
+  <rect x="40" y="224" width="320" height="120" rx="8" fill="#1e293b"/>
+  <text x="56" y="248" class="box">DISK — full dataset (source of truth)</text>
+  <text x="56" y="268" class="bsub">every row lives here, organized in pages</text>
+  <g fill="#334155" stroke="#64748b">
+    <rect x="56" y="280" width="288" height="16" rx="2"/>
+    <rect x="56" y="302" width="288" height="16" rx="2"/>
+    <rect x="56" y="324" width="200" height="12" rx="2"/>
+  </g>
+  <text x="40" y="366" class="note">Speed is limited by how often reads hit disk.</text>
+
+  <!-- divider -->
+  <line x1="400" y1="56" x2="400" y2="380" stroke="#e2e8f0" stroke-width="1.5"/>
+
+  <!-- RIGHT: in-memory -->
+  <text x="424" y="64" class="panel">In-memory database</text>
+  <text x="424" y="82" class="note">RAM is the source of truth; disk is only a safety net.</text>
+
+  <!-- RAM (all data) -->
+  <rect x="424" y="96" width="336" height="150" rx="8" fill="#059669"/>
+  <text x="440" y="120" class="box">RAM — the ENTIRE dataset</text>
+  <text x="440" y="140" class="bsub">native in-memory structures, no page format</text>
+  <g fill="#34d399" stroke="#a7f3d0">
+    <rect x="440" y="150" width="300" height="16" rx="2"/>
+    <rect x="440" y="172" width="300" height="16" rx="2"/>
+    <rect x="440" y="194" width="300" height="16" rx="2"/>
+    <rect x="440" y="216" width="300" height="16" rx="2"/>
+  </g>
+
+  <!-- persistence arrow -->
+  <path d="M 592 246 L 592 278" stroke="#64748b" stroke-width="2" stroke-dasharray="5,4"/><polygon points="587,274 592,284 597,274" fill="#64748b"/>
+  <text x="602" y="268" class="note">writes streamed for durability →</text>
+
+  <!-- disk = only persistence -->
+  <rect x="424" y="288" width="336" height="72" rx="8" fill="#f1f5f9" stroke="#cbd5e1"/>
+  <text x="440" y="312" class="tag">DISK — snapshots &amp; operation log only</text>
+  <text x="440" y="332" class="note">used to rebuild RAM after a restart —</text>
+  <text x="440" y="348" class="note">NOT read during normal operation.</text>
+
+  <!-- bottom takeaway -->
+  <rect x="40" y="392" width="720" height="58" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="56" y="416" class="tag">Key distinction</text>
+  <text x="56" y="436" class="note">A disk-based DB <tspan font-weight="700">caches</tspan> some data in RAM. An in-memory DB <tspan font-weight="700">keeps all working data in RAM</tspan> and touches disk only to survive restarts.</text>
+</svg>

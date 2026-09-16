@@ -1,0 +1,58 @@
+<svg viewBox="0 0 800 430" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .h { font-size: 12px; font-weight: 700; fill: #ffffff; }
+    .box { font-size: 10px; font-weight: 700; fill: #ffffff; }
+    .note { font-size: 10px; fill: #64748b; }
+    .lbl { font-size: 10px; font-weight: 700; fill: #1e293b; }
+  </style>
+
+  <text x="24" y="30" class="title">A classic fan-out choice: on write vs. on read (feeds/notifications)</text>
+
+  <!-- WRITE -->
+  <rect x="24" y="48" width="370" height="200" rx="10" fill="#eff6ff" stroke="#bfdbfe"/>
+  <rect x="24" y="48" width="370" height="32" rx="10" fill="#2563eb"/>
+  <text x="40" y="70" class="h">Fan-out on write (push)</text>
+
+  <rect x="44" y="98" width="70" height="30" rx="5" fill="#2563eb"/><text x="79" y="118" text-anchor="middle" class="box">user posts</text>
+  <rect x="200" y="90" width="80" height="20" rx="3" fill="#059669"/><text x="240" y="105" text-anchor="middle" class="box">follower feed</text>
+  <rect x="200" y="116" width="80" height="20" rx="3" fill="#059669"/><text x="240" y="131" text-anchor="middle" class="box">follower feed</text>
+  <rect x="200" y="142" width="80" height="20" rx="3" fill="#059669"/><text x="240" y="157" text-anchor="middle" class="box">follower feed</text>
+  <line x1="114" y1="110" x2="198" y2="100" stroke="#2563eb" stroke-width="1.6" marker-end="url(#b)"/>
+  <line x1="114" y1="113" x2="198" y2="126" stroke="#2563eb" stroke-width="1.6" marker-end="url(#b)"/>
+  <line x1="114" y1="116" x2="198" y2="152" stroke="#2563eb" stroke-width="1.6" marker-end="url(#b)"/>
+
+  <text x="40" y="188" class="note">Write the post into every follower's feed NOW.</text>
+  <text x="40" y="206" class="note" fill="#059669">✓ Reads are instant (feed pre-built).</text>
+  <text x="40" y="224" class="note" fill="#dc2626">✗ A celebrity with 50M followers = 50M writes.</text>
+
+  <!-- READ -->
+  <rect x="406" y="48" width="370" height="200" rx="10" fill="#f0fdf4" stroke="#bbf7d0"/>
+  <rect x="406" y="48" width="370" height="32" rx="10" fill="#059669"/>
+  <text x="422" y="70" class="h">Fan-out on read (pull)</text>
+
+  <rect x="426" y="98" width="70" height="30" rx="5" fill="#2563eb"/><text x="461" y="118" text-anchor="middle" class="box">user posts</text>
+  <rect x="540" y="104" width="90" height="22" rx="4" fill="#d97706"/><text x="585" y="120" text-anchor="middle" class="box">stored once</text>
+  <line x1="496" y1="113" x2="538" y2="114" stroke="#059669" stroke-width="1.6" marker-end="url(#g)"/>
+
+  <rect x="426" y="150" width="120" height="22" rx="4" fill="#64748b"/><text x="486" y="166" text-anchor="middle" class="box">reader opens feed</text>
+  <text x="556" y="166" class="note">→ gather posts from</text>
+  <text x="556" y="180" class="note">everyone they follow</text>
+
+  <text x="422" y="206" class="note" fill="#059669">✓ Writes are cheap (store once).</text>
+  <text x="422" y="224" class="note" fill="#dc2626">✗ Reads are expensive (assemble every time).</text>
+
+  <!-- HYBRID -->
+  <rect x="24" y="264" width="752" height="150" rx="10" fill="#fffbeb" stroke="#fde68a"/>
+  <text x="40" y="288" class="lbl">The hybrid (what large systems actually do)</text>
+  <text x="40" y="312" class="note">• <tspan font-weight="700">Normal users</tspan> → fan-out on write: push each post into followers' feeds so their reads are instant.</text>
+  <text x="40" y="332" class="note">• <tspan font-weight="700">Celebrities / huge accounts</tspan> → fan-out on read: don't push to millions; readers merge celebrity posts in at read time.</text>
+  <text x="40" y="352" class="note">• At read, a user's feed = their pre-built feed (normal follows) + a live pull of the few high-fan-out accounts they follow.</text>
+  <text x="40" y="378" class="note">This is pub/sub fan-out with a cost model attached — the "who receives the copy, and when" decision made pragmatically.</text>
+  <text x="40" y="398" class="note">The same push-vs-pull tension appears in notifications, chat feeds, and any large real-time distribution problem.</text>
+
+  <defs>
+    <marker id="b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#2563eb"/></marker>
+    <marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#059669"/></marker>
+  </defs>
+</svg>

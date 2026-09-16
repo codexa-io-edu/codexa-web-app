@@ -1,0 +1,38 @@
+<svg viewBox="0 0 760 440" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .actor { font-size: 13px; font-weight: 700; fill: #1e293b; }
+    .msg { font-size: 11px; font-weight: 700; fill: #1e293b; }
+    .note { font-size: 10.5px; fill: #64748b; }
+    .phase { font-size: 12px; font-weight: 700; fill: #059669; }
+    .bad { font-size: 10.5px; font-weight: 700; fill: #dc2626; }
+    .ok { font-size: 10.5px; font-weight: 700; fill: #059669; }
+  </style>
+
+  <text x="24" y="30" class="title">UDP: fire-and-forget — and why that's right for real-time</text>
+
+  <!-- actors -->
+  <text x="110" y="66" class="actor">Sender</text>
+  <text x="600" y="66" class="actor">Receiver</text>
+  <line x1="130" y1="74" x2="130" y2="250" stroke="#cbd5e1" stroke-width="2"/>
+  <line x1="620" y1="74" x2="620" y2="250" stroke="#cbd5e1" stroke-width="2"/>
+
+  <text x="24" y="94" class="phase">No handshake — the first packet is data. No ACKs, no retransmits.</text>
+
+  <line x1="130" y1="112" x2="620" y2="122" stroke="#059669" stroke-width="2"/><polygon points="614,116 624,123 612,127" fill="#059669"/>
+  <text x="250" y="110" class="msg">datagram: video frame 1</text>
+  <line x1="130" y1="146" x2="380" y2="153" stroke="#dc2626" stroke-width="2" stroke-dasharray="4,3"/>
+  <text x="250" y="144" class="msg" fill="#dc2626">frame 2  ✗ lost — and simply gone</text>
+  <line x1="130" y1="180" x2="620" y2="190" stroke="#059669" stroke-width="2"/><polygon points="614,184 624,191 612,195" fill="#059669"/>
+  <text x="250" y="178" class="msg">datagram: video frame 3</text>
+  <text x="150" y="222" class="note">The sender never waits for confirmation and never resends. Frame 2 is lost; frames keep flowing.</text>
+
+  <!-- the point -->
+  <rect x="24" y="266" width="712" height="158" rx="8" fill="#f0fdf4" stroke="#86efac"/>
+  <text x="40" y="290" class="phase">Why losing a packet beats waiting for it (in real-time)</text>
+  <text x="40" y="314" class="note">In a live video call, a dropped frame that's 200 ms old is <tspan font-weight="700">useless</tspan> — the moment has passed. Retransmitting it</text>
+  <text x="40" y="332" class="note">would only delay everything after it. That stall-to-wait behavior is <tspan font-weight="700">head-of-line blocking</tspan>, and it's exactly what TCP does.</text>
+  <text x="40" y="356" class="ok">UDP skips the lost frame and moves on → the call stays smooth (a tiny glitch beats a freeze).</text>
+  <text x="40" y="380" class="note">Same logic for online games (only the newest position matters) and live audio. Speed &amp; freshness &gt; perfect delivery.</text>
+  <text x="40" y="404" class="note">Need reliability <tspan font-weight="700">and</tspan> UDP's speed? Modern protocols like QUIC add selective reliability on top of UDP (see Web Communication Protocols).</text>
+</svg>

@@ -1,0 +1,69 @@
+<svg viewBox="0 0 800 460" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .box { font-size: 12px; font-weight: 700; fill: #ffffff; }
+    .lbl { font-size: 11px; font-weight: 700; fill: #1e293b; }
+    .seg { font-size: 9px; font-weight: 700; fill: #ffffff; }
+    .note { font-size: 10.5px; fill: #64748b; }
+    .q { font-size: 10px; font-weight: 700; fill: #1e293b; }
+  </style>
+
+  <text x="24" y="30" class="title">Adaptive Bitrate (ABR) streaming: HLS / DASH over a CDN</text>
+
+  <!-- source -->
+  <rect x="24" y="60" width="120" height="46" rx="8" fill="#1e293b"/><text x="42" y="84" class="box">Source video</text><text x="40" y="99" class="note" fill="#cbd5e1">encode once →</text>
+
+  <!-- bitrate ladder -->
+  <text x="170" y="56" class="lbl">Encoded at several qualities (a "bitrate ladder"), each split into small chunks:</text>
+  <!-- 1080p -->
+  <text x="170" y="88" class="q">1080p</text>
+  <rect x="230" y="76" width="40" height="18" rx="3" fill="#2563eb"/><text x="240" y="89" class="seg">c1</text>
+  <rect x="274" y="76" width="40" height="18" rx="3" fill="#2563eb"/><text x="284" y="89" class="seg">c2</text>
+  <rect x="318" y="76" width="40" height="18" rx="3" fill="#2563eb"/><text x="328" y="89" class="seg">c3</text>
+  <rect x="362" y="76" width="40" height="18" rx="3" fill="#2563eb"/><text x="372" y="89" class="seg">c4</text>
+  <!-- 720p -->
+  <text x="170" y="116" class="q">720p</text>
+  <rect x="230" y="104" width="40" height="18" rx="3" fill="#3b82f6"/><text x="240" y="117" class="seg">c1</text>
+  <rect x="274" y="104" width="40" height="18" rx="3" fill="#3b82f6"/><text x="284" y="117" class="seg">c2</text>
+  <rect x="318" y="104" width="40" height="18" rx="3" fill="#3b82f6"/><text x="328" y="117" class="seg">c3</text>
+  <rect x="362" y="104" width="40" height="18" rx="3" fill="#3b82f6"/><text x="372" y="117" class="seg">c4</text>
+  <!-- 480p -->
+  <text x="170" y="144" class="q">480p</text>
+  <rect x="230" y="132" width="40" height="18" rx="3" fill="#60a5fa"/><text x="240" y="145" class="seg">c1</text>
+  <rect x="274" y="132" width="40" height="18" rx="3" fill="#60a5fa"/><text x="284" y="145" class="seg">c2</text>
+  <rect x="318" y="132" width="40" height="18" rx="3" fill="#60a5fa"/><text x="328" y="145" class="seg">c3</text>
+  <rect x="362" y="132" width="40" height="18" rx="3" fill="#60a5fa"/><text x="372" y="145" class="seg">c4</text>
+
+  <text x="420" y="100" class="note">+ a manifest</text>
+  <text x="420" y="115" class="note">(playlist) listing</text>
+  <text x="420" y="130" class="note">all chunks/qualities</text>
+
+  <line x1="144" y1="83" x2="226" y2="83" stroke="#94a3b8" stroke-width="2"/><polygon points="222,78 232,83 222,88" fill="#94a3b8"/>
+
+  <!-- CDN -->
+  <rect x="530" y="90" width="120" height="46" rx="8" fill="#059669"/><text x="546" y="114" class="box">CDN edge</text><text x="540" y="129" class="note" fill="#dcfce7">chunks = cacheable files</text>
+  <line x1="500" y1="113" x2="528" y2="113" stroke="#94a3b8" stroke-width="2"/><polygon points="524,108 534,113 524,118" fill="#94a3b8"/>
+
+  <!-- player adapting -->
+  <rect x="24" y="200" width="752" height="180" rx="10" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="40" y="224" class="lbl">The player downloads chunks over HTTP and switches quality per chunk based on current bandwidth</text>
+
+  <rect x="630" y="240" width="120" height="60" rx="8" fill="#1e293b"/><text x="656" y="266" class="box">Player</text><text x="644" y="284" class="note" fill="#cbd5e1">measures bandwidth</text>
+
+  <!-- good network -->
+  <rect x="60" y="248" width="150" height="26" rx="4" fill="#dcfce7" stroke="#059669"/><text x="72" y="266" class="q" fill="#065f46">good network → grab 1080p</text>
+  <!-- drop -->
+  <rect x="60" y="286" width="180" height="26" rx="4" fill="#fef3c7" stroke="#d97706"/><text x="72" y="304" class="q" fill="#92400e">bandwidth drops → switch to 480p</text>
+  <!-- recover -->
+  <rect x="60" y="324" width="180" height="26" rx="4" fill="#dbeafe" stroke="#2563eb"/><text x="72" y="342" class="q" fill="#1e40af">recovers → back up to 720p/1080p</text>
+
+  <path d="M 240 261 L 628 261" stroke="#059669" stroke-width="2" stroke-dasharray="4,3"/>
+  <path d="M 240 299 L 628 285" stroke="#d97706" stroke-width="2" stroke-dasharray="4,3"/>
+  <path d="M 240 337 L 628 295" stroke="#2563eb" stroke-width="2" stroke-dasharray="4,3"/>
+
+  <text x="40" y="372" class="note">Adapting per chunk avoids stalls: quality dips instead of the video freezing. A small buffer absorbs brief dips.</text>
+
+  <text x="24" y="410" class="note">Why HTTP + chunks? The chunks are ordinary cacheable files, so the whole thing rides on existing <tspan font-weight="700">CDN</tspan> infrastructure and scales to millions.</text>
+  <text x="24" y="430" class="note">HLS (Apple) and MPEG-DASH are the two standard ABR protocols. VOD pre-encodes the ladder; live encodes it on the fly.</text>
+  <text x="24" y="450" class="note">Tradeoff: standard HLS/DASH adds several seconds of latency (great for scale, too slow for interactive — see the latency spectrum).</text>
+</svg>

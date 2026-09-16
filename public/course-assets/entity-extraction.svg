@@ -1,0 +1,59 @@
+<svg viewBox="0 0 820 430" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <rect width="820" height="430" fill="#f8fafc"/>
+  <text x="410" y="30" text-anchor="middle" font-size="20" font-weight="700" fill="#0f172a">From Requirements to Entities: The Extraction Process</text>
+  <text x="410" y="52" text-anchor="middle" font-size="12.5" fill="#64748b">Extract nouns → classify each → identify relationships between them</text>
+
+  <defs><marker id="ex_a" markerWidth="11" markerHeight="11" refX="8" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#475569"/></marker></defs>
+
+  <!-- Requirements text -->
+  <rect x="30" y="74" width="360" height="80" rx="8" fill="#0f172a"/>
+  <text x="40" y="95" font-size="9.5" fill="#94a3b8" font-style="italic">"A customer can place an order for one or</text>
+  <text x="40" y="111" font-size="9.5" fill="#94a3b8" font-style="italic">more products. Each order has a total price.</text>
+  <text x="40" y="127" font-size="9.5" fill="#94a3b8" font-style="italic">A payment is associated with an order.</text>
+  <text x="40" y="143" font-size="9.5" fill="#94a3b8" font-style="italic">Products have a name, SKU, and price."</text>
+
+  <!-- Arrow -->
+  <line x1="210" y1="155" x2="210" y2="178" stroke="#475569" stroke-width="1.8" marker-end="url(#ex_a)"/>
+  <text x="228" y="170" font-size="9.5" fill="#64748b">extract nouns</text>
+
+  <!-- Nouns extracted -->
+  <rect x="30" y="180" width="360" height="44" rx="8" fill="#fef9c3" stroke="#ca8a04" stroke-width="1.6"/>
+  <text x="210" y="196" text-anchor="middle" font-size="10" font-weight="700" fill="#a16207">Candidate nouns</text>
+  <text x="210" y="214" text-anchor="middle" font-size="10" fill="#334155">Customer · Order · Product · Payment · Price · Name · SKU</text>
+
+  <!-- Arrow to classification -->
+  <line x1="392" y1="202" x2="424" y2="202" stroke="#475569" stroke-width="1.8" marker-end="url(#ex_a)"/>
+  <text x="396" y="194" font-size="9" fill="#64748b">classify</text>
+
+  <!-- Classification boxes -->
+  <rect x="426" y="74" width="368" height="330" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.4"/>
+  <text x="610" y="96" text-anchor="middle" font-size="12" font-weight="700" fill="#334155">Classification</text>
+
+  <rect x="440" y="106" width="340" height="68" rx="7" fill="#eff6ff" stroke="#2563eb" stroke-width="1.6"/>
+  <text x="450" y="124" font-size="10.5" font-weight="700" fill="#1d4ed8">Entity (has identity, mutable lifecycle)</text>
+  <text x="450" y="144" font-size="9.5" fill="#334155">Customer — has an id, profile changes over time</text>
+  <text x="450" y="160" font-size="9.5" fill="#334155">Order — has an id, moves through statuses</text>
+
+  <rect x="440" y="182" width="340" height="68" rx="7" fill="#f0fdf4" stroke="#059669" stroke-width="1.6"/>
+  <text x="450" y="200" font-size="10.5" font-weight="700" fill="#047857">Value Object (defined by value, immutable)</text>
+  <text x="450" y="220" font-size="9.5" fill="#334155">Price / Money — amount + currency, no identity</text>
+  <text x="450" y="236" font-size="9.5" fill="#334155">SKU — a string code, defined entirely by its value</text>
+
+  <rect x="440" y="258" width="340" height="52" rx="7" fill="#fff7ed" stroke="#d97706" stroke-width="1.6"/>
+  <text x="450" y="276" font-size="10.5" font-weight="700" fill="#b45309">Domain Service (stateless operation)</text>
+  <text x="450" y="294" font-size="9.5" fill="#334155">PricingService — calculates totals across entities</text>
+
+  <rect x="440" y="318" width="340" height="52" rx="7" fill="#faf5ff" stroke="#7c3aed" stroke-width="1.6"/>
+  <text x="450" y="336" font-size="10.5" font-weight="700" fill="#6d28d9">Noun discarded (redundant / attribute)</text>
+  <text x="450" y="354" font-size="9.5" fill="#334155">Name — attribute of Product, not its own class</text>
+
+  <!-- Ask questions box -->
+  <rect x="30" y="254" width="360" height="150" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="210" y="274" text-anchor="middle" font-size="11" font-weight="700" fill="#334155">Classify with these questions</text>
+  <text x="44" y="296" font-size="9.5" fill="#334155">&#8226; Does it need to be uniquely tracked? → Entity</text>
+  <text x="44" y="314" font-size="9.5" fill="#334155">&#8226; Is it defined entirely by its value? → Value Object</text>
+  <text x="44" y="332" font-size="9.5" fill="#334155">&#8226; Is it a calculation across multiple entities? → Service</text>
+  <text x="44" y="350" font-size="9.5" fill="#334155">&#8226; Is it just a primitive attribute? → Discard as class</text>
+  <text x="44" y="374" font-size="9" fill="#64748b" font-style="italic">When in doubt: can two things be the same</text>
+  <text x="44" y="390" font-size="9" fill="#64748b" font-style="italic">"thing" while having different values? → Entity</text>
+</svg>

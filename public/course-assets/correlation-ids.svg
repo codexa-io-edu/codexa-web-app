@@ -1,0 +1,55 @@
+<svg viewBox="0 0 800 380" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .box { font-size: 10.5px; font-weight: 700; fill: #ffffff; }
+    .id { font-size: 9px; font-family: 'Consolas','Courier New',monospace; fill: #b45309; font-weight: 700; }
+    .log { font-size: 8.5px; font-family: 'Consolas','Courier New',monospace; fill: #334155; }
+    .note { font-size: 9.5px; fill: #64748b; }
+    .lbl { font-size: 10px; font-weight: 700; fill: #1e293b; }
+  </style>
+
+  <text x="24" y="30" class="title">Correlation IDs: stitch one request's logs across services</text>
+
+  <!-- client + gateway -->
+  <rect x="24" y="66" width="90" height="40" rx="6" fill="#64748b"/><text x="69" y="91" text-anchor="middle" class="box">Client</text>
+  <rect x="150" y="66" width="110" height="40" rx="6" fill="#7c3aed"/><text x="205" y="86" text-anchor="middle" class="box">API Gateway</text><text x="205" y="99" text-anchor="middle" class="note" fill="#ede9fe">assigns trace_id</text>
+  <line x1="114" y1="86" x2="148" y2="86" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#a)"/>
+  <rect x="150" y="112" width="200" height="20" rx="3" fill="#fef3c7"/><text x="158" y="126" class="id">trace_id = req-abc123  (generated)</text>
+
+  <!-- services chain -->
+  <rect x="60" y="160" width="120" height="40" rx="6" fill="#2563eb"/><text x="120" y="185" text-anchor="middle" class="box">Service A</text>
+  <rect x="330" y="160" width="120" height="40" rx="6" fill="#2563eb"/><text x="390" y="185" text-anchor="middle" class="box">Service B</text>
+  <rect x="600" y="160" width="120" height="40" rx="6" fill="#2563eb"/><text x="660" y="185" text-anchor="middle" class="box">Service C</text>
+
+  <line x1="205" y1="106" x2="130" y2="158" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#a)"/>
+  <line x1="180" y1="180" x2="328" y2="180" stroke="#b45309" stroke-width="1.8" marker-end="url(#o)"/><text x="210" y="173" class="id">+trace_id</text>
+  <line x1="450" y1="180" x2="598" y2="180" stroke="#b45309" stroke-width="1.8" marker-end="url(#o)"/><text x="480" y="173" class="id">+trace_id</text>
+
+  <!-- log lines -->
+  <rect x="40" y="212" width="200" height="46" rx="5" fill="#eff6ff" stroke="#bfdbfe"/>
+  <text x="48" y="230" class="log">A: trace=req-abc123</text>
+  <text x="48" y="244" class="log">"received order"</text>
+  <rect x="310" y="212" width="200" height="46" rx="5" fill="#eff6ff" stroke="#bfdbfe"/>
+  <text x="318" y="230" class="log">B: trace=req-abc123</text>
+  <text x="318" y="244" class="log">"reserved stock"</text>
+  <rect x="580" y="212" width="200" height="46" rx="5" fill="#fef2f2" stroke="#fecaca"/>
+  <text x="588" y="230" class="log">C: trace=req-abc123</text>
+  <text x="588" y="244" class="log" fill="#dc2626">ERROR "charge failed"</text>
+
+  <line x1="120" y1="200" x2="120" y2="210" stroke="#94a3b8" stroke-width="1.4"/>
+  <line x1="390" y1="200" x2="390" y2="210" stroke="#94a3b8" stroke-width="1.4"/>
+  <line x1="660" y1="200" x2="660" y2="210" stroke="#94a3b8" stroke-width="1.4"/>
+
+  <!-- payoff -->
+  <rect x="24" y="284" width="752" height="80" rx="8" fill="#f0fdf4" stroke="#bbf7d0"/>
+  <text x="40" y="306" class="lbl">The payoff — one query reconstructs the whole request</text>
+  <rect x="40" y="316" width="360" height="22" rx="3" fill="#dcfce7"/><text x="48" y="331" class="log" fill="#065f46">search: trace_id = "req-abc123"</text>
+  <text x="420" y="332" class="note">→ returns every log line from A, B, and C in order — so you</text>
+  <text x="40" y="352" class="note">see the failure happened at C, in the context of this exact user request. The ID is generated once at the edge</text>
+  <text x="40" y="366" class="note">and propagated on every downstream call (via a header).</text>
+
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#94a3b8"/></marker>
+    <marker id="o" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#b45309"/></marker>
+  </defs>
+</svg>

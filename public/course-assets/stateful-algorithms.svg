@@ -1,0 +1,47 @@
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .name { font-size: 13px; font-weight: 700; fill: #1e293b; }
+    .box { font-size: 12px; font-weight: 700; fill: #ffffff; }
+    .metric { font-size: 11px; font-weight: 700; fill: #ffffff; }
+    .note { font-size: 10.5px; fill: #64748b; }
+    .pick { font-size: 10px; font-weight: 700; fill: #059669; }
+  </style>
+
+  <text x="24" y="30" class="title">Stateful (load-aware) algorithms: watch the servers, then decide</text>
+
+  <!-- Least Connections -->
+  <rect x="24" y="50" width="370" height="300" rx="10" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="40" y="76" class="name">Least Connections</text>
+  <text x="40" y="96" class="note">route the new request to the server with</text>
+  <text x="40" y="112" class="note">the fewest active connections right now</text>
+
+  <rect x="60" y="130" width="120" height="44" rx="8" fill="#2563eb"/><text x="120" y="150" text-anchor="middle" class="box">Server 1</text><text x="120" y="167" text-anchor="middle" class="metric">2 active</text>
+  <rect x="60" y="186" width="120" height="44" rx="8" fill="#dc2626"/><text x="120" y="206" text-anchor="middle" class="box">Server 2</text><text x="120" y="223" text-anchor="middle" class="metric">5 active</text>
+  <rect x="60" y="242" width="120" height="44" rx="8" fill="#059669"/><text x="120" y="262" text-anchor="middle" class="box">Server 3</text><text x="120" y="279" text-anchor="middle" class="metric">1 active ◄</text>
+
+  <text x="210" y="255" class="pick">new request</text>
+  <text x="210" y="270" class="pick">→ Server 3</text>
+  <line x1="290" y1="264" x2="185" y2="264" stroke="#059669" stroke-width="2" marker-end="url(#p)"/>
+
+  <text x="40" y="316" class="note">Best when requests vary in cost or connections</text>
+  <text x="40" y="332" class="note">are long-lived (uploads, streaming, WebSockets).</text>
+
+  <!-- Least Response Time -->
+  <rect x="406" y="50" width="370" height="300" rx="10" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="422" y="76" class="name">Least Response Time / Least Latency</text>
+  <text x="422" y="96" class="note">pick the server that is currently answering</text>
+  <text x="422" y="112" class="note">fastest (lowest measured latency)</text>
+
+  <rect x="442" y="130" width="120" height="44" rx="8" fill="#dc2626"/><text x="502" y="150" text-anchor="middle" class="box">Server 1</text><text x="502" y="167" text-anchor="middle" class="metric">120 ms</text>
+  <rect x="442" y="186" width="120" height="44" rx="8" fill="#059669"/><text x="502" y="206" text-anchor="middle" class="box">Server 2</text><text x="502" y="223" text-anchor="middle" class="metric">18 ms ◄</text>
+  <rect x="442" y="242" width="120" height="44" rx="8" fill="#2563eb"/><text x="502" y="262" text-anchor="middle" class="box">Server 3</text><text x="502" y="279" text-anchor="middle" class="metric">45 ms</text>
+
+  <text x="592" y="199" class="pick">→ Server 2</text>
+  <line x1="672" y1="208" x2="567" y2="208" stroke="#059669" stroke-width="2" marker-end="url(#p)"/>
+
+  <text x="422" y="316" class="note">Reacts to slow/overloaded servers automatically.</text>
+  <text x="422" y="332" class="note">Related: least bandwidth, resource (CPU/RAM) based.</text>
+
+  <defs><marker id="p" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#059669"/></marker></defs>
+</svg>

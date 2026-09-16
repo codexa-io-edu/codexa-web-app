@@ -1,0 +1,63 @@
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .h { font-size: 13px; font-weight: 700; fill: #ffffff; }
+    .box { font-size: 10px; font-weight: 700; fill: #ffffff; }
+    .note { font-size: 10px; fill: #64748b; }
+    .good { font-size: 10px; font-weight: 700; fill: #059669; }
+    .bad { font-size: 10px; font-weight: 700; fill: #dc2626; }
+  </style>
+
+  <text x="24" y="30" class="title">Data: one shared database vs a database per service</text>
+
+  <!-- MONOLITH shared DB -->
+  <rect x="24" y="48" width="360" height="330" rx="10" fill="#eff6ff" stroke="#bfdbfe"/>
+  <rect x="24" y="48" width="360" height="34" rx="10" fill="#2563eb"/>
+  <text x="44" y="71" class="h">Monolith — shared database</text>
+
+  <rect x="60" y="104" width="80" height="30" rx="5" fill="#60a5fa"/><text x="100" y="124" text-anchor="middle" class="box">Orders</text>
+  <rect x="160" y="104" width="80" height="30" rx="5" fill="#60a5fa"/><text x="200" y="124" text-anchor="middle" class="box">Users</text>
+  <rect x="260" y="104" width="90" height="30" rx="5" fill="#60a5fa"/><text x="305" y="124" text-anchor="middle" class="box">Payments</text>
+
+  <rect x="120" y="200" width="170" height="50" rx="8" fill="#2563eb"/><text x="205" y="230" text-anchor="middle" class="box">One database</text>
+  <line x1="100" y1="134" x2="180" y2="198" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#a)"/>
+  <line x1="200" y1="134" x2="205" y2="198" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#a)"/>
+  <line x1="305" y1="134" x2="230" y2="198" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#a)"/>
+
+  <text x="60" y="288" class="good">✓ Cross-module JOINs are trivial</text>
+  <text x="60" y="310" class="good">✓ ACID transactions across all data</text>
+  <text x="60" y="332" class="bad">✗ Shared schema couples modules tightly</text>
+  <text x="60" y="354" class="bad">✗ One DB is a scaling &amp; failure bottleneck</text>
+
+  <!-- MICROSERVICES per-service DB -->
+  <rect x="416" y="48" width="360" height="330" rx="10" fill="#f0fdf4" stroke="#bbf7d0"/>
+  <rect x="416" y="48" width="360" height="34" rx="10" fill="#059669"/>
+  <text x="436" y="71" class="h">Microservices — database per service</text>
+
+  <rect x="440" y="104" width="90" height="30" rx="5" fill="#059669"/><text x="485" y="124" text-anchor="middle" class="box">Orders</text>
+  <rect x="558" y="104" width="90" height="30" rx="5" fill="#059669"/><text x="603" y="124" text-anchor="middle" class="box">Users</text>
+  <rect x="676" y="104" width="84" height="30" rx="5" fill="#059669"/><text x="718" y="124" text-anchor="middle" class="box">Payments</text>
+
+  <rect x="448" y="164" width="74" height="30" rx="5" fill="#34d399"/><text x="485" y="184" text-anchor="middle" class="box">DB</text>
+  <rect x="566" y="164" width="74" height="30" rx="5" fill="#34d399"/><text x="603" y="184" text-anchor="middle" class="box">DB</text>
+  <rect x="681" y="164" width="74" height="30" rx="5" fill="#34d399"/><text x="718" y="184" text-anchor="middle" class="box">DB</text>
+  <line x1="485" y1="134" x2="485" y2="162" stroke="#94a3b8" stroke-width="1.4"/>
+  <line x1="603" y1="134" x2="603" y2="162" stroke="#94a3b8" stroke-width="1.4"/>
+  <line x1="718" y1="134" x2="718" y2="162" stroke="#94a3b8" stroke-width="1.4"/>
+
+  <!-- cross-service via API -->
+  <line x1="530" y1="119" x2="556" y2="119" stroke="#7c3aed" stroke-width="1.6" stroke-dasharray="4,3" marker-end="url(#p)"/>
+  <text x="470" y="220" class="note">need Users' data? call the Users API — never</text>
+  <text x="470" y="234" class="note">reach into its DB directly.</text>
+
+  <text x="436" y="270" class="good">✓ Services are decoupled; own their schema</text>
+  <text x="436" y="292" class="good">✓ Each DB scaled/chosen independently (polyglot)</text>
+  <text x="436" y="314" class="bad">✗ No cross-service JOINs</text>
+  <text x="436" y="336" class="bad">✗ Consistency across services = events / saga</text>
+  <text x="436" y="356" class="note">(eventual consistency — see Consistency step)</text>
+
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#94a3b8"/></marker>
+    <marker id="p" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#7c3aed"/></marker>
+  </defs>
+</svg>

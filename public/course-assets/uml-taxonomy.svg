@@ -1,0 +1,59 @@
+<svg viewBox="0 0 820 470" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <rect width="820" height="470" fill="#f8fafc"/>
+  <text x="410" y="34" text-anchor="middle" font-size="22" font-weight="700" fill="#0f172a">The Two Families of UML Diagrams</text>
+  <text x="410" y="58" text-anchor="middle" font-size="13" fill="#64748b">Structural = what the system IS (its parts). Behavioral = what the system DOES (over time).</text>
+
+  <!-- root -->
+  <rect x="345" y="76" width="130" height="40" rx="8" fill="#334155"/>
+  <text x="410" y="101" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">UML</text>
+
+  <defs><marker id="um_a" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto"><path d="M0,0 L7,4 L0,8 Z" fill="#94a3b8"/></marker></defs>
+  <line x1="410" y1="116" x2="230" y2="140" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#um_a)"/>
+  <line x1="410" y1="116" x2="590" y2="140" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#um_a)"/>
+
+  <!-- Structural -->
+  <rect x="40" y="144" width="360" height="300" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="220" y="170" text-anchor="middle" font-size="15" font-weight="700" fill="#1d4ed8">Structural (static)</text>
+  <text x="220" y="188" text-anchor="middle" font-size="10" fill="#64748b">the building's blueprint</text>
+
+  <rect x="58" y="200" width="324" height="52" rx="7" fill="#ffffff" stroke="#93c5fd"/>
+  <text x="70" y="220" font-size="11.5" font-weight="700" fill="#1e3a8a">Class diagram &#9733;</text>
+  <text x="70" y="238" font-size="9.5" fill="#334155">classes, fields, methods, relationships — the LLD workhorse</text>
+
+  <rect x="58" y="258" width="324" height="44" rx="7" fill="#ffffff" stroke="#93c5fd"/>
+  <text x="70" y="277" font-size="11.5" font-weight="700" fill="#1e3a8a">Object diagram</text>
+  <text x="70" y="293" font-size="9.5" fill="#334155">a snapshot of instances at one moment</text>
+
+  <rect x="58" y="308" width="324" height="44" rx="7" fill="#ffffff" stroke="#93c5fd"/>
+  <text x="70" y="327" font-size="11.5" font-weight="700" fill="#1e3a8a">Component diagram</text>
+  <text x="70" y="343" font-size="9.5" fill="#334155">modules/services and their interfaces</text>
+
+  <rect x="58" y="358" width="324" height="44" rx="7" fill="#ffffff" stroke="#93c5fd"/>
+  <text x="70" y="377" font-size="11.5" font-weight="700" fill="#1e3a8a">Deployment diagram</text>
+  <text x="70" y="393" font-size="9.5" fill="#334155">hardware nodes, where artifacts run</text>
+
+  <text x="220" y="424" text-anchor="middle" font-size="9.5" fill="#1d4ed8">(also: package, profile, composite-structure)</text>
+
+  <!-- Behavioral -->
+  <rect x="420" y="144" width="360" height="300" rx="12" fill="#f0fdf4" stroke="#059669" stroke-width="2"/>
+  <text x="600" y="170" text-anchor="middle" font-size="15" font-weight="700" fill="#047857">Behavioral (dynamic)</text>
+  <text x="600" y="188" text-anchor="middle" font-size="10" fill="#64748b">the building in use, over time</text>
+
+  <rect x="438" y="200" width="324" height="52" rx="7" fill="#ffffff" stroke="#6ee7b7"/>
+  <text x="450" y="220" font-size="11.5" font-weight="700" fill="#065f46">Sequence diagram &#9733;</text>
+  <text x="450" y="238" font-size="9.5" fill="#334155">messages between objects, in time order</text>
+
+  <rect x="438" y="258" width="324" height="44" rx="7" fill="#ffffff" stroke="#6ee7b7"/>
+  <text x="450" y="277" font-size="11.5" font-weight="700" fill="#065f46">Activity diagram &#9733;</text>
+  <text x="450" y="293" font-size="9.5" fill="#334155">workflow / control flow (a flowchart++)</text>
+
+  <rect x="438" y="308" width="324" height="44" rx="7" fill="#ffffff" stroke="#6ee7b7"/>
+  <text x="450" y="327" font-size="11.5" font-weight="700" fill="#065f46">State machine diagram</text>
+  <text x="450" y="343" font-size="9.5" fill="#334155">states of one object &amp; its transitions</text>
+
+  <rect x="438" y="358" width="324" height="44" rx="7" fill="#ffffff" stroke="#6ee7b7"/>
+  <text x="450" y="377" font-size="11.5" font-weight="700" fill="#065f46">Use case diagram</text>
+  <text x="450" y="393" font-size="9.5" fill="#334155">actors &amp; the goals they pursue</text>
+
+  <text x="600" y="424" text-anchor="middle" font-size="9.5" fill="#047857">(also: communication, timing, interaction overview)</text>
+</svg>

@@ -1,0 +1,33 @@
+<svg viewBox="0 0 780 420" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <rect width="780" height="420" fill="#f8fafc"/>
+  <text x="390" y="38" text-anchor="middle" font-size="22" font-weight="700" fill="#0f172a">Anatomy of a Design Pattern</text>
+  <text x="390" y="63" text-anchor="middle" font-size="13" fill="#64748b">A pattern is a template you adapt &#8212; not code you copy-paste</text>
+
+  <!-- Name -->
+  <rect x="60" y="90" width="660" height="66" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <rect x="72" y="102" width="42" height="42" rx="8" fill="#2563eb"/>
+  <text x="93" y="130" text-anchor="middle" font-size="20" font-weight="700" fill="#ffffff">1</text>
+  <text x="128" y="118" font-size="15" font-weight="700" fill="#1d4ed8">Name</text>
+  <text x="128" y="140" font-size="12.5" fill="#334155">A shared word the whole team understands &#8212; "use a Strategy here" says a lot in 4 words.</text>
+
+  <!-- Problem -->
+  <rect x="60" y="166" width="660" height="66" rx="10" fill="#fff7ed" stroke="#d97706" stroke-width="2"/>
+  <rect x="72" y="178" width="42" height="42" rx="8" fill="#d97706"/>
+  <text x="93" y="206" text-anchor="middle" font-size="20" font-weight="700" fill="#ffffff">2</text>
+  <text x="128" y="194" font-size="15" font-weight="700" fill="#b45309">Problem</text>
+  <text x="128" y="216" font-size="12.5" fill="#334155">The recurring situation &amp; context where the pattern applies &#8212; when to reach for it.</text>
+
+  <!-- Solution -->
+  <rect x="60" y="242" width="660" height="66" rx="10" fill="#f0fdf4" stroke="#059669" stroke-width="2"/>
+  <rect x="72" y="254" width="42" height="42" rx="8" fill="#059669"/>
+  <text x="93" y="282" text-anchor="middle" font-size="20" font-weight="700" fill="#ffffff">3</text>
+  <text x="128" y="270" font-size="15" font-weight="700" fill="#047857">Solution</text>
+  <text x="128" y="292" font-size="12.5" fill="#334155">The general arrangement of classes/objects &#8212; a blueprint, adapted to each concrete case.</text>
+
+  <!-- Consequences -->
+  <rect x="60" y="318" width="660" height="66" rx="10" fill="#fdf4ff" stroke="#c026d3" stroke-width="2"/>
+  <rect x="72" y="330" width="42" height="42" rx="8" fill="#c026d3"/>
+  <text x="93" y="358" text-anchor="middle" font-size="20" font-weight="700" fill="#ffffff">4</text>
+  <text x="128" y="346" font-size="15" font-weight="700" fill="#a21caf">Consequences</text>
+  <text x="128" y="368" font-size="12.5" fill="#334155">The trade-offs &#8212; what you gain and what you pay. Every pattern has a cost, not just benefits.</text>
+</svg>

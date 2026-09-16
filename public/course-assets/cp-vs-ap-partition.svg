@@ -1,0 +1,73 @@
+<svg viewBox="0 0 800 470" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .panel { font-size: 14px; font-weight: 700; fill: #1e293b; }
+    .node { font-size: 12px; font-weight: 700; fill: #ffffff; }
+    .nsub { font-size: 10px; fill: #f1f5f9; }
+    .cli { font-size: 11px; font-weight: 700; fill: #1e293b; }
+    .note { font-size: 11px; fill: #64748b; }
+    .ok { font-size: 11px; font-weight: 700; fill: #059669; }
+    .bad { font-size: 11px; font-weight: 700; fill: #dc2626; }
+  </style>
+
+  <text x="24" y="30" class="title">The choice made concrete: what happens during a partition</text>
+  <text x="24" y="50" class="note">The network between two nodes breaks. Node 1 has the latest value (X=2); Node 2 is now cut off and still has the old value (X=1).</text>
+
+  <!-- ============ CP ============ -->
+  <text x="30" y="84" class="panel" fill="#2563eb">CP — choose Consistency</text>
+
+  <rect x="40" y="98" width="150" height="70" rx="8" fill="#2563eb"/>
+  <text x="66" y="124" class="node">Node 1</text>
+  <text x="60" y="144" class="nsub">X = 2 (latest)</text>
+
+  <rect x="230" y="98" width="150" height="70" rx="8" fill="#64748b"/>
+  <text x="256" y="124" class="node">Node 2</text>
+  <text x="250" y="144" class="nsub">X = 1 (stale, cut off)</text>
+
+  <!-- broken link -->
+  <line x1="190" y1="133" x2="210" y2="133" stroke="#dc2626" stroke-width="3"/>
+  <line x1="220" y1="133" x2="230" y2="133" stroke="#dc2626" stroke-width="3"/>
+  <text x="196" y="120" class="bad">✂</text>
+
+  <!-- client to node2 -->
+  <text x="230" y="200" class="cli">client reads Node 2 →</text>
+  <rect x="230" y="212" width="150" height="30" rx="5" fill="#fee2e2" stroke="#dc2626"/>
+  <text x="244" y="232" class="bad">ERROR / timeout</text>
+  <text x="40" y="270" class="note">Node 2 won't answer with data it can't</text>
+  <text x="40" y="286" class="note">confirm is current, so it <tspan font-weight="700">refuses</tspan>.</text>
+  <text x="40" y="308" class="ok">✓ never returns a wrong value</text>
+  <text x="40" y="326" class="bad">✗ that part of the system is unavailable</text>
+
+  <!-- divider -->
+  <line x1="410" y1="70" x2="410" y2="400" stroke="#e2e8f0" stroke-width="1.5"/>
+
+  <!-- ============ AP ============ -->
+  <text x="430" y="84" class="panel" fill="#059669">AP — choose Availability</text>
+
+  <rect x="440" y="98" width="150" height="70" rx="8" fill="#059669"/>
+  <text x="466" y="124" class="node">Node 1</text>
+  <text x="460" y="144" class="nsub">X = 2 (latest)</text>
+
+  <rect x="630" y="98" width="150" height="70" rx="8" fill="#059669"/>
+  <text x="656" y="124" class="node">Node 2</text>
+  <text x="650" y="144" class="nsub">X = 1 (stale, cut off)</text>
+
+  <line x1="590" y1="133" x2="610" y2="133" stroke="#dc2626" stroke-width="3"/>
+  <line x1="620" y1="133" x2="630" y2="133" stroke="#dc2626" stroke-width="3"/>
+  <text x="596" y="120" class="bad">✂</text>
+
+  <text x="630" y="200" class="cli">client reads Node 2 →</text>
+  <rect x="630" y="212" width="150" height="30" rx="5" fill="#fef3c7" stroke="#d97706"/>
+  <text x="644" y="232" class="note" fill="#92400e">returns X = 1 (stale)</text>
+  <text x="440" y="270" class="note">Node 2 answers with the best it has,</text>
+  <text x="440" y="286" class="note">even though it might be out of date.</text>
+  <text x="440" y="308" class="ok">✓ stays available &amp; responsive</text>
+  <text x="440" y="326" class="bad">✗ may return stale data (fixed on heal)</text>
+
+  <!-- footer -->
+  <rect x="24" y="356" width="752" height="98" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="40" y="380" class="panel" font-size="13">Why "partition tolerance" isn't optional</text>
+  <text x="40" y="402" class="note">Networks <tspan font-weight="700">will</tspan> drop and delay messages — you can't design that away. So a real distributed system must tolerate partitions (P),</text>
+  <text x="40" y="420" class="note">which leaves the genuine decision above: when a partition happens, do you sacrifice <tspan font-weight="700">availability</tspan> (CP) or <tspan font-weight="700">consistency</tspan> (AP)?</text>
+  <text x="40" y="442" class="note">When there's <tspan font-weight="700">no</tspan> partition, a well-built system can be both consistent and available — CAP only forces the trade during a failure.</text>
+</svg>

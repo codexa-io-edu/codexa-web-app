@@ -1,0 +1,64 @@
+<svg viewBox="0 0 780 380" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .hdr { font-size: 11px; font-weight: 700; fill: #ffffff; }
+    .lvl { font-size: 12px; font-weight: 700; fill: #1e293b; }
+    .sub { font-size: 10px; fill: #64748b; }
+    .yes { font-size: 12px; font-weight: 700; fill: #dc2626; }
+    .no  { font-size: 12px; font-weight: 700; fill: #059669; }
+    .note { font-size: 10.5px; fill: #64748b; }
+  </style>
+
+  <text x="24" y="30" class="title">Isolation levels vs. the anomalies they prevent</text>
+  <text x="24" y="50" class="note">"Possible" = the anomaly can still happen. Going down = safer but more locking/contention.</text>
+
+  <!-- header -->
+  <rect x="24" y="66" width="240" height="46" fill="#1e293b"/>
+  <rect x="264" y="66" width="160" height="46" fill="#334155"/>
+  <rect x="424" y="66" width="176" height="46" fill="#334155"/>
+  <rect x="600" y="66" width="156" height="46" fill="#334155"/>
+  <text x="40" y="94" class="hdr">Isolation level</text>
+  <text x="290" y="88" class="hdr">Dirty</text><text x="290" y="104" class="hdr">read</text>
+  <text x="450" y="88" class="hdr">Non-repeatable</text><text x="450" y="104" class="hdr">read</text>
+  <text x="628" y="88" class="hdr">Phantom</text><text x="628" y="104" class="hdr">read</text>
+
+  <!-- Read Uncommitted -->
+  <rect x="24" y="112" width="732" height="56" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="40" y="138" class="lvl">Read Uncommitted</text>
+  <text x="40" y="156" class="sub">lowest — rarely used</text>
+  <text x="304" y="146" class="yes">Possible</text>
+  <text x="470" y="146" class="yes">Possible</text>
+  <text x="642" y="146" class="yes">Possible</text>
+
+  <!-- Read Committed -->
+  <rect x="24" y="168" width="732" height="56" fill="#ffffff" stroke="#e2e8f0"/>
+  <text x="40" y="194" class="lvl">Read Committed</text>
+  <text x="40" y="212" class="sub">PostgreSQL / Oracle default</text>
+  <text x="316" y="202" class="no">Safe</text>
+  <text x="470" y="202" class="yes">Possible</text>
+  <text x="642" y="202" class="yes">Possible</text>
+
+  <!-- Repeatable Read -->
+  <rect x="24" y="224" width="732" height="56" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="40" y="250" class="lvl">Repeatable Read</text>
+  <text x="40" y="268" class="sub">MySQL / InnoDB default</text>
+  <text x="316" y="258" class="no">Safe</text>
+  <text x="486" y="258" class="no">Safe</text>
+  <text x="642" y="258" class="yes">Possible*</text>
+
+  <!-- Serializable -->
+  <rect x="24" y="280" width="732" height="56" fill="#ffffff" stroke="#e2e8f0"/>
+  <text x="40" y="306" class="lvl">Serializable</text>
+  <text x="40" y="324" class="sub">strongest — as if one-at-a-time</text>
+  <text x="316" y="314" class="no">Safe</text>
+  <text x="486" y="314" class="no">Safe</text>
+  <text x="656" y="314" class="no">Safe</text>
+
+  <!-- column separators -->
+  <line x1="264" y1="112" x2="264" y2="336" stroke="#e2e8f0"/>
+  <line x1="424" y1="112" x2="424" y2="336" stroke="#e2e8f0"/>
+  <line x1="600" y1="112" x2="600" y2="336" stroke="#e2e8f0"/>
+
+  <text x="24" y="360" class="note">* The SQL standard permits phantoms at Repeatable Read; some engines (e.g. PostgreSQL's snapshot isolation) prevent them anyway.</text>
+  <text x="24" y="376" class="note">Rule of thumb: pick the lowest level that keeps your data correct, and add explicit locks only where a specific invariant needs them.</text>
+</svg>

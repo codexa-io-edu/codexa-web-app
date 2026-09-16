@@ -1,0 +1,62 @@
+<svg viewBox="0 0 800 380" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .h { font-size: 13px; font-weight: 700; fill: #ffffff; }
+    .box { font-size: 10px; font-weight: 700; fill: #ffffff; }
+    .note { font-size: 10px; fill: #64748b; }
+  </style>
+
+  <text x="24" y="30" class="title">The goal: high cohesion within, loose coupling between</text>
+
+  <!-- GOOD -->
+  <rect x="24" y="48" width="360" height="300" rx="10" fill="#f0fdf4" stroke="#bbf7d0"/>
+  <rect x="24" y="48" width="360" height="34" rx="10" fill="#059669"/>
+  <text x="44" y="71" class="h">✓ High cohesion, loose coupling</text>
+
+  <rect x="60" y="104" width="130" height="110" rx="8" fill="#059669"/>
+  <text x="125" y="124" text-anchor="middle" class="box">Orders</text>
+  <rect x="72" y="134" width="106" height="20" rx="3" fill="#34d399"/><text x="125" y="149" text-anchor="middle" class="note" fill="#065f46">create order</text>
+  <rect x="72" y="158" width="106" height="20" rx="3" fill="#34d399"/><text x="125" y="173" text-anchor="middle" class="note" fill="#065f46">cancel order</text>
+  <rect x="72" y="182" width="106" height="20" rx="3" fill="#34d399"/><text x="125" y="197" text-anchor="middle" class="note" fill="#065f46">order status</text>
+
+  <rect x="230" y="104" width="120" height="110" rx="8" fill="#0ea5e9"/>
+  <text x="290" y="124" text-anchor="middle" class="box">Payments</text>
+  <rect x="242" y="134" width="96" height="20" rx="3" fill="#7dd3fc"/><text x="290" y="149" text-anchor="middle" class="note" fill="#075985">charge</text>
+  <rect x="242" y="158" width="96" height="20" rx="3" fill="#7dd3fc"/><text x="290" y="173" text-anchor="middle" class="note" fill="#075985">refund</text>
+
+  <line x1="190" y1="160" x2="228" y2="160" stroke="#059669" stroke-width="2" marker-end="url(#g)"/>
+  <text x="70" y="250" class="note" fill="#065f46">Related operations grouped together (cohesion);</text>
+  <text x="70" y="266" class="note" fill="#065f46">a few clean, well-defined calls between services</text>
+  <text x="70" y="282" class="note" fill="#065f46">(coupling). Things that change together stay together.</text>
+  <text x="70" y="312" class="note" fill="#065f46">One user action ≈ 1–2 network hops.</text>
+
+  <!-- BAD -->
+  <rect x="416" y="48" width="360" height="300" rx="10" fill="#fef2f2" stroke="#fecaca"/>
+  <rect x="416" y="48" width="360" height="34" rx="10" fill="#dc2626"/>
+  <text x="436" y="71" class="h">✗ Low cohesion, tight coupling</text>
+
+  <rect x="440" y="104" width="90" height="40" rx="6" fill="#f87171"/><text x="485" y="128" text-anchor="middle" class="box">Svc A</text>
+  <rect x="560" y="104" width="90" height="40" rx="6" fill="#f87171"/><text x="605" y="128" text-anchor="middle" class="box">Svc B</text>
+  <rect x="680" y="104" width="80" height="40" rx="6" fill="#f87171"/><text x="720" y="128" text-anchor="middle" class="box">Svc C</text>
+  <rect x="500" y="170" width="90" height="40" rx="6" fill="#f87171"/><text x="545" y="194" text-anchor="middle" class="box">Svc D</text>
+  <rect x="620" y="170" width="90" height="40" rx="6" fill="#f87171"/><text x="665" y="194" text-anchor="middle" class="box">Svc E</text>
+
+  <!-- chatty tangle -->
+  <line x1="530" y1="124" x2="560" y2="124" stroke="#dc2626" stroke-width="1.6" marker-end="url(#r)"/>
+  <line x1="650" y1="124" x2="680" y2="124" stroke="#dc2626" stroke-width="1.6" marker-end="url(#r)"/>
+  <line x1="485" y1="144" x2="540" y2="168" stroke="#dc2626" stroke-width="1.6" marker-end="url(#r)"/>
+  <line x1="605" y1="144" x2="560" y2="168" stroke="#dc2626" stroke-width="1.6" marker-end="url(#r)"/>
+  <line x1="665" y1="168" x2="720" y2="146" stroke="#dc2626" stroke-width="1.6" marker-end="url(#r)"/>
+  <line x1="590" y1="190" x2="620" y2="190" stroke="#dc2626" stroke-width="1.6" marker-end="url(#r)"/>
+
+  <text x="436" y="250" class="note" fill="#991b1b">Related logic scattered across services; every</text>
+  <text x="436" y="266" class="note" fill="#991b1b">action fans out into many synchronous calls</text>
+  <text x="436" y="282" class="note" fill="#991b1b">(temporal coupling). "One click = 8 hops."</text>
+  <text x="436" y="312" class="note" fill="#991b1b">Slow, fragile, and hard to change — a</text>
+  <text x="436" y="328" class="note" fill="#991b1b">distributed monolith in the making.</text>
+
+  <defs>
+    <marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#059669"/></marker>
+    <marker id="r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#dc2626"/></marker>
+  </defs>
+</svg>

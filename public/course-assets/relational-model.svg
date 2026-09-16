@@ -1,0 +1,67 @@
+<svg viewBox="0 0 760 460" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .tbl-title { font-size: 14px; font-weight: 700; fill: #ffffff; }
+    .col-head { font-size: 12px; font-weight: 700; fill: #1e293b; }
+    .cell { font-size: 12px; fill: #334155; }
+    .lbl { font-size: 11px; fill: #64748b; }
+    .pk { font-size: 10px; font-weight: 700; fill: #059669; }
+    .fk { font-size: 10px; font-weight: 700; fill: #d97706; }
+  </style>
+
+  <text x="24" y="30" class="title">The Relational Model: rows, columns, and a relationship</text>
+
+  <!-- customers table -->
+  <rect x="24" y="60" width="300" height="160" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+  <rect x="24" y="60" width="300" height="30" rx="8" fill="#2563eb"/>
+  <rect x="24" y="78" width="300" height="12" fill="#2563eb"/>
+  <text x="36" y="80" class="tbl-title">customers  (table)</text>
+
+  <line x1="24" y1="118" x2="324" y2="118" stroke="#e2e8f0"/>
+  <line x1="120" y1="90" x2="120" y2="220" stroke="#e2e8f0"/>
+  <line x1="220" y1="90" x2="220" y2="220" stroke="#e2e8f0"/>
+
+  <text x="36" y="110" class="col-head">id</text>
+  <text x="132" y="110" class="col-head">name</text>
+  <text x="232" y="110" class="col-head">city</text>
+  <text x="272" y="110" class="pk" >🔑 PK</text>
+
+  <text x="36" y="140" class="cell">1</text><text x="132" y="140" class="cell">Asha</text><text x="232" y="140" class="cell">Pune</text>
+  <text x="36" y="168" class="cell">2</text><text x="132" y="168" class="cell">Ravi</text><text x="232" y="168" class="cell">Delhi</text>
+  <text x="36" y="196" class="cell">3</text><text x="132" y="196" class="cell">Meera</text><text x="232" y="196" class="cell">Kochi</text>
+
+  <text x="36" y="238" class="lbl">↑ each row = one customer (a "record")</text>
+
+  <!-- orders table -->
+  <rect x="436" y="60" width="300" height="200" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+  <rect x="436" y="60" width="300" height="30" rx="8" fill="#2563eb"/>
+  <rect x="436" y="78" width="300" height="12" fill="#2563eb"/>
+  <text x="448" y="80" class="tbl-title">orders  (table)</text>
+
+  <line x1="436" y1="118" x2="736" y2="118" stroke="#e2e8f0"/>
+  <line x1="516" y1="90" x2="516" y2="260" stroke="#e2e8f0"/>
+  <line x1="636" y1="90" x2="636" y2="260" stroke="#e2e8f0"/>
+
+  <text x="448" y="110" class="col-head">id</text>
+  <text x="528" y="110" class="col-head">customer_id</text>
+  <text x="648" y="110" class="col-head">amount</text>
+  <text x="528" y="128" class="fk">↳ FK → customers.id</text>
+
+  <text x="448" y="152" class="cell">101</text><text x="528" y="152" class="cell">1</text><text x="648" y="152" class="cell">₹1,200</text>
+  <text x="448" y="180" class="cell">102</text><text x="528" y="180" class="cell">1</text><text x="648" y="180" class="cell">₹450</text>
+  <text x="448" y="208" class="cell">103</text><text x="528" y="208" class="cell">2</text><text x="648" y="208" class="cell">₹9,900</text>
+  <text x="448" y="236" class="cell">104</text><text x="528" y="236" class="cell">3</text><text x="648" y="236" class="cell">₹75</text>
+
+  <!-- relationship arrow -->
+  <path d="M 324 150 C 380 150, 380 175, 528 175" fill="none" stroke="#d97706" stroke-width="2" stroke-dasharray="5,4"/>
+  <polygon points="524,170 536,175 524,180" fill="#d97706"/>
+  <text x="350" y="140" class="fk">one customer → many orders</text>
+
+  <!-- legend -->
+  <rect x="24" y="300" width="712" height="130" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="40" y="326" class="col-head">Vocabulary</text>
+  <text x="40" y="352" class="cell">• <tspan font-weight="700">Table</tspan> — a named collection of rows with a fixed set of columns (like a spreadsheet).</text>
+  <text x="40" y="374" class="cell">• <tspan font-weight="700">Row / record</tspan> — one entity instance (one customer, one order).</text>
+  <text x="40" y="396" class="cell">• <tspan font-weight="700">Column / field</tspan> — one attribute with a declared type (integer, text, money…).</text>
+  <text x="40" y="418" class="cell">• <tspan font-weight="700" fill="#059669">Primary key (PK)</tspan> uniquely identifies a row. A <tspan font-weight="700" fill="#d97706">foreign key (FK)</tspan> points at another table's PK — that's the "relation".</text>
+</svg>

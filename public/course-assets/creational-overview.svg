@@ -1,0 +1,42 @@
+<svg viewBox="0 0 820 540" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <rect width="820" height="540" fill="#f8fafc"/>
+  <text x="410" y="38" text-anchor="middle" font-size="23" font-weight="700" fill="#0f172a">The Five Creational Patterns</text>
+  <text x="410" y="63" text-anchor="middle" font-size="13" fill="#64748b">All of them take control of "how objects get made" — but each solves a different creation problem</text>
+
+  <!-- Singleton -->
+  <rect x="40" y="92" width="740" height="76" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <rect x="52" y="104" width="180" height="52" rx="8" fill="#2563eb"/>
+  <text x="142" y="136" text-anchor="middle" font-size="16" font-weight="700" fill="#ffffff">Singleton</text>
+  <text x="248" y="126" font-size="13" font-weight="700" fill="#1d4ed8">Guarantees exactly one shared instance, globally reachable.</text>
+  <text x="248" y="150" font-size="12" fill="#334155">Use when: one — and only one — object should ever exist (a registry, cache, or pool).</text>
+
+  <!-- Factory Method -->
+  <rect x="40" y="180" width="740" height="76" rx="12" fill="#f0fdf4" stroke="#059669" stroke-width="2"/>
+  <rect x="52" y="192" width="180" height="52" rx="8" fill="#059669"/>
+  <text x="142" y="216" text-anchor="middle" font-size="15" font-weight="700" fill="#ffffff">Factory</text>
+  <text x="142" y="234" text-anchor="middle" font-size="15" font-weight="700" fill="#ffffff">Method</text>
+  <text x="248" y="214" font-size="13" font-weight="700" fill="#047857">Lets subclasses decide which concrete class to instantiate.</text>
+  <text x="248" y="238" font-size="12" fill="#334155">Use when: a class can't know in advance which product it must create — one product type.</text>
+
+  <!-- Abstract Factory -->
+  <rect x="40" y="268" width="740" height="76" rx="12" fill="#fff7ed" stroke="#d97706" stroke-width="2"/>
+  <rect x="52" y="280" width="180" height="52" rx="8" fill="#d97706"/>
+  <text x="142" y="304" text-anchor="middle" font-size="15" font-weight="700" fill="#ffffff">Abstract</text>
+  <text x="142" y="322" text-anchor="middle" font-size="15" font-weight="700" fill="#ffffff">Factory</text>
+  <text x="248" y="302" font-size="13" font-weight="700" fill="#b45309">Creates whole families of related objects that must match.</text>
+  <text x="248" y="326" font-size="12" fill="#334155">Use when: products vary together (a UI theme, an OS look-and-feel, a DB driver family).</text>
+
+  <!-- Builder -->
+  <rect x="40" y="356" width="740" height="76" rx="12" fill="#faf5ff" stroke="#7c3aed" stroke-width="2"/>
+  <rect x="52" y="368" width="180" height="52" rx="8" fill="#7c3aed"/>
+  <text x="142" y="400" text-anchor="middle" font-size="16" font-weight="700" fill="#ffffff">Builder</text>
+  <text x="248" y="390" font-size="13" font-weight="700" fill="#6d28d9">Assembles a complex object step by step.</text>
+  <text x="248" y="414" font-size="12" fill="#334155">Use when: many optional parts would otherwise force huge "telescoping" constructors.</text>
+
+  <!-- Prototype -->
+  <rect x="40" y="444" width="740" height="76" rx="12" fill="#ecfeff" stroke="#0891b2" stroke-width="2"/>
+  <rect x="52" y="456" width="180" height="52" rx="8" fill="#0891b2"/>
+  <text x="142" y="488" text-anchor="middle" font-size="16" font-weight="700" fill="#ffffff">Prototype</text>
+  <text x="248" y="478" font-size="13" font-weight="700" fill="#0e7490">Creates new objects by cloning an existing one.</text>
+  <text x="248" y="502" font-size="12" fill="#334155">Use when: building from scratch is costly, or you want copies of a pre-configured instance.</text>
+</svg>

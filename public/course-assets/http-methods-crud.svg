@@ -1,0 +1,64 @@
+<svg viewBox="0 0 820 470" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <rect width="820" height="470" fill="#f8fafc"/>
+  <text x="410" y="30" text-anchor="middle" font-size="20" font-weight="700" fill="#0f172a">HTTP Methods, CRUD, Safety &amp; Idempotency</text>
+  <text x="410" y="52" text-anchor="middle" font-size="12.5" fill="#64748b">The verb carries the intent &#8212; and whether it's safe to retry</text>
+
+  <!-- header -->
+  <rect x="30" y="70" width="110" height="30" rx="4" fill="#e0e7ff" stroke="#6366f1"/><text x="85" y="90" text-anchor="middle" font-size="11.5" font-weight="700" fill="#4338ca">Method</text>
+  <rect x="146" y="70" width="90" height="30" rx="4" fill="#e0e7ff" stroke="#6366f1"/><text x="191" y="90" text-anchor="middle" font-size="11.5" font-weight="700" fill="#4338ca">CRUD</text>
+  <rect x="242" y="70" width="300" height="30" rx="4" fill="#e0e7ff" stroke="#6366f1"/><text x="392" y="90" text-anchor="middle" font-size="11.5" font-weight="700" fill="#4338ca">Example</text>
+  <rect x="548" y="70" width="110" height="30" rx="4" fill="#e0e7ff" stroke="#6366f1"/><text x="603" y="90" text-anchor="middle" font-size="11.5" font-weight="700" fill="#4338ca">Safe?</text>
+  <rect x="664" y="70" width="126" height="30" rx="4" fill="#e0e7ff" stroke="#6366f1"/><text x="727" y="90" text-anchor="middle" font-size="11.5" font-weight="700" fill="#4338ca">Idempotent?</text>
+
+  <g font-family="monospace">
+    <!-- GET -->
+    <rect x="30" y="106" width="110" height="42" rx="4" fill="#dcfce7" stroke="#86efac"/><text x="85" y="132" text-anchor="middle" font-size="12" font-weight="700" fill="#047857">GET</text>
+    <rect x="146" y="106" width="90" height="42" rx="4" fill="#ffffff" stroke="#cbd5e1"/><text x="191" y="132" text-anchor="middle" font-size="10.5" fill="#334155">Read</text>
+    <rect x="242" y="106" width="300" height="42" rx="4" fill="#ffffff" stroke="#cbd5e1"/><text x="252" y="132" font-size="10" fill="#334155">GET /orders/42</text>
+    <rect x="548" y="106" width="110" height="42" rx="4" fill="#dcfce7" stroke="#86efac"/><text x="603" y="132" text-anchor="middle" font-size="11" font-weight="700" fill="#047857">YES</text>
+    <rect x="664" y="106" width="126" height="42" rx="4" fill="#dcfce7" stroke="#86efac"/><text x="727" y="132" text-anchor="middle" font-size="11" font-weight="700" fill="#047857">YES</text>
+
+    <!-- POST -->
+    <rect x="30" y="152" width="110" height="42" rx="4" fill="#fed7aa" stroke="#fdba74"/><text x="85" y="178" text-anchor="middle" font-size="12" font-weight="700" fill="#b45309">POST</text>
+    <rect x="146" y="152" width="90" height="42" rx="4" fill="#ffffff" stroke="#cbd5e1"/><text x="191" y="178" text-anchor="middle" font-size="10.5" fill="#334155">Create</text>
+    <rect x="242" y="152" width="300" height="42" rx="4" fill="#ffffff" stroke="#cbd5e1"/><text x="252" y="178" font-size="10" fill="#334155">POST /orders</text>
+    <rect x="548" y="152" width="110" height="42" rx="4" fill="#fee2e2" stroke="#fca5a5"/><text x="603" y="178" text-anchor="middle" font-size="11" font-weight="700" fill="#b91c1c">NO</text>
+    <rect x="664" y="152" width="126" height="42" rx="4" fill="#fee2e2" stroke="#fca5a5"/><text x="727" y="178" text-anchor="middle" font-size="11" font-weight="700" fill="#b91c1c">NO</text>
+
+    <!-- PUT -->
+    <rect x="30" y="198" width="110" height="42" rx="4" fill="#dbeafe" stroke="#93c5fd"/><text x="85" y="224" text-anchor="middle" font-size="12" font-weight="700" fill="#1d4ed8">PUT</text>
+    <rect x="146" y="198" width="90" height="42" rx="4" fill="#ffffff" stroke="#cbd5e1"/><text x="191" y="224" text-anchor="middle" font-size="9.5" fill="#334155">Replace</text>
+    <rect x="242" y="198" width="300" height="42" rx="4" fill="#ffffff" stroke="#cbd5e1"/><text x="252" y="224" font-size="10" fill="#334155">PUT /orders/42</text>
+    <rect x="548" y="198" width="110" height="42" rx="4" fill="#fee2e2" stroke="#fca5a5"/><text x="603" y="224" text-anchor="middle" font-size="11" font-weight="700" fill="#b91c1c">NO</text>
+    <rect x="664" y="198" width="126" height="42" rx="4" fill="#dcfce7" stroke="#86efac"/><text x="727" y="224" text-anchor="middle" font-size="11" font-weight="700" fill="#047857">YES</text>
+
+    <!-- PATCH -->
+    <rect x="30" y="244" width="110" height="42" rx="4" fill="#ede9fe" stroke="#c4b5fd"/><text x="85" y="270" text-anchor="middle" font-size="12" font-weight="700" fill="#6d28d9">PATCH</text>
+    <rect x="146" y="244" width="90" height="42" rx="4" fill="#ffffff" stroke="#cbd5e1"/><text x="191" y="270" text-anchor="middle" font-size="9.5" fill="#334155">Update</text>
+    <rect x="242" y="244" width="300" height="42" rx="4" fill="#ffffff" stroke="#cbd5e1"/><text x="252" y="270" font-size="10" fill="#334155">PATCH /orders/42</text>
+    <rect x="548" y="244" width="110" height="42" rx="4" fill="#fee2e2" stroke="#fca5a5"/><text x="603" y="270" text-anchor="middle" font-size="11" font-weight="700" fill="#b91c1c">NO</text>
+    <rect x="664" y="244" width="126" height="42" rx="4" fill="#fef9c3" stroke="#fde047"/><text x="727" y="266" text-anchor="middle" font-size="8.5" font-weight="700" fill="#a16207">USUALLY NOT</text><text x="727" y="279" text-anchor="middle" font-size="7" fill="#a16207">(depends)</text>
+
+    <!-- DELETE -->
+    <rect x="30" y="290" width="110" height="42" rx="4" fill="#fee2e2" stroke="#fca5a5"/><text x="85" y="316" text-anchor="middle" font-size="11.5" font-weight="700" fill="#b91c1c">DELETE</text>
+    <rect x="146" y="290" width="90" height="42" rx="4" fill="#ffffff" stroke="#cbd5e1"/><text x="191" y="316" text-anchor="middle" font-size="10.5" fill="#334155">Delete</text>
+    <rect x="242" y="290" width="300" height="42" rx="4" fill="#ffffff" stroke="#cbd5e1"/><text x="252" y="316" font-size="10" fill="#334155">DELETE /orders/42</text>
+    <rect x="548" y="290" width="110" height="42" rx="4" fill="#fee2e2" stroke="#fca5a5"/><text x="603" y="316" text-anchor="middle" font-size="11" font-weight="700" fill="#b91c1c">NO</text>
+    <rect x="664" y="290" width="126" height="42" rx="4" fill="#dcfce7" stroke="#86efac"/><text x="727" y="316" text-anchor="middle" font-size="11" font-weight="700" fill="#047857">YES</text>
+  </g>
+
+  <!-- definitions -->
+  <rect x="30" y="348" width="370" height="106" rx="8" fill="#ecfdf5" stroke="#059669" stroke-width="1.4"/>
+  <text x="215" y="370" text-anchor="middle" font-size="11.5" font-weight="700" fill="#047857">Safe</text>
+  <text x="215" y="392" text-anchor="middle" font-size="10" fill="#334155">Does not modify server state &#8212;</text>
+  <text x="215" y="408" text-anchor="middle" font-size="10" fill="#334155">a read-only operation. Safe to</text>
+  <text x="215" y="424" text-anchor="middle" font-size="10" fill="#334155">call any number of times, cache,</text>
+  <text x="215" y="440" text-anchor="middle" font-size="10" fill="#334155">and prefetch.</text>
+
+  <rect x="420" y="348" width="370" height="106" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="1.4"/>
+  <text x="605" y="370" text-anchor="middle" font-size="11.5" font-weight="700" fill="#1d4ed8">Idempotent</text>
+  <text x="605" y="392" text-anchor="middle" font-size="10" fill="#334155">Calling it N times has the SAME</text>
+  <text x="605" y="408" text-anchor="middle" font-size="10" fill="#334155">effect as calling it once. Critical</text>
+  <text x="605" y="424" text-anchor="middle" font-size="10" fill="#334155">for safe retries on network</text>
+  <text x="605" y="440" text-anchor="middle" font-size="10" fill="#334155">failure. (POST creates duplicates!)</text>
+</svg>

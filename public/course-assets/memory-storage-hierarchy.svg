@@ -1,0 +1,56 @@
+<svg viewBox="0 0 780 460" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .sub { font-size: 12px; fill: #64748b; }
+    .layer { font-size: 13px; font-weight: 700; fill: #ffffff; }
+    .lat { font-size: 12px; font-weight: 700; fill: #1e293b; }
+    .hum { font-size: 11px; fill: #475569; }
+    .hdr { font-size: 11px; font-weight: 700; fill: #64748b; }
+    .call { font-size: 12px; font-weight: 700; fill: #059669; }
+  </style>
+
+  <text x="24" y="30" class="title">Why memory is fast: the storage-latency hierarchy</text>
+  <text x="24" y="50" class="sub">Approximate read latencies, and the same numbers scaled up so 1 ns = 1 second (to feel the gap).</text>
+
+  <!-- column headers -->
+  <text x="40" y="82" class="hdr">TIER</text>
+  <text x="330" y="82" class="hdr">REAL LATENCY (approx)</text>
+  <text x="560" y="82" class="hdr">IF 1 ns = 1 SECOND</text>
+
+  <!-- L1/L2 cache -->
+  <rect x="40" y="92" width="270" height="40" rx="6" fill="#1e293b"/>
+  <text x="54" y="117" class="layer">CPU cache (L1/L2)</text>
+  <text x="330" y="117" class="lat">~1–5 ns</text>
+  <text x="560" y="117" class="hum">1–5 seconds</text>
+
+  <!-- RAM (highlighted) -->
+  <rect x="40" y="140" width="360" height="52" rx="6" fill="#2563eb" stroke="#059669" stroke-width="3"/>
+  <text x="54" y="162" class="layer">Main memory (RAM)</text>
+  <text x="54" y="181" class="sub" fill="#dbeafe">← in-memory databases live here</text>
+  <text x="330" y="163" class="lat" fill="#ffffff">~100 ns</text>
+  <text x="560" y="171" class="hum">~2 minutes</text>
+
+  <!-- SSD -->
+  <rect x="40" y="200" width="480" height="44" rx="6" fill="#0ea5e9"/>
+  <text x="54" y="227" class="layer">SSD (flash)</text>
+  <text x="330" y="227" class="lat" fill="#ffffff">~100 µs</text>
+  <text x="560" y="227" class="hum">~1 day</text>
+
+  <!-- HDD -->
+  <rect x="40" y="252" width="600" height="44" rx="6" fill="#94a3b8"/>
+  <text x="54" y="279" class="layer">Spinning disk (HDD)</text>
+  <text x="330" y="279" class="lat" fill="#ffffff">~10 ms</text>
+  <text x="560" y="279" class="hum">~4 months</text>
+
+  <!-- network -->
+  <rect x="40" y="304" width="700" height="40" rx="6" fill="#cbd5e1"/>
+  <text x="54" y="329" class="layer" fill="#1e293b">Network (cross-region round trip)</text>
+  <text x="330" y="329" class="lat">~100 ms</text>
+  <text x="560" y="329" class="hum" fill="#334155">~3 years</text>
+
+  <!-- takeaway -->
+  <rect x="40" y="360" width="700" height="80" rx="8" fill="#f0fdf4" stroke="#86efac"/>
+  <text x="56" y="384" class="call">The core idea of an in-memory database</text>
+  <text x="56" y="406" class="sub" fill="#334155">RAM is roughly <tspan font-weight="700">1,000×</tspan> faster than an SSD and <tspan font-weight="700">100,000×</tspan> faster than a spinning disk. A disk-based database</text>
+  <text x="56" y="424" class="sub" fill="#334155">spends most of its time waiting on storage; an in-memory database removes that wait by keeping the data in RAM.</text>
+</svg>

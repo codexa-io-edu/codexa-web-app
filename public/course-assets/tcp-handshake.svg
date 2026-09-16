@@ -1,0 +1,47 @@
+<svg viewBox="0 0 760 470" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .actor { font-size: 13px; font-weight: 700; fill: #1e293b; }
+    .msg { font-size: 11px; font-weight: 700; fill: #1e293b; }
+    .note { font-size: 10.5px; fill: #64748b; }
+    .phase { font-size: 12px; font-weight: 700; fill: #2563eb; }
+    .rt { font-size: 10.5px; font-weight: 700; fill: #d97706; }
+  </style>
+
+  <text x="24" y="30" class="title">TCP: handshake, reliable ordered delivery, teardown</text>
+
+  <!-- actors -->
+  <text x="120" y="66" class="actor">Client</text>
+  <text x="600" y="66" class="actor">Server</text>
+  <line x1="140" y1="74" x2="140" y2="440" stroke="#cbd5e1" stroke-width="2"/>
+  <line x1="620" y1="74" x2="620" y2="440" stroke="#cbd5e1" stroke-width="2"/>
+
+  <!-- handshake -->
+  <text x="24" y="96" class="phase">1 · Handshake (1 round trip before any data)</text>
+  <line x1="140" y1="108" x2="620" y2="126" stroke="#2563eb" stroke-width="2"/><polygon points="614,120 624,127 612,131" fill="#2563eb"/>
+  <text x="240" y="106" class="msg">SYN  (let's talk, seq=x)</text>
+  <line x1="620" y1="144" x2="140" y2="162" stroke="#2563eb" stroke-width="2"/><polygon points="146,156 136,163 148,167" fill="#2563eb"/>
+  <text x="240" y="142" class="msg">SYN-ACK  (ok, seq=y, ack=x+1)</text>
+  <line x1="140" y1="180" x2="620" y2="198" stroke="#2563eb" stroke-width="2"/><polygon points="614,192 624,199 612,203" fill="#2563eb"/>
+  <text x="270" y="178" class="msg">ACK  (great — connected)</text>
+  <text x="640" y="150" class="rt">↕ 1 RTT</text>
+
+  <!-- data -->
+  <text x="24" y="228" class="phase">2 · Reliable, ordered data</text>
+  <line x1="140" y1="240" x2="620" y2="256" stroke="#059669" stroke-width="2"/><polygon points="614,250 624,257 612,261" fill="#059669"/>
+  <text x="230" y="238" class="msg">DATA seg #1</text>
+  <line x1="140" y1="268" x2="400" y2="280" stroke="#dc2626" stroke-width="2" stroke-dasharray="4,3"/>
+  <text x="230" y="266" class="msg" fill="#dc2626">DATA seg #2  ✗ lost</text>
+  <text x="410" y="284" class="note" fill="#dc2626">(no ACK arrives)</text>
+  <line x1="140" y1="300" x2="620" y2="316" stroke="#059669" stroke-width="2" stroke-dasharray="5,3"/><polygon points="614,310 624,317 612,321" fill="#059669"/>
+  <text x="210" y="298" class="msg">retransmit seg #2</text>
+  <line x1="620" y1="330" x2="140" y2="346" stroke="#64748b" stroke-width="2"/><polygon points="146,340 136,347 148,351" fill="#64748b"/>
+  <text x="300" y="328" class="msg">ACK (got #1, #2)</text>
+  <text x="150" y="368" class="note">Sequence numbers reorder; missing ACKs trigger retransmits → nothing is lost, order preserved.</text>
+
+  <!-- teardown -->
+  <text x="24" y="398" class="phase">3 · Teardown</text>
+  <line x1="140" y1="410" x2="620" y2="422" stroke="#7c3aed" stroke-width="2"/><polygon points="614,416 624,423 612,427" fill="#7c3aed"/>
+  <text x="300" y="408" class="msg">FIN … ACK (close both ways)</text>
+  <text x="150" y="442" class="note">Cost of all this: setup latency + bookkeeping — but every byte is guaranteed and in order.</text>
+</svg>

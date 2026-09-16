@@ -1,0 +1,57 @@
+<svg viewBox="0 0 800 420" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .h { font-size: 13px; font-weight: 700; fill: #ffffff; }
+    .box { font-size: 10.5px; font-weight: 700; fill: #ffffff; }
+    .note { font-size: 10px; fill: #64748b; }
+    .lbl { font-size: 10px; font-weight: 700; fill: #1e293b; }
+  </style>
+
+  <text x="24" y="30" class="title">Single point of failure → eliminate with redundancy</text>
+
+  <!-- SPOF -->
+  <rect x="24" y="48" width="360" height="180" rx="10" fill="#fef2f2" stroke="#fecaca"/>
+  <rect x="24" y="48" width="360" height="34" rx="10" fill="#dc2626"/>
+  <text x="44" y="71" class="h">✗ Single point of failure</text>
+
+  <rect x="60" y="104" width="90" height="34" rx="6" fill="#64748b"/><text x="105" y="126" text-anchor="middle" class="box">clients</text>
+  <rect x="190" y="104" width="90" height="34" rx="6" fill="#dc2626"/><text x="235" y="126" text-anchor="middle" class="box">1 server</text>
+  <rect x="190" y="164" width="90" height="34" rx="6" fill="#dc2626"/><text x="235" y="186" text-anchor="middle" class="box">1 database</text>
+  <line x1="150" y1="121" x2="188" y2="121" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#a)"/>
+  <line x1="235" y1="138" x2="235" y2="162" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#a)"/>
+  <text x="300" y="126" class="note" fill="#991b1b">it dies →</text>
+  <text x="300" y="140" class="note" fill="#991b1b">everything</text>
+  <text x="300" y="154" class="note" fill="#991b1b">is down</text>
+
+  <!-- redundancy -->
+  <rect x="416" y="48" width="360" height="180" rx="10" fill="#f0fdf4" stroke="#bbf7d0"/>
+  <rect x="416" y="48" width="360" height="34" rx="10" fill="#059669"/>
+  <text x="436" y="71" class="h">✓ Redundant (no single point)</text>
+
+  <rect x="436" y="104" width="80" height="30" rx="6" fill="#64748b"/><text x="476" y="124" text-anchor="middle" class="box">clients</text>
+  <rect x="552" y="98" width="60" height="26" rx="5" fill="#7c3aed"/><text x="582" y="116" text-anchor="middle" class="box">LB</text>
+  <rect x="552" y="128" width="60" height="26" rx="5" fill="#7c3aed"/><text x="582" y="146" text-anchor="middle" class="box">LB'</text>
+  <rect x="648" y="92" width="64" height="24" rx="4" fill="#059669"/><text x="680" y="109" text-anchor="middle" class="box">srv 1</text>
+  <rect x="648" y="120" width="64" height="24" rx="4" fill="#059669"/><text x="680" y="137" text-anchor="middle" class="box">srv 2</text>
+  <rect x="648" y="148" width="64" height="24" rx="4" fill="#059669"/><text x="680" y="165" text-anchor="middle" class="box">srv 3</text>
+  <line x1="516" y1="119" x2="550" y2="115" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#a)"/>
+  <line x1="612" y1="112" x2="646" y2="104" stroke="#94a3b8" stroke-width="1.4" marker-end="url(#a)"/>
+  <line x1="612" y1="116" x2="646" y2="132" stroke="#94a3b8" stroke-width="1.4" marker-end="url(#a)"/>
+  <line x1="612" y1="120" x2="646" y2="158" stroke="#94a3b8" stroke-width="1.4" marker-end="url(#a)"/>
+  <rect x="648" y="182" width="110" height="26" rx="4" fill="#059669"/><text x="703" y="200" text-anchor="middle" class="box">replicated DB</text>
+  <text x="436" y="164" class="note" fill="#065f46">redundant LB + many</text>
+  <text x="436" y="180" class="note" fill="#065f46">instances + replicas:</text>
+  <text x="436" y="196" class="note" fill="#065f46">any one can fail</text>
+
+  <!-- techniques -->
+  <rect x="24" y="242" width="752" height="164" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="40" y="266" class="lbl">Redundancy patterns</text>
+  <text x="40" y="288" class="note">• <tspan font-weight="700">Active-active</tspan> — all replicas serve traffic; lose one, others absorb it (needs load balancing &amp; often statelessness).</text>
+  <text x="40" y="308" class="note">• <tspan font-weight="700">Active-passive (failover)</tspan> — a standby takes over when the primary fails; simpler, but failover time is downtime.</text>
+  <text x="40" y="328" class="note">• <tspan font-weight="700">N+1 / N+M</tspan> — provision spare capacity so losing an instance doesn't overload the rest.</text>
+  <text x="40" y="348" class="note">• <tspan font-weight="700">Multi-AZ / multi-region</tspan> — spread replicas across failure domains so one zone/region outage isn't total.</text>
+  <text x="40" y="368" class="note">⚠ <tspan font-weight="700">The LB paradox:</tspan> adding a load balancer creates a new SPOF — so the LB itself must be made highly available.</text>
+  <text x="40" y="388" class="note">⚠ <tspan font-weight="700">Correlated failure:</tspan> redundancy only helps if failures are independent — shared power, config, or a bad deploy defeat it.</text>
+
+  <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#94a3b8"/></marker></defs>
+</svg>

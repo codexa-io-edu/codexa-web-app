@@ -1,0 +1,34 @@
+<svg viewBox="0 0 820 430" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <rect width="820" height="430" fill="#f8fafc"/>
+  <text x="410" y="36" text-anchor="middle" font-size="22" font-weight="700" fill="#0f172a">Code Smells &amp; Refactoring</text>
+  <text x="410" y="60" text-anchor="middle" font-size="13" fill="#64748b">A code smell is a symptom of a deeper design problem. Refactoring is the cure — structure improved without changing behaviour.</text>
+  <defs><marker id="ov_a" markerWidth="12" markerHeight="12" refX="8" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#94a3b8"/></marker></defs>
+
+  <rect x="40" y="86" width="740" height="88" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <rect x="56" y="102" width="196" height="56" rx="8" fill="#dc2626"/>
+  <text x="154" y="127" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">1 · God Classes</text>
+  <text x="154" y="148" text-anchor="middle" font-size="11" fill="#fecaca">Extract Class · Move Method</text>
+  <text x="268" y="120" font-size="12.5" font-weight="700" fill="#b91c1c">One class that knows everything and does everything.</text>
+  <text x="268" y="141" font-size="11" fill="#334155">SRP violated at its extreme — hundreds of lines, dozens of methods, multiple</text>
+  <text x="268" y="159" font-size="11" fill="#334155">responsibilities. Refactor by identifying cohesive groups and extracting classes.</text>
+
+  <line x1="410" y1="174" x2="410" y2="192" stroke="#94a3b8" stroke-width="2" marker-end="url(#ov_a)"/>
+
+  <rect x="40" y="194" width="740" height="88" rx="12" fill="#fff7ed" stroke="#d97706" stroke-width="2"/>
+  <rect x="56" y="210" width="196" height="56" rx="8" fill="#d97706"/>
+  <text x="154" y="235" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">2 · Tight Coupling</text>
+  <text x="154" y="256" text-anchor="middle" font-size="11" fill="#fef3c7">Inject · Interface · Invert</text>
+  <text x="268" y="228" font-size="12.5" font-weight="700" fill="#b45309">Modules so entangled that changing one breaks another.</text>
+  <text x="268" y="249" font-size="11" fill="#334155">Direct instantiation, static calls, concrete-type dependencies — change ripples</text>
+  <text x="268" y="267" font-size="11" fill="#334155">everywhere. Fix with dependency injection, interfaces, and DIP.</text>
+
+  <line x1="410" y1="282" x2="410" y2="300" stroke="#94a3b8" stroke-width="2" marker-end="url(#ov_a)"/>
+
+  <rect x="40" y="302" width="740" height="88" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <rect x="56" y="318" width="196" height="56" rx="8" fill="#2563eb"/>
+  <text x="154" y="343" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">3 · Duplicate Code</text>
+  <text x="154" y="364" text-anchor="middle" font-size="11" fill="#bfdbfe">Extract · Pull Up · Template</text>
+  <text x="268" y="336" font-size="12.5" font-weight="700" fill="#1d4ed8">The same logic in multiple forms scattered across the codebase.</text>
+  <text x="268" y="357" font-size="11" fill="#334155">Exact copies, near-copies, structural duplicates — each a maintenance hazard.</text>
+  <text x="268" y="375" font-size="11" fill="#334155">Refactoring catalog: Extract Method, Pull Up Method, Form Template Method.</text>
+</svg>

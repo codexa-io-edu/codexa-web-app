@@ -1,0 +1,47 @@
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .box { font-size: 11px; font-weight: 700; fill: #ffffff; }
+    .note { font-size: 10px; fill: #64748b; }
+    .lbl { font-size: 10.5px; font-weight: 700; fill: #1e293b; }
+    .pod { font-size: 9px; font-weight: 700; fill: #ffffff; }
+  </style>
+
+  <text x="24" y="30" class="title">The reconciliation loop: declared desired state → self-healing</text>
+
+  <!-- desired -->
+  <rect x="24" y="60" width="200" height="70" rx="8" fill="#7c3aed"/><text x="124" y="88" text-anchor="middle" class="box">Desired state (you declare)</text><text x="124" y="110" text-anchor="middle" class="note" fill="#ede9fe">Deployment: replicas: 3</text>
+
+  <!-- controller -->
+  <rect x="300" y="60" width="200" height="70" rx="8" fill="#2563eb"/><text x="400" y="84" text-anchor="middle" class="box">Controller</text><text x="400" y="104" text-anchor="middle" class="note" fill="#dbeafe">compares desired vs actual,</text><text x="400" y="118" text-anchor="middle" class="note" fill="#dbeafe">acts to close the gap</text>
+
+  <!-- actual -->
+  <rect x="576" y="60" width="200" height="70" rx="8" fill="#059669"/><text x="676" y="88" text-anchor="middle" class="box">Actual state (cluster)</text><text x="676" y="110" text-anchor="middle" class="note" fill="#dcfce7">running pods</text>
+
+  <line x1="224" y1="95" x2="298" y2="95" stroke="#94a3b8" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="500" y1="95" x2="574" y2="95" stroke="#94a3b8" stroke-width="2" marker-end="url(#a)"/>
+  <!-- loop back -->
+  <path d="M 676 130 C 676 170, 400 170, 400 132" fill="none" stroke="#94a3b8" stroke-width="2" stroke-dasharray="5,4" marker-end="url(#a)"/>
+  <text x="470" y="162" class="note">observe actual →</text>
+
+  <!-- scenario -->
+  <rect x="24" y="196" width="752" height="120" rx="10" fill="#fef2f2" stroke="#fecaca"/>
+  <text x="40" y="218" class="lbl">Self-healing in action</text>
+  <!-- 3 pods, one dies -->
+  <rect x="40" y="232" width="70" height="40" rx="5" fill="#059669"/><text x="75" y="256" text-anchor="middle" class="pod">pod</text>
+  <rect x="120" y="232" width="70" height="40" rx="5" fill="#059669"/><text x="155" y="256" text-anchor="middle" class="pod">pod</text>
+  <rect x="200" y="232" width="70" height="40" rx="5" fill="#dc2626"/><text x="235" y="252" text-anchor="middle" class="pod">pod ✗</text><text x="235" y="264" text-anchor="middle" class="pod">crashes</text>
+  <text x="290" y="256" class="note">actual = 2, desired = 3 → gap detected</text>
+  <line x1="540" y1="252" x2="580" y2="252" stroke="#94a3b8" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="590" y="232" width="80" height="40" rx="5" fill="#10b981"/><text x="630" y="252" text-anchor="middle" class="pod">new pod</text><text x="630" y="264" text-anchor="middle" class="pod">created</text>
+  <text x="680" y="256" class="note" fill="#065f46">back to 3 ✓</text>
+  <text x="40" y="298" class="note">No human acts — the controller continuously drives actual toward desired. A crashed pod is replaced; a dead node's pods are rescheduled elsewhere.</text>
+
+  <!-- what orchestrators do -->
+  <rect x="24" y="330" width="752" height="60" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="40" y="352" class="lbl">This same loop delivers the orchestrator's core jobs</text>
+  <text x="40" y="372" class="note">scheduling · <tspan font-weight="700">self-healing</tspan> · horizontal autoscaling · rolling updates &amp; rollbacks · service discovery &amp; load balancing · config/secret &amp; storage management</text>
+  <text x="40" y="386" class="note" font-size="9">(This is the "rapid provisioning" and "self-healing" that microservices &amp; reliability depend on.)</text>
+
+  <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#94a3b8"/></marker></defs>
+</svg>

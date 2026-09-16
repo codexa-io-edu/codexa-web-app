@@ -1,0 +1,73 @@
+<svg viewBox="0 0 820 500" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <rect width="820" height="500" fill="#f8fafc"/>
+  <text x="410" y="30" text-anchor="middle" font-size="20" font-weight="700" fill="#0f172a">Worked Example: Order Checkout Flow</text>
+  <text x="410" y="52" text-anchor="middle" font-size="12.5" fill="#64748b">A decision (validate) and a fork (ship + email happen in parallel)</text>
+
+  <defs><marker id="af_a" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#334155"/></marker></defs>
+
+  <!-- initial -->
+  <circle cx="410" cy="78" r="11" fill="#334155"/>
+  <line x1="410" y1="89" x2="410" y2="106" stroke="#334155" stroke-width="1.6" marker-end="url(#af_a)"/>
+
+  <!-- add to cart / checkout -->
+  <rect x="340" y="108" width="140" height="36" rx="18" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="410" y="131" text-anchor="middle" font-size="10.5" fill="#1e3a8a">Submit checkout</text>
+  <line x1="410" y1="144" x2="410" y2="162" stroke="#334155" stroke-width="1.6" marker-end="url(#af_a)"/>
+
+  <!-- decision: valid? -->
+  <path d="M410,166 L448,192 L410,218 L372,192 Z" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+  <text x="410" y="196" text-anchor="middle" font-size="8.5" fill="#b45309">valid?</text>
+
+  <!-- no branch -->
+  <line x1="372" y1="192" x2="200" y2="192" stroke="#334155" stroke-width="1.6" marker-end="url(#af_a)"/>
+  <text x="290" y="184" text-anchor="middle" font-size="9" font-style="italic" fill="#334155">[invalid]</text>
+  <rect x="120" y="174" width="140" height="36" rx="18" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="190" y="197" text-anchor="middle" font-size="10" fill="#b91c1c">Show error</text>
+  <line x1="190" y1="174" x2="190" y2="126" stroke="#334155" stroke-width="1.6"/>
+  <line x1="190" y1="126" x2="338" y2="126" stroke="#334155" stroke-width="1.6" marker-end="url(#af_a)"/>
+
+  <!-- yes branch -->
+  <line x1="410" y1="218" x2="410" y2="240" stroke="#334155" stroke-width="1.6" marker-end="url(#af_a)"/>
+  <text x="430" y="234" font-size="9" font-style="italic" fill="#334155">[valid]</text>
+
+  <!-- charge payment -->
+  <rect x="340" y="242" width="140" height="36" rx="18" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="410" y="265" text-anchor="middle" font-size="10.5" fill="#1e3a8a">Charge payment</text>
+  <line x1="410" y1="278" x2="410" y2="298" stroke="#334155" stroke-width="1.6" marker-end="url(#af_a)"/>
+
+  <!-- fork -->
+  <rect x="300" y="300" width="220" height="9" rx="2" fill="#334155"/>
+  <text x="540" y="308" font-size="9" fill="#7c3aed">fork (parallel)</text>
+
+  <!-- parallel actions -->
+  <line x1="350" y1="309" x2="350" y2="330" stroke="#334155" stroke-width="1.6" marker-end="url(#af_a)"/>
+  <line x1="470" y1="309" x2="470" y2="330" stroke="#334155" stroke-width="1.6" marker-end="url(#af_a)"/>
+
+  <rect x="280" y="332" width="140" height="36" rx="18" fill="#dcfce7" stroke="#059669" stroke-width="1.5"/>
+  <text x="350" y="355" text-anchor="middle" font-size="10.5" fill="#065f46">Ship order</text>
+
+  <rect x="400" y="332" width="140" height="36" rx="18" fill="#dcfce7" stroke="#059669" stroke-width="1.5"/>
+  <text x="470" y="355" text-anchor="middle" font-size="10.5" fill="#065f46">Send email</text>
+
+  <line x1="350" y1="368" x2="350" y2="388" stroke="#334155" stroke-width="1.6" marker-end="url(#af_a)"/>
+  <line x1="470" y1="368" x2="470" y2="388" stroke="#334155" stroke-width="1.6" marker-end="url(#af_a)"/>
+
+  <!-- join -->
+  <rect x="300" y="390" width="220" height="9" rx="2" fill="#334155"/>
+  <text x="540" y="398" font-size="9" fill="#7c3aed">join (wait for both)</text>
+
+  <line x1="410" y1="399" x2="410" y2="420" stroke="#334155" stroke-width="1.6" marker-end="url(#af_a)"/>
+
+  <!-- final -->
+  <circle cx="410" cy="434" r="12" fill="none" stroke="#334155" stroke-width="1.6"/>
+  <circle cx="410" cy="434" r="6" fill="#334155"/>
+  <text x="410" y="466" text-anchor="middle" font-size="9.5" fill="#334155">Order complete</text>
+
+  <rect x="600" y="120" width="200" height="130" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="700" y="140" text-anchor="middle" font-size="10.5" font-weight="700" fill="#334155">Reading it</text>
+  <text x="612" y="162" font-size="8.8" fill="#334155">1. Submit &#8594; validate</text>
+  <text x="612" y="180" font-size="8.8" fill="#334155">2. Invalid &#8594; error, loop back</text>
+  <text x="612" y="198" font-size="8.8" fill="#334155">3. Valid &#8594; charge payment</text>
+  <text x="612" y="216" font-size="8.8" fill="#334155">4. FORK: ship &amp; email at once</text>
+  <text x="612" y="234" font-size="8.8" fill="#334155">5. JOIN: wait for both, done</text>
+</svg>

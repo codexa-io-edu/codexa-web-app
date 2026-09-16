@@ -1,0 +1,59 @@
+<svg viewBox="0 0 820 460" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <rect width="820" height="460" fill="#f8fafc"/>
+  <text x="410" y="34" text-anchor="middle" font-size="21" font-weight="700" fill="#0f172a">Prevention Strategies at a Glance</text>
+  <text x="410" y="58" text-anchor="middle" font-size="13" fill="#64748b">Each failure has distinct cures — and the best cure is often to avoid multiple locks entirely</text>
+
+  <!-- header -->
+  <rect x="30" y="78" width="180" height="30" rx="5" fill="#e0e7ff" stroke="#6366f1"/><text x="120" y="98" text-anchor="middle" font-size="12" font-weight="700" fill="#4338ca">Failure</text>
+  <rect x="220" y="78" width="290" height="30" rx="5" fill="#e0e7ff" stroke="#6366f1"/><text x="365" y="98" text-anchor="middle" font-size="12" font-weight="700" fill="#4338ca">Primary cures</text>
+  <rect x="520" y="78" width="270" height="30" rx="5" fill="#e0e7ff" stroke="#6366f1"/><text x="655" y="98" text-anchor="middle" font-size="12" font-weight="700" fill="#4338ca">Detection signal</text>
+
+  <!-- Deadlock -->
+  <rect x="30" y="114" width="180" height="96" rx="6" fill="#fef2f2" stroke="#fca5a5"/>
+  <text x="120" y="150" text-anchor="middle" font-size="12" font-weight="700" fill="#b91c1c">Deadlock</text>
+  <text x="120" y="170" text-anchor="middle" font-size="9" fill="#991b1b">blocked forever</text>
+  <text x="120" y="186" text-anchor="middle" font-size="9" fill="#991b1b">0% CPU</text>
+  <rect x="220" y="114" width="290" height="96" rx="6" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="234" y="134" font-size="9.8" fill="#334155">&#8226; Consistent global lock ordering &#9733;</text>
+  <text x="234" y="153" font-size="9.8" fill="#334155">&#8226; tryLock with timeout (break hold&amp;wait)</text>
+  <text x="234" y="172" font-size="9.8" fill="#334155">&#8226; Acquire all locks at once, or fewer locks</text>
+  <text x="234" y="191" font-size="9.8" fill="#334155">&#8226; Open calls (no lock held during callbacks)</text>
+  <rect x="520" y="114" width="270" height="96" rx="6" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="534" y="140" font-size="9.5" fill="#334155">Thread dump shows threads</text>
+  <text x="534" y="158" font-size="9.5" fill="#334155">BLOCKED on locks in a cycle;</text>
+  <text x="534" y="176" font-size="9.5" fill="#334155">JVM prints "deadlock detected".</text>
+  <text x="534" y="194" font-size="9.5" fill="#334155">App hangs, CPU idle.</text>
+
+  <!-- Livelock -->
+  <rect x="30" y="216" width="180" height="96" rx="6" fill="#fff7ed" stroke="#fdba74"/>
+  <text x="120" y="252" text-anchor="middle" font-size="12" font-weight="700" fill="#b45309">Livelock</text>
+  <text x="120" y="272" text-anchor="middle" font-size="9" fill="#7c2d12">active, no progress</text>
+  <text x="120" y="288" text-anchor="middle" font-size="9" fill="#7c2d12">100% CPU</text>
+  <rect x="220" y="216" width="290" height="96" rx="6" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="234" y="236" font-size="9.8" fill="#334155">&#8226; Randomized backoff before retry &#9733;</text>
+  <text x="234" y="255" font-size="9.8" fill="#334155">&#8226; Don't blindly "yield &amp; retry" in lockstep</text>
+  <text x="234" y="274" font-size="9.8" fill="#334155">&#8226; Cap retries, then fail / escalate</text>
+  <text x="234" y="293" font-size="9.8" fill="#334155">&#8226; Asymmetric behavior to break symmetry</text>
+  <rect x="520" y="216" width="270" height="96" rx="6" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="534" y="242" font-size="9.5" fill="#334155">High CPU but no throughput;</text>
+  <text x="534" y="260" font-size="9.5" fill="#334155">threads RUNNING, retry counters</text>
+  <text x="534" y="278" font-size="9.5" fill="#334155">climbing, work not completing.</text>
+
+  <!-- Starvation -->
+  <rect x="30" y="318" width="180" height="96" rx="6" fill="#faf5ff" stroke="#c4b5fd"/>
+  <text x="120" y="354" text-anchor="middle" font-size="12" font-weight="700" fill="#6d28d9">Starvation</text>
+  <text x="120" y="374" text-anchor="middle" font-size="9" fill="#5b21b6">one thread denied</text>
+  <text x="120" y="390" text-anchor="middle" font-size="9" fill="#5b21b6">others progress</text>
+  <rect x="220" y="318" width="290" height="96" rx="6" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="234" y="338" font-size="9.8" fill="#334155">&#8226; Fair locks (ReentrantLock(true)) &#9733;</text>
+  <text x="234" y="357" font-size="9.8" fill="#334155">&#8226; Fair scheduling / bounded queues</text>
+  <text x="234" y="376" font-size="9.8" fill="#334155">&#8226; Avoid indefinite priority preference</text>
+  <text x="234" y="395" font-size="9.8" fill="#334155">&#8226; Keep critical sections short</text>
+  <rect x="520" y="318" width="270" height="96" rx="6" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="534" y="344" font-size="9.5" fill="#334155">One thread's latency/wait time</text>
+  <text x="534" y="362" font-size="9.5" fill="#334155">grows unbounded while others</text>
+  <text x="534" y="380" font-size="9.5" fill="#334155">are served; tail latency spikes.</text>
+
+  <rect x="30" y="422" width="760" height="32" rx="8" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.6"/>
+  <text x="410" y="443" text-anchor="middle" font-size="10.5" font-weight="700" fill="#6d28d9">Best prevention overall: minimize shared mutable state and the number of locks &#8212; fewer locks, fewer ways to deadlock.</text>
+</svg>

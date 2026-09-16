@@ -1,0 +1,44 @@
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .h { font-size: 12px; font-weight: 700; fill: #ffffff; }
+    .c { font-size: 11px; fill: #1e293b; }
+    .cm { font-size: 11px; font-family: 'Consolas','Courier New',monospace; fill: #1e293b; }
+    .note { font-size: 10px; fill: #64748b; }
+    .lbl { font-size: 11px; font-weight: 700; fill: #1e293b; }
+  </style>
+
+  <text x="24" y="30" class="title">Availability: the "nines" and how components combine</text>
+
+  <!-- nines table -->
+  <text x="24" y="60" class="lbl">The nines (downtime per year)</text>
+  <rect x="24" y="70" width="150" height="28" fill="#1e293b"/><text x="34" y="89" class="h">Availability</text>
+  <rect x="174" y="70" width="180" height="28" fill="#334155"/><text x="184" y="89" class="h">Downtime / year</text>
+
+  <rect x="24" y="98" width="330" height="26" fill="#f8fafc"/><text x="34" y="116" class="c">99%   (two nines)</text><text x="184" y="116" class="cm">3.65 days</text>
+  <rect x="24" y="124" width="330" height="26" fill="#ffffff"/><text x="34" y="142" class="c">99.9%  (three nines)</text><text x="184" y="142" class="cm">8.77 hours</text>
+  <rect x="24" y="150" width="330" height="26" fill="#f8fafc"/><text x="34" y="168" class="c">99.99%  (four nines)</text><text x="184" y="168" class="cm">52.6 minutes</text>
+  <rect x="24" y="176" width="330" height="26" fill="#ffffff"/><text x="34" y="194" class="c">99.999% (five nines)</text><text x="184" y="194" class="cm">5.26 minutes</text>
+  <rect x="24" y="70" width="330" height="132" fill="none" stroke="#e2e8f0"/>
+  <text x="24" y="224" class="note">Each extra nine is ~10× less downtime — and much harder/costlier to reach.</text>
+
+  <!-- series -->
+  <rect x="24" y="248" width="360" height="140" rx="10" fill="#fef2f2" stroke="#fecaca"/>
+  <text x="40" y="272" class="lbl">Series (dependency chain) — multiplies DOWN</text>
+  <rect x="40" y="286" width="60" height="30" rx="4" fill="#2563eb"/><text x="70" y="306" text-anchor="middle" class="h">A</text>
+  <rect x="120" y="286" width="60" height="30" rx="4" fill="#2563eb"/><text x="150" y="306" text-anchor="middle" class="h">B</text>
+  <rect x="200" y="286" width="60" height="30" rx="4" fill="#2563eb"/><text x="230" y="306" text-anchor="middle" class="h">C</text>
+  <line x1="100" y1="301" x2="118" y2="301" stroke="#94a3b8" stroke-width="2"/>
+  <line x1="180" y1="301" x2="198" y2="301" stroke="#94a3b8" stroke-width="2"/>
+  <text x="40" y="344" class="cm">0.999 × 0.999 × 0.999 = 0.997</text>
+  <text x="40" y="366" class="note">A service that depends on many others is <tspan font-weight="700">less</tspan> available</text>
+  <text x="40" y="380" class="note">than any of them. More dependencies = lower availability.</text>
+
+  <!-- parallel -->
+  <rect x="404" y="248" width="372" height="140" rx="10" fill="#f0fdf4" stroke="#bbf7d0"/>
+  <text x="420" y="272" class="lbl">Parallel (redundancy) — multiplies UP</text>
+  <rect x="440" y="284" width="60" height="26" rx="4" fill="#059669"/><text x="470" y="302" text-anchor="middle" class="h">A</text>
+  <rect x="440" y="316" width="60" height="26" rx="4" fill="#059669"/><text x="470" y="334" text-anchor="middle" class="h">A'</text>
+  <text x="420" y="360" class="cm">1 − (0.01 × 0.01) = 0.9999</text>
+  <text x="420" y="380" class="note">Two 99% replicas in parallel → 99.99%. Redundancy raises availability — if failures are independent.</text>
+</svg>

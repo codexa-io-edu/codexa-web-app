@@ -1,0 +1,51 @@
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .box { font-size: 12px; font-weight: 700; fill: #ffffff; }
+    .sub { font-size: 9.5px; fill: #e2e8f0; }
+    .note { font-size: 10.5px; fill: #64748b; }
+    .ok { font-size: 10px; font-weight: 700; fill: #059669; }
+    .no { font-size: 10px; font-weight: 700; fill: #dc2626; }
+  </style>
+
+  <text x="24" y="30" class="title">Rate limiting: cap how fast each client can call, at the front door</text>
+  <text x="24" y="50" class="note">Limit example: 5 requests per minute per client. Extra requests are rejected instead of hammering the backend.</text>
+
+  <!-- well-behaved client -->
+  <rect x="40" y="90" width="110" height="40" rx="6" fill="#64748b"/><text x="95" y="110" text-anchor="middle" class="box">Client A</text><text x="95" y="124" text-anchor="middle" class="sub">3 req/min — fine</text>
+
+  <!-- abusive client -->
+  <rect x="40" y="230" width="110" height="40" rx="6" fill="#64748b"/><text x="95" y="250" text-anchor="middle" class="box">Client B</text><text x="95" y="264" text-anchor="middle" class="sub">50 req/min — abusive</text>
+
+  <!-- limiter -->
+  <rect x="300" y="150" width="170" height="90" rx="10" fill="#2563eb"/>
+  <text x="385" y="185" text-anchor="middle" class="box">Rate Limiter</text>
+  <text x="385" y="204" text-anchor="middle" class="sub">at reverse proxy /</text>
+  <text x="385" y="219" text-anchor="middle" class="sub">API gateway</text>
+
+  <line x1="150" y1="110" x2="298" y2="170" stroke="#94a3b8" stroke-width="2"/>
+  <line x1="150" y1="250" x2="298" y2="220" stroke="#94a3b8" stroke-width="2"/>
+
+  <!-- backend -->
+  <rect x="640" y="150" width="120" height="60" rx="8" fill="#059669"/><text x="700" y="185" text-anchor="middle" class="box">Backend</text>
+
+  <!-- allowed -->
+  <line x1="470" y1="180" x2="638" y2="180" stroke="#059669" stroke-width="2.4" marker-end="url(#g)"/>
+  <text x="500" y="172" class="ok">✓ within limit → 200 OK, forwarded</text>
+
+  <!-- rejected -->
+  <line x1="470" y1="215" x2="560" y2="290" stroke="#dc2626" stroke-width="2.4" marker-end="url(#r)"/>
+  <rect x="500" y="300" width="260" height="34" rx="6" fill="#fef2f2" stroke="#fecaca"/>
+  <text x="512" y="322" class="no">✗ over limit → 429 Too Many Requests</text>
+
+  <!-- why -->
+  <rect x="24" y="300" width="440" height="80" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="40" y="322" class="note"><tspan font-weight="700">Why:</tspan> protect backends from overload &amp; abuse (DoS, scraping,</text>
+  <text x="40" y="340" class="note">brute-force), enforce fair use across tenants, honor API</text>
+  <text x="40" y="358" class="note">plan quotas, and control cost.</text>
+
+  <defs>
+    <marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#059669"/></marker>
+    <marker id="r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#dc2626"/></marker>
+  </defs>
+</svg>

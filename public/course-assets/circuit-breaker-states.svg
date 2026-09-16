@@ -1,0 +1,57 @@
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .state { font-size: 13px; font-weight: 700; fill: #ffffff; }
+    .sub { font-size: 9.5px; fill: #f1f5f9; }
+    .t { font-size: 10px; font-weight: 700; fill: #1e293b; }
+    .note { font-size: 10px; fill: #64748b; }
+  </style>
+
+  <text x="24" y="30" class="title">The circuit breaker: stop hammering a failing dependency</text>
+
+  <!-- CLOSED -->
+  <circle cx="150" cy="150" r="70" fill="#059669"/>
+  <text x="150" y="145" text-anchor="middle" class="state">CLOSED</text>
+  <text x="150" y="164" text-anchor="middle" class="sub">calls pass through</text>
+  <text x="150" y="178" text-anchor="middle" class="sub">(normal)</text>
+
+  <!-- OPEN -->
+  <circle cx="650" cy="150" r="70" fill="#dc2626"/>
+  <text x="650" y="145" text-anchor="middle" class="state">OPEN</text>
+  <text x="650" y="164" text-anchor="middle" class="sub">calls fail fast</text>
+  <text x="650" y="178" text-anchor="middle" class="sub">(no call made)</text>
+
+  <!-- HALF-OPEN -->
+  <circle cx="400" cy="310" r="66" fill="#d97706"/>
+  <text x="400" y="305" text-anchor="middle" class="state">HALF-OPEN</text>
+  <text x="400" y="324" text-anchor="middle" class="sub">let a few trial</text>
+  <text x="400" y="338" text-anchor="middle" class="sub">calls through</text>
+
+  <!-- transitions -->
+  <!-- closed -> open -->
+  <line x1="220" y1="135" x2="580" y2="135" stroke="#dc2626" stroke-width="2.2" marker-end="url(#r)"/>
+  <text x="300" y="126" class="t" fill="#dc2626">failures exceed threshold →</text>
+  <text x="310" y="112" class="note">(e.g. &gt;50% errors in the window)</text>
+
+  <!-- open -> half-open -->
+  <line x1="610" y1="205" x2="450" y2="285" stroke="#d97706" stroke-width="2.2" marker-end="url(#o)"/>
+  <text x="470" y="240" class="t" fill="#d97706">after a cooldown timer →</text>
+
+  <!-- half-open -> closed (success) -->
+  <line x1="345" y1="270" x2="185" y2="200" stroke="#059669" stroke-width="2.2" marker-end="url(#g)"/>
+  <text x="150" y="256" class="t" fill="#059669">trials succeed → CLOSE</text>
+
+  <!-- half-open -> open (fail) -->
+  <line x1="455" y1="272" x2="610" y2="200" stroke="#dc2626" stroke-width="2.2" marker-end="url(#r)"/>
+  <text x="470" y="290" class="t" fill="#dc2626">trials fail → re-OPEN</text>
+
+  <!-- footer -->
+  <rect x="24" y="360" width="752" height="34" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="40" y="382" class="note">While OPEN, the caller returns instantly (error or <tspan font-weight="700">fallback</tspan>) instead of piling up on the dead dependency — breaking the cascade. Libraries: Resilience4j, Polly, (Hystrix, now retired).</text>
+
+  <defs>
+    <marker id="r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#dc2626"/></marker>
+    <marker id="o" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#d97706"/></marker>
+    <marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#059669"/></marker>
+  </defs>
+</svg>

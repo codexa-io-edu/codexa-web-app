@@ -1,0 +1,49 @@
+<svg viewBox="0 0 800 420" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .box { font-size: 11px; font-weight: 700; fill: #ffffff; }
+    .sub { font-size: 9px; fill: #e2e8f0; }
+    .note { font-size: 10.5px; fill: #64748b; }
+    .mono { font-size: 10px; font-family: 'Consolas','Courier New',monospace; fill: #1e293b; }
+    .warn { font-size: 10px; font-weight: 700; fill: #dc2626; }
+    .good { font-size: 10px; font-weight: 700; fill: #059669; }
+  </style>
+
+  <text x="24" y="30" class="title">Distributed rate limiting: many nodes must share one counter</text>
+  <text x="24" y="50" class="note">A client's requests get spread across gateway nodes by the load balancer — so per-node local counters would each allow the full limit.</text>
+
+  <!-- client -->
+  <rect x="40" y="180" width="90" height="40" rx="6" fill="#64748b"/><text x="85" y="205" text-anchor="middle" class="box">Client</text>
+
+  <!-- gateway nodes -->
+  <rect x="230" y="90" width="120" height="40" rx="6" fill="#2563eb"/><text x="290" y="115" text-anchor="middle" class="box">Gateway N1</text>
+  <rect x="230" y="180" width="120" height="40" rx="6" fill="#2563eb"/><text x="290" y="205" text-anchor="middle" class="box">Gateway N2</text>
+  <rect x="230" y="270" width="120" height="40" rx="6" fill="#2563eb"/><text x="290" y="295" text-anchor="middle" class="box">Gateway N3</text>
+
+  <line x1="130" y1="195" x2="228" y2="115" stroke="#94a3b8" stroke-width="1.8"/>
+  <line x1="130" y1="200" x2="228" y2="200" stroke="#94a3b8" stroke-width="1.8"/>
+  <line x1="130" y1="205" x2="228" y2="285" stroke="#94a3b8" stroke-width="1.8"/>
+
+  <!-- redis -->
+  <rect x="500" y="160" width="180" height="90" rx="10" fill="#dc2626"/>
+  <text x="590" y="192" text-anchor="middle" class="box">Shared counter store</text>
+  <text x="590" y="210" text-anchor="middle" class="sub">Redis — atomic INCR</text>
+  <text x="590" y="226" text-anchor="middle" class="sub">key: rl:user:123:minute</text>
+
+  <line x1="350" y1="110" x2="498" y2="180" stroke="#dc2626" stroke-width="2" marker-end="url(#r)"/>
+  <line x1="350" y1="200" x2="498" y2="200" stroke="#dc2626" stroke-width="2" marker-end="url(#r)"/>
+  <line x1="350" y1="290" x2="498" y2="220" stroke="#dc2626" stroke-width="2" marker-end="url(#r)"/>
+
+  <!-- redis command -->
+  <rect x="470" y="270" width="290" height="52" rx="6" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="484" y="290" class="mono">count = INCR rl:user:123:minute</text>
+  <text x="484" y="308" class="mono">if count == 1: EXPIRE key 60</text>
+
+  <!-- footer -->
+  <rect x="24" y="340" width="752" height="72" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="40" y="362" class="warn">✗ Local-only counters: with 3 nodes each allowing 5/min, the client effectively gets 15/min.</text>
+  <text x="40" y="382" class="good">✓ Shared atomic counter: all nodes increment the same key, so the real global limit is enforced.</text>
+  <text x="40" y="402" class="note">Trade-offs: a round-trip per request &amp; a hot key. Faster-but-approximate options: per-node quota (limit/N) or local + sync.</text>
+
+  <defs><marker id="r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#dc2626"/></marker></defs>
+</svg>

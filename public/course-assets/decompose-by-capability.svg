@@ -1,0 +1,64 @@
+<svg viewBox="0 0 800 410" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .h { font-size: 13px; font-weight: 700; fill: #ffffff; }
+    .box { font-size: 10px; font-weight: 700; fill: #ffffff; }
+    .note { font-size: 10px; fill: #64748b; }
+    .cap { font-size: 10px; font-weight: 700; fill: #1e293b; }
+  </style>
+
+  <text x="24" y="30" class="title">Cut vertically by capability — not horizontally by layer</text>
+
+  <!-- WRONG: horizontal -->
+  <rect x="24" y="48" width="360" height="330" rx="10" fill="#fef2f2" stroke="#fecaca"/>
+  <rect x="24" y="48" width="360" height="34" rx="10" fill="#dc2626"/>
+  <text x="44" y="71" class="h">✗ By technical layer (anti-pattern)</text>
+
+  <rect x="60" y="104" width="288" height="44" rx="6" fill="#f87171"/><text x="204" y="131" text-anchor="middle" class="box">UI / Frontend service</text>
+  <rect x="60" y="158" width="288" height="44" rx="6" fill="#f87171"/><text x="204" y="185" text-anchor="middle" class="box">Business-logic service</text>
+  <rect x="60" y="212" width="288" height="44" rx="6" fill="#f87171"/><text x="204" y="239" text-anchor="middle" class="box">Data-access service</text>
+
+  <!-- feature change cuts across -->
+  <line x1="80" y1="104" x2="80" y2="256" stroke="#7f1d1d" stroke-width="3" stroke-dasharray="4,3"/>
+  <text x="88" y="288" class="note" fill="#991b1b">One feature change (e.g. "add a</text>
+  <text x="88" y="304" class="note" fill="#991b1b">discount field") touches ALL three</text>
+  <text x="88" y="320" class="note" fill="#991b1b">services → they must deploy together.</text>
+  <text x="60" y="352" class="note" fill="#991b1b">Tight coupling + network hops =</text>
+  <text x="60" y="368" class="note" fill="#991b1b">a distributed monolith.</text>
+
+  <!-- RIGHT: vertical -->
+  <rect x="416" y="48" width="360" height="330" rx="10" fill="#f0fdf4" stroke="#bbf7d0"/>
+  <rect x="416" y="48" width="360" height="34" rx="10" fill="#059669"/>
+  <text x="436" y="71" class="h">✓ By business capability</text>
+
+  <!-- three vertical slices each with layers -->
+  <g>
+    <rect x="436" y="104" width="105" height="180" rx="6" fill="#059669"/>
+    <text x="488" y="124" text-anchor="middle" class="box">Orders</text>
+    <rect x="446" y="134" width="85" height="34" rx="3" fill="#34d399"/><text x="488" y="155" text-anchor="middle" class="cap">UI</text>
+    <rect x="446" y="174" width="85" height="34" rx="3" fill="#34d399"/><text x="488" y="195" text-anchor="middle" class="cap">logic</text>
+    <rect x="446" y="214" width="85" height="34" rx="3" fill="#34d399"/><text x="488" y="235" text-anchor="middle" class="cap">data</text>
+    <rect x="446" y="254" width="85" height="22" rx="3" fill="#065f46"/><text x="488" y="269" text-anchor="middle" class="box">DB</text>
+  </g>
+  <g>
+    <rect x="551" y="104" width="105" height="180" rx="6" fill="#059669"/>
+    <text x="603" y="124" text-anchor="middle" class="box">Payments</text>
+    <rect x="561" y="134" width="85" height="34" rx="3" fill="#34d399"/><text x="603" y="155" text-anchor="middle" class="cap">UI</text>
+    <rect x="561" y="174" width="85" height="34" rx="3" fill="#34d399"/><text x="603" y="195" text-anchor="middle" class="cap">logic</text>
+    <rect x="561" y="214" width="85" height="34" rx="3" fill="#34d399"/><text x="603" y="235" text-anchor="middle" class="cap">data</text>
+    <rect x="561" y="254" width="85" height="22" rx="3" fill="#065f46"/><text x="603" y="269" text-anchor="middle" class="box">DB</text>
+  </g>
+  <g>
+    <rect x="666" y="104" width="100" height="180" rx="6" fill="#059669"/>
+    <text x="716" y="124" text-anchor="middle" class="box">Inventory</text>
+    <rect x="676" y="134" width="80" height="34" rx="3" fill="#34d399"/><text x="716" y="155" text-anchor="middle" class="cap">UI</text>
+    <rect x="676" y="174" width="80" height="34" rx="3" fill="#34d399"/><text x="716" y="195" text-anchor="middle" class="cap">logic</text>
+    <rect x="676" y="214" width="80" height="34" rx="3" fill="#34d399"/><text x="716" y="235" text-anchor="middle" class="cap">data</text>
+    <rect x="676" y="254" width="80" height="22" rx="3" fill="#065f46"/><text x="716" y="269" text-anchor="middle" class="box">DB</text>
+  </g>
+
+  <text x="436" y="308" class="note" fill="#065f46">Each service is a full vertical slice — UI to data —</text>
+  <text x="436" y="324" class="note" fill="#065f46">for one capability, owned by one team.</text>
+  <text x="436" y="348" class="note" fill="#065f46">A feature change stays inside ONE service and</text>
+  <text x="436" y="364" class="note" fill="#065f46">deploys on its own. Real independence.</text>
+</svg>

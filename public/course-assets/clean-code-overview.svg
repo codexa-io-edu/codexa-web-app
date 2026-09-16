@@ -1,0 +1,50 @@
+<svg viewBox="0 0 820 530" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <rect width="820" height="530" fill="#f8fafc"/>
+  <text x="410" y="36" text-anchor="middle" font-size="22" font-weight="700" fill="#0f172a">Clean Code Principles</text>
+  <text x="410" y="60" text-anchor="middle" font-size="13" fill="#64748b">Code that works is necessary; code that is clear, lean, and focused is what makes systems maintainable.</text>
+  <defs><marker id="ov_a" markerWidth="12" markerHeight="12" refX="8" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#94a3b8"/></marker></defs>
+
+  <rect x="40" y="78" width="740" height="74" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <rect x="56" y="90" width="100" height="50" rx="7" fill="#2563eb"/>
+  <text x="106" y="121" text-anchor="middle" font-size="16" font-weight="700" fill="#fff">DRY</text>
+  <text x="172" y="108" font-size="12" font-weight="700" fill="#1d4ed8">Don't Repeat Yourself — every piece of knowledge has one home.</text>
+  <text x="172" y="128" font-size="11" fill="#334155">Eliminate duplication so a change needs to happen in exactly one place; but avoid the</text>
+  <text x="172" y="143" font-size="11" fill="#334155">trap of over-abstracting things that merely look similar.</text>
+
+  <line x1="410" y1="152" x2="410" y2="166" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#ov_a)"/>
+
+  <rect x="40" y="168" width="740" height="74" rx="10" fill="#f0fdf4" stroke="#059669" stroke-width="2"/>
+  <rect x="56" y="180" width="100" height="50" rx="7" fill="#059669"/>
+  <text x="106" y="211" text-anchor="middle" font-size="16" font-weight="700" fill="#fff">KISS</text>
+  <text x="172" y="198" font-size="12" font-weight="700" fill="#047857">Keep It Simple — complexity is the enemy of maintainability.</text>
+  <text x="172" y="218" font-size="11" fill="#334155">Choose the simplest solution that correctly solves the problem. Complexity compounds;</text>
+  <text x="172" y="233" font-size="11" fill="#334155">every unnecessary layer multiplies the cognitive cost for every future reader.</text>
+
+  <line x1="410" y1="242" x2="410" y2="256" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#ov_a)"/>
+
+  <rect x="40" y="258" width="740" height="74" rx="10" fill="#fff7ed" stroke="#d97706" stroke-width="2"/>
+  <rect x="56" y="270" width="100" height="50" rx="7" fill="#d97706"/>
+  <text x="106" y="301" text-anchor="middle" font-size="16" font-weight="700" fill="#fff">YAGNI</text>
+  <text x="172" y="288" font-size="12" font-weight="700" fill="#b45309">You Aren't Gonna Need It — don't build what isn't asked for.</text>
+  <text x="172" y="308" font-size="11" fill="#334155">Speculative generality adds code that must be maintained, tested, and understood but</text>
+  <text x="172" y="323" font-size="11" fill="#334155">may never be used. Build for today's requirements; refactor when tomorrow's arrive.</text>
+
+  <line x1="410" y1="332" x2="410" y2="346" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#ov_a)"/>
+
+  <rect x="40" y="348" width="740" height="74" rx="10" fill="#faf5ff" stroke="#7c3aed" stroke-width="2"/>
+  <rect x="56" y="360" width="100" height="50" rx="7" fill="#7c3aed"/>
+  <text x="106" y="391" text-anchor="middle" font-size="16" font-weight="700" fill="#fff">SRP</text>
+  <text x="172" y="378" font-size="12" font-weight="700" fill="#6d28d9">Single Responsibility — one reason to change, one job to do.</text>
+  <text x="172" y="398" font-size="11" fill="#334155">Applies at every level: method, class, module. A unit that mixes concerns is coupled to</text>
+  <text x="172" y="413" font-size="11" fill="#334155">all of them and must change whenever any changes — even unrelated ones.</text>
+
+  <line x1="410" y1="422" x2="410" y2="436" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#ov_a)"/>
+
+  <rect x="40" y="438" width="740" height="74" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+  <rect x="56" y="450" width="100" height="50" rx="7" fill="#0f766e"/>
+  <text x="106" y="475" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">Separation</text>
+  <text x="106" y="492" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">of Concerns</text>
+  <text x="172" y="468" font-size="12" font-weight="700" fill="#065f46">SoC — partition the system so each part handles exactly one concern.</text>
+  <text x="172" y="488" font-size="11" fill="#334155">Extends SRP to architecture: layering, domain isolation, cross-cutting concerns (logging,</text>
+  <text x="172" y="503" font-size="11" fill="#334155">transactions, security) handled once and consistently.</text>
+</svg>

@@ -1,0 +1,41 @@
+<svg viewBox="0 0 820 490" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <rect width="820" height="490" fill="#f8fafc"/>
+  <text x="410" y="34" text-anchor="middle" font-size="21" font-weight="700" fill="#0f172a">Which Concurrent Collection Should I Use?</text>
+  <text x="410" y="58" text-anchor="middle" font-size="13" fill="#64748b">Start from the data shape and access pattern</text>
+
+  <!-- header row -->
+  <rect x="30" y="78" width="180" height="30" rx="5" fill="#e0e7ff" stroke="#6366f1"/><text x="120" y="98" text-anchor="middle" font-size="11.5" font-weight="700" fill="#4338ca">I need...</text>
+  <rect x="220" y="78" width="330" height="30" rx="5" fill="#e0e7ff" stroke="#6366f1"/><text x="385" y="98" text-anchor="middle" font-size="11.5" font-weight="700" fill="#4338ca">Use</text>
+  <rect x="560" y="78" width="230" height="30" rx="5" fill="#e0e7ff" stroke="#6366f1"/><text x="675" y="98" text-anchor="middle" font-size="11.5" font-weight="700" fill="#4338ca">Because</text>
+
+  <!-- rows -->
+  <g font-size="10.5">
+    <rect x="30" y="114" width="180" height="46" rx="5" fill="#eff6ff" stroke="#93c5fd"/><text x="42" y="134" font-weight="700" fill="#1e3a8a">A shared map</text><text x="42" y="150" fill="#334155">(key-value)</text>
+    <rect x="220" y="114" width="330" height="46" rx="5" fill="#ffffff" stroke="#cbd5e1"/><text x="232" y="134" font-weight="700" fill="#047857">ConcurrentHashMap</text><text x="232" y="150" fill="#334155" font-size="9.5">merge/compute/putIfAbsent for atomic updates</text>
+    <rect x="560" y="114" width="230" height="46" rx="5" fill="#ffffff" stroke="#cbd5e1"/><text x="572" y="140" fill="#334155" font-size="9.5">the default high-concurrency map</text>
+
+    <rect x="30" y="164" width="180" height="46" rx="5" fill="#eff6ff" stroke="#93c5fd"/><text x="42" y="184" font-weight="700" fill="#1e3a8a">A sorted map</text><text x="42" y="200" fill="#334155">/ range queries</text>
+    <rect x="220" y="164" width="330" height="46" rx="5" fill="#ffffff" stroke="#cbd5e1"/><text x="232" y="190" font-weight="700" fill="#047857">ConcurrentSkipListMap</text>
+    <rect x="560" y="164" width="230" height="46" rx="5" fill="#ffffff" stroke="#cbd5e1"/><text x="572" y="190" fill="#334155" font-size="9.5">concurrent + keys kept in order</text>
+
+    <rect x="30" y="214" width="180" height="46" rx="5" fill="#f0fdf4" stroke="#6ee7b7"/><text x="42" y="234" font-weight="700" fill="#065f46">A list, read-</text><text x="42" y="250" fill="#334155">mostly</text>
+    <rect x="220" y="214" width="330" height="46" rx="5" fill="#ffffff" stroke="#cbd5e1"/><text x="232" y="240" font-weight="700" fill="#047857">CopyOnWriteArrayList</text>
+    <rect x="560" y="214" width="230" height="46" rx="5" fill="#ffffff" stroke="#cbd5e1"/><text x="572" y="234" fill="#334155" font-size="9.5">lock-free reads; writes rare</text><text x="572" y="250" fill="#b91c1c" font-size="9">(bad if writes are frequent)</text>
+
+    <rect x="30" y="264" width="180" height="46" rx="5" fill="#fff7ed" stroke="#fdba74"/><text x="42" y="284" font-weight="700" fill="#7c2d12">A queue for</text><text x="42" y="300" fill="#334155">producer-consumer</text>
+    <rect x="220" y="264" width="330" height="46" rx="5" fill="#ffffff" stroke="#cbd5e1"/><text x="232" y="290" font-weight="700" fill="#047857">ArrayBlockingQueue (bounded)</text>
+    <rect x="560" y="264" width="230" height="46" rx="5" fill="#ffffff" stroke="#cbd5e1"/><text x="572" y="290" fill="#334155" font-size="9.5">blocks + backpressure</text>
+
+    <rect x="30" y="314" width="180" height="46" rx="5" fill="#fff7ed" stroke="#fdba74"/><text x="42" y="334" font-weight="700" fill="#7c2d12">A fast non-</text><text x="42" y="350" fill="#334155">blocking queue</text>
+    <rect x="220" y="314" width="330" height="46" rx="5" fill="#ffffff" stroke="#cbd5e1"/><text x="232" y="340" font-weight="700" fill="#047857">ConcurrentLinkedQueue</text>
+    <rect x="560" y="314" width="230" height="46" rx="5" fill="#ffffff" stroke="#cbd5e1"/><text x="572" y="334" fill="#334155" font-size="9.5">CAS-based, never blocks</text><text x="572" y="350" fill="#334155" font-size="9">(poll returns null if empty)</text>
+
+    <rect x="30" y="364" width="180" height="46" rx="5" fill="#f0fdf4" stroke="#6ee7b7"/><text x="42" y="384" font-weight="700" fill="#065f46">A set</text>
+    <rect x="220" y="364" width="330" height="46" rx="5" fill="#ffffff" stroke="#cbd5e1"/><text x="232" y="384" font-weight="700" fill="#047857">ConcurrentHashMap.newKeySet()</text><text x="232" y="400" fill="#334155" font-size="9.5">or CopyOnWriteArraySet if read-mostly</text>
+    <rect x="560" y="364" width="230" height="46" rx="5" fill="#ffffff" stroke="#cbd5e1"/><text x="572" y="390" fill="#334155" font-size="9.5">CHM-backed = high concurrency</text>
+  </g>
+
+  <rect x="30" y="424" width="760" height="56" rx="8" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+  <text x="410" y="446" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6d28d9">Golden rule: reach for a purpose-built concurrent collection BEFORE wrapping a plain one in your own locks.</text>
+  <text x="410" y="466" text-anchor="middle" font-size="10.5" fill="#334155">And prefer its atomic compound methods (merge, compute, putIfAbsent) over check-then-act sequences.</text>
+</svg>

@@ -1,0 +1,48 @@
+<svg viewBox="0 0 800 430" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .box { font-size: 11px; font-weight: 700; fill: #ffffff; }
+    .note { font-size: 10px; fill: #64748b; }
+    .lbl { font-size: 10.5px; font-weight: 700; fill: #1e293b; }
+    .bad { font-size: 10px; font-weight: 700; fill: #dc2626; }
+  </style>
+
+  <text x="24" y="30" class="title">The transactional outbox: one atomic write, then relay</text>
+
+  <!-- dual write problem inset -->
+  <rect x="24" y="48" width="330" height="120" rx="10" fill="#fef2f2" stroke="#fecaca"/>
+  <text x="40" y="70" class="lbl">The dual-write problem it solves</text>
+  <text x="40" y="92" class="note">Writing to the DB and publishing to the broker as</text>
+  <text x="40" y="108" class="note">two separate steps can partially fail:</text>
+  <text x="40" y="128" class="bad">DB commit ✓  →  crash  →  publish ✗</text>
+  <text x="40" y="146" class="note">Now the data changed but no event was sent —</text>
+  <text x="40" y="162" class="note">state and stream are inconsistent.</text>
+
+  <!-- the fix -->
+  <rect x="374" y="48" width="402" height="120" rx="10" fill="#f0fdf4" stroke="#bbf7d0"/>
+  <text x="390" y="70" class="lbl">The fix: write both in ONE local transaction</text>
+  <rect x="390" y="84" width="370" height="66" rx="6" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="404" y="104" class="note">BEGIN;</text>
+  <text x="404" y="122" class="note">  UPDATE orders SET status='placed' …</text>
+  <text x="404" y="140" class="note">  INSERT INTO outbox (event) VALUES (…);   COMMIT;</text>
+
+  <!-- flow -->
+  <rect x="40" y="220" width="150" height="70" rx="8" fill="#2563eb"/><text x="115" y="248" text-anchor="middle" class="box">Service DB</text><text x="115" y="266" text-anchor="middle" class="note" fill="#dbeafe">orders + outbox tables</text>
+
+  <rect x="280" y="220" width="150" height="70" rx="8" fill="#d97706"/><text x="355" y="248" text-anchor="middle" class="box">Relay / CDC</text><text x="355" y="266" text-anchor="middle" class="note" fill="#fff7ed">reads outbox, publishes</text>
+
+  <rect x="520" y="220" width="120" height="70" rx="8" fill="#7c3aed"/><text x="580" y="255" text-anchor="middle" class="box">Broker</text>
+
+  <rect x="680" y="310" width="96" height="60" rx="8" fill="#059669"/><text x="728" y="338" text-anchor="middle" class="box">Consumer</text><text x="728" y="354" text-anchor="middle" class="note" fill="#dcfce7">+ inbox dedup</text>
+
+  <line x1="190" y1="255" x2="278" y2="255" stroke="#94a3b8" stroke-width="2" marker-end="url(#a)"/><text x="196" y="246" class="note">poll outbox</text>
+  <line x1="430" y1="255" x2="518" y2="255" stroke="#94a3b8" stroke-width="2" marker-end="url(#a)"/><text x="440" y="246" class="note">publish</text>
+  <line x1="580" y1="290" x2="700" y2="308" stroke="#94a3b8" stroke-width="2" marker-end="url(#a)"/>
+
+  <!-- footer -->
+  <rect x="24" y="384" width="640" height="40" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="40" y="400" class="note">The relay may publish a row more than once (at-least-once), so the consumer keeps an <tspan font-weight="700">inbox / dedup table</tspan> to apply each event id once —</text>
+  <text x="40" y="416" class="note">giving effectively-once end to end. This is the practical exactly-once pattern between a database and a message broker.</text>
+
+  <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#94a3b8"/></marker></defs>
+</svg>

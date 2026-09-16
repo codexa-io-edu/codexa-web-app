@@ -1,0 +1,44 @@
+<svg viewBox="0 0 800 380" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .box { font-size: 12px; font-weight: 700; fill: #ffffff; }
+    .sub { font-size: 9.5px; fill: #e2e8f0; }
+    .step { font-size: 10.5px; font-weight: 700; fill: #2563eb; }
+    .note { font-size: 10.5px; fill: #64748b; }
+    .job { font-size: 10px; font-weight: 700; fill: #1e293b; }
+  </style>
+
+  <text x="24" y="30" class="title">How a forward proxy handles an outbound request</text>
+
+  <!-- client -->
+  <rect x="40" y="150" width="120" height="60" rx="8" fill="#64748b"/><text x="100" y="176" text-anchor="middle" class="box">Client</text><text x="100" y="194" text-anchor="middle" class="sub">configured to use proxy</text>
+
+  <!-- proxy -->
+  <rect x="330" y="130" width="140" height="100" rx="10" fill="#2563eb"/><text x="400" y="165" text-anchor="middle" class="box">Forward Proxy</text><text x="400" y="184" text-anchor="middle" class="sub">e.g. Squid / Zscaler</text><text x="400" y="202" text-anchor="middle" class="sub">IP 198.51.100.9</text>
+
+  <!-- origin -->
+  <rect x="640" y="150" width="120" height="60" rx="8" fill="#059669"/><text x="700" y="176" text-anchor="middle" class="box">Origin server</text><text x="700" y="194" text-anchor="middle" class="sub">sees proxy's IP only</text>
+
+  <!-- arrows -->
+  <line x1="160" y1="172" x2="328" y2="172" stroke="#2563eb" stroke-width="2.2" marker-end="url(#b)"/>
+  <text x="180" y="164" class="step">1 · GET http://site.com</text>
+  <line x1="470" y1="172" x2="638" y2="172" stroke="#2563eb" stroke-width="2.2" marker-end="url(#b)"/>
+  <text x="500" y="164" class="step">2 · proxy fetches it</text>
+  <line x1="638" y1="196" x2="472" y2="196" stroke="#059669" stroke-width="2" marker-end="url(#g)"/>
+  <text x="512" y="212" class="step">3 · response</text>
+  <line x1="328" y1="196" x2="162" y2="196" stroke="#059669" stroke-width="2" marker-end="url(#g)"/>
+  <text x="180" y="212" class="step">4 · returned to client</text>
+
+  <!-- jobs -->
+  <rect x="280" y="256" width="240" height="104" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="296" y="278" class="job">Along the way the proxy can:</text>
+  <text x="296" y="298" class="note">• filter / block (policy, malware)</text>
+  <text x="296" y="316" class="note">• cache for reuse by other clients</text>
+  <text x="296" y="334" class="note">• log every request (audit)</text>
+  <text x="296" y="352" class="note">• hide the client's real IP</text>
+
+  <defs>
+    <marker id="b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#2563eb"/></marker>
+    <marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#059669"/></marker>
+  </defs>
+</svg>

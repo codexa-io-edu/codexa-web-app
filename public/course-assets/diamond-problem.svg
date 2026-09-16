@@ -1,0 +1,40 @@
+<svg viewBox="0 0 700 400" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <rect width="700" height="400" fill="#f8fafc"/>
+  <text x="350" y="34" text-anchor="middle" font-size="21" font-weight="700" fill="#0f172a">The Diamond Problem</text>
+  <text x="350" y="58" text-anchor="middle" font-size="13" fill="#64748b">Why most languages forbid multiple inheritance of state</text>
+
+  <defs>
+    <marker id="tri2" markerWidth="16" markerHeight="16" refX="8" refY="8" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L16,8 L0,16 Z" fill="#ffffff" stroke="#475569" stroke-width="1.5"/>
+    </marker>
+  </defs>
+
+  <!-- top -->
+  <rect x="270" y="78" width="160" height="60" rx="10" fill="#e0e7ff" stroke="#4338ca" stroke-width="2.5"/>
+  <text x="350" y="103" text-anchor="middle" font-size="14" font-weight="700" fill="#3730a3">Device</text>
+  <text x="350" y="124" text-anchor="middle" font-size="11" fill="#4f46e5" font-family="monospace">boot()</text>
+
+  <!-- left -->
+  <rect x="90" y="190" width="170" height="60" rx="10" fill="#dcfce7" stroke="#059669" stroke-width="2"/>
+  <text x="175" y="215" text-anchor="middle" font-size="13" font-weight="700" fill="#047857">Scanner</text>
+  <text x="175" y="236" text-anchor="middle" font-size="11" fill="#065f46" font-family="monospace">boot()  // v1</text>
+
+  <!-- right -->
+  <rect x="440" y="190" width="170" height="60" rx="10" fill="#dcfce7" stroke="#059669" stroke-width="2"/>
+  <text x="525" y="215" text-anchor="middle" font-size="13" font-weight="700" fill="#047857">Printer</text>
+  <text x="525" y="236" text-anchor="middle" font-size="11" fill="#065f46" font-family="monospace">boot()  // v2</text>
+
+  <!-- bottom -->
+  <rect x="265" y="300" width="170" height="60" rx="10" fill="#fee2e2" stroke="#dc2626" stroke-width="2.5"/>
+  <text x="350" y="325" text-anchor="middle" font-size="13" font-weight="700" fill="#b91c1c">Photocopier</text>
+  <text x="350" y="346" text-anchor="middle" font-size="10.5" fill="#991b1b">which boot()?  &#10007;</text>
+
+  <!-- lines -->
+  <line x1="175" y1="190" x2="315" y2="140" stroke="#475569" stroke-width="2" marker-end="url(#tri2)"/>
+  <line x1="525" y1="190" x2="385" y2="140" stroke="#475569" stroke-width="2" marker-end="url(#tri2)"/>
+  <line x1="300" y1="300" x2="200" y2="252" stroke="#475569" stroke-width="2" marker-end="url(#tri2)"/>
+  <line x1="400" y1="300" x2="500" y2="252" stroke="#475569" stroke-width="2" marker-end="url(#tri2)"/>
+
+  <text x="360" y="250" font-size="11.5" fill="#b91c1c">Photocopier inherits boot() from BOTH paths.</text>
+  <text x="360" y="270" font-size="11.5" fill="#b91c1c">The compiler cannot decide which one wins.</text>
+</svg>

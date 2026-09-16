@@ -1,0 +1,107 @@
+<svg viewBox="0 0 800 560" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .card-t { font-size: 15px; font-weight: 700; fill: #ffffff; }
+    .card-s { font-size: 11px; fill: #e0e7ff; }
+    .h { font-size: 11px; font-weight: 700; fill: #1e293b; }
+    .c { font-size: 11px; fill: #334155; }
+    .mono { font-size: 11px; fill: #334155; font-family: 'SFMono-Regular', Consolas, monospace; }
+    .use { font-size: 10.5px; fill: #64748b; }
+    .db { font-size: 10.5px; font-weight: 700; fill: #2563eb; }
+  </style>
+
+  <text x="24" y="30" class="title">The four NoSQL data models</text>
+
+  <!-- KEY-VALUE -->
+  <rect x="24" y="52" width="366" height="230" rx="10" fill="#ffffff" stroke="#cbd5e1"/>
+  <rect x="24" y="52" width="366" height="46" rx="10" fill="#2563eb"/>
+  <rect x="24" y="80" width="366" height="18" fill="#2563eb"/>
+  <text x="40" y="74" class="card-t">1 · Key–Value</text>
+  <text x="40" y="92" class="card-s">simplest — a giant hash map: get/set by key</text>
+
+  <rect x="40" y="112" width="150" height="26" rx="4" fill="#eff6ff" stroke="#93c5fd"/>
+  <text x="50" y="129" class="mono">"user:42"</text>
+  <text x="200" y="129" class="c">→</text>
+  <rect x="218" y="112" width="156" height="26" rx="4" fill="#f1f5f9" stroke="#cbd5e1"/>
+  <text x="228" y="129" class="mono">{name:"Asha"...}</text>
+
+  <rect x="40" y="146" width="150" height="26" rx="4" fill="#eff6ff" stroke="#93c5fd"/>
+  <text x="50" y="163" class="mono">"cart:42"</text>
+  <text x="200" y="163" class="c">→</text>
+  <rect x="218" y="146" width="156" height="26" rx="4" fill="#f1f5f9" stroke="#cbd5e1"/>
+  <text x="228" y="163" class="mono">["sku1","sku9"]</text>
+
+  <text x="40" y="200" class="h">Best for</text>
+  <text x="40" y="218" class="use">Caching, sessions, feature flags, counters,</text>
+  <text x="40" y="234" class="use">user preferences — O(1) lookups by key.</text>
+  <text x="40" y="262" class="db">Redis · DynamoDB · Riak · Memcached</text>
+
+  <!-- DOCUMENT -->
+  <rect x="410" y="52" width="366" height="230" rx="10" fill="#ffffff" stroke="#cbd5e1"/>
+  <rect x="410" y="52" width="366" height="46" rx="10" fill="#059669"/>
+  <rect x="410" y="80" width="366" height="18" fill="#059669"/>
+  <text x="426" y="74" class="card-t">2 · Document</text>
+  <text x="426" y="92" class="card-s">self-contained JSON/BSON docs, nested fields</text>
+
+  <rect x="426" y="112" width="334" height="94" rx="6" fill="#f0fdf4" stroke="#86efac"/>
+  <text x="440" y="130" class="mono">{ "_id": 42,</text>
+  <text x="440" y="146" class="mono">  "name": "Asha",</text>
+  <text x="440" y="162" class="mono">  "address": { "city": "Pune" },</text>
+  <text x="440" y="178" class="mono">  "orders": [ {id:101}, {id:102} ] }</text>
+  <text x="440" y="197" class="use">↑ related data embedded in one document</text>
+
+  <text x="426" y="228" class="h">Best for</text>
+  <text x="426" y="246" class="use">General-purpose apps, catalogs, user profiles,</text>
+  <text x="426" y="262" class="use">CMS — query on any field, flexible schema.</text>
+  <text x="426" y="278" class="db" fill="#059669">MongoDB · Couchbase · Firestore</text>
+
+  <!-- WIDE-COLUMN -->
+  <rect x="24" y="300" width="366" height="240" rx="10" fill="#ffffff" stroke="#cbd5e1"/>
+  <rect x="24" y="300" width="366" height="46" rx="10" fill="#d97706"/>
+  <rect x="24" y="328" width="366" height="18" fill="#d97706"/>
+  <text x="40" y="322" class="card-t">3 · Wide-Column</text>
+  <text x="40" y="340" class="card-s">rows keyed by partition; columns vary per row</text>
+
+  <!-- mini table -->
+  <rect x="40" y="360" width="334" height="96" rx="6" fill="#fffbeb" stroke="#fcd34d"/>
+  <line x1="130" y1="360" x2="130" y2="456" stroke="#fde68a"/>
+  <line x1="40" y1="386" x2="374" y2="386" stroke="#fde68a"/>
+  <text x="50" y="379" class="h">row key</text>
+  <text x="140" y="379" class="h">dynamic columns →</text>
+  <text x="50" y="406" class="mono">sensor:1</text>
+  <text x="140" y="406" class="mono">t1=21° t2=22° t3=23°</text>
+  <text x="50" y="430" class="mono">sensor:2</text>
+  <text x="140" y="430" class="mono">t1=19° t5=20°</text>
+  <text x="140" y="450" class="use">rows can have different columns (sparse)</text>
+
+  <text x="40" y="482" class="h">Best for</text>
+  <text x="40" y="500" class="use">Time-series, IoT, event logs, huge write volume</text>
+  <text x="40" y="516" class="use">at scale; queries over massive datasets.</text>
+  <text x="40" y="533" class="db" fill="#d97706">Cassandra · HBase · Bigtable · ScyllaDB</text>
+
+  <!-- GRAPH -->
+  <rect x="410" y="300" width="366" height="240" rx="10" fill="#ffffff" stroke="#cbd5e1"/>
+  <rect x="410" y="300" width="366" height="46" rx="10" fill="#7c3aed"/>
+  <rect x="410" y="328" width="366" height="18" fill="#7c3aed"/>
+  <text x="426" y="322" class="card-t">4 · Graph</text>
+  <text x="426" y="340" class="card-s">nodes + edges with properties — relationships</text>
+
+  <!-- graph drawing -->
+  <g>
+    <circle cx="470" cy="400" r="20" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+    <text x="456" y="404" class="mono" fill="#6d28d9">Asha</text>
+    <circle cx="600" cy="380" r="20" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+    <text x="588" y="384" class="mono" fill="#6d28d9">Ravi</text>
+    <circle cx="600" cy="460" r="20" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+    <text x="580" y="464" class="mono" fill="#6d28d9">Movie</text>
+    <line x1="490" y1="396" x2="580" y2="384" stroke="#7c3aed" stroke-width="1.5"/>
+    <text x="500" y="378" class="use">FOLLOWS</text>
+    <line x1="482" y1="418" x2="584" y2="452" stroke="#7c3aed" stroke-width="1.5"/>
+    <text x="500" y="450" class="use">LIKES</text>
+  </g>
+
+  <text x="426" y="486" class="h">Best for</text>
+  <text x="426" y="504" class="use">Social graphs, recommendations, fraud rings,</text>
+  <text x="426" y="520" class="use">knowledge graphs — fast multi-hop traversals.</text>
+  <text x="426" y="536" class="db" fill="#7c3aed">Neo4j · Neptune · JanusGraph</text>
+</svg>

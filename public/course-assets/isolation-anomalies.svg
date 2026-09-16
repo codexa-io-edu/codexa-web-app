@@ -1,0 +1,50 @@
+<svg viewBox="0 0 780 470" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .name { font-size: 13px; font-weight: 700; fill: #1e293b; }
+    .txn { font-size: 11px; font-weight: 700; fill: #475569; }
+    .op { font-size: 10.5px; fill: #334155; }
+    .bad { font-size: 10.5px; font-weight: 700; fill: #dc2626; }
+    .note { font-size: 10.5px; fill: #64748b; }
+  </style>
+
+  <text x="24" y="30" class="title">The three read anomalies isolation prevents</text>
+  <text x="24" y="48" class="note">Two transactions (T1, T2) running at the same time. Time flows left → right.</text>
+
+  <!-- ===== DIRTY READ ===== -->
+  <text x="24" y="82" class="name">1 · Dirty read — reading uncommitted data that later disappears</text>
+  <line x1="120" y1="96" x2="756" y2="96" stroke="#e2e8f0"/>
+  <line x1="120" y1="132" x2="756" y2="132" stroke="#e2e8f0"/>
+  <text x="30" y="100" class="txn">T1</text>
+  <text x="30" y="136" class="txn">T2</text>
+  <rect x="140" y="86" width="150" height="20" rx="3" fill="#fca5a5"/><text x="150" y="100" class="op">write X=99 (uncommitted)</text>
+  <rect x="560" y="86" width="120" height="20" rx="3" fill="#94a3b8"/><text x="570" y="100" class="op">ROLLBACK</text>
+  <rect x="330" y="122" width="140" height="20" rx="3" fill="#fecaca"/><text x="340" y="136" class="bad">reads X=99 (dirty!)</text>
+  <text x="330" y="160" class="bad">T2 acted on a value that never really existed.</text>
+
+  <!-- ===== NON-REPEATABLE READ ===== -->
+  <text x="24" y="200" class="name">2 · Non-repeatable read — same row read twice gives different values</text>
+  <line x1="120" y1="214" x2="756" y2="214" stroke="#e2e8f0"/>
+  <line x1="120" y1="250" x2="756" y2="250" stroke="#e2e8f0"/>
+  <text x="30" y="218" class="txn">T1</text>
+  <text x="30" y="254" class="txn">T2</text>
+  <rect x="140" y="204" width="110" height="20" rx="3" fill="#bfdbfe"/><text x="150" y="218" class="op">read X = 1</text>
+  <rect x="560" y="204" width="150" height="20" rx="3" fill="#fecaca"/><text x="570" y="218" class="bad">read X = 2  (changed!)</text>
+  <rect x="330" y="240" width="180" height="20" rx="3" fill="#bbf7d0"/><text x="340" y="254" class="op">write X=2, COMMIT</text>
+  <text x="330" y="278" class="bad">The value shifted under T1 mid-transaction.</text>
+
+  <!-- ===== PHANTOM READ ===== -->
+  <text x="24" y="318" class="name">3 · Phantom read — same query returns a different set of rows</text>
+  <line x1="120" y1="332" x2="756" y2="332" stroke="#e2e8f0"/>
+  <line x1="120" y1="368" x2="756" y2="368" stroke="#e2e8f0"/>
+  <text x="30" y="336" class="txn">T1</text>
+  <text x="30" y="372" class="txn">T2</text>
+  <rect x="140" y="322" width="180" height="20" rx="3" fill="#bfdbfe"/><text x="150" y="336" class="op">SELECT count → 2 rows</text>
+  <rect x="560" y="322" width="180" height="20" rx="3" fill="#fecaca"/><text x="570" y="336" class="bad">same query → 3 rows</text>
+  <rect x="330" y="358" width="200" height="20" rx="3" fill="#bbf7d0"/><text x="340" y="372" class="op">INSERT matching row, COMMIT</text>
+  <text x="330" y="396" class="bad">A new row "appeared" inside T1's transaction.</text>
+
+  <rect x="24" y="414" width="732" height="44" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="40" y="432" class="note">Dirty read = uncommitted data · Non-repeatable read = an existing row <tspan font-weight="700">changed</tspan> · Phantom read = the <tspan font-weight="700">set of rows</tspan> changed.</text>
+  <text x="40" y="450" class="note">Higher isolation levels prevent more of these — at the cost of concurrency. (See the levels matrix.)</text>
+</svg>

@@ -1,0 +1,50 @@
+<svg viewBox="0 0 820 440" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <rect width="820" height="440" fill="#f8fafc"/>
+  <text x="410" y="34" text-anchor="middle" font-size="21" font-weight="700" fill="#0f172a">Deadlock: The Circular Wait</text>
+  <text x="410" y="58" text-anchor="middle" font-size="13" fill="#64748b">Each thread holds one lock and waits for the other's — a cycle no one can break</text>
+
+  <defs>
+    <marker id="dw_hold" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#059669"/></marker>
+    <marker id="dw_wait" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#dc2626"/></marker>
+  </defs>
+
+  <!-- Thread 1 -->
+  <rect x="90" y="110" width="150" height="70" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="165" y="140" text-anchor="middle" font-size="13" font-weight="700" fill="#1d4ed8">Thread 1</text>
+  <text x="165" y="162" text-anchor="middle" font-size="9.5" fill="#334155">transfer(A &#8594; B)</text>
+
+  <!-- Thread 2 -->
+  <rect x="580" y="110" width="150" height="70" rx="10" fill="#fff7ed" stroke="#d97706" stroke-width="2"/>
+  <text x="655" y="140" text-anchor="middle" font-size="13" font-weight="700" fill="#b45309">Thread 2</text>
+  <text x="655" y="162" text-anchor="middle" font-size="9.5" fill="#334155">transfer(B &#8594; A)</text>
+
+  <!-- Lock A -->
+  <circle cx="230" cy="320" r="42" fill="#dcfce7" stroke="#059669" stroke-width="2.4"/>
+  <text x="230" y="316" text-anchor="middle" font-size="13" font-weight="700" fill="#047857">Lock A</text>
+  <text x="230" y="334" text-anchor="middle" font-size="8.5" fill="#065f46">account A</text>
+
+  <!-- Lock B -->
+  <circle cx="590" cy="320" r="42" fill="#dcfce7" stroke="#059669" stroke-width="2.4"/>
+  <text x="590" y="316" text-anchor="middle" font-size="13" font-weight="700" fill="#047857">Lock B</text>
+  <text x="590" y="334" text-anchor="middle" font-size="8.5" fill="#065f46">account B</text>
+
+  <!-- T1 holds A -->
+  <line x1="150" y1="180" x2="210" y2="282" stroke="#059669" stroke-width="2.4" marker-end="url(#dw_hold)"/>
+  <text x="120" y="240" font-size="10" font-weight="700" fill="#047857">holds</text>
+
+  <!-- T1 waits for B -->
+  <line x1="240" y1="140" x2="560" y2="300" stroke="#dc2626" stroke-width="2.4" stroke-dasharray="6 4" marker-end="url(#dw_wait)"/>
+  <text x="400" y="205" font-size="10" font-weight="700" fill="#b91c1c">waits for Lock B</text>
+
+  <!-- T2 holds B -->
+  <line x1="670" y1="180" x2="610" y2="282" stroke="#059669" stroke-width="2.4" marker-end="url(#dw_hold)"/>
+  <text x="690" y="240" font-size="10" font-weight="700" fill="#047857">holds</text>
+
+  <!-- T2 waits for A -->
+  <line x1="580" y1="140" x2="260" y2="300" stroke="#dc2626" stroke-width="2.4" stroke-dasharray="6 4" marker-end="url(#dw_wait)"/>
+  <text x="420" y="270" font-size="10" font-weight="700" fill="#b91c1c">waits for Lock A</text>
+
+  <rect x="150" y="392" width="520" height="40" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="1.4"/>
+  <text x="410" y="410" text-anchor="middle" font-size="10.5" font-weight="700" fill="#b91c1c">T1 locked A then wants B; T2 locked B then wants A. Both wait forever.</text>
+  <text x="410" y="426" text-anchor="middle" font-size="9.5" fill="#991b1b">The root cause: two locks acquired in OPPOSITE orders.</text>
+</svg>

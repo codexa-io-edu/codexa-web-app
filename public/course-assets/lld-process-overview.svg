@@ -1,0 +1,40 @@
+<svg viewBox="0 0 820 500" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <rect width="820" height="500" fill="#f8fafc"/>
+  <text x="410" y="36" text-anchor="middle" font-size="22" font-weight="700" fill="#0f172a">LLD Problem Solving — The Five-Stage Process</text>
+  <text x="410" y="60" text-anchor="middle" font-size="13" fill="#64748b">Every LLD problem — whether an interview question or a real design — follows the same disciplined sequence</text>
+  <defs><marker id="lld_a" markerWidth="12" markerHeight="12" refX="8" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#475569"/></marker></defs>
+
+  <rect x="40" y="84" width="740" height="70" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <rect x="56" y="96" width="50" height="46" rx="6" fill="#2563eb"/>
+  <text x="81" y="125" text-anchor="middle" font-size="18" font-weight="700" fill="#fff">1</text>
+  <text x="122" y="116" font-size="13" font-weight="700" fill="#1d4ed8">OO Design Process</text>
+  <text x="122" y="136" font-size="11" fill="#334155">The disciplined iterative loop: understand → model → refine → validate. The mindset before any code.</text>
+  <line x1="410" y1="154" x2="410" y2="170" stroke="#94a3b8" stroke-width="2" marker-end="url(#lld_a)"/>
+
+  <rect x="40" y="172" width="740" height="70" rx="10" fill="#f0fdf4" stroke="#059669" stroke-width="2"/>
+  <rect x="56" y="184" width="50" height="46" rx="6" fill="#059669"/>
+  <text x="81" y="213" text-anchor="middle" font-size="18" font-weight="700" fill="#fff">2</text>
+  <text x="122" y="204" font-size="13" font-weight="700" fill="#047857">Requirement Analysis</text>
+  <text x="122" y="224" font-size="11" fill="#334155">Extract functional &amp; non-functional requirements. Ask the right clarifying questions. Scope the problem.</text>
+  <line x1="410" y1="242" x2="410" y2="258" stroke="#94a3b8" stroke-width="2" marker-end="url(#lld_a)"/>
+
+  <rect x="40" y="260" width="740" height="70" rx="10" fill="#fff7ed" stroke="#d97706" stroke-width="2"/>
+  <rect x="56" y="272" width="50" height="46" rx="6" fill="#d97706"/>
+  <text x="81" y="301" text-anchor="middle" font-size="18" font-weight="700" fill="#fff">3</text>
+  <text x="122" y="292" font-size="13" font-weight="700" fill="#b45309">Identifying Entities &amp; Relationships</text>
+  <text x="122" y="312" font-size="11" fill="#334155">Extract nouns → classify as Entity, Value Object, or Service. Map associations, compositions, dependencies.</text>
+  <line x1="410" y1="330" x2="410" y2="346" stroke="#94a3b8" stroke-width="2" marker-end="url(#lld_a)"/>
+
+  <rect x="40" y="348" width="740" height="70" rx="10" fill="#faf5ff" stroke="#7c3aed" stroke-width="2"/>
+  <rect x="56" y="360" width="50" height="46" rx="6" fill="#7c3aed"/>
+  <text x="81" y="389" text-anchor="middle" font-size="18" font-weight="700" fill="#fff">4</text>
+  <text x="122" y="380" font-size="13" font-weight="700" fill="#6d28d9">Designing Class Hierarchies</text>
+  <text x="122" y="400" font-size="11" fill="#334155">Inheritance vs composition decisions. Abstract classes vs interfaces. Keeping hierarchies flat and purposeful.</text>
+  <line x1="410" y1="418" x2="410" y2="434" stroke="#94a3b8" stroke-width="2" marker-end="url(#lld_a)"/>
+
+  <rect x="40" y="436" width="740" height="52" rx="10" fill="#ecfdf5" stroke="#0f766e" stroke-width="2"/>
+  <rect x="56" y="448" width="50" height="30" rx="6" fill="#0f766e"/>
+  <text x="81" y="468" text-anchor="middle" font-size="18" font-weight="700" fill="#fff">5</text>
+  <text x="122" y="461" font-size="13" font-weight="700" fill="#065f46">Applying Design Patterns Effectively</text>
+  <text x="122" y="478" font-size="11" fill="#334155">Recognise which pattern fits; apply it intentionally; know when NOT to. Patterns serve the design, not the other way around.</text>
+</svg>

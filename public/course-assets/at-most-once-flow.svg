@@ -1,0 +1,39 @@
+<svg viewBox="0 0 780 320" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .box { font-size: 11px; font-weight: 700; fill: #ffffff; }
+    .step { font-size: 10.5px; font-weight: 700; fill: #1e293b; }
+    .note { font-size: 10.5px; fill: #64748b; }
+    .bad { font-size: 11px; font-weight: 700; fill: #dc2626; }
+  </style>
+
+  <text x="24" y="30" class="title">At-most-once: acknowledge first, then process</text>
+
+  <!-- lane labels -->
+  <text x="60" y="72" class="step">Broker</text>
+  <text x="600" y="72" class="step">Consumer</text>
+  <line x1="90" y1="80" x2="90" y2="270" stroke="#cbd5e1" stroke-width="2"/>
+  <line x1="640" y1="80" x2="640" y2="270" stroke="#cbd5e1" stroke-width="2"/>
+
+  <!-- deliver -->
+  <line x1="90" y1="110" x2="640" y2="110" stroke="#2563eb" stroke-width="2" marker-end="url(#b)"/>
+  <text x="200" y="102" class="step">1 · deliver message</text>
+
+  <!-- ack/commit immediately -->
+  <line x1="640" y1="150" x2="90" y2="150" stroke="#059669" stroke-width="2" marker-end="url(#g)"/>
+  <text x="200" y="142" class="step">2 · commit offset / ack IMMEDIATELY (before work)</text>
+
+  <!-- process then crash -->
+  <rect x="560" y="176" width="160" height="30" rx="5" fill="#d97706"/><text x="640" y="196" text-anchor="middle" class="box">3 · start processing…</text>
+  <rect x="560" y="214" width="160" height="30" rx="5" fill="#dc2626"/><text x="640" y="234" text-anchor="middle" class="box">4 · CRASH mid-process</text>
+
+  <text x="120" y="232" class="bad">✗ message already acked → never redelivered → LOST</text>
+
+  <rect x="24" y="278" width="732" height="34" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="40" y="300" class="note">Because the ack happens before the work, a crash loses the message — but a duplicate can never occur. Also achieved by fire-and-forget (no ack at all).</text>
+
+  <defs>
+    <marker id="b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#2563eb"/></marker>
+    <marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#059669"/></marker>
+  </defs>
+</svg>

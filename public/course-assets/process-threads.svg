@@ -1,0 +1,55 @@
+<svg viewBox="0 0 820 500" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <rect width="820" height="500" fill="#ffffff"/>
+
+  <!-- Process container -->
+  <rect x="40" y="54" width="740" height="386" rx="14" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+  <text x="410" y="82" text-anchor="middle" fill="#0f172a" font-size="18" font-weight="700">PROCESS — one running program</text>
+
+  <!-- Shared memory band -->
+  <text x="70" y="112" text-anchor="start" fill="#b45309" font-size="13" font-weight="700">SHARED by all threads</text>
+  <rect x="70"  y="120" width="165" height="76" rx="9" fill="#f59e0b"/>
+  <text x="152" y="163" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">Code</text>
+  <rect x="245" y="120" width="165" height="76" rx="9" fill="#f59e0b"/>
+  <text x="327" y="163" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">Global Data</text>
+  <rect x="420" y="120" width="165" height="76" rx="9" fill="#f59e0b"/>
+  <text x="502" y="163" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">Heap</text>
+  <rect x="595" y="120" width="155" height="76" rx="9" fill="#f59e0b"/>
+  <text x="672" y="156" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">Open Files</text>
+  <text x="672" y="176" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">/ Resources</text>
+
+  <!-- Threads -->
+  <text x="70" y="228" text-anchor="start" fill="#0f766e" font-size="13" font-weight="700">PRIVATE to each thread</text>
+
+  <!-- Thread 1 -->
+  <rect x="70" y="238" width="215" height="182" rx="10" fill="#ccfbf1" stroke="#0d9488" stroke-width="1.6"/>
+  <text x="177" y="262" text-anchor="middle" fill="#115e59" font-size="15" font-weight="700">Thread 1</text>
+  <rect x="86" y="274" width="183" height="38" rx="7" fill="#14b8a6"/>
+  <text x="177" y="299" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">Stack</text>
+  <rect x="86" y="320" width="183" height="38" rx="7" fill="#14b8a6"/>
+  <text x="177" y="345" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">Registers</text>
+  <rect x="86" y="366" width="183" height="42" rx="7" fill="#14b8a6"/>
+  <text x="177" y="392" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">Program Counter</text>
+
+  <!-- Thread 2 -->
+  <rect x="302" y="238" width="215" height="182" rx="10" fill="#ccfbf1" stroke="#0d9488" stroke-width="1.6"/>
+  <text x="409" y="262" text-anchor="middle" fill="#115e59" font-size="15" font-weight="700">Thread 2</text>
+  <rect x="318" y="274" width="183" height="38" rx="7" fill="#14b8a6"/>
+  <text x="409" y="299" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">Stack</text>
+  <rect x="318" y="320" width="183" height="38" rx="7" fill="#14b8a6"/>
+  <text x="409" y="345" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">Registers</text>
+  <rect x="318" y="366" width="183" height="42" rx="7" fill="#14b8a6"/>
+  <text x="409" y="392" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">Program Counter</text>
+
+  <!-- Thread 3 -->
+  <rect x="534" y="238" width="215" height="182" rx="10" fill="#ccfbf1" stroke="#0d9488" stroke-width="1.6"/>
+  <text x="641" y="262" text-anchor="middle" fill="#115e59" font-size="15" font-weight="700">Thread 3</text>
+  <rect x="550" y="274" width="183" height="38" rx="7" fill="#14b8a6"/>
+  <text x="641" y="299" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">Stack</text>
+  <rect x="550" y="320" width="183" height="38" rx="7" fill="#14b8a6"/>
+  <text x="641" y="345" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">Registers</text>
+  <rect x="550" y="366" width="183" height="42" rx="7" fill="#14b8a6"/>
+  <text x="641" y="392" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">Program Counter</text>
+
+  <text x="410" y="466" text-anchor="middle" fill="#334155" font-size="13">Threads share the process's code, data &amp; heap — but each keeps its own stack, registers &amp; program counter.</text>
+  <text x="410" y="486" text-anchor="middle" fill="#64748b" font-size="12">Separate processes have completely isolated memory.</text>
+</svg>

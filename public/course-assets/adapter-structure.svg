@@ -1,0 +1,44 @@
+<svg viewBox="0 0 780 380" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <rect width="780" height="380" fill="#f8fafc"/>
+  <text x="390" y="34" text-anchor="middle" font-size="21" font-weight="700" fill="#0f172a">Adapter: A Translator Between Two Interfaces</text>
+
+  <defs>
+    <marker id="a_arr" markerWidth="11" markerHeight="11" refX="8" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#475569"/>
+    </marker>
+  </defs>
+
+  <!-- client -->
+  <rect x="40" y="150" width="140" height="70" rx="9" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="110" y="180" text-anchor="middle" font-size="13" font-weight="700" fill="#1d4ed8">Client</text>
+  <text x="110" y="200" text-anchor="middle" font-size="9.5" fill="#1e3a8a">expects Target</text>
+
+  <!-- target interface -->
+  <rect x="230" y="150" width="150" height="70" rx="9" fill="#dbeafe" stroke="#1d4ed8" stroke-width="2.2"/>
+  <text x="305" y="176" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1e3a8a">«interface»</text>
+  <text x="305" y="194" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1e3a8a">MediaPlayer</text>
+  <text x="305" y="211" text-anchor="middle" font-size="9.5" fill="#3730a3" font-family="monospace">play(file)</text>
+
+  <!-- adapter -->
+  <rect x="430" y="150" width="150" height="70" rx="9" fill="#fff7ed" stroke="#d97706" stroke-width="2.4"/>
+  <text x="505" y="176" text-anchor="middle" font-size="13" font-weight="700" fill="#b45309">Mp4Adapter</text>
+  <text x="505" y="194" text-anchor="middle" font-size="9.5" fill="#7c2d12">implements MediaPlayer</text>
+  <text x="505" y="210" text-anchor="middle" font-size="9.5" fill="#7c2d12">wraps + translates</text>
+
+  <!-- adaptee -->
+  <rect x="620" y="150" width="130" height="70" rx="9" fill="#f0fdf4" stroke="#059669" stroke-width="2"/>
+  <text x="685" y="176" text-anchor="middle" font-size="12.5" font-weight="700" fill="#047857">Mp4Library</text>
+  <text x="685" y="194" text-anchor="middle" font-size="9" fill="#065f46">(3rd-party, fixed)</text>
+  <text x="685" y="210" text-anchor="middle" font-size="9" fill="#065f46" font-family="monospace">renderMp4()</text>
+
+  <!-- arrows -->
+  <line x1="180" y1="185" x2="228" y2="185" stroke="#475569" stroke-width="2" marker-end="url(#a_arr)"/>
+  <line x1="380" y1="185" x2="428" y2="185" stroke="#475569" stroke-width="2" marker-end="url(#a_arr)"/>
+  <text x="405" y="176" text-anchor="middle" font-size="9" fill="#64748b">is-a</text>
+  <line x1="580" y1="185" x2="618" y2="185" stroke="#475569" stroke-width="2" marker-end="url(#a_arr)"/>
+  <text x="600" y="176" text-anchor="middle" font-size="9" fill="#64748b">calls</text>
+
+  <text x="390" y="270" text-anchor="middle" font-size="12.5" fill="#334155">The client calls <tspan font-family="monospace">play()</tspan>; the adapter turns that into the library's <tspan font-family="monospace">renderMp4()</tspan>.</text>
+  <text x="390" y="296" text-anchor="middle" font-size="11.5" fill="#64748b">Neither the client nor the third-party library changes — the adapter absorbs the mismatch.</text>
+  <text x="390" y="330" text-anchor="middle" font-size="11.5" fill="#334155">Like a travel plug adapter: your laptop and the foreign socket both stay the same; the adapter bridges them.</text>
+</svg>

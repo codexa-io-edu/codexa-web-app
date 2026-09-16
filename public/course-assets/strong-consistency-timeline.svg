@@ -1,0 +1,43 @@
+<svg viewBox="0 0 780 340" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .lane { font-size: 12px; font-weight: 700; fill: #1e293b; }
+    .ev { font-size: 11px; fill: #334155; }
+    .val { font-size: 12px; font-weight: 700; fill: #ffffff; }
+    .note { font-size: 11px; fill: #64748b; }
+    .ok { font-size: 11px; font-weight: 700; fill: #059669; }
+  </style>
+
+  <text x="24" y="30" class="title">Strong consistency: every read sees the latest write</text>
+  <text x="24" y="50" class="note">The write is confirmed only once replicas agree, so afterwards any replica returns the new value. It behaves like a single copy.</text>
+
+  <!-- time axis -->
+  <line x1="150" y1="80" x2="740" y2="80" stroke="#cbd5e1"/>
+  <text x="700" y="72" class="note">time →</text>
+
+  <!-- write event -->
+  <line x1="230" y1="70" x2="230" y2="270" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <rect x="180" y="86" width="100" height="26" rx="5" fill="#2563eb"/>
+  <text x="192" y="104" class="val">write X = 2</text>
+  <text x="180" y="128" class="note">confirmed after</text>
+  <text x="180" y="142" class="note">replicas agree</text>
+
+  <!-- Replica A lane -->
+  <text x="24" y="180" class="lane">Replica A</text>
+  <line x1="150" y1="176" x2="740" y2="176" stroke="#e2e8f0"/>
+  <rect x="150" y="164" width="80" height="22" rx="3" fill="#94a3b8"/><text x="176" y="180" class="val">1</text>
+  <rect x="230" y="164" width="510" height="22" rx="3" fill="#059669"/><text x="470" y="180" class="val">2</text>
+
+  <!-- Replica B lane -->
+  <text x="24" y="232" class="lane">Replica B</text>
+  <line x1="150" y1="228" x2="740" y2="228" stroke="#e2e8f0"/>
+  <rect x="150" y="216" width="80" height="22" rx="3" fill="#94a3b8"/><text x="176" y="232" class="val">1</text>
+  <rect x="230" y="216" width="510" height="22" rx="3" fill="#059669"/><text x="470" y="232" class="val">2</text>
+
+  <!-- reads -->
+  <circle cx="360" cy="176" r="6" fill="#1e293b"/><text x="330" y="204" class="ok">read → 2 ✓</text>
+  <circle cx="560" cy="228" r="6" fill="#1e293b"/><text x="530" y="256" class="ok">read → 2 ✓</text>
+
+  <text x="150" y="296" class="note">No matter which replica you read, once the write is committed you always get the newest value — <tspan font-weight="700" fill="#059669">no stale reads.</tspan></text>
+  <text x="150" y="316" class="note">Cost: the write had to wait for coordination, and under a network partition the system may refuse to serve to stay correct (see CAP topic).</text>
+</svg>

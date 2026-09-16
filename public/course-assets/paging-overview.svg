@@ -1,0 +1,54 @@
+<svg viewBox="0 0 940 500" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="pm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b"/>
+    </marker>
+  </defs>
+  <rect width="940" height="500" fill="#ffffff"/>
+
+  <text x="140" y="44" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="700">Virtual Pages</text>
+  <text x="140" y="62" text-anchor="middle" fill="#64748b" font-size="12">contiguous, per process</text>
+  <text x="460" y="44" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="700">Page Table</text>
+  <text x="460" y="62" text-anchor="middle" fill="#64748b" font-size="12">virtual → physical mapping</text>
+  <text x="785" y="44" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="700">Physical Memory</text>
+  <text x="785" y="62" text-anchor="middle" fill="#64748b" font-size="12">frames (RAM)</text>
+
+  <!-- Virtual pages -->
+  <rect x="60" y="80"  width="160" height="56" rx="8" fill="#4f46e5"/><text x="140" y="114" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">Page 0</text>
+  <rect x="60" y="146" width="160" height="56" rx="8" fill="#f59e0b"/><text x="140" y="180" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">Page 1</text>
+  <rect x="60" y="212" width="160" height="56" rx="8" fill="#0d9488"/><text x="140" y="246" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">Page 2</text>
+  <rect x="60" y="278" width="160" height="56" rx="8" fill="#db2777"/><text x="140" y="312" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">Page 3</text>
+
+  <!-- Page table -->
+  <rect x="330" y="80" width="260" height="254" rx="10" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.6"/>
+  <rect x="342" y="90"  width="10" height="36" fill="#4f46e5"/><text x="366" y="113" text-anchor="start" fill="#0f172a" font-size="13" font-weight="600">Page 0 → Frame 2</text>
+  <rect x="342" y="156" width="10" height="36" fill="#f59e0b"/><text x="366" y="179" text-anchor="start" fill="#0f172a" font-size="13" font-weight="600">Page 1 → on Disk</text>
+  <rect x="342" y="222" width="10" height="36" fill="#0d9488"/><text x="366" y="245" text-anchor="start" fill="#0f172a" font-size="13" font-weight="600">Page 2 → Frame 0</text>
+  <rect x="342" y="288" width="10" height="36" fill="#db2777"/><text x="366" y="311" text-anchor="start" fill="#0f172a" font-size="13" font-weight="600">Page 3 → Frame 3</text>
+
+  <!-- Physical frames -->
+  <rect x="690" y="80"  width="190" height="46" rx="8" fill="#0d9488"/><text x="785" y="108" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">Frame 0 · Page 2</text>
+  <rect x="690" y="132" width="190" height="46" rx="8" fill="#e2e8f0"/><text x="785" y="160" text-anchor="middle" fill="#64748b" font-size="13" font-weight="600">Frame 1 · free</text>
+  <rect x="690" y="184" width="190" height="46" rx="8" fill="#4f46e5"/><text x="785" y="212" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">Frame 2 · Page 0</text>
+  <rect x="690" y="236" width="190" height="46" rx="8" fill="#db2777"/><text x="785" y="264" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">Frame 3 · Page 3</text>
+
+  <!-- Disk -->
+  <rect x="690" y="300" width="190" height="52" rx="8" fill="#1e293b"/>
+  <text x="785" y="322" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">Disk (swap)</text>
+  <text x="785" y="340" text-anchor="middle" fill="#fbbf24" font-size="12" font-weight="600">holds Page 1</text>
+
+  <!-- Left arrows: pages -> table -->
+  <line x1="220" y1="108" x2="326" y2="108" stroke="#64748b" stroke-width="1.8" marker-end="url(#pm)"/>
+  <line x1="220" y1="174" x2="326" y2="174" stroke="#64748b" stroke-width="1.8" marker-end="url(#pm)"/>
+  <line x1="220" y1="240" x2="326" y2="240" stroke="#64748b" stroke-width="1.8" marker-end="url(#pm)"/>
+  <line x1="220" y1="306" x2="326" y2="306" stroke="#64748b" stroke-width="1.8" marker-end="url(#pm)"/>
+
+  <!-- Right arrows: table -> destination -->
+  <line x1="590" y1="108" x2="686" y2="204" stroke="#4f46e5" stroke-width="1.8" marker-end="url(#pm)"/>
+  <line x1="590" y1="174" x2="686" y2="322" stroke="#f59e0b" stroke-width="1.8" marker-end="url(#pm)"/>
+  <line x1="590" y1="240" x2="686" y2="103" stroke="#0d9488" stroke-width="1.8" marker-end="url(#pm)"/>
+  <line x1="590" y1="306" x2="686" y2="259" stroke="#db2777" stroke-width="1.8" marker-end="url(#pm)"/>
+
+  <text x="470" y="392" text-anchor="middle" fill="#334155" font-size="13">A process sees ordered, contiguous pages. The page table maps each to a scattered physical frame —</text>
+  <text x="470" y="412" text-anchor="middle" fill="#334155" font-size="13">or to disk when memory is full (swapped out).</text>
+</svg>

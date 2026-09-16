@@ -1,0 +1,48 @@
+<svg viewBox="0 0 820 450" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <rect width="820" height="450" fill="#f8fafc"/>
+  <text x="410" y="30" text-anchor="middle" font-size="20" font-weight="700" fill="#0f172a">Resource Modeling: Nouns, Collections &amp; Hierarchy</text>
+  <text x="410" y="52" text-anchor="middle" font-size="12.5" fill="#64748b">A resource is a "thing"; the URL is its address; the method is the action</text>
+
+  <!-- anatomy of a URL -->
+  <rect x="60" y="76" width="700" height="70" rx="8" fill="#0f172a"/>
+  <text x="80" y="118" font-size="16" font-family="monospace" fill="#e2e8f0">GET  https://api.shop.com<tspan fill="#38bdf8">/v1</tspan><tspan fill="#4ade80">/customers</tspan><tspan fill="#fbbf24">/42</tspan><tspan fill="#4ade80">/orders</tspan><tspan fill="#f87171">?status=paid</tspan></text>
+  <text x="150" y="100" font-size="9" fill="#94a3b8">method</text>
+  <text x="330" y="138" font-size="8.5" fill="#38bdf8">version</text>
+  <text x="405" y="138" font-size="8.5" fill="#4ade80">collection</text>
+  <text x="490" y="138" font-size="8.5" fill="#fbbf24">id</text>
+  <text x="545" y="138" font-size="8.5" fill="#4ade80">sub-collection</text>
+  <text x="660" y="138" font-size="8.5" fill="#f87171">query (filter)</text>
+
+  <!-- collection vs member -->
+  <rect x="40" y="170" width="360" height="120" rx="10" fill="#f0fdf4" stroke="#059669" stroke-width="1.6"/>
+  <text x="220" y="192" text-anchor="middle" font-size="12.5" font-weight="700" fill="#047857">Collection vs Member</text>
+  <text x="55" y="216" font-size="11" font-family="monospace" fill="#334155"><tspan fill="#059669" font-weight="700">/orders</tspan>       &#8594; the collection (all orders)</text>
+  <text x="55" y="238" font-size="11" font-family="monospace" fill="#334155"><tspan fill="#059669" font-weight="700">/orders/42</tspan>    &#8594; one member (order 42)</text>
+  <text x="55" y="264" font-size="9.5" fill="#334155">POST to the collection creates; GET/PUT/DELETE</text>
+  <text x="55" y="278" font-size="9.5" fill="#334155">on the member reads/replaces/removes it.</text>
+
+  <!-- nesting -->
+  <rect x="420" y="170" width="360" height="120" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="1.6"/>
+  <text x="600" y="192" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1d4ed8">Nesting shows relationships</text>
+  <text x="435" y="216" font-size="10.5" font-family="monospace" fill="#334155"><tspan fill="#2563eb" font-weight="700">/customers/42/orders</tspan></text>
+  <text x="435" y="234" font-size="9.5" fill="#334155">"the orders belonging to customer 42"</text>
+  <text x="435" y="258" font-size="9.5" fill="#b91c1c">Rule: don't nest more than ~2 levels deep.</text>
+  <text x="435" y="274" font-size="9.5" fill="#334155">/customers/42/orders/7/items/3/... &#8594; too deep</text>
+
+  <!-- do / don't -->
+  <rect x="40" y="308" width="360" height="126" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="1.6"/>
+  <text x="220" y="330" text-anchor="middle" font-size="12" font-weight="700" fill="#047857">&#10003; Do</text>
+  <text x="55" y="352" font-size="10" font-family="monospace" fill="#334155">GET /users            (plural nouns)</text>
+  <text x="55" y="372" font-size="10" font-family="monospace" fill="#334155">GET /users/42/orders  (hierarchy)</text>
+  <text x="55" y="392" font-size="10" font-family="monospace" fill="#334155">POST /users           (verb via method)</text>
+  <text x="55" y="412" font-size="10" font-family="monospace" fill="#334155">GET /users?role=admin (filter in query)</text>
+  <text x="55" y="428" font-size="9" fill="#047857">lowercase, hyphenated, consistent</text>
+
+  <rect x="420" y="308" width="360" height="126" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="1.6"/>
+  <text x="600" y="330" text-anchor="middle" font-size="12" font-weight="700" fill="#b91c1c">&#10007; Don't</text>
+  <text x="435" y="352" font-size="10" font-family="monospace" fill="#334155">GET /getUsers         (verb in path)</text>
+  <text x="435" y="372" font-size="10" font-family="monospace" fill="#334155">GET /user             (inconsistent plural)</text>
+  <text x="435" y="392" font-size="10" font-family="monospace" fill="#334155">POST /createUser      (verb again)</text>
+  <text x="435" y="412" font-size="10" font-family="monospace" fill="#334155">GET /Users/Get_All    (mixed case/style)</text>
+  <text x="435" y="428" font-size="9" fill="#b91c1c">the method already says the verb</text>
+</svg>

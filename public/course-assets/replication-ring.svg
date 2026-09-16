@@ -1,0 +1,58 @@
+<svg viewBox="0 0 780 470" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .node { font-size: 12px; font-weight: 700; fill: #ffffff; }
+    .key { font-size: 11px; font-weight: 700; fill: #1e293b; }
+    .note { font-size: 10.5px; fill: #64748b; }
+    .cap { font-size: 11px; font-weight: 700; fill: #2563eb; }
+  </style>
+
+  <text x="24" y="30" class="title">Replication: keep walking clockwise to the next N distinct nodes</text>
+
+  <!-- ring -->
+  <circle cx="300" cy="255" r="150" fill="none" stroke="#cbd5e1" stroke-width="2.5"/>
+
+  <!-- 5 nodes A..E -->
+  <!-- A 0 (300,105) -->
+  <rect x="272" y="88" width="56" height="32" rx="6" fill="#94a3b8"/><text x="300" y="109" text-anchor="middle" class="node">A</text>
+  <!-- B 72 (443,189) -->
+  <rect x="447" y="173" width="56" height="32" rx="6" fill="#94a3b8"/><text x="475" y="194" text-anchor="middle" class="node">B</text>
+  <!-- C 144 (388,356) -->
+  <rect x="392" y="356" width="56" height="32" rx="6" fill="#059669"/><text x="420" y="377" text-anchor="middle" class="node">C ①</text>
+  <!-- D 216 (212,356) -->
+  <rect x="156" y="356" width="56" height="32" rx="6" fill="#059669"/><text x="184" y="377" text-anchor="middle" class="node">D ②</text>
+  <!-- E 288 (157,189) -->
+  <rect x="101" y="173" width="56" height="32" rx="6" fill="#059669"/><text x="129" y="194" text-anchor="middle" class="node">E ③</text>
+
+  <!-- key K at 108 (443,321) -->
+  <circle cx="443" cy="321" r="9" fill="#d97706"/><text x="455" y="325" class="key">key K</text>
+
+  <!-- walk arrows K->C->D->E -->
+  <path d="M 443 321 A 150 150 0 0 1 420 356" fill="none" stroke="#059669" stroke-width="2.4" marker-end="url(#g)"/>
+  <path d="M 392 372 A 150 150 0 0 1 212 372" fill="none" stroke="#059669" stroke-width="2.4" marker-end="url(#g)"/>
+  <path d="M 156 372 A 150 150 0 0 1 129 205" fill="none" stroke="#059669" stroke-width="2.4" marker-end="url(#g)"/>
+
+  <defs>
+    <marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#059669"/></marker>
+  </defs>
+
+  <!-- explanation -->
+  <rect x="530" y="95" width="230" height="320" rx="10" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="548" y="123" class="cap">Replication factor N = 3</text>
+  <text x="548" y="150" class="note">Find the key's position, then keep</text>
+  <text x="548" y="166" class="note">walking clockwise, collecting the</text>
+  <text x="548" y="182" class="note">next 3 <tspan font-weight="700">distinct physical</tspan> nodes:</text>
+
+  <text x="548" y="214" class="note">① C — primary</text>
+  <text x="548" y="234" class="note">② D — replica</text>
+  <text x="548" y="254" class="note">③ E — replica</text>
+
+  <text x="548" y="288" class="note">This ordered set is the key's</text>
+  <text x="548" y="304" class="note"><tspan font-weight="700">preference list</tspan>. If C is down,</text>
+  <text x="548" y="320" class="note">reads/writes fall through to D, E.</text>
+
+  <text x="548" y="356" class="note">With virtual nodes, "distinct</text>
+  <text x="548" y="372" class="note">physical" matters — skip extra</text>
+  <text x="548" y="388" class="note">slots of a node already chosen.</text>
+  <text x="548" y="404" class="note">Used by Dynamo &amp; Cassandra.</text>
+</svg>

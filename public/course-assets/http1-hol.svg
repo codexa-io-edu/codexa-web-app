@@ -1,0 +1,44 @@
+<svg viewBox="0 0 780 430" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .lbl { font-size: 12px; font-weight: 700; fill: #1e293b; }
+    .req { font-size: 10px; font-weight: 700; fill: #ffffff; }
+    .note { font-size: 10.5px; fill: #64748b; }
+    .prob { font-size: 11px; font-weight: 700; fill: #dc2626; }
+  </style>
+
+  <text x="24" y="30" class="title">HTTP/1.1's problem: one thing at a time per connection</text>
+
+  <!-- single connection serialized -->
+  <text x="24" y="66" class="lbl">On one connection, requests are serialized — each must finish before the next starts:</text>
+  <line x1="40" y1="120" x2="740" y2="120" stroke="#cbd5e1" stroke-width="2"/>
+  <rect x="40" y="86" width="120" height="24" rx="4" fill="#2563eb"/><text x="60" y="103" class="req">GET a.css</text>
+  <rect x="40" y="122" width="120" height="24" rx="4" fill="#64748b"/><text x="52" y="139" class="req">← wait response</text>
+  <rect x="180" y="86" width="120" height="24" rx="4" fill="#2563eb"/><text x="200" y="103" class="req">GET b.js</text>
+  <rect x="180" y="122" width="120" height="24" rx="4" fill="#64748b"/><text x="192" y="139" class="req">← wait response</text>
+  <rect x="320" y="86" width="180" height="24" rx="4" fill="#dc2626"/><text x="332" y="103" class="req">GET slow-image.jpg (slow!)</text>
+  <rect x="320" y="122" width="180" height="24" rx="4" fill="#7f1d1d"/><text x="332" y="139" class="req">← everything behind it waits</text>
+  <rect x="520" y="86" width="120" height="24" rx="4" fill="#94a3b8"/><text x="540" y="103" class="req">GET c.css</text>
+  <text x="530" y="139" class="prob">blocked ✗</text>
+
+  <text x="40" y="176" class="prob">Head-of-line blocking: one slow response holds up every request queued behind it.</text>
+
+  <!-- workaround -->
+  <text x="24" y="216" class="lbl">Browser workaround: open ~6 parallel TCP connections per domain</text>
+  <g>
+    <rect x="40" y="230" width="100" height="22" rx="4" fill="#3b82f6"/><text x="60" y="246" class="req">conn 1</text>
+    <rect x="150" y="230" width="100" height="22" rx="4" fill="#3b82f6"/><text x="170" y="246" class="req">conn 2</text>
+    <rect x="260" y="230" width="100" height="22" rx="4" fill="#3b82f6"/><text x="280" y="246" class="req">conn 3</text>
+    <rect x="370" y="230" width="100" height="22" rx="4" fill="#3b82f6"/><text x="390" y="246" class="req">conn 4</text>
+    <rect x="480" y="230" width="100" height="22" rx="4" fill="#3b82f6"/><text x="500" y="246" class="req">conn 5</text>
+    <rect x="590" y="230" width="100" height="22" rx="4" fill="#3b82f6"/><text x="610" y="246" class="req">conn 6</text>
+  </g>
+  <text x="40" y="276" class="note">…but each has its own handshake &amp; slow-start cost, and 6 is a hard cap — a page with 100 assets still queues.</text>
+
+  <!-- dev hacks -->
+  <rect x="24" y="298" width="732" height="112" rx="8" fill="#fffbeb" stroke="#fcd34d"/>
+  <text x="40" y="322" class="lbl" fill="#92400e">The hacks developers used to reduce request count</text>
+  <text x="40" y="344" class="note">• <tspan font-weight="700">Spriting</tspan>: combine many icons into one image.  • <tspan font-weight="700">Concatenation</tspan>: bundle all JS/CSS into one file.</text>
+  <text x="40" y="364" class="note">• <tspan font-weight="700">Inlining</tspan>: embed small assets in the HTML.  • <tspan font-weight="700">Domain sharding</tspan>: spread assets across sub-domains for more connections.</text>
+  <text x="40" y="388" class="note">These are workarounds for a protocol limit — and every one of them became <tspan font-weight="700">unnecessary</tspan> with HTTP/2's multiplexing.</text>
+</svg>

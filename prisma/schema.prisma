@@ -1,0 +1,375 @@
+// prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// ─────────────────────────────────────────────
+// ENUMS
+// ─────────────────────────────────────────────
+
+enum Role {
+  STUDENT
+  ADMIN
+}
+
+enum LearningMode {
+  READING
+  VIDEO
+}
+
+enum VideoProvider {
+  YOUTUBE   // Placeholder during initial rollout
+  BUNNY     // Production: Bunny.net HLS streaming
+}
+
+enum AssetType {
+  IMAGE
+  SVG
+  DIAGRAM
+}
+
+enum EnrollmentStatus {
+  ACTIVE
+  EXPIRED
+  CANCELLED
+}
+
+enum SubscriptionPlan {
+  FREE
+  PRO
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  CANCELLED
+  PAST_DUE
+  TRIALING
+}
+
+// ─────────────────────────────────────────────
+// USER
+// ─────────────────────────────────────────────
+
+model User {
+  id            String       @id @default(cuid())
+  clerkId       String       @unique
+  email         String       @unique
+  name          String?
+  imageUrl      String?
+  role          Role         @default(STUDENT)
+  defaultMode   LearningMode @default(READING)
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+
+  // Relations
+  readingProgress  ReadingProgress[]
+  videoProgress    VideoProgress[]
+  bookmarks        Bookmark[]
+  enrollments      Enrollment[]
+  subscription     Subscription?
+
+  @@index([clerkId])
+  @@index([email])
+  @@map("users")
+}
+
+// ─────────────────────────────────────────────
+// COURSE HIERARCHY
+// ─────────────────────────────────────────────
+
+model Course {
+  id           String   @id @default(cuid())
+  slug         String   @unique  // "system-design", "dsa", "java"
+  title        String            // "System Design"
+  description  String?
+  thumbnailUrl String?
+  isPaid       Boolean  @default(false)
+  price        Decimal? @db.Decimal(10,2)
+  isPublished  Boolean  @default(false)
+  order        Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  // Relations
+  parts       Part[]
+  modules     Module[]
+  topics      Topic[]
+  lessons     Lesson[]
+  enrollments Enrollment[]
+
+  @@map("courses")
+}
+
+model Part {
+  id          String   @id @default(cuid())
+  courseId    String
+  slug        String               // "introduction", "hld", "lld"
+  title       String               // "Introduction", "High Level Design", "Low Level Design"
+  description String?
+  order       Int      @default(0)
+  isPublished Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  course  Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  modules Module[]
+
+  @@unique([courseId, slug])
+  @@index([courseId, order])
+  @@map("parts")
+}
+
+model Module {
+  id          String   @id @default(cuid())
+  courseId    String
+  partId      String
+  slug        String
+  title       String
+  description String?
+  order       Int      @default(0)
+  isPublished Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  course  Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  part    Part     @relation(fields: [partId], references: [id], onDelete: Cascade)
+  topics  Topic[]
+  lessons Lesson[]
+
+  @@unique([partId, slug])
+  @@index([courseId, order])
+  @@index([partId, order])
+  @@map("modules")
+}
+
+model Topic {
+  id              String   @id @default(cuid())
+  courseId        String
+  moduleId        String
+  slug            String
+  title           String
+  description     String?
+  overviewContent String?  @db.Text
+  order           Int      @default(0)
+  isPublished     Boolean  @default(false)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  // Relations
+  course   Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  module   Module   @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+  lessons  Lesson[]
+
+  @@unique([moduleId, slug])
+  @@index([courseId, order])
+  @@index([moduleId, order])
+  @@map("topics")
+}
+
+model Lesson {
+  id                 String       @id @default(cuid())
+  courseId           String
+  moduleId           String
+  topicId            String
+  slug               String
+  title              String
+  description        String?
+  content            String?      @db.Text
+  isFreePreview      Boolean      @default(false)
+  isPublished        Boolean      @default(false)
+  order              Int          @default(0)
+  defaultMode        LearningMode @default(READING)
+  readingTimeMinutes Int?
+  searchVector       Unsupported("tsvector")?
+  createdAt          DateTime     @default(now())
+  updatedAt          DateTime     @updatedAt
+
+  // Relations
+  course          Course          @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  module          Module          @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+  topic           Topic           @relation(fields: [topicId], references: [id], onDelete: Cascade)
+  videoMetadata   VideoMetadata?
+  assets          LessonAsset[]
+  readingProgress ReadingProgress[]
+  videoProgress   VideoProgress[]
+  bookmarks       Bookmark[]
+
+  @@unique([topicId, slug])
+  @@index([courseId, order])
+  @@index([moduleId, order])
+  @@index([topicId, order])
+  @@index([isFreePreview])
+  @@index([isPublished])
+  @@map("lessons")
+}
+
+// ─────────────────────────────────────────────
+// VIDEO METADATA
+// ─────────────────────────────────────────────
+
+model VideoMetadata {
+  id               String        @id @default(cuid())
+  lessonId         String        @unique
+  provider         VideoProvider @default(YOUTUBE)
+  videoUrl         String
+  thumbnailUrl     String?
+  durationSeconds  Int?
+  title            String?
+  description      String?       @db.Text
+  bunnyVideoId     String?
+  bunnyLibraryId   String?
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+
+  // Relations
+  lesson Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+  @@map("video_metadata")
+}
+
+// ─────────────────────────────────────────────
+// LESSON ASSETS (Images, SVGs)
+// ─────────────────────────────────────────────
+
+model LessonAsset {
+  id        String    @id @default(cuid())
+  lessonId  String
+  type      AssetType
+  filename  String
+  r2Key     String    @unique
+  url       String
+  alt       String?
+  sizeBytes Int?
+  createdAt DateTime  @default(now())
+
+  // Relations
+  lesson Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+  @@index([lessonId])
+  @@map("lesson_assets")
+}
+
+// ─────────────────────────────────────────────
+// PROGRESS TRACKING
+// ─────────────────────────────────────────────
+
+model ReadingProgress {
+  id            String    @id @default(cuid())
+  userId        String
+  lessonId      String
+  scrollPercent Int       @default(0)  // 0–100
+  isCompleted   Boolean   @default(false)
+  completedAt   DateTime?
+  lastViewedAt  DateTime  @default(now())
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relations
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lesson Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, lessonId])
+  @@index([userId])
+  @@index([lessonId])
+  @@map("reading_progress")
+}
+
+model VideoProgress {
+  id              String    @id @default(cuid())
+  userId          String
+  lessonId        String
+  watchedSeconds  Int       @default(0)
+  durationSeconds Int       @default(0)
+  percentWatched  Int       @default(0)
+  isCompleted     Boolean   @default(false)
+  completedAt     DateTime?
+  lastWatchedAt   DateTime  @default(now())
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  // Relations
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lesson Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, lessonId])
+  @@index([userId])
+  @@index([lessonId])
+  @@map("video_progress")
+}
+
+// ─────────────────────────────────────────────
+// BOOKMARKS
+// ─────────────────────────────────────────────
+
+model Bookmark {
+  id        String   @id @default(cuid())
+  userId    String
+  lessonId  String
+  createdAt DateTime @default(now())
+
+  // Relations
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lesson Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, lessonId])
+  @@index([userId])
+  @@map("bookmarks")
+}
+
+// ─────────────────────────────────────────────
+// ENROLLMENT
+// ─────────────────────────────────────────────
+
+model Enrollment {
+  id         String           @id @default(cuid())
+  userId     String
+  courseId   String
+  status     EnrollmentStatus @default(ACTIVE)
+  enrolledAt DateTime         @default(now())
+  expiresAt  DateTime?
+  createdAt  DateTime         @default(now())
+  updatedAt  DateTime         @updatedAt
+
+  // Relations
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, courseId])
+  @@index([userId])
+  @@index([courseId])
+  @@map("enrollments")
+}
+
+// ─────────────────────────────────────────────
+// SUBSCRIPTION
+// ─────────────────────────────────────────────
+
+model Subscription {
+  id                   String             @id @default(cuid())
+  userId               String             @unique
+  plan                 SubscriptionPlan   @default(FREE)
+  status               SubscriptionStatus @default(ACTIVE)
+  stripeCustomerId     String?            @unique
+  stripeSubscriptionId String?            @unique
+  stripePriceId        String?
+  currentPeriodStart   DateTime?
+  currentPeriodEnd     DateTime?
+  cancelAtPeriodEnd    Boolean            @default(false)
+  createdAt            DateTime           @default(now())
+  updatedAt            DateTime           @updatedAt
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([stripeCustomerId])
+  @@map("subscriptions")
+}

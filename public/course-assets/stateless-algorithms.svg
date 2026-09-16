@@ -1,0 +1,57 @@
+<svg viewBox="0 0 800 470" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .name { font-size: 13px; font-weight: 700; fill: #1e293b; }
+    .box { font-size: 11px; font-weight: 700; fill: #ffffff; }
+    .note { font-size: 10px; fill: #64748b; }
+    .req { font-size: 10px; font-weight: 700; fill: #ffffff; }
+  </style>
+
+  <text x="24" y="30" class="title">Stateless algorithms: decide with a rule, remember nothing</text>
+
+  <!-- Round Robin -->
+  <rect x="24" y="50" width="370" height="190" rx="10" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="40" y="74" class="name">Round Robin — rotate in order</text>
+  <text x="40" y="94" class="note">req 1 → S1 · req 2 → S2 · req 3 → S3 · req 4 → S1 …</text>
+  <rect x="40" y="108" width="60" height="30" rx="5" fill="#2563eb"/><text x="70" y="128" text-anchor="middle" class="box">S1</text>
+  <rect x="110" y="108" width="60" height="30" rx="5" fill="#2563eb"/><text x="140" y="128" text-anchor="middle" class="box">S2</text>
+  <rect x="180" y="108" width="60" height="30" rx="5" fill="#2563eb"/><text x="210" y="128" text-anchor="middle" class="box">S3</text>
+  <path d="M 70 150 Q 140 185 210 150" fill="none" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#s)"/>
+  <text x="40" y="210" class="note">Simple, even — assumes servers &amp; requests</text>
+  <text x="40" y="226" class="note">are roughly equal.</text>
+
+  <!-- Weighted RR -->
+  <rect x="406" y="50" width="370" height="190" rx="10" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="422" y="74" class="name">Weighted Round Robin — by capacity</text>
+  <text x="422" y="94" class="note">bigger server gets a bigger share</text>
+  <rect x="422" y="108" width="150" height="30" rx="5" fill="#2563eb"/><text x="497" y="128" text-anchor="middle" class="box">S1 (weight 3)</text>
+  <rect x="422" y="146" width="50" height="30" rx="5" fill="#7c3aed"/><text x="447" y="166" text-anchor="middle" class="box">S2 (1)</text>
+  <text x="422" y="210" class="note">Use when servers have different CPU/RAM.</text>
+  <text x="422" y="226" class="note">S1 handles ~3× the traffic of S2.</text>
+
+  <!-- Random -->
+  <rect x="24" y="256" width="370" height="190" rx="10" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="40" y="280" class="name">Random (or Weighted Random)</text>
+  <text x="40" y="300" class="note">pick a server at random each time</text>
+  <rect x="40" y="314" width="60" height="30" rx="5" fill="#94a3b8"/><text x="70" y="334" text-anchor="middle" class="box">S1</text>
+  <rect x="110" y="314" width="60" height="30" rx="5" fill="#2563eb"/><text x="140" y="334" text-anchor="middle" class="box">S2</text>
+  <rect x="180" y="314" width="60" height="30" rx="5" fill="#94a3b8"/><text x="210" y="334" text-anchor="middle" class="box">S3</text>
+  <text x="255" y="334" font-size="18" fill="#d97706">🎲</text>
+  <text x="40" y="416" class="note">Evens out over many requests; needs no</text>
+  <text x="40" y="432" class="note">shared counter — great across many LBs.</text>
+
+  <!-- Hash -->
+  <rect x="406" y="256" width="370" height="190" rx="10" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="422" y="280" class="name">Hash-based — same key → same server</text>
+  <text x="422" y="300" class="note">server = hash(client IP) % N</text>
+  <rect x="422" y="314" width="120" height="30" rx="5" fill="#64748b"/><text x="482" y="334" text-anchor="middle" class="box">client 203.0.113.5</text>
+  <line x1="542" y1="329" x2="640" y2="329" stroke="#059669" stroke-width="2" marker-end="url(#s2)"/>
+  <rect x="646" y="314" width="60" height="30" rx="5" fill="#059669"/><text x="676" y="334" text-anchor="middle" class="box">S2</text>
+  <text x="422" y="416" class="note">Affinity with NO stored state. But changing N</text>
+  <text x="422" y="432" class="note">reshuffles almost everyone → consistent hashing.</text>
+
+  <defs>
+    <marker id="s" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#94a3b8"/></marker>
+    <marker id="s2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#059669"/></marker>
+  </defs>
+</svg>

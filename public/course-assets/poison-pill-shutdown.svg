@@ -1,0 +1,43 @@
+<svg viewBox="0 0 820 380" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <rect width="820" height="380" fill="#f8fafc"/>
+  <text x="410" y="34" text-anchor="middle" font-size="21" font-weight="700" fill="#0f172a">Graceful Shutdown: The Poison Pill</text>
+  <text x="410" y="58" text-anchor="middle" font-size="13" fill="#64748b">How do consumers know to stop? Send a special sentinel item that means "no more work — exit"</text>
+
+  <defs>
+    <marker id="pp_arr" markerWidth="11" markerHeight="11" refX="8" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#475569"/>
+    </marker>
+  </defs>
+
+  <!-- producer -->
+  <rect x="50" y="120" width="130" height="80" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="1.8"/>
+  <text x="115" y="150" text-anchor="middle" font-size="12" font-weight="700" fill="#1d4ed8">Producer</text>
+  <text x="115" y="172" text-anchor="middle" font-size="9" fill="#334155">done producing?</text>
+  <text x="115" y="188" text-anchor="middle" font-size="9" fill="#334155">put N poison pills</text>
+
+  <!-- queue with pill -->
+  <rect x="270" y="112" width="200" height="96" rx="10" fill="#fef9c3" stroke="#ca8a04" stroke-width="2.2"/>
+  <text x="370" y="104" text-anchor="middle" font-size="11" font-weight="700" fill="#a16207">Queue</text>
+  <rect x="286" y="130" width="50" height="30" rx="4" fill="#fde68a"/><text x="311" y="150" text-anchor="middle" font-size="9" fill="#a16207">item</text>
+  <rect x="342" y="130" width="50" height="30" rx="4" fill="#fde68a"/><text x="367" y="150" text-anchor="middle" font-size="9" fill="#a16207">item</text>
+  <rect x="398" y="130" width="58" height="30" rx="4" fill="#fecaca" stroke="#dc2626" stroke-width="1.6"/><text x="427" y="150" text-anchor="middle" font-size="9" font-weight="700" fill="#b91c1c">POISON</text>
+  <text x="370" y="185" text-anchor="middle" font-size="9" fill="#a16207">pill sits at the end, after all real work</text>
+
+  <!-- consumers -->
+  <rect x="560" y="96" width="200" height="52" rx="8" fill="#f0fdf4" stroke="#059669" stroke-width="1.6"/>
+  <text x="660" y="118" text-anchor="middle" font-size="11" font-weight="700" fill="#047857">Consumer loop</text>
+  <text x="660" y="136" text-anchor="middle" font-size="9" fill="#065f46" font-family="monospace">item = take()</text>
+
+  <rect x="560" y="160" width="200" height="52" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="1.6"/>
+  <text x="660" y="182" text-anchor="middle" font-size="10.5" font-weight="700" fill="#b91c1c">if (item == POISON)</text>
+  <text x="660" y="200" text-anchor="middle" font-size="9" fill="#991b1b" font-family="monospace">re-queue? then break; // exit</text>
+
+  <line x1="180" y1="160" x2="268" y2="160" stroke="#475569" stroke-width="1.8" marker-end="url(#pp_arr)"/>
+  <line x1="470" y1="150" x2="558" y2="130" stroke="#475569" stroke-width="1.8" marker-end="url(#pp_arr)"/>
+
+  <rect x="120" y="248" width="580" height="112" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="410" y="272" text-anchor="middle" font-size="12" font-weight="700" fill="#334155">Rules for a clean shutdown</text>
+  <text x="410" y="296" text-anchor="middle" font-size="10.5" fill="#334155">&#8226; Send ONE poison pill per consumer (or have each re-queue it before exiting so all N see it)</text>
+  <text x="410" y="318" text-anchor="middle" font-size="10.5" fill="#334155">&#8226; The pill flows through the queue AFTER real items, so nothing in flight is dropped</text>
+  <text x="410" y="340" text-anchor="middle" font-size="10.5" fill="#334155">&#8226; Alternative: interrupt the consumer threads, or use ExecutorService.shutdown() which handles this for you</text>
+</svg>

@@ -1,0 +1,41 @@
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .h { font-size: 13px; font-weight: 700; fill: #ffffff; }
+    .item { font-size: 10.5px; fill: #334155; }
+    .note { font-size: 10.5px; fill: #64748b; }
+  </style>
+
+  <text x="24" y="30" class="title">Which should you choose?</text>
+
+  <!-- monolith column -->
+  <rect x="24" y="48" width="365" height="270" rx="10" fill="#eff6ff" stroke="#bfdbfe"/>
+  <rect x="24" y="48" width="365" height="34" rx="10" fill="#2563eb"/>
+  <text x="44" y="71" class="h">Start with a monolith when…</text>
+  <text x="44" y="108" class="item">• You're early-stage / an MVP — speed to market matters</text>
+  <text x="44" y="134" class="item">• The team is small (a few engineers)</text>
+  <text x="44" y="160" class="item">• The domain is still unclear / changing fast</text>
+  <text x="44" y="186" class="item">• The app is simple or moderate in size</text>
+  <text x="44" y="212" class="item">• You have limited DevOps / platform capability</text>
+  <text x="44" y="238" class="item">• Strong consistency (ACID) is central</text>
+  <text x="44" y="272" class="note">Horizontal scaling still works — a monolith</text>
+  <text x="44" y="288" class="note">behind a load balancer scales a long way.</text>
+
+  <!-- microservices column -->
+  <rect x="411" y="48" width="365" height="270" rx="10" fill="#f0fdf4" stroke="#bbf7d0"/>
+  <rect x="411" y="48" width="365" height="34" rx="10" fill="#059669"/>
+  <text x="431" y="71" class="h">Move to microservices when…</text>
+  <text x="431" y="108" class="item">• Many teams need to ship independently</text>
+  <text x="431" y="134" class="item">• The domain has clear, stable boundaries</text>
+  <text x="431" y="160" class="item">• Parts need very different scaling</text>
+  <text x="431" y="186" class="item">• You have mature CI/CD, monitoring, orchestration</text>
+  <text x="431" y="212" class="item">• Different parts want different tech stacks</text>
+  <text x="431" y="238" class="item">• The monolith's build/deploy/coupling is real pain</text>
+  <text x="431" y="272" class="note">The trigger is organizational &amp; operational pain,</text>
+  <text x="431" y="288" class="note">not "microservices are modern."</text>
+
+  <!-- footer -->
+  <rect x="24" y="334" width="752" height="52" rx="8" fill="#fffbeb" stroke="#fde68a"/>
+  <text x="40" y="356" class="note"><tspan font-weight="700">"Monolith first."</tspan> Most teams should start with a (well-modularized) monolith and extract services only when concrete pain</text>
+  <text x="40" y="374" class="note">justifies the added complexity. Premature microservices slow you down; a distributed monolith is worse than either.</text>
+</svg>

@@ -1,0 +1,66 @@
+<svg viewBox="0 0 800 420" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .ph { font-size: 13px; font-weight: 700; fill: #1e293b; }
+    .box { font-size: 11px; font-weight: 700; fill: #ffffff; }
+    .note { font-size: 10px; fill: #64748b; }
+    .fast { font-size: 10px; font-weight: 700; fill: #059669; }
+    .risk { font-size: 10px; font-weight: 700; fill: #dc2626; }
+  </style>
+
+  <text x="24" y="30" class="title">Three write strategies: where does a write go?</text>
+
+  <!-- ===== WRITE-THROUGH ===== -->
+  <rect x="24" y="50" width="240" height="330" rx="10" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="44" y="76" class="ph" fill="#2563eb">Write-Through</text>
+  <rect x="44" y="90" width="90" height="34" rx="6" fill="#1e293b"/><text x="70" y="112" class="box">App</text>
+  <rect x="44" y="160" width="90" height="34" rx="6" fill="#2563eb"/><text x="66" y="182" class="box">Cache</text>
+  <rect x="150" y="160" width="90" height="34" rx="6" fill="#64748b"/><text x="176" y="182" class="box">DB</text>
+  <path d="M 89 124 L 89 158" stroke="#334155" stroke-width="2"/><polygon points="84,154 89,164 94,154" fill="#334155"/>
+  <path d="M 134 177 L 148 177" stroke="#334155" stroke-width="2"/><polygon points="144,172 154,177 144,182" fill="#334155"/>
+  <text x="44" y="222" class="note">Write to BOTH, synchronously,</text>
+  <text x="44" y="236" class="note">before acknowledging.</text>
+  <rect x="44" y="250" width="196" height="110" rx="6" fill="#eff6ff" stroke="#93c5fd"/>
+  <text x="54" y="272" class="fast">✓ cache always fresh</text>
+  <text x="54" y="292" class="fast">✓ read-after-write is correct</text>
+  <text x="54" y="312" class="risk">✗ every write pays cache + DB</text>
+  <text x="54" y="332" class="note">Best: read-heavy data read</text>
+  <text x="54" y="348" class="note">soon after it's written.</text>
+
+  <!-- ===== WRITE-BACK ===== -->
+  <rect x="280" y="50" width="240" height="330" rx="10" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="300" y="76" class="ph" fill="#059669">Write-Back</text>
+  <rect x="300" y="90" width="90" height="34" rx="6" fill="#1e293b"/><text x="326" y="112" class="box">App</text>
+  <rect x="300" y="160" width="90" height="34" rx="6" fill="#059669"/><text x="322" y="182" class="box">Cache</text>
+  <rect x="406" y="160" width="90" height="34" rx="6" fill="#64748b"/><text x="432" y="182" class="box">DB</text>
+  <path d="M 345 124 L 345 158" stroke="#334155" stroke-width="2"/><polygon points="340,154 345,164 350,154" fill="#334155"/>
+  <text x="300" y="140" class="fast">ack now ✓</text>
+  <path d="M 390 177 L 404 177" stroke="#d97706" stroke-width="2" stroke-dasharray="4,3"/><polygon points="400,172 410,177 400,182" fill="#d97706"/>
+  <text x="300" y="216" class="note">Write to cache, ack instantly;</text>
+  <text x="300" y="230" class="note">flush to DB later (batched).</text>
+  <rect x="300" y="244" width="196" height="116" rx="6" fill="#f0fdf4" stroke="#86efac"/>
+  <text x="310" y="266" class="fast">✓ fastest writes, batches DB</text>
+  <text x="310" y="286" class="fast">✓ absorbs huge write spikes</text>
+  <text x="310" y="306" class="risk">✗ crash before flush = data loss</text>
+  <text x="310" y="326" class="note">Best: high-frequency writes where</text>
+  <text x="310" y="342" class="note">some loss is OK (counters, metrics).</text>
+
+  <!-- ===== WRITE-AROUND ===== -->
+  <rect x="536" y="50" width="240" height="330" rx="10" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="556" y="76" class="ph" fill="#d97706">Write-Around</text>
+  <rect x="556" y="90" width="90" height="34" rx="6" fill="#1e293b"/><text x="582" y="112" class="box">App</text>
+  <rect x="662" y="90" width="90" height="34" rx="6" fill="#64748b"/><text x="688" y="112" class="box">DB</text>
+  <rect x="556" y="160" width="90" height="34" rx="6" fill="#cbd5e1"/><text x="574" y="182" class="box" fill="#475569">Cache</text>
+  <path d="M 646 107 L 660 107" stroke="#334155" stroke-width="2"/><polygon points="656,102 666,107 656,112" fill="#334155"/>
+  <text x="556" y="146" class="note">write skips the cache</text>
+  <path d="M 601 158 L 601 128" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <text x="556" y="212" class="note">Write straight to DB;</text>
+  <text x="556" y="226" class="note">invalidate any cached copy.</text>
+  <rect x="556" y="240" width="196" height="120" rx="6" fill="#fffbeb" stroke="#fcd34d"/>
+  <text x="566" y="262" class="fast">✓ no cache pollution from</text>
+  <text x="566" y="277" class="fast">   write-only data</text>
+  <text x="566" y="297" class="risk">✗ read right after write = miss</text>
+  <text x="566" y="317" class="note">Best: write-heavy data that's</text>
+  <text x="566" y="333" class="note">rarely read soon (logs, audit).</text>
+  <text x="566" y="352" class="note">Cache fills later on a read miss.</text>
+</svg>

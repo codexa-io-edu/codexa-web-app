@@ -1,0 +1,62 @@
+<svg viewBox="0 0 780 400" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .node { font-size: 13px; font-weight: 700; fill: #ffffff; }
+    .nsub { font-size: 10px; fill: #f1f5f9; }
+    .lbl { font-size: 12px; font-weight: 700; fill: #1e293b; }
+    .note { font-size: 11px; fill: #64748b; }
+    .tag { font-size: 11px; font-weight: 700; fill: #ffffff; }
+    .ok { font-size: 12px; font-weight: 700; fill: #059669; }
+  </style>
+
+  <text x="24" y="30" class="title">Tunable consistency with quorums:  R + W &gt; N  ⇒  fresh read</text>
+  <text x="24" y="50" class="note">With N=3 copies, a write waits for W acknowledgements and a read consults R copies. If R + W &gt; N, the read set must overlap the write set.</text>
+
+  <!-- three nodes -->
+  <g>
+    <rect x="120" y="120" width="130" height="90" rx="10" fill="#059669"/>
+    <text x="150" y="150" class="node">Node 1</text>
+    <text x="140" y="172" class="nsub">has newest (X=2)</text>
+    <rect x="140" y="182" width="90" height="18" rx="3" fill="#047857"/><text x="150" y="196" class="nsub">written ✓</text>
+  </g>
+  <g>
+    <rect x="325" y="120" width="130" height="90" rx="10" fill="#059669"/>
+    <text x="355" y="150" class="node">Node 2</text>
+    <text x="345" y="172" class="nsub">has newest (X=2)</text>
+    <rect x="345" y="182" width="90" height="18" rx="3" fill="#047857"/><text x="355" y="196" class="nsub">written ✓</text>
+  </g>
+  <g>
+    <rect x="530" y="120" width="130" height="90" rx="10" fill="#94a3b8"/>
+    <text x="560" y="150" class="node">Node 3</text>
+    <text x="548" y="172" class="nsub">still old (X=1)</text>
+    <rect x="550" y="182" width="90" height="18" rx="3" fill="#64748b"/><text x="560" y="196" class="nsub">not yet</text>
+  </g>
+
+  <!-- write bracket -->
+  <path d="M 120 108 L 455 108" stroke="#2563eb" stroke-width="2"/>
+  <line x1="120" y1="108" x2="120" y2="118" stroke="#2563eb" stroke-width="2"/>
+  <line x1="455" y1="108" x2="455" y2="118" stroke="#2563eb" stroke-width="2"/>
+  <rect x="230" y="88" width="120" height="22" rx="4" fill="#2563eb"/>
+  <text x="248" y="104" class="tag">WRITE  W = 2</text>
+
+  <!-- read bracket -->
+  <path d="M 325 222 L 660 222" stroke="#d97706" stroke-width="2"/>
+  <line x1="325" y1="212" x2="325" y2="222" stroke="#d97706" stroke-width="2"/>
+  <line x1="660" y1="212" x2="660" y2="222" stroke="#d97706" stroke-width="2"/>
+  <rect x="430" y="224" width="120" height="22" rx="4" fill="#d97706"/>
+  <text x="452" y="240" class="tag">READ  R = 2</text>
+
+  <!-- overlap highlight -->
+  <rect x="325" y="116" width="130" height="98" rx="10" fill="none" stroke="#dc2626" stroke-width="3" stroke-dasharray="6,4"/>
+  <text x="330" y="270" class="ok">Node 2 is in BOTH sets → the read is guaranteed to see X=2 ✓</text>
+
+  <!-- math -->
+  <text x="120" y="298" class="lbl">R + W = 2 + 2 = 4  &gt;  N = 3   →  guaranteed overlap → strong-style read</text>
+  <text x="120" y="318" class="note">Lower R/W (e.g. R=1, W=1) → faster and more available, but a read may miss the newest write (eventual).</text>
+
+  <!-- named levels -->
+  <rect x="24" y="336" width="732" height="52" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="40" y="358" class="lbl">Common named levels:</text>
+  <text x="205" y="358" class="note"><tspan font-weight="700">ONE</tspan> (fastest, weakest) · <tspan font-weight="700">QUORUM</tspan> (majority, balanced) · <tspan font-weight="700">ALL</tspan> (strongest, slowest).</text>
+  <text x="40" y="378" class="note">You pick per operation: QUORUM read + QUORUM write on a 3-node cluster satisfies R + W &gt; N.</text>
+</svg>

@@ -1,0 +1,58 @@
+<svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .panel { font-size: 14px; font-weight: 700; fill: #1e293b; }
+    .box { font-size: 12px; font-weight: 700; fill: #ffffff; }
+    .step { font-size: 11px; font-weight: 700; fill: #1e293b; }
+    .note { font-size: 10.5px; fill: #64748b; }
+    .miss { font-size: 10.5px; font-weight: 700; fill: #d97706; }
+  </style>
+
+  <text x="24" y="30" class="title">The Cache-Aside pattern: the application manages the cache</text>
+
+  <!-- ===== READ ===== -->
+  <text x="30" y="66" class="panel" fill="#2563eb">READ path (lazy loading)</text>
+
+  <rect x="40" y="82" width="110" height="46" rx="8" fill="#1e293b"/><text x="66" y="110" class="box">App</text>
+  <rect x="330" y="82" width="120" height="46" rx="8" fill="#2563eb"/><text x="356" y="110" class="box">Cache</text>
+  <rect x="630" y="82" width="120" height="46" rx="8" fill="#64748b"/><text x="656" y="110" class="box">Database</text>
+
+  <!-- 1 check cache -->
+  <path d="M 150 98 L 328 98" stroke="#334155" stroke-width="2"/><polygon points="324,93 334,98 324,103" fill="#334155"/>
+  <text x="180" y="90" class="step">1 · GET key</text>
+  <!-- hit -->
+  <path d="M 330 118 L 152 118" stroke="#059669" stroke-width="2"/><polygon points="156,113 146,118 156,123" fill="#059669"/>
+  <text x="180" y="138" class="note" fill="#059669">HIT → return value ✓ (done)</text>
+
+  <!-- 2 miss to DB -->
+  <path d="M 450 100 L 628 100" stroke="#d97706" stroke-width="2" stroke-dasharray="5,4"/><polygon points="624,95 634,100 624,105" fill="#d97706"/>
+  <text x="470" y="92" class="miss">2 · on MISS, read DB</text>
+  <!-- 3 populate -->
+  <path d="M 630 118 C 540 150, 460 150, 452 128" fill="none" stroke="#7c3aed" stroke-width="2"/><polygon points="456,132 448,122 462,124" fill="#7c3aed"/>
+  <text x="470" y="150" class="step" fill="#7c3aed">3 · SET key in cache (with TTL), return</text>
+
+  <line x1="24" y1="176" x2="776" y2="176" stroke="#e2e8f0"/>
+
+  <!-- ===== WRITE ===== -->
+  <text x="30" y="204" class="panel" fill="#059669">WRITE path</text>
+
+  <rect x="40" y="220" width="110" height="46" rx="8" fill="#1e293b"/><text x="66" y="248" class="box">App</text>
+  <rect x="330" y="220" width="120" height="46" rx="8" fill="#64748b"/><text x="352" y="248" class="box">Database</text>
+  <rect x="630" y="220" width="120" height="46" rx="8" fill="#2563eb"/><text x="656" y="248" class="box">Cache</text>
+
+  <path d="M 150 238 L 328 238" stroke="#334155" stroke-width="2"/><polygon points="324,233 334,238 324,243" fill="#334155"/>
+  <text x="175" y="230" class="step">1 · write to DB (source of truth)</text>
+
+  <path d="M 450 238 L 628 238" stroke="#dc2626" stroke-width="2"/><polygon points="624,233 634,238 624,243" fill="#dc2626"/>
+  <text x="480" y="230" class="step" fill="#dc2626">2 · invalidate (delete) the cached key</text>
+  <text x="480" y="284" class="note">Next read misses → reloads fresh from DB (step 2–3 above).</text>
+
+  <!-- footer -->
+  <rect x="24" y="306" width="752" height="132" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="40" y="330" class="panel" font-size="13">Why it's the default pattern — and what to watch</text>
+  <text x="40" y="354" class="note">✓ <tspan font-weight="700">Resilient</tspan>: if the cache is down, reads still work by falling back to the DB.</text>
+  <text x="40" y="374" class="note">✓ <tspan font-weight="700">Lazy / memory-efficient</tspan>: only data that's actually requested ever gets cached.</text>
+  <text x="40" y="394" class="note">⚠ <tspan font-weight="700">Miss penalty</tspan>: a miss costs three hops (cache → DB → cache). ⚠ <tspan font-weight="700">Staleness</tspan>: data can drift between DB and cache — a TTL bounds it.</text>
+  <text x="40" y="414" class="note">⚠ <tspan font-weight="700">Stampede</tspan>: a popular key expiring can send many misses to the DB at once (mitigate with locking / request coalescing).</text>
+  <text x="40" y="432" class="note">Alternative write handling (write-through / write-back / write-around) is a separate topic — Cache Write Strategies.</text>
+</svg>

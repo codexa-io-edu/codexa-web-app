@@ -1,0 +1,71 @@
+<svg viewBox="0 0 800 480" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .panel { font-size: 14px; font-weight: 700; fill: #ffffff; }
+    .lbl { font-size: 12px; font-weight: 700; fill: #1e293b; }
+    .note { font-size: 11px; fill: #64748b; }
+    .mono { font-size: 11px; fill: #334155; font-family: 'SFMono-Regular', Consolas, monospace; }
+    .good { font-size: 11px; font-weight: 700; fill: #059669; }
+    .bad { font-size: 11px; font-weight: 700; fill: #dc2626; }
+  </style>
+
+  <text x="24" y="30" class="title">Surviving a restart: how in-memory databases persist</text>
+  <text x="24" y="50" class="note">RAM is volatile — a crash or reboot wipes it. Two strategies (often combined) rebuild the dataset from disk.</text>
+
+  <!-- LEFT: Snapshot -->
+  <rect x="24" y="66" width="366" height="30" rx="6" fill="#2563eb"/>
+  <text x="40" y="86" class="panel">A · Snapshot / Checkpoint</text>
+
+  <text x="40" y="122" class="note">Every N minutes, dump the whole dataset to one file.</text>
+
+  <!-- timeline -->
+  <line x1="48" y1="150" x2="366" y2="150" stroke="#cbd5e1" stroke-width="2"/>
+  <circle cx="90" cy="150" r="6" fill="#2563eb"/><text x="72" y="176" class="mono">snap</text>
+  <circle cx="200" cy="150" r="6" fill="#2563eb"/><text x="182" y="176" class="mono">snap</text>
+  <circle cx="310" cy="150" r="6" fill="#2563eb"/><text x="292" y="176" class="mono">snap</text>
+  <text x="330" y="145" class="bad" font-size="14">💥</text>
+  <line x1="340" y1="130" x2="340" y2="170" stroke="#dc2626" stroke-width="2"/>
+  <text x="326" y="196" class="bad">crash</text>
+
+  <path d="M 310 210 C 320 210, 330 210, 340 210" stroke="#dc2626" stroke-width="6"/>
+  <text x="200" y="228" class="bad">✗ writes after last snapshot are lost</text>
+
+  <rect x="40" y="244" width="334" height="86" rx="6" fill="#eff6ff" stroke="#93c5fd"/>
+  <text x="52" y="266" class="good">✓ Compact file, fast to load on restart</text>
+  <text x="52" y="286" class="good">✓ Low overhead during normal running</text>
+  <text x="52" y="306" class="bad">✗ Can lose everything since the last snapshot</text>
+  <text x="52" y="324" class="note">Good when losing a few minutes of data is OK.</text>
+
+  <!-- RIGHT: Append-only log -->
+  <rect x="410" y="66" width="366" height="30" rx="6" fill="#059669"/>
+  <text x="426" y="86" class="panel">B · Append-Only Operation Log</text>
+
+  <text x="426" y="122" class="note">Record every write to disk as it happens; replay on restart.</text>
+
+  <!-- log entries -->
+  <g>
+    <rect x="426" y="138" width="330" height="20" rx="3" fill="#f0fdf4" stroke="#86efac"/><text x="434" y="153" class="mono">SET user:1 "Asha"</text>
+    <rect x="426" y="162" width="330" height="20" rx="3" fill="#f0fdf4" stroke="#86efac"/><text x="434" y="177" class="mono">INCR views 1</text>
+    <rect x="426" y="186" width="330" height="20" rx="3" fill="#f0fdf4" stroke="#86efac"/><text x="434" y="201" class="mono">SET cart:1 [...]</text>
+    <text x="330" y="153" class="bad" font-size="14"></text>
+  </g>
+  <path d="M 426 220 L 700 220" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="426" y="236" class="good">↻ replay the log → dataset fully rebuilt</text>
+
+  <rect x="426" y="244" width="334" height="86" rx="6" fill="#f0fdf4" stroke="#86efac"/>
+  <text x="438" y="266" class="good">✓ Minimal data loss (flush per-write or per-second)</text>
+  <text x="438" y="286" class="bad">✗ Larger files; slower to replay a long log</text>
+  <text x="438" y="306" class="note">✗ Needs periodic rewrite/compaction to stay small</text>
+  <text x="438" y="324" class="note">Good when durability matters more than restart speed.</text>
+
+  <!-- bottom: hybrid + replication -->
+  <rect x="24" y="348" width="752" height="56" rx="8" fill="#fffbeb" stroke="#fcd34d"/>
+  <text x="40" y="372" class="lbl">Hybrid (common default):</text>
+  <text x="220" y="372" class="note">a base snapshot + an append-only log of changes since it — fast recovery <tspan font-weight="700">and</tspan> minimal loss.</text>
+  <text x="40" y="394" class="note">Tuning the flush frequency trades durability against write speed.</text>
+
+  <rect x="24" y="414" width="752" height="52" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="40" y="438" class="lbl">Replication ≠ durability.</text>
+  <text x="200" y="438" class="note">Keeping copies on other nodes protects against one machine failing, but a shared</text>
+  <text x="40" y="456" class="note">power loss or bug can still lose in-flight data. It complements persistence; it doesn't replace it. (Replication mechanics: separate module.)</text>
+</svg>

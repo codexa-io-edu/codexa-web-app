@@ -1,0 +1,43 @@
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <rect width="800" height="400" fill="#f8fafc"/>
+  <text x="400" y="34" text-anchor="middle" font-size="21" font-weight="700" fill="#0f172a">Decorator: Wrap an Object to Layer On Behavior</text>
+  <text x="400" y="58" text-anchor="middle" font-size="13" fill="#64748b">Each wrapper adds one responsibility and forwards the rest — stack them in any order</text>
+
+  <!-- nested wrappers (concentric) -->
+  <rect x="230" y="90" width="340" height="230" rx="14" fill="#fff7ed" stroke="#d97706" stroke-width="2.2"/>
+  <text x="400" y="112" text-anchor="middle" font-size="13" font-weight="700" fill="#b45309">MilkDecorator  (+$0.50)</text>
+
+  <rect x="270" y="128" width="260" height="160" rx="12" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+  <text x="400" y="150" text-anchor="middle" font-size="13" font-weight="700" fill="#b45309">SugarDecorator  (+$0.25)</text>
+
+  <rect x="310" y="166" width="180" height="90" rx="10" fill="#ffedd5" stroke="#d97706" stroke-width="2"/>
+  <text x="400" y="188" text-anchor="middle" font-size="13" font-weight="700" fill="#b45309">CaramelDecorator  (+$0.75)</text>
+
+  <rect x="345" y="204" width="110" height="42" rx="8" fill="#0891b2"/>
+  <text x="400" y="223" text-anchor="middle" font-size="12.5" font-weight="700" fill="#ffffff">Coffee</text>
+  <text x="400" y="238" text-anchor="middle" font-size="9.5" fill="#e0f2fe">base: $2.00</text>
+
+  <!-- call flow -->
+  <defs>
+    <marker id="d_arr" markerWidth="11" markerHeight="11" refX="8" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#0e7490"/>
+    </marker>
+  </defs>
+  <text x="120" y="150" font-size="12.5" font-weight="700" fill="#0e7490">cost()</text>
+  <line x1="150" y1="175" x2="228" y2="200" stroke="#0e7490" stroke-width="2" marker-end="url(#d_arr)"/>
+  <text x="120" y="200" font-size="10" fill="#334155">each layer adds</text>
+  <text x="120" y="216" font-size="10" fill="#334155">its price, then asks</text>
+  <text x="120" y="232" font-size="10" fill="#334155">the layer inside.</text>
+
+  <!-- result -->
+  <rect x="600" y="150" width="170" height="120" rx="10" fill="#ecfeff" stroke="#0891b2" stroke-width="1.8"/>
+  <text x="685" y="174" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0e7490">Total cost()</text>
+  <text x="616" y="200" font-size="11" fill="#0e7490" font-family="monospace">2.00  base</text>
+  <text x="616" y="220" font-size="11" fill="#0e7490" font-family="monospace">+0.75 caramel</text>
+  <text x="616" y="240" font-size="11" fill="#0e7490" font-family="monospace">+0.25 sugar</text>
+  <text x="616" y="260" font-size="11" fill="#0e7490" font-family="monospace">+0.50 milk = 3.50</text>
+  <line x1="570" y1="205" x2="598" y2="205" stroke="#0e7490" stroke-width="2" marker-end="url(#d_arr)"/>
+
+  <text x="400" y="352" text-anchor="middle" font-size="11.5" fill="#334155">All wrappers share the Coffee interface, so a decorated coffee is still "a coffee" — you can wrap a wrapper.</text>
+  <text x="400" y="376" text-anchor="middle" font-size="11" fill="#64748b">3 add-ons as decorators = 3 classes; as subclasses you'd need one class per combination.</text>
+</svg>

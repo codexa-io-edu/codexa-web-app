@@ -1,0 +1,53 @@
+<svg viewBox="0 0 920 380" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="p1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#4f46e5"/></marker>
+    <marker id="p2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#0d9488"/></marker>
+    <marker id="p3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#db2777"/></marker>
+  </defs>
+  <rect width="920" height="380" fill="#ffffff"/>
+  <text x="460" y="32" text-anchor="middle" fill="#0f172a" font-size="18" font-weight="700">Data Travels as Packets</text>
+
+  <!-- source -->
+  <rect x="30" y="120" width="130" height="70" rx="10" fill="#1e293b"/>
+  <text x="95" y="150" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">Message</text>
+  <text x="95" y="170" text-anchor="middle" fill="#cbd5e1" font-size="11">split into packets</text>
+
+  <rect x="40" y="204" width="34" height="26" rx="5" fill="#4f46e5"/><text x="57" y="222" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">P1</text>
+  <rect x="80" y="204" width="34" height="26" rx="5" fill="#0d9488"/><text x="97" y="222" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">P2</text>
+  <rect x="120" y="204" width="34" height="26" rx="5" fill="#db2777"/><text x="137" y="222" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">P3</text>
+
+  <!-- routers mesh -->
+  <circle cx="330" cy="110" r="20" fill="#0ea5e9"/><text x="330" y="115" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">R1</text>
+  <circle cx="470" cy="80"  r="20" fill="#0ea5e9"/><text x="470" y="85" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">R2</text>
+  <circle cx="400" cy="200" r="20" fill="#0ea5e9"/><text x="400" y="205" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">R3</text>
+  <circle cx="560" cy="180" r="20" fill="#0ea5e9"/><text x="560" y="185" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">R4</text>
+  <circle cx="470" cy="290" r="20" fill="#0ea5e9"/><text x="470" y="295" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">R5</text>
+  <circle cx="620" cy="110" r="20" fill="#0ea5e9"/><text x="620" y="115" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">R6</text>
+
+  <!-- faint mesh links -->
+  <g stroke="#cbd5e1" stroke-width="1.5">
+    <line x1="330" y1="110" x2="470" y2="80"/><line x1="470" y1="80" x2="620" y2="110"/>
+    <line x1="330" y1="110" x2="400" y2="200"/><line x1="400" y1="200" x2="560" y2="180"/>
+    <line x1="560" y1="180" x2="620" y2="110"/><line x1="400" y1="200" x2="470" y2="290"/>
+    <line x1="470" y1="290" x2="560" y2="180"/><line x1="470" y1="80" x2="560" y2="180"/>
+  </g>
+
+  <!-- packet routes (colored) -->
+  <path d="M 160 210 L 320 118" fill="none" stroke="#4f46e5" stroke-width="2.4" marker-end="url(#p1)"/>
+  <path d="M 350 100 L 452 86" fill="none" stroke="#4f46e5" stroke-width="2.4"/>
+  <path d="M 488 82 L 700 150" fill="none" stroke="#4f46e5" stroke-width="2.4" marker-end="url(#p1)"/>
+
+  <path d="M 160 216 L 384 196" fill="none" stroke="#0d9488" stroke-width="2.4" marker-end="url(#p2)"/>
+  <path d="M 418 196 L 542 182" fill="none" stroke="#0d9488" stroke-width="2.4"/>
+  <path d="M 576 172 L 700 158" fill="none" stroke="#0d9488" stroke-width="2.4" marker-end="url(#p2)"/>
+
+  <path d="M 160 224 L 452 284" fill="none" stroke="#db2777" stroke-width="2.4" marker-end="url(#p3)"/>
+  <path d="M 486 282 L 700 170" fill="none" stroke="#db2777" stroke-width="2.4" marker-end="url(#p3)"/>
+
+  <!-- destination -->
+  <rect x="705" y="120" width="130" height="70" rx="10" fill="#0d9488"/>
+  <text x="770" y="150" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">Message</text>
+  <text x="770" y="170" text-anchor="middle" fill="#ccfbf1" font-size="11">reassembled</text>
+
+  <text x="460" y="352" text-anchor="middle" fill="#64748b" font-size="12">Each packet carries a destination address and can take a different route. TCP reorders them and re-requests any that are lost.</text>
+</svg>

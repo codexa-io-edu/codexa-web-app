@@ -1,0 +1,56 @@
+<svg viewBox="0 0 820 450" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <rect width="820" height="450" fill="#f8fafc"/>
+  <text x="410" y="30" text-anchor="middle" font-size="20" font-weight="700" fill="#0f172a">Extensibility Patterns</text>
+  <text x="410" y="52" text-anchor="middle" font-size="12.5" fill="#64748b">Structural choices you make today that make tomorrow's additions non-breaking</text>
+
+  <!-- Pattern 1: Envelope -->
+  <rect x="30" y="70" width="360" height="160" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="1.8"/>
+  <text x="210" y="92" text-anchor="middle" font-size="12" font-weight="700" fill="#1d4ed8">1 · Response Envelope</text>
+  <rect x="50" y="104" width="150" height="110" rx="6" fill="#fef2f2" stroke="#fca5a5"/>
+  <text x="125" y="122" text-anchor="middle" font-size="8.5" font-weight="700" fill="#b91c1c">Bare array (fragile)</text>
+  <text x="58" y="142" font-family="monospace" font-size="8" fill="#334155">[ {...}, {...} ]</text>
+  <text x="58" y="160" font-size="8.5" fill="#b91c1c">Can't add total/cursor</text>
+  <text x="58" y="176" font-size="8.5" fill="#b91c1c">later without breaking</text>
+  <rect x="214" y="104" width="160" height="110" rx="6" fill="#dcfce7" stroke="#86efac"/>
+  <text x="294" y="122" text-anchor="middle" font-size="8.5" font-weight="700" fill="#047857">Envelope (extensible)</text>
+  <text x="222" y="140" font-family="monospace" font-size="8" fill="#334155">{</text>
+  <text x="222" y="155" font-family="monospace" font-size="8" fill="#334155">  "data": [...],</text>
+  <text x="222" y="170" font-family="monospace" font-size="8" fill="#065f46">  "total": 100,</text>
+  <text x="222" y="185" font-family="monospace" font-size="8" fill="#065f46">  "cursor": "..."</text>
+  <text x="222" y="200" font-family="monospace" font-size="8" fill="#334155">}</text>
+
+  <!-- Pattern 2: Optional fields -->
+  <rect x="430" y="70" width="360" height="160" rx="10" fill="#f0fdf4" stroke="#059669" stroke-width="1.8"/>
+  <text x="610" y="92" text-anchor="middle" font-size="12" font-weight="700" fill="#047857">2 · Optional Fields with Defaults</text>
+  <rect x="450" y="104" width="320" height="110" rx="6" fill="#ffffff" stroke="#6ee7b7"/>
+  <text x="460" y="124" font-family="monospace" font-size="8.5" fill="#334155">// Old response (v1 consumers see only this)</text>
+  <text x="460" y="140" font-family="monospace" font-size="8.5" fill="#334155">{ "id": 42, "status": "paid" }</text>
+  <text x="460" y="162" font-family="monospace" font-size="8.5" fill="#334155">// New response (additive, v1 consumers</text>
+  <text x="460" y="178" font-family="monospace" font-size="8.5" fill="#334155">//  just ignore the new fields)</text>
+  <text x="460" y="194" font-family="monospace" font-size="8.5" fill="#065f46">{ "id": 42, "status": "paid",</text>
+  <text x="460" y="208" font-family="monospace" font-size="8.5" fill="#065f46">  "paidAt": "...", "currency": "USD" }</text>
+
+  <!-- Pattern 3: Tolerant reader -->
+  <rect x="30" y="250" width="360" height="172" rx="10" fill="#fff7ed" stroke="#d97706" stroke-width="1.8"/>
+  <text x="210" y="272" text-anchor="middle" font-size="12" font-weight="700" fill="#b45309">3 · Tolerant Reader (Postel's Law)</text>
+  <rect x="50" y="286" width="320" height="120" rx="6" fill="#ffffff" stroke="#fdba74"/>
+  <text x="60" y="306" font-size="9" fill="#334155">Consumers must be written to IGNORE unknown fields</text>
+  <text x="60" y="322" font-size="9" fill="#334155">and gracefully handle missing optional fields.</text>
+  <text x="60" y="344" font-family="monospace" font-size="8.5" fill="#b45309">// DON'T: strict deserialize — fails on new fields</text>
+  <text x="60" y="360" font-family="monospace" font-size="8.5" fill="#334155">mapper.readValue(json, OrderV1.class);</text>
+  <text x="60" y="376" font-size="8.5" fill="#334155">// (extra fields throw by default in some configs)</text>
+  <text x="60" y="394" font-family="monospace" font-size="8.5" fill="#047857">// DO: configure to ignore unknowns</text>
+  <text x="60" y="410" font-family="monospace" font-size="8.5" fill="#334155">@JsonIgnoreProperties(ignoreUnknown = true)</text>
+
+  <!-- Pattern 4: Enum extensibility -->
+  <rect x="430" y="250" width="360" height="172" rx="10" fill="#faf5ff" stroke="#7c3aed" stroke-width="1.8"/>
+  <text x="610" y="272" text-anchor="middle" font-size="12" font-weight="700" fill="#6d28d9">4 · Enum Extensibility</text>
+  <rect x="450" y="286" width="320" height="120" rx="6" fill="#ffffff" stroke="#c4b5fd"/>
+  <text x="460" y="306" font-size="9" fill="#334155">Adding a new enum value is additive on the server side</text>
+  <text x="460" y="322" font-size="9" fill="#334155">but BREAKING on clients with strict switch/enum parsing.</text>
+  <text x="460" y="344" font-family="monospace" font-size="8.5" fill="#b91c1c">// Client switch on status — new "DISPUTED" value breaks</text>
+  <text x="460" y="360" font-family="monospace" font-size="8.5" fill="#334155">switch(status) {</text>
+  <text x="460" y="376" font-family="monospace" font-size="8.5" fill="#334155">  case PAID: ... case REFUNDED: ...</text>
+  <text x="460" y="392" font-family="monospace" font-size="8.5" fill="#b91c1c">  // no default → throws on "DISPUTED"</text>
+  <text x="460" y="408" font-family="monospace" font-size="8.5" fill="#047857">  default: handleUnknown(status); // ← correct</text>
+</svg>

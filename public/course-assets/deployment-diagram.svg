@@ -1,0 +1,56 @@
+<svg viewBox="0 0 820 430" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <rect width="820" height="430" fill="#f8fafc"/>
+  <text x="410" y="30" text-anchor="middle" font-size="20" font-weight="700" fill="#0f172a">Deployment Diagram: Where the Software Physically Runs</text>
+  <text x="410" y="52" text-anchor="middle" font-size="12.5" fill="#64748b">Nodes (3-D boxes) are hardware/execution environments; artifacts are the deployable files that run on them</text>
+
+  <!-- Client node -->
+  <g>
+    <polygon points="60,110 180,110 200,92 80,92" fill="#c7d2fe" stroke="#4338ca" stroke-width="1.5"/>
+    <polygon points="180,110 180,190 200,172 200,92" fill="#a5b4fc" stroke="#4338ca" stroke-width="1.5"/>
+    <rect x="60" y="110" width="120" height="80" fill="#e0e7ff" stroke="#4338ca" stroke-width="1.5"/>
+    <text x="120" y="128" text-anchor="middle" font-size="9" font-weight="700" fill="#3730a3">&#171;device&#187;</text>
+    <text x="120" y="144" text-anchor="middle" font-size="11" font-weight="700" fill="#3730a3">Browser</text>
+    <rect x="74" y="154" width="92" height="26" rx="2" fill="#ffffff" stroke="#6366f1" stroke-width="1"/>
+    <text x="120" y="171" text-anchor="middle" font-size="8" fill="#4338ca">&#171;artifact&#187; app.js</text>
+  </g>
+
+  <!-- App server node -->
+  <g>
+    <polygon points="330,100 470,100 490,82 350,82" fill="#bbf7d0" stroke="#047857" stroke-width="1.5"/>
+    <polygon points="470,100 470,210 490,192 490,82" fill="#86efac" stroke="#047857" stroke-width="1.5"/>
+    <rect x="330" y="100" width="140" height="110" fill="#dcfce7" stroke="#047857" stroke-width="1.5"/>
+    <text x="400" y="118" text-anchor="middle" font-size="9" font-weight="700" fill="#065f46">&#171;execution env&#187;</text>
+    <text x="400" y="134" text-anchor="middle" font-size="11" font-weight="700" fill="#065f46">App Server (JVM)</text>
+    <rect x="344" y="144" width="112" height="24" rx="2" fill="#ffffff" stroke="#059669" stroke-width="1"/>
+    <text x="400" y="160" text-anchor="middle" font-size="7.5" fill="#047857">&#171;artifact&#187; orders.war</text>
+    <rect x="344" y="174" width="112" height="24" rx="2" fill="#ffffff" stroke="#059669" stroke-width="1"/>
+    <text x="400" y="190" text-anchor="middle" font-size="7.5" fill="#047857">&#171;artifact&#187; auth.jar</text>
+  </g>
+
+  <!-- DB node -->
+  <g>
+    <polygon points="630,110 750,110 770,92 650,92" fill="#ddd6fe" stroke="#6d28d9" stroke-width="1.5"/>
+    <polygon points="750,110 750,190 770,172 770,92" fill="#c4b5fd" stroke="#6d28d9" stroke-width="1.5"/>
+    <rect x="630" y="110" width="120" height="80" fill="#ede9fe" stroke="#6d28d9" stroke-width="1.5"/>
+    <text x="690" y="128" text-anchor="middle" font-size="9" font-weight="700" fill="#5b21b6">&#171;device&#187;</text>
+    <text x="690" y="144" text-anchor="middle" font-size="11" font-weight="700" fill="#5b21b6">DB Server</text>
+    <rect x="644" y="154" width="92" height="26" rx="2" fill="#ffffff" stroke="#7c3aed" stroke-width="1"/>
+    <text x="690" y="171" text-anchor="middle" font-size="8" fill="#5b21b6">PostgreSQL</text>
+  </g>
+
+  <!-- communication paths -->
+  <line x1="200" y1="150" x2="330" y2="150" stroke="#334155" stroke-width="1.8"/>
+  <text x="265" y="142" text-anchor="middle" font-size="9" fill="#334155">HTTPS</text>
+  <text x="265" y="164" text-anchor="middle" font-size="7.5" font-style="italic" fill="#64748b">&#171;protocol&#187;</text>
+
+  <line x1="490" y1="150" x2="630" y2="150" stroke="#334155" stroke-width="1.8"/>
+  <text x="560" y="142" text-anchor="middle" font-size="9" fill="#334155">JDBC / TCP</text>
+  <text x="560" y="164" text-anchor="middle" font-size="7.5" font-style="italic" fill="#64748b">&#171;protocol&#187;</text>
+
+  <rect x="90" y="250" width="640" height="150" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="410" y="272" text-anchor="middle" font-size="11.5" font-weight="700" fill="#334155">The vocabulary</text>
+  <text x="110" y="298" font-size="10" fill="#334155"><tspan font-weight="700">Node:</tspan> a physical or virtual machine / execution environment (3-D box). &#171;device&#187; = hardware, &#171;execution environment&#187; = a runtime (JVM, container, OS).</text>
+  <text x="110" y="324" font-size="10" fill="#334155"><tspan font-weight="700">Artifact:</tspan> a concrete deployable file &#8212; a .war, .jar, .js bundle, container image, DLL &#8212; that is DEPLOYED ONTO a node.</text>
+  <text x="110" y="350" font-size="10" fill="#334155"><tspan font-weight="700">Communication path:</tspan> a line between nodes showing they talk, labeled with the protocol (HTTPS, JDBC, TCP).</text>
+  <text x="110" y="376" font-size="10" fill="#334155"><tspan font-weight="700">In short:</tspan> components (logical modules) get packaged into artifacts, which are deployed onto nodes (physical machines).</text>
+</svg>

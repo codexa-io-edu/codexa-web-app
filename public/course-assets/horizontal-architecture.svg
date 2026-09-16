@@ -1,0 +1,66 @@
+<svg viewBox="0 0 760 540" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="ax" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b"/>
+    </marker>
+  </defs>
+  <rect width="760" height="540" fill="#ffffff"/>
+
+  <!-- Client -->
+  <rect x="300" y="24" width="160" height="44" rx="9" fill="#1e293b"/>
+  <text x="380" y="51" text-anchor="middle" fill="#fff" font-size="15" font-weight="600">Clients</text>
+  <line x1="380" y1="68" x2="380" y2="98" stroke="#64748b" stroke-width="2" marker-end="url(#ax)"/>
+
+  <!-- Load balancer -->
+  <rect x="270" y="102" width="220" height="46" rx="9" fill="#0891b2"/>
+  <text x="380" y="130" text-anchor="middle" fill="#fff" font-size="15" font-weight="600">Load Balancer</text>
+  <text x="510" y="120" fill="#64748b" font-size="11">spreads traffic</text>
+  <text x="510" y="135" fill="#64748b" font-size="11">evenly · skips</text>
+  <text x="510" y="150" fill="#64748b" font-size="11">unhealthy nodes</text>
+
+  <!-- fan out to servers -->
+  <line x1="380" y1="148" x2="150" y2="190" stroke="#64748b" stroke-width="2" marker-end="url(#ax)"/>
+  <line x1="380" y1="148" x2="380" y2="190" stroke="#64748b" stroke-width="2" marker-end="url(#ax)"/>
+  <line x1="380" y1="148" x2="610" y2="190" stroke="#64748b" stroke-width="2" marker-end="url(#ax)"/>
+
+  <rect x="80"  y="192" width="140" height="58" rx="9" fill="#14b8a6"/>
+  <text x="150" y="217" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">App Server 1</text>
+  <text x="150" y="236" text-anchor="middle" fill="#ccfbf1" font-size="11">stateless</text>
+
+  <rect x="310" y="192" width="140" height="58" rx="9" fill="#14b8a6"/>
+  <text x="380" y="217" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">App Server 2</text>
+  <text x="380" y="236" text-anchor="middle" fill="#ccfbf1" font-size="11">stateless</text>
+
+  <rect x="540" y="192" width="140" height="58" rx="9" fill="#14b8a6"/>
+  <text x="610" y="217" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">App Server 3</text>
+  <text x="610" y="236" text-anchor="middle" fill="#ccfbf1" font-size="11">stateless</text>
+
+  <!-- auto-scaler adds a server -->
+  <rect x="540" y="266" width="140" height="40" rx="9" fill="none" stroke="#0d9488" stroke-width="1.6" stroke-dasharray="5 4"/>
+  <text x="610" y="291" text-anchor="middle" fill="#0d9488" font-size="12" font-weight="600">+ App Server N</text>
+  <text x="610" y="326" text-anchor="middle" fill="#64748b" font-size="11">auto-scaler adds/removes</text>
+  <text x="610" y="341" text-anchor="middle" fill="#64748b" font-size="11">servers with demand</text>
+
+  <!-- to shared state -->
+  <line x1="150" y1="250" x2="290" y2="360" stroke="#64748b" stroke-width="2" marker-end="url(#ax)"/>
+  <line x1="380" y1="250" x2="360" y2="360" stroke="#64748b" stroke-width="2" marker-end="url(#ax)"/>
+
+  <!-- cache -->
+  <rect x="240" y="364" width="160" height="46" rx="9" fill="#f59e0b"/>
+  <text x="320" y="392" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">Cache</text>
+
+  <line x1="320" y1="410" x2="320" y2="440" stroke="#64748b" stroke-width="2" marker-end="url(#ax)"/>
+
+  <!-- database + replica -->
+  <rect x="180" y="444" width="180" height="54" rx="9" fill="#1e40af"/>
+  <text x="270" y="467" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">Primary DB</text>
+  <text x="270" y="485" text-anchor="middle" fill="#dbeafe" font-size="11">writes</text>
+
+  <line x1="360" y1="471" x2="398" y2="471" stroke="#64748b" stroke-width="2" marker-end="url(#ax)"/>
+
+  <rect x="400" y="444" width="180" height="54" rx="9" fill="#3b82f6"/>
+  <text x="490" y="467" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">Read Replicas</text>
+  <text x="490" y="485" text-anchor="middle" fill="#dbeafe" font-size="11">scale reads</text>
+
+  <text x="380" y="524" text-anchor="middle" fill="#475569" font-size="12">Any server can handle any request — so the fleet grows and shrinks freely</text>
+</svg>

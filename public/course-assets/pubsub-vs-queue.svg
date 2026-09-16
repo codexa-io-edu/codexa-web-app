@@ -1,0 +1,57 @@
+<svg viewBox="0 0 800 380" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .h { font-size: 13px; font-weight: 700; fill: #ffffff; }
+    .box { font-size: 11px; font-weight: 700; fill: #ffffff; }
+    .note { font-size: 10px; fill: #64748b; }
+    .msg { font-size: 10px; font-weight: 700; fill: #ffffff; }
+  </style>
+
+  <text x="24" y="30" class="title">The core distinction: work-sharing vs broadcast</text>
+
+  <!-- QUEUE -->
+  <rect x="24" y="48" width="370" height="310" rx="10" fill="#eff6ff" stroke="#bfdbfe"/>
+  <rect x="24" y="48" width="370" height="36" rx="10" fill="#2563eb"/>
+  <text x="44" y="72" class="h">Point-to-point (queue) — consumed ONCE</text>
+
+  <rect x="44" y="110" width="80" height="34" rx="6" fill="#2563eb"/><text x="84" y="132" text-anchor="middle" class="box">Producer</text>
+  <rect x="160" y="106" width="70" height="42" rx="6" fill="#d97706"/><text x="195" y="132" text-anchor="middle" class="msg">Queue</text>
+  <line x1="124" y1="127" x2="158" y2="127" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#a)"/>
+
+  <rect x="290" y="96" width="80" height="28" rx="5" fill="#059669"/><text x="330" y="115" text-anchor="middle" class="box">Consumer 1</text>
+  <rect x="290" y="132" width="80" height="28" rx="5" fill="#94a3b8"/><text x="330" y="151" text-anchor="middle" class="box">Consumer 2</text>
+  <rect x="290" y="168" width="80" height="28" rx="5" fill="#94a3b8"/><text x="330" y="187" text-anchor="middle" class="box">Consumer 3</text>
+
+  <line x1="230" y1="127" x2="288" y2="110" stroke="#059669" stroke-width="2.2" marker-end="url(#g)"/>
+  <text x="60" y="234" class="note">Message m1 goes to <tspan font-weight="700">exactly one</tspan> consumer.</text>
+  <text x="60" y="254" class="note">Consumers <tspan font-weight="700">compete</tspan>; adding them shares</text>
+  <text x="60" y="270" class="note">the load. Used for distributing tasks.</text>
+  <text x="60" y="300" class="note">→ "who will do this job?"</text>
+
+  <!-- PUBSUB -->
+  <rect x="406" y="48" width="370" height="310" rx="10" fill="#f0fdf4" stroke="#bbf7d0"/>
+  <rect x="406" y="48" width="370" height="36" rx="10" fill="#059669"/>
+  <text x="426" y="72" class="h">Publish-subscribe — delivered to ALL</text>
+
+  <rect x="426" y="110" width="80" height="34" rx="6" fill="#2563eb"/><text x="466" y="132" text-anchor="middle" class="box">Publisher</text>
+  <rect x="542" y="106" width="70" height="42" rx="6" fill="#d97706"/><text x="577" y="132" text-anchor="middle" class="msg">Topic</text>
+  <line x1="506" y1="127" x2="540" y2="127" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#a)"/>
+
+  <rect x="672" y="96" width="90" height="28" rx="5" fill="#059669"/><text x="717" y="115" text-anchor="middle" class="box">Subscriber 1</text>
+  <rect x="672" y="132" width="90" height="28" rx="5" fill="#059669"/><text x="717" y="151" text-anchor="middle" class="box">Subscriber 2</text>
+  <rect x="672" y="168" width="90" height="28" rx="5" fill="#059669"/><text x="717" y="187" text-anchor="middle" class="box">Subscriber 3</text>
+
+  <line x1="612" y1="122" x2="670" y2="110" stroke="#059669" stroke-width="2.2" marker-end="url(#g)"/>
+  <line x1="612" y1="127" x2="670" y2="146" stroke="#059669" stroke-width="2.2" marker-end="url(#g)"/>
+  <line x1="612" y1="133" x2="670" y2="182" stroke="#059669" stroke-width="2.2" marker-end="url(#g)"/>
+
+  <text x="426" y="234" class="note">Message m1 is copied to <tspan font-weight="700">every</tspan> subscriber.</text>
+  <text x="426" y="254" class="note">Subscribers are <tspan font-weight="700">independent</tspan>; adding one</text>
+  <text x="426" y="270" class="note">doesn't take anything from the others.</text>
+  <text x="426" y="300" class="note">→ "this happened — everyone who cares, react."</text>
+
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#94a3b8"/></marker>
+    <marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#059669"/></marker>
+  </defs>
+</svg>

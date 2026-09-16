@@ -1,0 +1,69 @@
+<svg viewBox="0 0 960 430" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b"/>
+    </marker>
+  </defs>
+  <rect width="960" height="430" fill="#ffffff"/>
+  <line x1="480" y1="30" x2="480" y2="392" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="6 6"/>
+
+  <!-- ============ LEFT: VERTICAL ============ -->
+  <text x="240" y="30" text-anchor="middle" fill="#3730a3" font-size="20" font-weight="700">VERTICAL SCALING</text>
+  <text x="240" y="50" text-anchor="middle" fill="#6366f1" font-size="14" font-weight="600">(Scale Up)</text>
+
+  <!-- big server on top -->
+  <rect x="140" y="72" width="200" height="104" rx="10" fill="#4f46e5"/>
+  <text x="240" y="112" text-anchor="middle" fill="#fff" font-size="16" font-weight="700">Bigger Server</text>
+  <text x="240" y="136" text-anchor="middle" fill="#e0e7ff" font-size="12">more CPU · more RAM</text>
+  <text x="240" y="154" text-anchor="middle" fill="#e0e7ff" font-size="12">more disk</text>
+
+  <!-- upgrade arrow -->
+  <line x1="240" y1="262" x2="240" y2="182" stroke="#64748b" stroke-width="2.5" marker-end="url(#ar)"/>
+  <text x="352" y="228" text-anchor="middle" fill="#4f46e5" font-size="12" font-weight="600">upgrade the</text>
+  <text x="352" y="244" text-anchor="middle" fill="#4f46e5" font-size="12" font-weight="600">one machine</text>
+
+  <!-- small server -->
+  <rect x="185" y="264" width="110" height="54" rx="8" fill="#a5b4fc"/>
+  <text x="240" y="296" text-anchor="middle" fill="#312e81" font-size="14" font-weight="600">Server</text>
+
+  <text x="240" y="356" text-anchor="middle" fill="#334155" font-size="13" font-weight="600">Make ONE machine more powerful</text>
+  <text x="240" y="376" text-anchor="middle" fill="#64748b" font-size="12">Simple · has a hardware ceiling · single point of failure</text>
+
+  <!-- ============ RIGHT: HORIZONTAL ============ -->
+  <text x="720" y="30" text-anchor="middle" fill="#115e59" font-size="20" font-weight="700">HORIZONTAL SCALING</text>
+  <text x="720" y="50" text-anchor="middle" fill="#0d9488" font-size="14" font-weight="600">(Scale Out)</text>
+
+  <rect x="610" y="70" width="220" height="42" rx="8" fill="#0891b2"/>
+  <text x="720" y="97" text-anchor="middle" fill="#fff" font-size="15" font-weight="600">Load Balancer</text>
+
+  <line x1="720" y1="112" x2="600" y2="156" stroke="#64748b" stroke-width="2" marker-end="url(#ar)"/>
+  <line x1="720" y1="112" x2="720" y2="156" stroke="#64748b" stroke-width="2" marker-end="url(#ar)"/>
+  <line x1="720" y1="112" x2="840" y2="156" stroke="#64748b" stroke-width="2" marker-end="url(#ar)"/>
+
+  <rect x="536" y="158" width="108" height="54" rx="8" fill="#14b8a6"/>
+  <text x="590" y="185" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">Server 1</text>
+  <text x="590" y="202" text-anchor="middle" fill="#ccfbf1" font-size="11">stateless</text>
+
+  <rect x="666" y="158" width="108" height="54" rx="8" fill="#14b8a6"/>
+  <text x="720" y="185" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">Server 2</text>
+  <text x="720" y="202" text-anchor="middle" fill="#ccfbf1" font-size="11">stateless</text>
+
+  <rect x="796" y="158" width="108" height="54" rx="8" fill="#14b8a6"/>
+  <text x="850" y="185" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">Server 3</text>
+  <text x="850" y="202" text-anchor="middle" fill="#ccfbf1" font-size="11">stateless</text>
+
+  <rect x="796" y="224" width="108" height="40" rx="8" fill="none" stroke="#0d9488" stroke-width="1.6" stroke-dasharray="5 4"/>
+  <text x="850" y="249" text-anchor="middle" fill="#0d9488" font-size="12" font-weight="600">+ Server N</text>
+
+  <line x1="590" y1="212" x2="700" y2="292" stroke="#64748b" stroke-width="2" marker-end="url(#ar)"/>
+  <line x1="720" y1="212" x2="720" y2="292" stroke="#64748b" stroke-width="2" marker-end="url(#ar)"/>
+  <line x1="850" y1="212" x2="850" y2="222" stroke="#64748b" stroke-width="1.6" stroke-dasharray="4 3"/>
+  <line x1="820" y1="264" x2="742" y2="292" stroke="#64748b" stroke-width="2" marker-end="url(#ar)"/>
+
+  <rect x="600" y="294" width="240" height="52" rx="8" fill="#0d9488"/>
+  <text x="720" y="317" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">Shared Data Layer</text>
+  <text x="720" y="335" text-anchor="middle" fill="#ccfbf1" font-size="11">replicated / sharded</text>
+
+  <text x="720" y="376" text-anchor="middle" fill="#334155" font-size="13" font-weight="600">Add MORE machines behind a load balancer</text>
+  <text x="720" y="396" text-anchor="middle" fill="#64748b" font-size="12">Near-unlimited · redundant · needs stateless design</text>
+</svg>

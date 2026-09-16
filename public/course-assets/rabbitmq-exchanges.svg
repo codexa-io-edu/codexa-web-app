@@ -1,0 +1,52 @@
+<svg viewBox="0 0 800 420" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .box { font-size: 11px; font-weight: 700; fill: #ffffff; }
+    .note { font-size: 10px; fill: #64748b; }
+    .lbl { font-size: 10.5px; font-weight: 700; fill: #1e293b; }
+    .key { font-size: 9.5px; font-family: 'Consolas','Courier New',monospace; fill: #1e293b; }
+  </style>
+
+  <text x="24" y="30" class="title">RabbitMQ: producer → exchange → (bindings) → queues → consumers</text>
+
+  <!-- producer -->
+  <rect x="24" y="150" width="90" height="40" rx="6" fill="#2563eb"/><text x="69" y="175" text-anchor="middle" class="box">Producer</text>
+  <text x="24" y="210" class="key">routing key:</text>
+  <text x="24" y="224" class="key">"order.created"</text>
+
+  <!-- exchange -->
+  <rect x="180" y="140" width="130" height="60" rx="8" fill="#d97706"/><text x="245" y="166" text-anchor="middle" class="box">Exchange</text><text x="245" y="184" text-anchor="middle" class="note" fill="#fff7ed">routes by rules</text>
+  <line x1="114" y1="170" x2="178" y2="170" stroke="#94a3b8" stroke-width="2" marker-end="url(#a)"/>
+
+  <!-- queues -->
+  <rect x="440" y="90" width="120" height="34" rx="5" fill="#f1f5f9" stroke="#cbd5e1"/><text x="500" y="112" text-anchor="middle" class="lbl">orders queue</text>
+  <rect x="440" y="150" width="120" height="34" rx="5" fill="#f1f5f9" stroke="#cbd5e1"/><text x="500" y="172" text-anchor="middle" class="lbl">audit queue</text>
+  <rect x="440" y="210" width="120" height="34" rx="5" fill="#f1f5f9" stroke="#cbd5e1"/><text x="500" y="232" text-anchor="middle" class="lbl">email queue</text>
+
+  <line x1="310" y1="160" x2="438" y2="107" stroke="#d97706" stroke-width="1.6" marker-end="url(#o)"/><text x="330" y="128" class="key">order.*</text>
+  <line x1="310" y1="170" x2="438" y2="167" stroke="#d97706" stroke-width="1.6" marker-end="url(#o)"/><text x="330" y="160" class="key">order.created</text>
+  <line x1="310" y1="180" x2="438" y2="227" stroke="#d97706" stroke-width="1.6" marker-end="url(#o)"/><text x="330" y="212" class="key">order.created</text>
+
+  <!-- consumers -->
+  <rect x="620" y="90" width="120" height="34" rx="5" fill="#059669"/><text x="680" y="112" text-anchor="middle" class="box">consumer</text>
+  <rect x="620" y="150" width="120" height="34" rx="5" fill="#059669"/><text x="680" y="172" text-anchor="middle" class="box">consumer</text>
+  <rect x="620" y="210" width="120" height="34" rx="5" fill="#059669"/><text x="680" y="232" text-anchor="middle" class="box">consumer</text>
+  <line x1="560" y1="107" x2="618" y2="107" stroke="#059669" stroke-width="1.6" marker-end="url(#g)"/>
+  <line x1="560" y1="167" x2="618" y2="167" stroke="#059669" stroke-width="1.6" marker-end="url(#g)"/>
+  <line x1="560" y1="227" x2="618" y2="227" stroke="#059669" stroke-width="1.6" marker-end="url(#g)"/>
+
+  <!-- exchange types -->
+  <rect x="24" y="270" width="752" height="136" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="40" y="292" class="lbl">Exchange types decide how routing keys map to queues</text>
+  <text x="40" y="314" class="note">• <tspan font-weight="700">direct</tspan> — deliver to queues bound with the exact routing key ("order.created" → order queue).</text>
+  <text x="40" y="334" class="note">• <tspan font-weight="700">topic</tspan> — pattern match with wildcards ("order.*" or "order.#") for flexible routing.</text>
+  <text x="40" y="354" class="note">• <tspan font-weight="700">fanout</tspan> — ignore the key; broadcast to every bound queue (pub/sub-style — see Pub/Sub topic).</text>
+  <text x="40" y="374" class="note">• <tspan font-weight="700">headers</tspan> — route on message header attributes instead of the routing key.</text>
+  <text x="40" y="396" class="note">This is a "smart broker": routing logic lives in the broker, and consumers just read from their queue and <tspan font-weight="700">ack</tspan>.</text>
+
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#94a3b8"/></marker>
+    <marker id="o" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#d97706"/></marker>
+    <marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#059669"/></marker>
+  </defs>
+</svg>

@@ -1,27 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #080810;
+    --foreground: #F1F5F9;
+    --sidebar-bg: #0D0D18;
+    --nav-bg: #0A0A12;
+    --card-bg: #13131F;
+    --border-color: #1E1E35;
+  }
+
+  body {
+    color: var(--foreground);
+    background: var(--background);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    overflow-x: hidden;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+/* CODEXA Brand Gradients */
+.cx-gradient-text {
+  background: linear-gradient(90deg, #FF6B00 0%, #8B5CF6 55%, #3B82F6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+.cx-gradient-bg {
+  background: linear-gradient(90deg, #FF6B00 0%, #8B5CF6 55%, #3B82F6 100%);
+}
+
+.cx-gradient-btn {
+  background: linear-gradient(135deg, #FF6B00 0%, #8B5CF6 100%);
+  transition: all 0.2s ease-in-out;
+}
+
+.cx-gradient-btn:hover {
+  opacity: 0.95;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px rgba(139, 92, 246, 0.35);
+}
+
+.cx-gradient-border {
+  position: relative;
+  border-radius: 0.75rem;
+  background: #13131F;
+}
+
+.cx-gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(90deg, #FF6B00, #8B5CF6, #3B82F6);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Glassmorphism surfaces */
+.cx-glass {
+  background: rgba(19, 19, 31, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(30, 30, 53, 0.8);
+}
+
+/* Custom Scrollbars */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #2A2A45 transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #2A2A45;
+  border-radius: 99px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: #3E3E65;
 }

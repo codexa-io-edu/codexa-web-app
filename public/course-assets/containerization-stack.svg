@@ -1,0 +1,43 @@
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .box { font-size: 11px; font-weight: 700; fill: #ffffff; }
+    .sub { font-size: 9px; fill: #e2e8f0; }
+    .note { font-size: 10px; fill: #64748b; }
+    .lbl { font-size: 10px; font-weight: 700; fill: #1e293b; }
+  </style>
+
+  <text x="24" y="30" class="title">The containerization pipeline, end to end</text>
+
+  <!-- pipeline -->
+  <rect x="24" y="70" width="120" height="60" rx="8" fill="#0ea5e9"/><text x="84" y="96" text-anchor="middle" class="box">Dockerfile</text><text x="84" y="114" text-anchor="middle" class="sub">the recipe</text>
+  <rect x="184" y="70" width="130" height="60" rx="8" fill="#2563eb"/><text x="249" y="96" text-anchor="middle" class="box">Image</text><text x="249" y="114" text-anchor="middle" class="sub">packaged layers</text>
+  <rect x="354" y="70" width="130" height="60" rx="8" fill="#7c3aed"/><text x="419" y="96" text-anchor="middle" class="box">Registry</text><text x="419" y="114" text-anchor="middle" class="sub">Docker Hub, ECR…</text>
+  <rect x="524" y="70" width="120" height="60" rx="8" fill="#d97706"/><text x="584" y="96" text-anchor="middle" class="box">Runtime</text><text x="584" y="114" text-anchor="middle" class="sub">containerd / runc</text>
+  <rect x="684" y="70" width="92" height="60" rx="8" fill="#059669"/><text x="730" y="96" text-anchor="middle" class="box">Container</text><text x="730" y="114" text-anchor="middle" class="sub">running</text>
+
+  <line x1="144" y1="100" x2="182" y2="100" stroke="#94a3b8" stroke-width="2" marker-end="url(#a)"/><text x="146" y="64" class="note">build</text>
+  <line x1="314" y1="100" x2="352" y2="100" stroke="#94a3b8" stroke-width="2" marker-end="url(#a)"/><text x="318" y="64" class="note">push</text>
+  <line x1="484" y1="100" x2="522" y2="100" stroke="#94a3b8" stroke-width="2" marker-end="url(#a)"/><text x="486" y="64" class="note">pull</text>
+  <line x1="644" y1="100" x2="682" y2="100" stroke="#94a3b8" stroke-width="2" marker-end="url(#a)"/><text x="648" y="64" class="note">run</text>
+
+  <!-- orchestrator -->
+  <rect x="184" y="170" width="592" height="120" rx="10" fill="#eff6ff" stroke="#bfdbfe"/>
+  <text x="200" y="194" class="lbl">Orchestrator (Kubernetes) — runs &amp; manages many containers across many machines</text>
+  <rect x="200" y="206" width="130" height="70" rx="6" fill="#dbeafe" stroke="#93c5fd"/><text x="265" y="228" text-anchor="middle" class="note" fill="#1e40af">Node 1</text>
+  <rect x="212" y="238" width="48" height="28" rx="3" fill="#059669"/><rect x="266" y="238" width="48" height="28" rx="3" fill="#059669"/>
+  <rect x="345" y="206" width="130" height="70" rx="6" fill="#dbeafe" stroke="#93c5fd"/><text x="410" y="228" text-anchor="middle" class="note" fill="#1e40af">Node 2</text>
+  <rect x="357" y="238" width="48" height="28" rx="3" fill="#059669"/><rect x="411" y="238" width="48" height="28" rx="3" fill="#059669"/>
+  <rect x="490" y="206" width="130" height="70" rx="6" fill="#dbeafe" stroke="#93c5fd"/><text x="555" y="228" text-anchor="middle" class="note" fill="#1e40af">Node 3</text>
+  <rect x="502" y="238" width="48" height="28" rx="3" fill="#059669"/><rect x="556" y="238" width="48" height="28" rx="3" fill="#059669"/>
+  <rect x="635" y="206" width="125" height="70" rx="6" fill="#dbeafe" stroke="#93c5fd"/><text x="697" y="228" text-anchor="middle" class="note" fill="#1e40af">Node 4</text>
+  <rect x="647" y="238" width="48" height="28" rx="3" fill="#059669"/><rect x="701" y="238" width="48" height="28" rx="3" fill="#059669"/>
+  <line x1="584" y1="130" x2="480" y2="168" stroke="#94a3b8" stroke-width="1.6" stroke-dasharray="4,3" marker-end="url(#a)"/>
+
+  <!-- OCI -->
+  <rect x="24" y="330" width="752" height="54" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="40" y="352" class="lbl">Open standards (OCI) make it vendor-neutral</text>
+  <text x="40" y="372" class="note">The Open Container Initiative defines the image, runtime, and distribution specs — so images and runtimes interoperate across tools (not just Docker).</text>
+
+  <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#94a3b8"/></marker></defs>
+</svg>

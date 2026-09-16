@@ -1,0 +1,63 @@
+<svg viewBox="0 0 800 430" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .h { font-size: 12px; font-weight: 700; fill: #ffffff; }
+    .box { font-size: 9.5px; font-weight: 700; fill: #ffffff; }
+    .note { font-size: 9.5px; fill: #64748b; }
+    .lbl { font-size: 10px; font-weight: 700; fill: #1e293b; }
+  </style>
+
+  <text x="24" y="30" class="title">Kubernetes: control plane manages worker nodes</text>
+
+  <!-- kubectl -->
+  <rect x="24" y="70" width="90" height="44" rx="6" fill="#0ea5e9"/><text x="69" y="97" text-anchor="middle" class="box">kubectl / CI</text>
+
+  <!-- control plane -->
+  <rect x="140" y="56" width="300" height="180" rx="10" fill="#eff6ff" stroke="#bfdbfe"/>
+  <text x="156" y="78" class="lbl">Control plane</text>
+  <rect x="156" y="88" width="270" height="30" rx="5" fill="#2563eb"/><text x="291" y="108" text-anchor="middle" class="box">API server (front door for all ops)</text>
+  <rect x="156" y="124" width="130" height="46" rx="5" fill="#1d4ed8"/><text x="221" y="144" text-anchor="middle" class="box">Scheduler</text><text x="221" y="160" text-anchor="middle" class="note" fill="#dbeafe">places pods</text>
+  <rect x="296" y="124" width="130" height="46" rx="5" fill="#1d4ed8"/><text x="361" y="144" text-anchor="middle" class="box">Controller mgr</text><text x="361" y="160" text-anchor="middle" class="note" fill="#dbeafe">reconciles state</text>
+  <rect x="156" y="176" width="270" height="30" rx="5" fill="#1e40af"/><text x="291" y="196" text-anchor="middle" class="box">etcd — cluster state store (source of truth)</text>
+
+  <line x1="114" y1="92" x2="154" y2="102" stroke="#94a3b8" stroke-width="2" marker-end="url(#a)"/>
+
+  <!-- nodes -->
+  <rect x="470" y="56" width="306" height="180" rx="10" fill="#f0fdf4" stroke="#bbf7d0"/>
+  <text x="486" y="78" class="lbl">Worker nodes</text>
+
+  <rect x="486" y="88" width="140" height="140" rx="8" fill="#dcfce7" stroke="#86efac"/>
+  <text x="556" y="106" text-anchor="middle" class="note" fill="#065f46">Node 1</text>
+  <rect x="496" y="114" width="120" height="20" rx="3" fill="#059669"/><text x="556" y="129" text-anchor="middle" class="box">kubelet</text>
+  <rect x="496" y="138" width="120" height="18" rx="3" fill="#10b981"/><text x="556" y="152" text-anchor="middle" class="box">kube-proxy</text>
+  <rect x="496" y="160" width="56" height="28" rx="3" fill="#047857"/><text x="524" y="178" text-anchor="middle" class="box">Pod</text>
+  <rect x="558" y="160" width="56" height="28" rx="3" fill="#047857"/><text x="586" y="178" text-anchor="middle" class="box">Pod</text>
+  <rect x="496" y="192" width="120" height="16" rx="3" fill="#065f46"/><text x="556" y="205" text-anchor="middle" class="box" font-size="8">container runtime</text>
+
+  <rect x="636" y="88" width="130" height="140" rx="8" fill="#dcfce7" stroke="#86efac"/>
+  <text x="701" y="106" text-anchor="middle" class="note" fill="#065f46">Node 2</text>
+  <rect x="646" y="114" width="110" height="20" rx="3" fill="#059669"/><text x="701" y="129" text-anchor="middle" class="box">kubelet</text>
+  <rect x="646" y="138" width="110" height="18" rx="3" fill="#10b981"/><text x="701" y="152" text-anchor="middle" class="box">kube-proxy</text>
+  <rect x="646" y="160" width="52" height="28" rx="3" fill="#047857"/><text x="672" y="178" text-anchor="middle" class="box">Pod</text>
+  <rect x="704" y="160" width="52" height="28" rx="3" fill="#047857"/><text x="730" y="178" text-anchor="middle" class="box">Pod</text>
+  <rect x="646" y="192" width="110" height="16" rx="3" fill="#065f46"/><text x="701" y="205" text-anchor="middle" class="box" font-size="8">container runtime</text>
+
+  <line x1="440" y1="146" x2="468" y2="146" stroke="#94a3b8" stroke-width="2" marker-end="url(#a)"/><text x="430" y="140" class="note" text-anchor="end">manages</text>
+
+  <!-- objects hierarchy -->
+  <rect x="24" y="252" width="752" height="160" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="40" y="274" class="lbl">Core objects (you declare these in YAML)</text>
+  <rect x="40" y="286" width="150" height="26" rx="4" fill="#7c3aed"/><text x="115" y="304" text-anchor="middle" class="box">Deployment</text>
+  <line x1="190" y1="299" x2="228" y2="299" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#a)"/>
+  <rect x="230" y="286" width="150" height="26" rx="4" fill="#8b5cf6"/><text x="305" y="304" text-anchor="middle" class="box">ReplicaSet</text>
+  <line x1="380" y1="299" x2="418" y2="299" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#a)"/>
+  <rect x="420" y="286" width="150" height="26" rx="4" fill="#a78bfa"/><text x="495" y="304" text-anchor="middle" class="box">Pods (containers)</text>
+  <rect x="600" y="286" width="160" height="26" rx="4" fill="#059669"/><text x="680" y="304" text-anchor="middle" class="box">Service (stable IP+LB)</text>
+
+  <text x="40" y="336" class="note">• <tspan font-weight="700">Pod</tspan> — smallest unit, one+ tightly-coupled containers.  • <tspan font-weight="700">Deployment</tspan> — desired replicas + rolling updates.  • <tspan font-weight="700">Service</tspan> — stable network endpoint + load balancing.</text>
+  <text x="40" y="356" class="note">• <tspan font-weight="700">Ingress</tspan> — external HTTP routing.  • <tspan font-weight="700">ConfigMap / Secret</tspan> — config &amp; secrets.  • <tspan font-weight="700">StatefulSet</tspan> — stateful apps.  • <tspan font-weight="700">HPA</tspan> — autoscaler.</text>
+  <text x="40" y="376" class="note">• <tspan font-weight="700">DaemonSet</tspan> — one pod per node.  • <tspan font-weight="700">Job / CronJob</tspan> — batch/scheduled.  • <tspan font-weight="700">PersistentVolume / Claim</tspan> — storage.  • <tspan font-weight="700">Namespace</tspan> — isolation.</text>
+  <text x="40" y="400" class="note">Managed offerings remove the control-plane ops burden: <tspan font-weight="700">EKS</tspan> (AWS), <tspan font-weight="700">GKE</tspan> (Google), <tspan font-weight="700">AKS</tspan> (Azure).</text>
+
+  <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#94a3b8"/></marker></defs>
+</svg>

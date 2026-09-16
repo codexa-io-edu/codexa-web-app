@@ -1,0 +1,44 @@
+<svg viewBox="0 0 820 470" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <rect width="820" height="470" fill="#f8fafc"/>
+  <text x="410" y="34" text-anchor="middle" font-size="21" font-weight="700" fill="#0f172a">The Lost Update: A Read-Modify-Write Race, Step by Step</text>
+  <text x="410" y="58" text-anchor="middle" font-size="13" fill="#64748b">count++ is three operations; interleaving them loses an increment</text>
+
+  <!-- columns -->
+  <rect x="60" y="78" width="200" height="34" rx="6" fill="#dbeafe" stroke="#2563eb"/><text x="160" y="100" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1e3a8a">Thread A</text>
+  <rect x="560" y="78" width="200" height="34" rx="6" fill="#fed7aa" stroke="#d97706"/><text x="660" y="100" text-anchor="middle" font-size="12.5" font-weight="700" fill="#7c2d12">Thread B</text>
+  <rect x="310" y="78" width="200" height="34" rx="6" fill="#e2e8f0" stroke="#64748b"/><text x="410" y="100" text-anchor="middle" font-size="12.5" font-weight="700" fill="#334155">Shared count</text>
+
+  <!-- time arrow -->
+  <defs>
+    <marker id="rc_t" markerWidth="10" markerHeight="10" refX="7" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L7,4 L0,8 Z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+  <line x1="30" y1="128" x2="30" y2="420" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#rc_t)"/>
+  <text x="22" y="280" font-size="11" fill="#64748b" transform="rotate(-90 22 280)">time  &#8595;</text>
+
+  <!-- step rows -->
+  <!-- t1 A reads -->
+  <rect x="60" y="128" width="200" height="34" rx="6" fill="#eff6ff" stroke="#93c5fd"/><text x="160" y="150" text-anchor="middle" font-size="11" fill="#1e3a8a" font-family="monospace">read count &#8594; 5</text>
+  <rect x="310" y="128" width="200" height="34" rx="6" fill="#f8fafc" stroke="#cbd5e1"/><text x="410" y="150" text-anchor="middle" font-size="12" font-weight="700" fill="#334155">5</text>
+
+  <!-- t2 B reads -->
+  <rect x="560" y="170" width="200" height="34" rx="6" fill="#fff7ed" stroke="#fdba74"/><text x="660" y="192" text-anchor="middle" font-size="11" fill="#7c2d12" font-family="monospace">read count &#8594; 5</text>
+  <rect x="310" y="170" width="200" height="34" rx="6" fill="#f8fafc" stroke="#cbd5e1"/><text x="410" y="192" text-anchor="middle" font-size="12" font-weight="700" fill="#334155">5</text>
+  <text x="660" y="224" text-anchor="middle" font-size="9.5" fill="#b91c1c">&#9888; B read 5 too — before A wrote!</text>
+
+  <!-- t3 A computes+writes -->
+  <rect x="60" y="240" width="200" height="34" rx="6" fill="#eff6ff" stroke="#93c5fd"/><text x="160" y="262" text-anchor="middle" font-size="11" fill="#1e3a8a" font-family="monospace">5 + 1 = 6, write 6</text>
+  <rect x="310" y="240" width="200" height="34" rx="6" fill="#dcfce7" stroke="#86efac"/><text x="410" y="262" text-anchor="middle" font-size="12" font-weight="700" fill="#047857">6</text>
+
+  <!-- t4 B computes+writes -->
+  <rect x="560" y="282" width="200" height="34" rx="6" fill="#fff7ed" stroke="#fdba74"/><text x="660" y="304" text-anchor="middle" font-size="11" fill="#7c2d12" font-family="monospace">5 + 1 = 6, write 6</text>
+  <rect x="310" y="282" width="200" height="34" rx="6" fill="#fee2e2" stroke="#fca5a5"/><text x="410" y="304" text-anchor="middle" font-size="12" font-weight="700" fill="#b91c1c">6</text>
+  <text x="660" y="336" text-anchor="middle" font-size="9.5" fill="#b91c1c">&#9888; B overwrites with 6, not 7</text>
+
+  <!-- result -->
+  <rect x="150" y="360" width="520" height="86" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="410" y="386" text-anchor="middle" font-size="13" font-weight="700" fill="#b91c1c">Two increments happened, but count went 5 &#8594; 6, not 5 &#8594; 7.</text>
+  <text x="410" y="410" text-anchor="middle" font-size="11.5" fill="#991b1b">One update was LOST. The read-modify-write of A and B overlapped.</text>
+  <text x="410" y="432" text-anchor="middle" font-size="11" fill="#64748b">Change the timing slightly and you'd get 7 — which is exactly why the bug is non-deterministic.</text>
+</svg>

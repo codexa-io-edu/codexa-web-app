@@ -1,0 +1,48 @@
+<svg viewBox="0 0 780 360" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .tech { font-size: 13px; font-weight: 700; fill: #ffffff; }
+    .tsub { font-size: 10px; fill: #f1f5f9; }
+    .axis { font-size: 11px; font-weight: 700; fill: #475569; }
+    .note { font-size: 10.5px; fill: #64748b; }
+  </style>
+
+  <text x="24" y="30" class="title">Streaming: the latency ↔ scale tradeoff</text>
+  <text x="24" y="50" class="note">Lower latency is harder to scale to huge audiences; massive scale means accepting more delay. Pick by use case.</text>
+
+  <!-- axis -->
+  <line x1="60" y1="230" x2="740" y2="230" stroke="#94a3b8" stroke-width="2"/>
+  <text x="60" y="255" class="axis">◄ ultra-low latency</text>
+  <text x="600" y="255" class="axis">higher latency ►</text>
+  <text x="60" y="278" class="note">(hardest to scale)</text>
+  <text x="640" y="278" class="note">(scales to millions)</text>
+
+  <!-- WebRTC -->
+  <rect x="70" y="120" width="180" height="90" rx="10" fill="#059669"/>
+  <text x="86" y="146" class="tech">WebRTC</text>
+  <text x="86" y="166" class="tsub">&lt; 500 ms — interactive</text>
+  <text x="86" y="184" class="tsub">P2P / needs media server</text>
+  <text x="86" y="202" class="tsub">(SFU) to scale up</text>
+  <line x1="160" y1="210" x2="160" y2="228" stroke="#059669" stroke-width="2"/>
+
+  <!-- LL-HLS -->
+  <rect x="300" y="120" width="180" height="90" rx="10" fill="#2563eb"/>
+  <text x="316" y="146" class="tech">LL-HLS / LL-DASH</text>
+  <text x="316" y="166" class="tsub">~2–5 s</text>
+  <text x="316" y="184" class="tsub">low-latency variants,</text>
+  <text x="316" y="202" class="tsub">still CDN-scalable</text>
+  <line x1="390" y1="210" x2="390" y2="228" stroke="#2563eb" stroke-width="2"/>
+
+  <!-- HLS/DASH -->
+  <rect x="530" y="120" width="200" height="90" rx="10" fill="#64748b"/>
+  <text x="546" y="146" class="tech">Standard HLS / DASH</text>
+  <text x="546" y="166" class="tsub">~10–30 s</text>
+  <text x="546" y="184" class="tsub">massively scalable</text>
+  <text x="546" y="202" class="tsub">via CDN (VOD &amp; live)</text>
+  <line x1="630" y1="210" x2="630" y2="228" stroke="#64748b" stroke-width="2"/>
+
+  <!-- use cases -->
+  <rect x="24" y="296" width="732" height="52" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="40" y="318" class="note"><tspan font-weight="700">WebRTC</tspan>: video calls, auctions, betting, cloud gaming — must be conversational.  <tspan font-weight="700">LL-HLS</tspan>: interactive live sports/streams.</text>
+  <text x="40" y="338" class="note"><tspan font-weight="700">HLS/DASH</tspan>: Netflix-style VOD and large live broadcasts where a few seconds' delay is fine and reach is everything.</text>
+</svg>

@@ -1,0 +1,59 @@
+<svg viewBox="0 0 820 440" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <rect width="820" height="440" fill="#f8fafc"/>
+  <text x="410" y="28" text-anchor="middle" font-size="20" font-weight="700" fill="#0f172a">Bounded Contexts: The Same Word, Different Meanings</text>
+  <text x="410" y="50" text-anchor="middle" font-size="12.5" fill="#64748b">"Product" in Sales ≠ "Product" in Warehouse ≠ "Product" in Catalog — same name, different models</text>
+
+  <defs>
+    <marker id="bc_a" markerWidth="11" markerHeight="11" refX="8" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#475569"/></marker>
+  </defs>
+
+  <!-- Sales context -->
+  <rect x="30" y="72" width="230" height="200" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2.2" stroke-dasharray="8 4"/>
+  <text x="145" y="96" text-anchor="middle" font-size="13" font-weight="700" fill="#1d4ed8">Sales Context</text>
+  <rect x="50" y="110" width="190" height="70" rx="6" fill="#ffffff" stroke="#93c5fd"/>
+  <text x="60" y="130" font-size="10.5" font-weight="700" fill="#1e3a8a">Product</text>
+  <text x="60" y="148" font-size="9" fill="#334155">name, price, discounts</text>
+  <text x="60" y="164" font-size="9" fill="#334155">promotional bundles</text>
+  <text x="60" y="178" font-size="9" fill="#334155">salesHistory</text>
+  <rect x="50" y="196" width="190" height="50" rx="6" fill="#ffffff" stroke="#93c5fd"/>
+  <text x="60" y="216" font-size="9.5" font-weight="700" fill="#1e3a8a">Order (root)</text>
+  <text x="60" y="232" font-size="9" fill="#334155">orderLines, total, status</text>
+  <text x="145" y="280" text-anchor="middle" font-size="9.5" font-style="italic" fill="#64748b">"how we sell it"</text>
+
+  <!-- Warehouse context -->
+  <rect x="295" y="72" width="230" height="200" rx="12" fill="#f0fdf4" stroke="#059669" stroke-width="2.2" stroke-dasharray="8 4"/>
+  <text x="410" y="96" text-anchor="middle" font-size="13" font-weight="700" fill="#047857">Warehouse Context</text>
+  <rect x="315" y="110" width="190" height="70" rx="6" fill="#ffffff" stroke="#6ee7b7"/>
+  <text x="325" y="130" font-size="10.5" font-weight="700" fill="#065f46">Product</text>
+  <text x="325" y="148" font-size="9" fill="#334155">sku, weight, dimensions</text>
+  <text x="325" y="164" font-size="9" fill="#334155">binLocation, stockLevel</text>
+  <text x="325" y="178" font-size="9" fill="#334155">reorderPoint</text>
+  <rect x="315" y="196" width="190" height="50" rx="6" fill="#ffffff" stroke="#6ee7b7"/>
+  <text x="325" y="216" font-size="9.5" font-weight="700" fill="#065f46">Shipment (root)</text>
+  <text x="325" y="232" font-size="9" fill="#334155">pickedItems, carrier, trackNo</text>
+  <text x="410" y="280" text-anchor="middle" font-size="9.5" font-style="italic" fill="#64748b">"how we store &amp; ship it"</text>
+
+  <!-- Catalog context -->
+  <rect x="560" y="72" width="230" height="200" rx="12" fill="#faf5ff" stroke="#7c3aed" stroke-width="2.2" stroke-dasharray="8 4"/>
+  <text x="675" y="96" text-anchor="middle" font-size="13" font-weight="700" fill="#6d28d9">Catalog Context</text>
+  <rect x="580" y="110" width="190" height="70" rx="6" fill="#ffffff" stroke="#c4b5fd"/>
+  <text x="590" y="130" font-size="10.5" font-weight="700" fill="#5b21b6">Product</text>
+  <text x="590" y="148" font-size="9" fill="#334155">name, description, images</text>
+  <text x="590" y="164" font-size="9" fill="#334155">categories, tags, SEO</text>
+  <text x="590" y="178" font-size="9" fill="#334155">variants, reviews</text>
+  <rect x="580" y="196" width="190" height="50" rx="6" fill="#ffffff" stroke="#c4b5fd"/>
+  <text x="590" y="216" font-size="9.5" font-weight="700" fill="#5b21b6">Category (root)</text>
+  <text x="590" y="232" font-size="9" fill="#334155">hierarchy, displayOrder</text>
+  <text x="675" y="280" text-anchor="middle" font-size="9.5" font-style="italic" fill="#64748b">"how we present it"</text>
+
+  <!-- Context mapping arrows -->
+  <line x1="262" y1="172" x2="293" y2="172" stroke="#475569" stroke-width="1.8" marker-end="url(#bc_a)"/>
+  <line x1="527" y1="172" x2="558" y2="172" stroke="#475569" stroke-width="1.8" marker-end="url(#bc_a)"/>
+
+  <rect x="40" y="310" width="740" height="116" rx="10" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="410" y="332" text-anchor="middle" font-size="12" font-weight="700" fill="#334155">Why bounded contexts matter</text>
+  <text x="410" y="356" text-anchor="middle" font-size="10.5" fill="#334155">Each context has its own model of "Product" — optimised for its domain. Sales needs pricing; Warehouse needs dimensions; Catalog needs SEO.</text>
+  <text x="410" y="376" text-anchor="middle" font-size="10.5" fill="#334155">Trying to unify them into one model creates a God Entity that satisfies nobody and changes for everyone's reasons simultaneously.</text>
+  <text x="410" y="400" text-anchor="middle" font-size="10.5" fill="#1d4ed8" font-weight="700">One Ubiquitous Language per context. Translation happens at context boundaries (Anti-Corruption Layer).</text>
+  <text x="410" y="418" text-anchor="middle" font-size="9.5" fill="#64748b">Contexts ≈ microservice boundaries ≈ team ownership boundaries — when they align, teams can change independently.</text>
+</svg>

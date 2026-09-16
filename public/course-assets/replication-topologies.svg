@@ -1,0 +1,87 @@
+<svg viewBox="0 0 800 430" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .panel { font-size: 13px; font-weight: 700; fill: #1e293b; }
+    .node { font-size: 12px; font-weight: 700; fill: #ffffff; }
+    .nsub { font-size: 9.5px; fill: #e0e7ff; }
+    .note { font-size: 10.5px; fill: #64748b; }
+    .w { font-size: 10px; font-weight: 700; fill: #dc2626; }
+    .r { font-size: 10px; font-weight: 700; fill: #059669; }
+  </style>
+
+  <text x="24" y="30" class="title">Three replication topologies</text>
+
+  <!-- ============ SINGLE-LEADER ============ -->
+  <text x="30" y="66" class="panel">Single-leader (primary–replica)</text>
+  <!-- leader -->
+  <rect x="90" y="80" width="110" height="46" rx="8" fill="#2563eb"/>
+  <text x="110" y="100" class="node">LEADER</text>
+  <text x="102" y="116" class="nsub">reads + writes</text>
+  <text x="60" y="98" class="w">writes→</text>
+
+  <!-- replicas -->
+  <rect x="30" y="160" width="100" height="40" rx="8" fill="#059669"/>
+  <text x="46" y="185" class="node">replica</text>
+  <rect x="160" y="160" width="100" height="40" rx="8" fill="#059669"/>
+  <text x="176" y="185" class="node">replica</text>
+
+  <line x1="130" y1="126" x2="80" y2="160" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <line x1="160" y1="126" x2="200" y2="160" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="55" y="222" class="r">reads↑</text>
+  <text x="150" y="222" class="note">replicate ↓</text>
+
+  <text x="30" y="252" class="note">One writable node; copies serve reads.</text>
+  <text x="30" y="268" class="note">Simple, no write conflicts. Leader is a</text>
+  <text x="30" y="284" class="note">bottleneck &amp; single write point.</text>
+
+  <!-- ============ MULTI-LEADER ============ -->
+  <text x="300" y="66" class="panel">Multi-leader</text>
+  <rect x="300" y="80" width="90" height="44" rx="8" fill="#2563eb"/>
+  <text x="312" y="100" class="node">leader A</text>
+  <text x="316" y="116" class="nsub">r + w</text>
+  <rect x="450" y="80" width="90" height="44" rx="8" fill="#2563eb"/>
+  <text x="462" y="100" class="node">leader B</text>
+  <text x="466" y="116" class="nsub">r + w</text>
+
+  <!-- bidirectional sync -->
+  <line x1="390" y1="102" x2="450" y2="102" stroke="#d97706" stroke-width="2"/>
+  <polygon points="394,97 384,102 394,107" fill="#d97706"/>
+  <polygon points="446,97 456,102 446,107" fill="#d97706"/>
+  <text x="392" y="94" class="note" fill="#d97706">sync both ways</text>
+
+  <rect x="300" y="150" width="90" height="34" rx="6" fill="#059669"/>
+  <text x="316" y="172" class="node">replica</text>
+  <rect x="450" y="150" width="90" height="34" rx="6" fill="#059669"/>
+  <text x="466" y="172" class="node">replica</text>
+  <line x1="345" y1="124" x2="345" y2="150" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <line x1="495" y1="124" x2="495" y2="150" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+  <text x="300" y="212" class="note">Writable in multiple regions (low local</text>
+  <text x="300" y="228" class="note">latency, keeps working if one region is</text>
+  <text x="300" y="244" class="note">cut off). Cost: <tspan font-weight="700">write conflicts</tspan> to resolve.</text>
+
+  <!-- ============ LEADERLESS ============ -->
+  <text x="600" y="66" class="panel">Leaderless</text>
+  <text x="580" y="88" class="w">write to many→</text>
+  <rect x="590" y="98" width="80" height="34" rx="6" fill="#7c3aed"/>
+  <text x="606" y="120" class="node">node 1</text>
+  <rect x="690" y="98" width="80" height="34" rx="6" fill="#7c3aed"/>
+  <text x="706" y="120" class="node">node 2</text>
+  <rect x="640" y="150" width="80" height="34" rx="6" fill="#7c3aed"/>
+  <text x="656" y="172" class="node">node 3</text>
+
+  <line x1="630" y1="132" x2="670" y2="150" stroke="#cbd5e1"/>
+  <line x1="730" y1="132" x2="700" y2="150" stroke="#cbd5e1"/>
+  <line x1="670" y1="115" x2="690" y2="115" stroke="#cbd5e1"/>
+
+  <text x="600" y="212" class="note">No single leader; client writes to and</text>
+  <text x="600" y="228" class="note">reads from several nodes (quorums).</text>
+  <text x="600" y="244" class="note">Highly available; app handles conflicts.</text>
+
+  <!-- footer -->
+  <rect x="24" y="308" width="752" height="102" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="40" y="332" class="panel">Two orthogonal choices</text>
+  <text x="40" y="356" class="note">1 · <tspan font-weight="700">Topology</tspan> — how many nodes accept writes (above).</text>
+  <text x="40" y="378" class="note">2 · <tspan font-weight="700">Timing</tspan> — <tspan font-weight="700">synchronous</tspan> (leader waits for a replica to confirm → safer, slower) vs <tspan font-weight="700">asynchronous</tspan> (leader replies</text>
+  <text x="60" y="396" class="note">immediately, replicates after → faster, but a replica can lag behind). The lag creates a consistency question — see the Consistency module.</text>
+</svg>

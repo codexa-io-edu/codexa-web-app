@@ -1,0 +1,54 @@
+<svg viewBox="0 0 820 440" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <rect width="820" height="440" fill="#f8fafc"/>
+  <text x="410" y="34" text-anchor="middle" font-size="21" font-weight="700" fill="#0f172a">Why Immutable Objects Are Automatically Thread-Safe</text>
+
+  <!-- recipe box -->
+  <rect x="40" y="60" width="360" height="330" rx="12" fill="#f0fdf4" stroke="#059669" stroke-width="2.2"/>
+  <text x="220" y="86" text-anchor="middle" font-size="14" font-weight="700" fill="#047857">The 5 rules of immutability</text>
+
+  <g font-size="11.5" fill="#065f46">
+    <rect x="58" y="100" width="324" height="46" rx="7" fill="#dcfce7"/>
+    <text x="72" y="119" font-weight="700">1. All fields final</text>
+    <text x="72" y="136" font-size="10" fill="#334155">set once in the constructor, never reassigned</text>
+
+    <rect x="58" y="152" width="324" height="46" rx="7" fill="#dcfce7"/>
+    <text x="72" y="171" font-weight="700">2. No setters / mutators</text>
+    <text x="72" y="188" font-size="10" fill="#334155">no method changes state after construction</text>
+
+    <rect x="58" y="204" width="324" height="46" rx="7" fill="#dcfce7"/>
+    <text x="72" y="223" font-weight="700">3. Class final (or fully controlled)</text>
+    <text x="72" y="240" font-size="10" fill="#334155">subclasses can't add mutable behavior</text>
+
+    <rect x="58" y="256" width="324" height="46" rx="7" fill="#dcfce7"/>
+    <text x="72" y="275" font-weight="700">4. Defensive-copy mutable inputs</text>
+    <text x="72" y="292" font-size="10" fill="#334155">copy arrays/collections in AND out</text>
+
+    <rect x="58" y="308" width="324" height="46" rx="7" fill="#dcfce7"/>
+    <text x="72" y="327" font-weight="700">5. Don't leak 'this' during construction</text>
+    <text x="72" y="344" font-size="10" fill="#334155">safe publication of a fully-built object</text>
+  </g>
+  <text x="220" y="376" text-anchor="middle" font-size="10.5" fill="#047857">follow these &#8594; the object can never change</text>
+
+  <!-- consequence -->
+  <defs>
+    <marker id="im_arr" markerWidth="12" markerHeight="12" refX="8" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#059669"/>
+    </marker>
+  </defs>
+  <line x1="400" y1="225" x2="450" y2="225" stroke="#059669" stroke-width="2.5" marker-end="url(#im_arr)"/>
+
+  <rect x="460" y="90" width="330" height="150" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="625" y="116" text-anchor="middle" font-size="13.5" font-weight="700" fill="#1d4ed8">No state changes, so:</text>
+  <text x="480" y="144" font-size="11.5" fill="#334155">&#8226; No writes &#8594; nothing to race on (atomicity)</text>
+  <text x="480" y="168" font-size="11.5" fill="#334155">&#8226; final fields are safely visible to all</text>
+  <text x="500" y="184" font-size="10.5" fill="#64748b">threads after construction (visibility)</text>
+  <text x="480" y="208" font-size="11.5" fill="#334155">&#8226; No reordering hazard for readers</text>
+  <text x="500" y="224" font-size="10.5" fill="#64748b">(ordering — guaranteed by the JMM)</text>
+
+  <rect x="460" y="258" width="330" height="132" rx="12" fill="#dcfce7" stroke="#059669" stroke-width="2.4"/>
+  <text x="625" y="286" text-anchor="middle" font-size="15" font-weight="700" fill="#047857">Share freely across any</text>
+  <text x="625" y="308" text-anchor="middle" font-size="15" font-weight="700" fill="#047857">number of threads —</text>
+  <text x="625" y="330" text-anchor="middle" font-size="15" font-weight="700" fill="#047857">with ZERO locking.</text>
+  <text x="625" y="360" text-anchor="middle" font-size="10.5" fill="#065f46">This is why immutability is the</text>
+  <text x="625" y="376" text-anchor="middle" font-size="10.5" fill="#065f46">simplest, strongest safety strategy.</text>
+</svg>

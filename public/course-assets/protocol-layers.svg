@@ -1,0 +1,37 @@
+<svg viewBox="0 0 760 420" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="lm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b"/></marker>
+  </defs>
+  <rect width="760" height="420" fill="#ffffff"/>
+  <text x="380" y="34" text-anchor="middle" fill="#0f172a" font-size="18" font-weight="700">The Rules: TCP/IP Layers</text>
+
+  <!-- Application -->
+  <rect x="120" y="60" width="520" height="66" rx="10" fill="#4f46e5"/>
+  <text x="150" y="90" text-anchor="start" fill="#fff" font-size="15" font-weight="700">Application</text>
+  <text x="150" y="112" text-anchor="start" fill="#c7d2fe" font-size="12">what the data means — HTTP/HTTPS, DNS</text>
+
+  <!-- Transport -->
+  <rect x="120" y="134" width="520" height="66" rx="10" fill="#0891b2"/>
+  <text x="150" y="164" text-anchor="start" fill="#fff" font-size="15" font-weight="700">Transport</text>
+  <text x="150" y="186" text-anchor="start" fill="#cffafe" font-size="12">reliable delivery &amp; ports — TCP, UDP</text>
+
+  <!-- Internet -->
+  <rect x="120" y="208" width="520" height="66" rx="10" fill="#0d9488"/>
+  <text x="150" y="238" text-anchor="start" fill="#fff" font-size="15" font-weight="700">Internet</text>
+  <text x="150" y="260" text-anchor="start" fill="#ccfbf1" font-size="12">addressing &amp; routing between networks — IP</text>
+
+  <!-- Link -->
+  <rect x="120" y="282" width="520" height="66" rx="10" fill="#64748b"/>
+  <text x="150" y="312" text-anchor="start" fill="#fff" font-size="15" font-weight="700">Link</text>
+  <text x="150" y="334" text-anchor="start" fill="#e2e8f0" font-size="12">physical transmission — Ethernet, Wi-Fi</text>
+
+  <!-- down arrow -->
+  <line x1="70" y1="70" x2="70" y2="340" stroke="#64748b" stroke-width="2" marker-end="url(#lm)"/>
+  <text x="52" y="205" text-anchor="middle" fill="#64748b" font-size="12" font-weight="600" transform="rotate(-90 52 205)">sender: data goes DOWN</text>
+
+  <!-- up arrow -->
+  <line x1="690" y1="340" x2="690" y2="70" stroke="#64748b" stroke-width="2" marker-end="url(#lm)"/>
+  <text x="708" y="205" text-anchor="middle" fill="#64748b" font-size="12" font-weight="600" transform="rotate(-90 708 205)">receiver: back UP</text>
+
+  <text x="380" y="384" text-anchor="middle" fill="#64748b" font-size="12">Each layer adds its own info and only talks to the layers above and below it — a shared set of rules every device follows.</text>
+</svg>

@@ -1,0 +1,40 @@
+<svg viewBox="0 0 800 420" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .h { font-size: 12px; font-weight: 700; fill: #1e293b; }
+    .lab { font-size: 11px; font-weight: 700; fill: #ffffff; }
+    .note { font-size: 10.5px; fill: #64748b; }
+    .tick { font-size: 10px; font-weight: 700; fill: #1e293b; }
+    .moved { font-size: 10px; font-weight: 700; fill: #dc2626; }
+  </style>
+
+  <text x="24" y="30" class="title">Adding or removing a node moves only one arc's keys</text>
+  <text x="24" y="50" class="note">The ring "unrolled" into a line (0 → max, wrapping back to A). Each colored segment = the keys owned by the node at its right edge.</text>
+
+  <!-- BEFORE -->
+  <text x="40" y="90" class="h">Before — nodes A, B, C</text>
+  <rect x="40" y="100" width="220" height="38" fill="#2563eb"/><text x="150" y="124" text-anchor="middle" class="lab">owned by A</text>
+  <rect x="260" y="100" width="300" height="38" fill="#059669"/><text x="410" y="124" text-anchor="middle" class="lab">owned by B</text>
+  <rect x="560" y="100" width="200" height="38" fill="#7c3aed"/><text x="660" y="124" text-anchor="middle" class="lab">owned by C</text>
+  <text x="256" y="154" class="tick">▲ A</text>
+  <text x="556" y="154" class="tick">▲ B</text>
+  <text x="756" y="154" class="tick">▲ C</text>
+
+  <!-- AFTER add -->
+  <text x="40" y="210" class="h">After — add node D (lands inside B's arc)</text>
+  <rect x="40" y="220" width="220" height="38" fill="#2563eb"/><text x="150" y="244" text-anchor="middle" class="lab">owned by A</text>
+  <rect x="260" y="220" width="150" height="38" fill="#dc2626"/><text x="335" y="244" text-anchor="middle" class="lab">→ now D</text>
+  <rect x="410" y="220" width="150" height="38" fill="#059669"/><text x="485" y="244" text-anchor="middle" class="lab">still B</text>
+  <rect x="560" y="220" width="200" height="38" fill="#7c3aed"/><text x="660" y="244" text-anchor="middle" class="lab">owned by C</text>
+  <text x="256" y="274" class="tick">▲ A</text>
+  <text x="406" y="274" class="tick">▲ D</text>
+  <text x="556" y="274" class="tick">▲ B</text>
+  <text x="756" y="274" class="tick">▲ C</text>
+  <text x="270" y="292" class="moved">only these keys move (B → D)</text>
+
+  <!-- footer -->
+  <rect x="24" y="318" width="752" height="86" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="40" y="342" class="note"><tspan font-weight="700">Adding D</tspan> splits only B's arc: the keys between A and D move from B to D. Everyone owned by A and C is untouched.</text>
+  <text x="40" y="362" class="note"><tspan font-weight="700">Removing a node</tspan> is the mirror image: its arc simply merges into the next node clockwise, and only its keys move.</text>
+  <text x="40" y="386" class="note">Either way, roughly <tspan font-family="'Consolas','Courier New',monospace" font-weight="700">K/N</tspan> keys move (K keys, N nodes) — not nearly all of them, as plain modulo hashing would.</text>
+</svg>

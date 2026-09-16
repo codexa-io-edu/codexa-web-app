@@ -1,0 +1,54 @@
+<svg viewBox="0 0 800 430" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .h { font-size: 14px; font-weight: 700; fill: #ffffff; }
+    .box { font-size: 12px; font-weight: 700; fill: #ffffff; }
+    .mono { font-size: 10px; font-family: 'Consolas','Courier New',monospace; fill: #1e293b; }
+    .note { font-size: 10px; fill: #64748b; }
+    .tag { font-size: 10px; font-weight: 700; fill: #1e293b; }
+  </style>
+
+  <text x="24" y="30" class="title">Two places to balance: L4 (transport) vs L7 (application)</text>
+
+  <!-- L4 panel -->
+  <rect x="24" y="48" width="370" height="352" rx="10" fill="#eff6ff" stroke="#bfdbfe"/>
+  <rect x="24" y="48" width="370" height="40" rx="10" fill="#2563eb"/>
+  <text x="44" y="74" class="h">L4 — Transport level (TCP/UDP)</text>
+
+  <text x="44" y="112" class="tag">Sees only: IP addresses + ports</text>
+  <rect x="44" y="122" width="330" height="40" rx="6" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="54" y="140" class="mono">src 203.0.113.5:51000 → dst :443</text>
+  <text x="54" y="154" class="mono">(payload NOT inspected)</text>
+
+  <text x="44" y="190" class="tag">Decision: pick a server, forward the packets</text>
+  <text x="44" y="210" class="note">Doesn't read the request. Just forwards the</text>
+  <text x="44" y="226" class="note">whole connection to one chosen backend.</text>
+
+  <rect x="44" y="244" width="330" height="1" fill="#cbd5e1"/>
+  <text x="44" y="270" class="tag" fill="#059669">+ Very fast, low overhead</text>
+  <text x="44" y="290" class="tag" fill="#059669">+ Protocol-agnostic (any TCP/UDP traffic)</text>
+  <text x="44" y="312" class="tag" fill="#dc2626">– Can't route by URL, header, or cookie</text>
+  <text x="44" y="334" class="tag" fill="#dc2626">– No content-aware features (TLS, caching)</text>
+  <text x="44" y="370" class="note">e.g. AWS NLB, HAProxy (TCP mode)</text>
+
+  <!-- L7 panel -->
+  <rect x="406" y="48" width="370" height="352" rx="10" fill="#f5f3ff" stroke="#ddd6fe"/>
+  <rect x="406" y="48" width="370" height="40" rx="10" fill="#7c3aed"/>
+  <text x="426" y="74" class="h">L7 — Application level (HTTP)</text>
+
+  <text x="426" y="112" class="tag">Sees: full request — path, headers, cookies</text>
+  <rect x="426" y="122" width="330" height="40" rx="6" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="436" y="140" class="mono">GET /api/orders  Host: shop.com</text>
+  <text x="436" y="154" class="mono">Cookie: session=abc  (fully readable)</text>
+
+  <text x="426" y="190" class="tag">Decision: route by content</text>
+  <text x="426" y="210" class="note">/api/* → API servers · /images/* → static</text>
+  <text x="426" y="226" class="note">cookie → sticky server · can also do TLS, caching</text>
+
+  <rect x="426" y="244" width="330" height="1" fill="#cbd5e1"/>
+  <text x="426" y="270" class="tag" fill="#059669">+ Smart, content-aware routing</text>
+  <text x="426" y="290" class="tag" fill="#059669">+ TLS termination, compression, caching</text>
+  <text x="426" y="312" class="tag" fill="#dc2626">– More work per request (must parse HTTP)</text>
+  <text x="426" y="334" class="tag" fill="#dc2626">– HTTP/HTTPS-oriented, slightly higher latency</text>
+  <text x="426" y="370" class="note">e.g. AWS ALB, NGINX, Envoy, HAProxy (HTTP)</text>
+</svg>

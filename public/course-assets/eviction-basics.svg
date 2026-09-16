@@ -1,0 +1,58 @@
+<svg viewBox="0 0 780 410" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .lbl { font-size: 12px; font-weight: 700; fill: #1e293b; }
+    .slot { font-size: 11px; font-weight: 700; fill: #ffffff; }
+    .note { font-size: 11px; fill: #64748b; }
+    .q { font-size: 13px; font-weight: 700; fill: #1e293b; }
+  </style>
+
+  <text x="24" y="30" class="title">Eviction: the cache is full — which item do we remove?</text>
+
+  <!-- full cache -->
+  <text x="40" y="72" class="lbl">Cache (full)</text>
+  <g>
+    <rect x="40" y="82" width="70" height="40" rx="5" fill="#2563eb"/><text x="66" y="107" class="slot">A</text>
+    <rect x="116" y="82" width="70" height="40" rx="5" fill="#2563eb"/><text x="142" y="107" class="slot">B</text>
+    <rect x="192" y="82" width="70" height="40" rx="5" fill="#2563eb"/><text x="218" y="107" class="slot">C</text>
+    <rect x="268" y="82" width="70" height="40" rx="5" fill="#94a3b8"/><text x="290" y="107" class="slot">D ✗</text>
+  </g>
+
+  <!-- new item -->
+  <rect x="420" y="82" width="90" height="40" rx="5" fill="#059669"/><text x="446" y="107" class="slot">new: E</text>
+  <path d="M 348 102 L 416 102" stroke="#334155" stroke-width="2"/><polygon points="412,97 422,102 412,107" fill="#334155"/>
+  <text x="352" y="94" class="note">wants in</text>
+
+  <!-- eviction -->
+  <path d="M 303 122 L 303 160" stroke="#dc2626" stroke-width="2"/><polygon points="298,156 303,166 308,156" fill="#dc2626"/>
+  <text x="315" y="150" class="note" fill="#dc2626">evict a victim (D) to make room, then insert E</text>
+
+  <!-- the core question -->
+  <rect x="40" y="182" width="700" height="46" rx="8" fill="#f1f5f9" stroke="#cbd5e1"/>
+  <text x="56" y="211" class="q">The one question every policy answers: which item is least likely to be requested again?</text>
+
+  <!-- heuristics -->
+  <rect x="40" y="244" width="220" height="96" rx="8" fill="#eff6ff" stroke="#2563eb"/>
+  <text x="54" y="266" class="lbl" fill="#2563eb">Recency → LRU</text>
+  <text x="54" y="288" class="note">"used recently = likely used</text>
+  <text x="54" y="302" class="note">again." Tracks last-access time.</text>
+  <text x="54" y="326" class="note">Adapts fast; scan-vulnerable.</text>
+
+  <rect x="280" y="244" width="220" height="96" rx="8" fill="#f0fdf4" stroke="#059669"/>
+  <text x="294" y="266" class="lbl" fill="#059669">Frequency → LFU</text>
+  <text x="294" y="288" class="note">"used often = likely used</text>
+  <text x="294" y="302" class="note">again." Tracks access counts.</text>
+  <text x="294" y="326" class="note">Scan-resistant; slow to adapt.</text>
+
+  <rect x="520" y="244" width="220" height="96" rx="8" fill="#f5f3ff" stroke="#7c3aed"/>
+  <text x="534" y="266" class="lbl" fill="#7c3aed">Both → Segmented LRU / hybrids</text>
+  <text x="534" y="288" class="note">combine recency + frequency</text>
+  <text x="534" y="302" class="note">to resist scans while staying</text>
+  <text x="534" y="326" class="note">adaptive.</text>
+
+  <!-- eviction vs expiration -->
+  <rect x="40" y="356" width="700" height="42" rx="8" fill="#fffbeb" stroke="#fcd34d"/>
+  <text x="56" y="374" class="lbl" fill="#92400e">Eviction ≠ expiration</text>
+  <text x="170" y="374" class="note">Expiration (TTL) removes items by <tspan font-weight="700">age/staleness</tspan> (Caching Fundamentals).</text>
+  <text x="56" y="392" class="note">Eviction removes items because the cache is <tspan font-weight="700">out of space</tspan> — the subject of this topic.</text>
+</svg>

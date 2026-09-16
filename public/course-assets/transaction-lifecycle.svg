@@ -1,0 +1,55 @@
+<svg viewBox="0 0 780 360" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .state { font-size: 13px; font-weight: 700; fill: #ffffff; }
+    .ssub { font-size: 10px; fill: #f1f5f9; }
+    .edge { font-size: 11px; font-weight: 700; fill: #334155; }
+    .note { font-size: 11px; fill: #64748b; }
+  </style>
+
+  <text x="24" y="30" class="title">The lifecycle of a transaction</text>
+  <text x="24" y="50" class="note">A transaction is a unit of work that ends in exactly one of two ways: fully committed, or fully undone (aborted). Never half-done.</text>
+
+  <!-- Active -->
+  <rect x="40" y="120" width="150" height="60" rx="10" fill="#2563eb"/>
+  <text x="70" y="146" class="state">Active</text>
+  <text x="56" y="166" class="ssub">running its operations</text>
+  <text x="42" y="108" class="note">BEGIN ↓</text>
+
+  <!-- Partially committed -->
+  <rect x="290" y="120" width="170" height="60" rx="10" fill="#2563eb"/>
+  <text x="310" y="146" class="state">Partially committed</text>
+  <text x="310" y="166" class="ssub">last op done, finalizing</text>
+
+  <!-- Committed -->
+  <rect x="580" y="120" width="160" height="60" rx="10" fill="#059669"/>
+  <text x="610" y="146" class="state">Committed</text>
+  <text x="596" y="166" class="ssub">durable &amp; permanent ✓</text>
+
+  <!-- Failed -->
+  <rect x="290" y="250" width="150" height="56" rx="10" fill="#dc2626"/>
+  <text x="322" y="276" class="state">Failed</text>
+  <text x="300" y="294" class="ssub">error — cannot proceed</text>
+
+  <!-- Aborted -->
+  <rect x="560" y="250" width="180" height="56" rx="10" fill="#7f1d1d"/>
+  <text x="590" y="276" class="state">Aborted (rolled back)</text>
+  <text x="590" y="294" class="ssub">all changes undone</text>
+
+  <!-- transitions -->
+  <path d="M 190 150 L 288 150" stroke="#64748b" stroke-width="2"/><polygon points="284,145 294,150 284,155" fill="#64748b"/>
+  <path d="M 460 150 L 578 150" stroke="#059669" stroke-width="2"/><polygon points="574,145 584,150 574,155" fill="#059669"/>
+  <text x="470" y="142" class="edge" fill="#059669">COMMIT</text>
+
+  <!-- active -> failed -->
+  <path d="M 115 180 L 320 248" stroke="#dc2626" stroke-width="2"/><polygon points="314,242 324,250 310,252" fill="#dc2626"/>
+  <text x="150" y="230" class="edge" fill="#dc2626">error</text>
+  <!-- partially -> failed -->
+  <path d="M 370 180 L 370 248" stroke="#dc2626" stroke-width="2" stroke-dasharray="4,3"/><polygon points="365,244 370,254 375,244" fill="#dc2626"/>
+
+  <!-- failed -> aborted -->
+  <path d="M 440 278 L 558 278" stroke="#7f1d1d" stroke-width="2"/><polygon points="554,273 564,278 554,283" fill="#7f1d1d"/>
+  <text x="450" y="270" class="edge" fill="#7f1d1d">ROLLBACK</text>
+
+  <text x="24" y="340" class="note">The two green/red endpoints are the whole point of <tspan font-weight="700">Atomicity</tspan>: a transaction either reaches <tspan font-weight="700" fill="#059669">Committed</tspan> or is completely <tspan font-weight="700" fill="#7f1d1d">Aborted</tspan> — there is no in-between.</text>
+</svg>

@@ -1,0 +1,53 @@
+<svg viewBox="0 0 800 430" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .box { font-size: 12px; font-weight: 700; fill: #ffffff; }
+    .sub { font-size: 9.5px; fill: #ede9fe; }
+    .note { font-size: 10px; fill: #64748b; }
+    .job { font-size: 10.5px; font-weight: 700; fill: #1e293b; }
+  </style>
+
+  <text x="24" y="30" class="title">One reverse proxy, many jobs — the front door of a web system</text>
+
+  <!-- clients -->
+  <text x="60" y="150" class="note">internet</text>
+  <rect x="40" y="160" width="90" height="28" rx="6" fill="#64748b"/><text x="85" y="179" text-anchor="middle" class="box">client</text>
+  <rect x="40" y="196" width="90" height="28" rx="6" fill="#64748b"/><text x="85" y="215" text-anchor="middle" class="box">client</text>
+  <rect x="40" y="232" width="90" height="28" rx="6" fill="#64748b"/><text x="85" y="251" text-anchor="middle" class="box">client</text>
+
+  <!-- reverse proxy -->
+  <rect x="300" y="150" width="180" height="120" rx="12" fill="#7c3aed"/>
+  <text x="390" y="200" text-anchor="middle" class="box">Reverse Proxy</text>
+  <text x="390" y="220" text-anchor="middle" class="sub">single public entry point</text>
+  <text x="390" y="236" text-anchor="middle" class="sub">NGINX · Envoy · HAProxy</text>
+
+  <line x1="130" y1="174" x2="298" y2="200" stroke="#94a3b8" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="130" y1="210" x2="298" y2="210" stroke="#94a3b8" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="130" y1="246" x2="298" y2="220" stroke="#94a3b8" stroke-width="2" marker-end="url(#a)"/>
+
+  <!-- backends -->
+  <rect x="650" y="120" width="120" height="30" rx="6" fill="#059669"/><text x="710" y="140" text-anchor="middle" class="box">API servers</text>
+  <rect x="650" y="165" width="120" height="30" rx="6" fill="#059669"/><text x="710" y="185" text-anchor="middle" class="box">app servers</text>
+  <rect x="650" y="210" width="120" height="30" rx="6" fill="#059669"/><text x="710" y="230" text-anchor="middle" class="box">static / media</text>
+  <rect x="650" y="255" width="120" height="30" rx="6" fill="#059669"/><text x="710" y="275" text-anchor="middle" class="box">service C</text>
+
+  <line x1="480" y1="195" x2="648" y2="135" stroke="#059669" stroke-width="2" marker-end="url(#g)"/>
+  <line x1="480" y1="205" x2="648" y2="180" stroke="#059669" stroke-width="2" marker-end="url(#g)"/>
+  <line x1="480" y1="220" x2="648" y2="225" stroke="#059669" stroke-width="2" marker-end="url(#g)"/>
+  <line x1="480" y1="235" x2="648" y2="270" stroke="#059669" stroke-width="2" marker-end="url(#g)"/>
+
+  <!-- jobs strip -->
+  <rect x="24" y="300" width="752" height="112" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="40" y="324" class="job">What it does at the edge, so backends don't have to:</text>
+  <text x="40" y="348" class="note">• <tspan font-weight="700">TLS termination</tspan> — decrypt HTTPS once, talk plain HTTP inside</text>
+  <text x="420" y="348" class="note">• <tspan font-weight="700">Load balancing</tspan> — spread across backends (see prev topic)</text>
+  <text x="40" y="368" class="note">• <tspan font-weight="700">Caching + compression</tspan> — serve hot responses, gzip/brotli</text>
+  <text x="420" y="368" class="note">• <tspan font-weight="700">Routing</tspan> — by path/host to the right service (API gateway)</text>
+  <text x="40" y="388" class="note">• <tspan font-weight="700">Security</tspan> — hide backend IPs, WAF, rate limiting, DDoS</text>
+  <text x="420" y="388" class="note">• <tspan font-weight="700">Header rewrites</tspan> — add X-Forwarded-For, redirects</text>
+
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#94a3b8"/></marker>
+    <marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#059669"/></marker>
+  </defs>
+</svg>

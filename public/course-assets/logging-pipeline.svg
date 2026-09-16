@@ -1,0 +1,50 @@
+<svg viewBox="0 0 800 380" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .box { font-size: 10.5px; font-weight: 700; fill: #ffffff; }
+    .sub { font-size: 8.5px; fill: #e2e8f0; }
+    .note { font-size: 9.5px; fill: #64748b; }
+    .lbl { font-size: 10px; font-weight: 700; fill: #1e293b; }
+  </style>
+
+  <text x="24" y="30" class="title">The centralized logging pipeline</text>
+  <text x="24" y="50" class="note">In distributed systems you can't SSH into 100 machines to grep — logs must be collected into one searchable place.</text>
+
+  <!-- stage 1: sources -->
+  <rect x="24" y="78" width="120" height="90" rx="8" fill="#2563eb"/><text x="84" y="110" text-anchor="middle" class="box">Services</text><text x="84" y="128" text-anchor="middle" class="sub">emit structured</text><text x="84" y="140" text-anchor="middle" class="sub">logs (to stdout)</text>
+
+  <!-- stage 2: collector -->
+  <rect x="176" y="78" width="130" height="90" rx="8" fill="#0ea5e9"/><text x="241" y="106" text-anchor="middle" class="box">Collector / agent</text><text x="241" y="126" text-anchor="middle" class="sub">Fluent Bit, Fluentd,</text><text x="241" y="138" text-anchor="middle" class="sub">Logstash, Vector</text><text x="241" y="154" text-anchor="middle" class="sub">(node agent / sidecar)</text>
+
+  <!-- stage 3: buffer -->
+  <rect x="338" y="78" width="120" height="90" rx="8" fill="#d97706"/><text x="398" y="106" text-anchor="middle" class="box">Buffer / transport</text><text x="398" y="126" text-anchor="middle" class="sub">Kafka (optional)</text><text x="398" y="140" text-anchor="middle" class="sub">absorbs spikes,</text><text x="398" y="152" text-anchor="middle" class="sub">decouples flow</text>
+
+  <!-- stage 4: process -->
+  <rect x="490" y="78" width="120" height="90" rx="8" fill="#7c3aed"/><text x="550" y="106" text-anchor="middle" class="box">Processing</text><text x="550" y="126" text-anchor="middle" class="sub">parse, enrich,</text><text x="550" y="140" text-anchor="middle" class="sub">filter, redact,</text><text x="550" y="152" text-anchor="middle" class="sub">sample</text>
+
+  <!-- stage 5: store -->
+  <rect x="642" y="78" width="134" height="90" rx="8" fill="#059669"/><text x="709" y="106" text-anchor="middle" class="box">Store &amp; index</text><text x="709" y="126" text-anchor="middle" class="sub">Elasticsearch /</text><text x="709" y="140" text-anchor="middle" class="sub">OpenSearch / Loki /</text><text x="709" y="152" text-anchor="middle" class="sub">cloud store</text>
+
+  <line x1="144" y1="123" x2="174" y2="123" stroke="#94a3b8" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="306" y1="123" x2="336" y2="123" stroke="#94a3b8" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="458" y1="123" x2="488" y2="123" stroke="#94a3b8" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="610" y1="123" x2="640" y2="123" stroke="#94a3b8" stroke-width="2" marker-end="url(#a)"/>
+
+  <!-- visualize -->
+  <rect x="642" y="200" width="134" height="60" rx="8" fill="#1e293b"/><text x="709" y="226" text-anchor="middle" class="box">Search / dashboards</text><text x="709" y="244" text-anchor="middle" class="sub">Kibana / Grafana</text>
+  <line x1="709" y1="168" x2="709" y2="198" stroke="#94a3b8" stroke-width="2" marker-end="url(#a)"/>
+
+  <!-- stacks note -->
+  <rect x="24" y="200" width="590" height="60" rx="8" fill="#eff6ff" stroke="#bfdbfe"/>
+  <text x="40" y="222" class="lbl">Common stacks</text>
+  <text x="40" y="242" class="note"><tspan font-weight="700">ELK</tspan> = Elasticsearch + Logstash + Kibana.  <tspan font-weight="700">EFK</tspan> = swap Logstash for Fluentd.  <tspan font-weight="700">Grafana Loki</tspan> = label-indexed, cheaper.</text>
+  <text x="40" y="256" class="note">Managed/SaaS: CloudWatch Logs, Google Cloud Logging, <tspan font-weight="700">Datadog</tspan>, <tspan font-weight="700">Splunk</tspan>.</text>
+
+  <!-- footer -->
+  <rect x="24" y="300" width="752" height="64" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="40" y="322" class="lbl">Why each stage exists</text>
+  <text x="40" y="342" class="note">The <tspan font-weight="700">agent</tspan> ships logs off the host (so they survive it); the <tspan font-weight="700">buffer</tspan> smooths bursts &amp; decouples producers from the store;</text>
+  <text x="40" y="358" class="note"><tspan font-weight="700">processing</tspan> normalizes and redacts; <tspan font-weight="700">indexed storage</tspan> makes millions of lines searchable in seconds.</text>
+
+  <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#94a3b8"/></marker></defs>
+</svg>

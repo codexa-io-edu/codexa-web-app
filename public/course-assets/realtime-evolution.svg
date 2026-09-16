@@ -1,0 +1,60 @@
+<svg viewBox="0 0 800 470" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .name { font-size: 13px; font-weight: 700; fill: #1e293b; }
+    .side { font-size: 10px; font-weight: 700; fill: #475569; }
+    .msg { font-size: 9.5px; font-weight: 700; fill: #ffffff; }
+    .note { font-size: 10px; fill: #64748b; }
+    .good { font-size: 10px; font-weight: 700; fill: #059669; }
+    .bad { font-size: 10px; font-weight: 700; fill: #dc2626; }
+  </style>
+
+  <text x="24" y="30" class="title">Getting to real-time: how server→client push evolved</text>
+  <text x="24" y="48" class="note">The problem: plain HTTP is client-initiated request/response — the server can't tell the client "something happened."</text>
+
+  <!-- headers -->
+  <text x="150" y="72" class="side">Client</text>
+  <text x="470" y="72" class="side">Server</text>
+
+  <!-- 1 short polling -->
+  <text x="24" y="98" class="name">1 · Short polling</text>
+  <rect x="150" y="86" width="60" height="16" rx="3" fill="#94a3b8"/><text x="158" y="98" class="msg">any new?</text>
+  <rect x="470" y="86" width="50" height="16" rx="3" fill="#cbd5e1"/><text x="478" y="98" class="msg" fill="#475569">no</text>
+  <rect x="150" y="106" width="60" height="16" rx="3" fill="#94a3b8"/><text x="158" y="118" class="msg">any new?</text>
+  <rect x="470" y="106" width="50" height="16" rx="3" fill="#cbd5e1"/><text x="478" y="118" class="msg" fill="#475569">no</text>
+  <rect x="150" y="126" width="60" height="16" rx="3" fill="#94a3b8"/><text x="158" y="138" class="msg">any new?</text>
+  <rect x="470" y="126" width="50" height="16" rx="3" fill="#059669"/><text x="478" y="138" class="msg">yes!</text>
+  <text x="560" y="120" class="bad">✗ constant wasted requests, laggy</text>
+
+  <!-- 2 long polling -->
+  <text x="24" y="176" class="name">2 · Long polling</text>
+  <rect x="150" y="164" width="60" height="16" rx="3" fill="#94a3b8"/><text x="158" y="176" class="msg">any new?</text>
+  <rect x="470" y="164" width="120" height="16" rx="3" fill="#64748b"/><text x="478" y="176" class="msg">…holds open…</text>
+  <rect x="470" y="184" width="50" height="16" rx="3" fill="#059669"/><text x="478" y="196" class="msg">data!</text>
+  <rect x="150" y="204" width="60" height="16" rx="3" fill="#94a3b8"/><text x="158" y="216" class="msg">re-ask…</text>
+  <text x="600" y="188" class="note">better, but one msg per cycle + reconnect cost</text>
+
+  <!-- 3 SSE -->
+  <text x="24" y="254" class="name">3 · Server-Sent Events</text>
+  <rect x="150" y="242" width="70" height="16" rx="3" fill="#94a3b8"/><text x="158" y="254" class="msg">open stream</text>
+  <line x1="470" y1="250" x2="220" y2="250" stroke="#059669" stroke-width="2"/><polygon points="224,245 214,250 224,255" fill="#059669"/>
+  <rect x="470" y="262" width="55" height="16" rx="3" fill="#059669"/><text x="476" y="274" class="msg">event</text>
+  <rect x="540" y="262" width="55" height="16" rx="3" fill="#059669"/><text x="546" y="274" class="msg">event</text>
+  <text x="610" y="258" class="good">✓ server pushes freely…</text>
+  <text x="610" y="274" class="bad">✗ one direction only (S→C)</text>
+
+  <!-- 4 websocket -->
+  <text x="24" y="332" class="name">4 · WebSocket</text>
+  <rect x="150" y="320" width="90" height="16" rx="3" fill="#2563eb"/><text x="158" y="332" class="msg">upgrade once</text>
+  <line x1="240" y1="350" x2="468" y2="350" stroke="#2563eb" stroke-width="3"/>
+  <text x="290" y="344" class="note">one persistent connection</text>
+  <rect x="150" y="360" width="70" height="16" rx="3" fill="#2563eb"/><text x="158" y="372" class="msg">C → S msg</text>
+  <rect x="398" y="360" width="70" height="16" rx="3" fill="#7c3aed"/><text x="406" y="372" class="msg">S → C msg</text>
+  <text x="560" y="356" class="good">✓ full-duplex: both sides,</text>
+  <text x="560" y="372" class="good">   anytime, low overhead</text>
+
+  <!-- footer -->
+  <rect x="24" y="398" width="752" height="60" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="40" y="422" class="note">Each step gets closer to true real-time push. <tspan font-weight="700">SSE</tspan> is great for one-way feeds; <tspan font-weight="700">WebSocket</tspan> is the general two-way answer;</text>
+  <text x="40" y="442" class="note">for peer-to-peer media at the lowest latency, you go beyond HTTP entirely to <tspan font-weight="700">WebRTC</tspan>. Polling still works as a simple fallback.</text>
+</svg>

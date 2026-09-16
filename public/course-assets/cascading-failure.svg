@@ -1,0 +1,38 @@
+<svg viewBox="0 0 800 420" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .box { font-size: 10.5px; font-weight: 700; fill: #ffffff; }
+    .note { font-size: 10px; fill: #64748b; }
+    .step { font-size: 10.5px; font-weight: 700; fill: #dc2626; }
+    .lbl { font-size: 10px; font-weight: 700; fill: #1e293b; }
+  </style>
+
+  <text x="24" y="30" class="title">Cascading failure: how one slow dependency sinks everything</text>
+
+  <!-- chain -->
+  <rect x="40" y="70" width="120" height="46" rx="8" fill="#64748b"/><text x="100" y="92" text-anchor="middle" class="box">Users</text><text x="100" y="107" text-anchor="middle" class="note" fill="#e2e8f0">requests pour in</text>
+  <rect x="220" y="70" width="130" height="46" rx="8" fill="#2563eb"/><text x="285" y="92" text-anchor="middle" class="box">Service A</text><text x="285" y="107" text-anchor="middle" class="note" fill="#dbeafe">(web / API)</text>
+  <rect x="410" y="70" width="130" height="46" rx="8" fill="#2563eb"/><text x="475" y="92" text-anchor="middle" class="box">Service B</text><text x="475" y="107" text-anchor="middle" class="note" fill="#dbeafe">calls C for each req</text>
+  <rect x="600" y="70" width="150" height="46" rx="8" fill="#d97706"/><text x="675" y="92" text-anchor="middle" class="box">Service C (slow)</text><text x="675" y="107" text-anchor="middle" class="note" fill="#fff7ed">latency spikes to 10s</text>
+
+  <line x1="160" y1="93" x2="218" y2="93" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#a)"/>
+  <line x1="350" y1="93" x2="408" y2="93" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#a)"/>
+  <line x1="540" y1="93" x2="598" y2="93" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#a)"/>
+
+  <!-- snowball steps -->
+  <text x="24" y="156" class="lbl">The snowball, step by step</text>
+  <rect x="24" y="168" width="752" height="26" rx="4" fill="#fff7ed"/><text x="34" y="186" class="step">1 · Service C slows down (GC pause, hot DB, deploy). It doesn't crash — it just gets slow.</text>
+  <rect x="24" y="196" width="752" height="26" rx="4" fill="#ffedd5"/><text x="34" y="214" class="step">2 · Service B's calls to C block. Each waiting request holds a thread / connection from B's pool.</text>
+  <rect x="24" y="224" width="752" height="26" rx="4" fill="#fed7aa"/><text x="34" y="242" class="step">3 · B's thread pool &amp; connection pool fill up with requests stuck waiting on C → B stops responding.</text>
+  <rect x="24" y="252" width="752" height="26" rx="4" fill="#fecaca"/><text x="34" y="270" class="step">4 · Service A, calling B, exhausts ITS pools the same way → A goes down. The failure has climbed the chain.</text>
+  <rect x="24" y="280" width="752" height="26" rx="4" fill="#fca5a5"/><text x="34" y="298" class="step">5 · The whole user-facing system is down — because one dependency got slow, not even because it crashed.</text>
+
+  <!-- amplifiers -->
+  <rect x="24" y="320" width="752" height="86" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="40" y="342" class="lbl">What makes it worse (amplifiers)</text>
+  <text x="40" y="362" class="note">• <tspan font-weight="700">Retry storms</tspan> — clients retry the slow/failed calls, multiplying load on the already-struggling dependency.</text>
+  <text x="40" y="380" class="note">• <tspan font-weight="700">Thundering herd</tspan> — everyone retries at once (no jitter); <tspan font-weight="700">load redistribution</tspan> — a dead node's load crushes the survivors.</text>
+  <text x="40" y="398" class="note">• <tspan font-weight="700">No timeouts</tspan> — unbounded waits are the root enabler; the fixes are timeouts, circuit breakers, and bulkheads (next doc).</text>
+
+  <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#94a3b8"/></marker></defs>
+</svg>

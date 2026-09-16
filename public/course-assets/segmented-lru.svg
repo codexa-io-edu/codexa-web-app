@@ -1,0 +1,55 @@
+<svg viewBox="0 0 780 410" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .seg { font-size: 13px; font-weight: 700; fill: #ffffff; }
+    .lbl { font-size: 11px; font-weight: 700; fill: #1e293b; }
+    .item { font-size: 11px; font-weight: 700; fill: #ffffff; }
+    .note { font-size: 11px; fill: #64748b; }
+    .ok { font-size: 11px; font-weight: 700; fill: #059669; }
+  </style>
+
+  <text x="24" y="30" class="title">Segmented LRU: prove yourself before entering the protected zone</text>
+
+  <!-- probationary -->
+  <rect x="40" y="70" width="330" height="90" rx="8" fill="#94a3b8"/>
+  <text x="56" y="92" class="seg">Probationary segment (new / unproven)</text>
+  <rect x="56" y="104" width="56" height="34" rx="4" fill="#64748b"/><text x="76" y="126" class="item">new</text>
+  <rect x="120" y="104" width="56" height="34" rx="4" fill="#64748b"/><text x="140" y="126" class="item">scan</text>
+  <rect x="184" y="104" width="56" height="34" rx="4" fill="#64748b"/><text x="204" y="126" class="item">scan</text>
+  <text x="250" y="126" class="note">LRU order →</text>
+
+  <!-- protected -->
+  <rect x="410" y="70" width="330" height="90" rx="8" fill="#2563eb"/>
+  <text x="426" y="92" class="seg">Protected segment (proven hot)</text>
+  <rect x="426" y="104" width="56" height="34" rx="4" fill="#1d4ed8"/><text x="450" y="126" class="item">A</text>
+  <rect x="490" y="104" width="56" height="34" rx="4" fill="#1d4ed8"/><text x="514" y="126" class="item">B</text>
+  <rect x="554" y="104" width="56" height="34" rx="4" fill="#1d4ed8"/><text x="578" y="126" class="item">C</text>
+
+  <!-- new enters probationary -->
+  <path d="M 40 120 L 20 120 L 20 90 L 38 90" fill="none" stroke="#059669" stroke-width="2"/>
+  <text x="20" y="80" class="note">new items enter here ↑</text>
+
+  <!-- promotion on 2nd hit -->
+  <path d="M 240 110 C 320 100, 360 100, 424 110" fill="none" stroke="#059669" stroke-width="2.5"/>
+  <polygon points="420,105 430,110 420,115" fill="#059669"/>
+  <text x="270" y="98" class="ok">2nd hit → promote</text>
+
+  <!-- demotion -->
+  <path d="M 610 140 C 520 175, 300 175, 240 148" fill="none" stroke="#d97706" stroke-width="2" stroke-dasharray="5,4"/>
+  <polygon points="244,143 234,149 245,153" fill="#d97706"/>
+  <text x="380" y="185" class="note">protected full → demote its LRU back to probationary</text>
+
+  <!-- eviction -->
+  <path d="M 56 138 L 56 200" stroke="#dc2626" stroke-width="2"/><polygon points="51,196 56,206 61,196" fill="#dc2626"/>
+  <text x="70" y="200" class="note" fill="#dc2626">eviction happens only from the probationary tail</text>
+
+  <!-- key insight -->
+  <rect x="40" y="222" width="700" height="160" rx="8" fill="#f0fdf4" stroke="#86efac"/>
+  <text x="56" y="246" class="lbl" fill="#059669">Why this beats plain LRU: scan resistance</text>
+  <text x="56" y="270" class="note">New items land in <tspan font-weight="700">probationary</tspan>. Only an item accessed <tspan font-weight="700">a second time</tspan> (proven reuse) is promoted to <tspan font-weight="700">protected</tspan>.</text>
+  <text x="56" y="290" class="note">A big one-off scan floods probationary with items that are never hit again — so they're evicted from there</text>
+  <text x="56" y="310" class="note">without ever touching the hot, protected set. Plain LRU would let that scan wipe the whole cache.</text>
+  <text x="56" y="336" class="note">Result: it keeps <tspan font-weight="700">recency</tspan> (LRU within each segment) <tspan font-weight="700">and</tspan> a form of <tspan font-weight="700">frequency</tspan> (promotion requires a repeat hit),</text>
+  <text x="56" y="356" class="note">resisting scans while staying adaptive. Tuning the protected/probationary size split is the main knob.</text>
+  <text x="56" y="376" class="note">This idea underlies many modern high-hit-ratio caches (see Other Eviction Policies).</text>
+</svg>

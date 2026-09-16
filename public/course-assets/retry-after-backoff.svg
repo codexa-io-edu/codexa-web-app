@@ -1,0 +1,42 @@
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .h { font-size: 13px; font-weight: 700; fill: #1e293b; }
+    .mono { font-size: 10.5px; font-family: 'Consolas','Courier New',monospace; fill: #1e293b; }
+    .note { font-size: 10.5px; fill: #64748b; }
+    .lbl { font-size: 10px; font-weight: 700; fill: #ffffff; }
+  </style>
+
+  <text x="24" y="30" class="title">Telling the client: 429, Retry-After, and polite backoff</text>
+
+  <!-- response box -->
+  <rect x="24" y="50" width="360" height="180" rx="10" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="40" y="74" class="h">What the server returns when over limit</text>
+  <rect x="40" y="88" width="328" height="128" rx="6" fill="#1e293b"/>
+  <text x="54" y="112" class="mono" fill="#f87171">HTTP/1.1 429 Too Many Requests</text>
+  <text x="54" y="134" class="mono" fill="#e2e8f0">Retry-After: 2</text>
+  <text x="54" y="156" class="mono" fill="#e2e8f0">RateLimit-Limit: 100</text>
+  <text x="54" y="178" class="mono" fill="#e2e8f0">RateLimit-Remaining: 0</text>
+  <text x="54" y="200" class="mono" fill="#e2e8f0">RateLimit-Reset: 2</text>
+
+  <!-- backoff timeline -->
+  <rect x="404" y="50" width="372" height="180" rx="10" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="420" y="74" class="h">Good client: exponential backoff + jitter</text>
+
+  <line x1="430" y1="160" x2="756" y2="160" stroke="#94a3b8" stroke-width="2"/>
+  <!-- attempts -->
+  <rect x="436" y="146" width="18" height="28" rx="3" fill="#dc2626"/><text x="445" y="192" text-anchor="middle" class="note">try</text>
+  <rect x="486" y="146" width="18" height="28" rx="3" fill="#d97706"/><text x="495" y="192" text-anchor="middle" class="note">+1s</text>
+  <rect x="560" y="146" width="18" height="28" rx="3" fill="#d97706"/><text x="569" y="192" text-anchor="middle" class="note">+2s</text>
+  <rect x="662" y="146" width="18" height="28" rx="3" fill="#059669"/><text x="671" y="192" text-anchor="middle" class="note">+4s ✓</text>
+  <text x="420" y="216" class="note">wait ≈ base · 2ⁿ + random jitter, capped at a max</text>
+
+  <!-- footer -->
+  <rect x="24" y="250" width="752" height="132" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="40" y="274" class="h">Why these details matter</text>
+  <text x="40" y="298" class="note">• <tspan font-weight="700">429</tspan> is the standard "you're rate limited" status — distinct from 503 (overloaded) or 403 (forbidden).</text>
+  <text x="40" y="318" class="note">• <tspan font-weight="700">Retry-After</tspan> tells the client exactly how long to wait, so it stops guessing.</text>
+  <text x="40" y="338" class="note">• <tspan font-weight="700">RateLimit-*</tspan> headers let well-behaved clients self-throttle before they ever hit the wall.</text>
+  <text x="40" y="358" class="note">• <tspan font-weight="700">Jitter</tspan> spreads retries out — without it, thousands of clients retry in lockstep and cause a thundering herd.</text>
+  <text x="40" y="376" class="note">• A dumb client that retries instantly makes overload worse; backoff turns a spike into a manageable trickle.</text>
+</svg>

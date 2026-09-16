@@ -1,0 +1,58 @@
+<svg viewBox="0 0 800 430" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <rect width="800" height="430" fill="#f8fafc"/>
+  <text x="400" y="34" text-anchor="middle" font-size="21" font-weight="700" fill="#0f172a">Factory Method: Subclasses Choose the Product</text>
+
+  <defs>
+    <marker id="fm_tri" markerWidth="14" markerHeight="14" refX="7" refY="7" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L14,7 L0,14 Z" fill="#ffffff" stroke="#475569" stroke-width="1.4"/>
+    </marker>
+    <marker id="fm_dash" markerWidth="12" markerHeight="12" refX="9" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L9,4 L0,8" fill="none" stroke="#d97706" stroke-width="1.4"/>
+    </marker>
+  </defs>
+
+  <text x="205" y="66" text-anchor="middle" font-size="13" font-weight="700" fill="#047857">Creator side</text>
+  <text x="600" y="66" text-anchor="middle" font-size="13" font-weight="700" fill="#b45309">Product side</text>
+
+  <!-- Creator abstract -->
+  <rect x="70" y="80" width="270" height="86" rx="10" fill="#dcfce7" stroke="#059669" stroke-width="2.4"/>
+  <text x="205" y="104" text-anchor="middle" font-size="14" font-weight="700" fill="#047857">Logistics (abstract)</text>
+  <line x1="90" y1="114" x2="320" y2="114" stroke="#86efac" stroke-width="1.3"/>
+  <text x="100" y="134" font-size="11.5" fill="#065f46" font-family="monospace">planDelivery()  // uses factory</text>
+  <text x="100" y="154" font-size="11.5" fill="#065f46" font-family="monospace">abstract createTransport()</text>
+
+  <!-- Concrete creators -->
+  <rect x="40" y="230" width="150" height="70" rx="9" fill="#f0fdf4" stroke="#059669" stroke-width="1.8"/>
+  <text x="115" y="254" text-anchor="middle" font-size="12.5" font-weight="700" fill="#047857">RoadLogistics</text>
+  <text x="115" y="276" text-anchor="middle" font-size="10" fill="#065f46" font-family="monospace">createTransport()</text>
+  <text x="115" y="290" text-anchor="middle" font-size="10" fill="#065f46" font-family="monospace">return new Truck()</text>
+
+  <rect x="220" y="230" width="150" height="70" rx="9" fill="#f0fdf4" stroke="#059669" stroke-width="1.8"/>
+  <text x="295" y="254" text-anchor="middle" font-size="12.5" font-weight="700" fill="#047857">SeaLogistics</text>
+  <text x="295" y="276" text-anchor="middle" font-size="10" fill="#065f46" font-family="monospace">createTransport()</text>
+  <text x="295" y="290" text-anchor="middle" font-size="10" fill="#065f46" font-family="monospace">return new Ship()</text>
+
+  <line x1="115" y1="230" x2="190" y2="168" stroke="#475569" stroke-width="1.5" marker-end="url(#fm_tri)"/>
+  <line x1="295" y1="230" x2="220" y2="168" stroke="#475569" stroke-width="1.5" marker-end="url(#fm_tri)"/>
+
+  <!-- Product interface -->
+  <rect x="500" y="80" width="230" height="66" rx="10" fill="#ffedd5" stroke="#d97706" stroke-width="2.4"/>
+  <text x="615" y="106" text-anchor="middle" font-size="14" font-weight="700" fill="#b45309">Transport (interface)</text>
+  <text x="615" y="128" text-anchor="middle" font-size="11" fill="#7c2d12" font-family="monospace">deliver()</text>
+
+  <!-- Concrete products -->
+  <rect x="500" y="230" width="105" height="60" rx="9" fill="#fff7ed" stroke="#d97706" stroke-width="1.8"/>
+  <text x="552" y="264" text-anchor="middle" font-size="12.5" font-weight="700" fill="#b45309">Truck</text>
+  <rect x="625" y="230" width="105" height="60" rx="9" fill="#fff7ed" stroke="#d97706" stroke-width="1.8"/>
+  <text x="677" y="264" text-anchor="middle" font-size="12.5" font-weight="700" fill="#b45309">Ship</text>
+
+  <line x1="552" y1="230" x2="600" y2="146" stroke="#475569" stroke-width="1.5" marker-end="url(#fm_tri)"/>
+  <line x1="677" y1="230" x2="630" y2="146" stroke="#475569" stroke-width="1.5" marker-end="url(#fm_tri)"/>
+
+  <!-- factory produces product (dashed) -->
+  <line x1="190" y1="270" x2="498" y2="262" stroke="#d97706" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#fm_dash)"/>
+  <text x="360" y="255" text-anchor="middle" font-size="10.5" fill="#b45309">«creates»</text>
+
+  <text x="400" y="345" text-anchor="middle" font-size="12" fill="#334155">planDelivery() is written once in the base class and calls createTransport() — it works for ANY transport.</text>
+  <text x="400" y="368" text-anchor="middle" font-size="11.5" fill="#64748b">Add "AirLogistics + Plane" later = two new classes, zero edits to planDelivery(). (That's OCP.)</text>
+</svg>

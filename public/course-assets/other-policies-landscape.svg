@@ -1,0 +1,50 @@
+<svg viewBox="0 0 780 470" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .axis { font-size: 12px; font-weight: 700; fill: #475569; }
+    .pol { font-size: 12px; font-weight: 700; fill: #ffffff; }
+    .psub { font-size: 9.5px; fill: #1e293b; }
+    .note { font-size: 11px; fill: #64748b; }
+  </style>
+
+  <text x="24" y="30" class="title">The eviction-policy landscape: simplicity vs. hit ratio</text>
+
+  <!-- axes -->
+  <line x1="90" y1="400" x2="740" y2="400" stroke="#94a3b8" stroke-width="2"/>
+  <polygon points="736,395 748,400 736,405" fill="#94a3b8"/>
+  <line x1="90" y1="400" x2="90" y2="70" stroke="#94a3b8" stroke-width="2"/>
+  <polygon points="85,74 90,62 95,74" fill="#94a3b8"/>
+  <text x="300" y="430" class="axis">simpler / lower overhead  →  smarter / more bookkeeping</text>
+  <text x="30" y="240" class="axis" transform="rotate(-90 30 240)">lower hit ratio  →  higher hit ratio</text>
+
+  <!-- points (low-left = simple/low ratio; up-right = smart/high ratio) -->
+  <!-- FIFO -->
+  <rect x="110" y="352" width="96" height="30" rx="6" fill="#94a3b8"/><text x="122" y="372" class="pol">FIFO</text>
+  <text x="110" y="346" class="psub">evict oldest inserted</text>
+  <!-- Random -->
+  <rect x="150" y="312" width="110" height="30" rx="6" fill="#94a3b8"/><text x="162" y="332" class="pol">Random</text>
+  <text x="150" y="306" class="psub">no metadata; decent, cheap</text>
+  <!-- CLOCK -->
+  <rect x="210" y="270" width="150" height="30" rx="6" fill="#64748b"/><text x="222" y="290" class="pol">CLOCK / Second-Chance</text>
+  <text x="212" y="264" class="psub">cheap LRU approximation (OS pages)</text>
+  <!-- LRU -->
+  <rect x="300" y="228" width="80" height="30" rx="6" fill="#2563eb"/><text x="316" y="248" class="pol">LRU</text>
+  <text x="300" y="222" class="psub">recency; scan-vulnerable</text>
+  <!-- LFU -->
+  <rect x="360" y="196" width="80" height="30" rx="6" fill="#059669"/><text x="376" y="216" class="pol">LFU</text>
+  <text x="360" y="190" class="psub">frequency; needs aging</text>
+  <!-- SLRU/2Q -->
+  <rect x="430" y="162" width="130" height="30" rx="6" fill="#7c3aed"/><text x="442" y="182" class="pol">SLRU / 2Q</text>
+  <text x="432" y="156" class="psub">segmented; scan-resistant</text>
+  <!-- ARC -->
+  <rect x="510" y="126" width="90" height="30" rx="6" fill="#7c3aed"/><text x="522" y="146" class="pol">ARC</text>
+  <text x="512" y="120" class="psub">self-tuning recency+frequency</text>
+  <!-- W-TinyLFU -->
+  <rect x="580" y="86" width="140" height="30" rx="6" fill="#dc2626"/><text x="592" y="106" class="pol">W-TinyLFU</text>
+  <text x="582" y="80" class="psub">modern; frequency sketch + admission</text>
+
+  <!-- trend line -->
+  <path d="M 150 372 C 350 300, 500 180, 660 100" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="5,5"/>
+
+  <text x="90" y="458" class="note">No single winner: match the policy to the workload and to how much per-item bookkeeping you can afford.</text>
+</svg>

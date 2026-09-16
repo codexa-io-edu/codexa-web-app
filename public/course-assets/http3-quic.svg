@@ -1,0 +1,65 @@
+<svg viewBox="0 0 780 450" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .lbl { font-size: 12px; font-weight: 700; fill: #1e293b; }
+    .fr { font-size: 9px; font-weight: 700; fill: #ffffff; }
+    .note { font-size: 10.5px; fill: #64748b; }
+    .ok { font-size: 11px; font-weight: 700; fill: #059669; }
+    .strm { font-size: 10px; font-weight: 700; fill: #1e293b; }
+    .h { font-size: 11px; font-weight: 700; fill: #1e293b; }
+  </style>
+
+  <text x="24" y="30" class="title">HTTP/3 over QUIC: truly independent streams on UDP</text>
+
+  <!-- independent streams -->
+  <text x="24" y="62" class="ok">✓ Fixed: transport-layer HOL. QUIC streams are independent — a lost packet only affects its own stream.</text>
+
+  <text x="30" y="92" class="strm">stream 1</text>
+  <text x="30" y="120" class="strm">stream 2</text>
+  <text x="30" y="148" class="strm">stream 3</text>
+
+  <rect x="100" y="78" width="640" height="92" rx="8" fill="#f1f5f9" stroke="#cbd5e1"/>
+  <text x="108" y="74" class="note">one QUIC connection over UDP ↓</text>
+  <!-- s1 -->
+  <rect x="112" y="84" width="70" height="18" rx="3" fill="#2563eb"/><text x="126" y="97" class="fr">S1</text>
+  <rect x="190" y="84" width="70" height="18" rx="3" fill="#2563eb"/><text x="204" y="97" class="fr">S1</text>
+  <text x="270" y="98" class="ok">→ continues ✓</text>
+  <!-- s2 lost -->
+  <rect x="112" y="112" width="70" height="18" rx="3" fill="#dc2626" stroke="#7f1d1d" stroke-width="2"/><text x="128" y="125" class="fr">LOST ✗</text>
+  <text x="190" y="126" class="note" fill="#dc2626">only stream 2 waits for this packet</text>
+  <!-- s3 -->
+  <rect x="112" y="140" width="70" height="18" rx="3" fill="#d97706"/><text x="126" y="153" class="fr">S3</text>
+  <rect x="190" y="140" width="70" height="18" rx="3" fill="#d97706"/><text x="204" y="153" class="fr">S3</text>
+  <text x="270" y="154" class="ok">→ continues ✓</text>
+
+  <text x="100" y="192" class="note">Streams 1 &amp; 3 flow uninterrupted while stream 2 recovers — no more one-packet-stalls-everything.</text>
+
+  <!-- three more QUIC wins -->
+  <rect x="24" y="210" width="240" height="120" rx="8" fill="#f0fdf4" stroke="#86efac"/>
+  <text x="40" y="234" class="h">Built-in encryption</text>
+  <text x="40" y="256" class="note">TLS 1.3 is baked into QUIC —</text>
+  <text x="40" y="272" class="note">HTTP/3 is always encrypted;</text>
+  <text x="40" y="288" class="note">there's no plaintext mode.</text>
+  <text x="40" y="314" class="note">(crypto depth → Security topic)</text>
+
+  <rect x="272" y="210" width="240" height="120" rx="8" fill="#f0fdf4" stroke="#86efac"/>
+  <text x="288" y="234" class="h">Faster setup</text>
+  <text x="288" y="256" class="note">Transport + TLS handshake are</text>
+  <text x="288" y="272" class="note">combined → 1-RTT to first byte,</text>
+  <text x="288" y="288" class="note">or 0-RTT on a resumed session.</text>
+  <text x="288" y="314" class="note">(vs TCP + separate TLS RTTs)</text>
+
+  <rect x="520" y="210" width="236" height="120" rx="8" fill="#f0fdf4" stroke="#86efac"/>
+  <text x="536" y="234" class="h">Connection migration</text>
+  <text x="536" y="256" class="note">A connection is a Connection ID,</text>
+  <text x="536" y="272" class="note">not an IP:port. Switch WiFi →</text>
+  <text x="536" y="288" class="note">cellular mid-download and it</text>
+  <text x="536" y="304" class="note">keeps going — no reconnect.</text>
+
+  <!-- scenario -->
+  <rect x="24" y="346" width="732" height="90" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="40" y="370" class="lbl">Concrete win (mobile)</text>
+  <text x="40" y="392" class="note">You're downloading a file on WiFi and walk out the door onto cellular. TCP would drop the connection (the IP changed)</text>
+  <text x="40" y="410" class="note">and restart. QUIC recognizes the same Connection ID and continues seamlessly — and its independent streams shrug off the</text>
+  <text x="40" y="428" class="note">extra packet loss that mobile networks bring. This is why HTTP/3 shines on phones and lossy links.</text>
+</svg>

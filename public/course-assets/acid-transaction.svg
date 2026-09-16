@@ -1,0 +1,60 @@
+<svg viewBox="0 0 760 430" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .step { font-size: 12px; fill: #334155; }
+    .box-t { font-size: 13px; font-weight: 700; fill: #1e293b; }
+    .ok { font-size: 12px; font-weight: 700; fill: #059669; }
+    .bad { font-size: 12px; font-weight: 700; fill: #dc2626; }
+    .note { font-size: 11px; fill: #64748b; }
+    .code { font-size: 12px; fill: #1e293b; font-family: 'SFMono-Regular', Consolas, monospace; }
+  </style>
+
+  <text x="24" y="30" class="title">A transaction is all-or-nothing (Atomicity)</text>
+  <text x="24" y="52" class="note">Transfer ₹500 from account A to account B — two writes that must both happen, or neither.</text>
+
+  <!-- Success path -->
+  <rect x="24" y="70" width="340" height="330" rx="10" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5"/>
+  <text x="44" y="98" class="ok">✓ Success path — COMMIT</text>
+
+  <rect x="44" y="112" width="300" height="30" rx="5" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="54" y="132" class="code">BEGIN;</text>
+
+  <rect x="44" y="150" width="300" height="46" rx="5" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="54" y="168" class="code">UPDATE acct SET bal = bal-500</text>
+  <text x="54" y="186" class="code">  WHERE id = 'A';   -- A: 1000→500</text>
+
+  <rect x="44" y="204" width="300" height="46" rx="5" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="54" y="222" class="code">UPDATE acct SET bal = bal+500</text>
+  <text x="54" y="240" class="code">  WHERE id = 'B';   -- B: 200→700</text>
+
+  <rect x="44" y="258" width="300" height="30" rx="5" fill="#dcfce7" stroke="#059669"/>
+  <text x="54" y="278" class="code">COMMIT;   -- both saved permanently</text>
+
+  <text x="44" y="316" class="step">Final:  A = ₹500,  B = ₹700</text>
+  <text x="44" y="340" class="ok">Total conserved (₹1200) ✓ Durable after crash ✓</text>
+  <text x="44" y="376" class="note">Money is never created or lost — the</text>
+  <text x="44" y="392" class="note">two writes commit together atomically.</text>
+
+  <!-- Failure path -->
+  <rect x="396" y="70" width="340" height="330" rx="10" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.5"/>
+  <text x="416" y="98" class="bad">✗ Failure path — ROLLBACK</text>
+
+  <rect x="416" y="112" width="300" height="30" rx="5" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="426" y="132" class="code">BEGIN;</text>
+
+  <rect x="416" y="150" width="300" height="46" rx="5" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="426" y="168" class="code">UPDATE acct SET bal = bal-500</text>
+  <text x="426" y="186" class="code">  WHERE id = 'A';   -- A: 1000→500</text>
+
+  <rect x="416" y="204" width="300" height="46" rx="5" fill="#fee2e2" stroke="#dc2626"/>
+  <text x="426" y="222" class="code">-- 💥 crash / error here</text>
+  <text x="426" y="240" class="code">   (B was never credited)</text>
+
+  <rect x="416" y="258" width="300" height="30" rx="5" fill="#fee2e2" stroke="#dc2626"/>
+  <text x="426" y="278" class="code">ROLLBACK;  -- undo everything</text>
+
+  <text x="416" y="316" class="step">Final:  A = ₹1000,  B = ₹200</text>
+  <text x="416" y="340" class="bad">The partial debit is undone ✓</text>
+  <text x="416" y="376" class="note">Without atomicity, A would lose ₹500</text>
+  <text x="416" y="392" class="note">that B never received — money vanishes.</text>
+</svg>

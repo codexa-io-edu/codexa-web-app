@@ -1,0 +1,43 @@
+<svg viewBox="0 0 780 400" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .lbl { font-size: 12px; font-weight: 700; fill: #1e293b; }
+    .node { font-size: 12px; font-weight: 700; fill: #ffffff; }
+    .note { font-size: 11px; fill: #64748b; }
+    .end { font-size: 11px; font-weight: 700; fill: #475569; }
+    .op { font-size: 11px; font-weight: 700; fill: #2563eb; }
+  </style>
+
+  <text x="24" y="30" class="title">LRU internals: a hash map + a doubly linked list = O(1)</text>
+
+  <!-- hash map -->
+  <text x="40" y="72" class="lbl">Hash map (key → node)</text>
+  <rect x="40" y="82" width="150" height="90" rx="8" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="54" y="104" class="note">"A" → •</text>
+  <text x="54" y="126" class="note">"B" → •</text>
+  <text x="54" y="148" class="note">"C" → •</text>
+  <text x="40" y="192" class="note">gives O(1) lookup of any node</text>
+
+  <!-- doubly linked list -->
+  <text x="260" y="72" class="lbl">Doubly linked list (usage order)</text>
+  <text x="260" y="200" class="end">MRU (head) — most recently used</text>
+  <text x="600" y="200" class="end" text-anchor="end">least recently used (tail) — LRU</text>
+
+  <rect x="260" y="100" width="90" height="44" rx="6" fill="#2563eb"/><text x="298" y="127" class="node">C</text>
+  <rect x="380" y="100" width="90" height="44" rx="6" fill="#3b82f6"/><text x="418" y="127" class="node">A</text>
+  <rect x="500" y="100" width="90" height="44" rx="6" fill="#94a3b8"/><text x="538" y="127" class="node">B</text>
+
+  <line x1="350" y1="122" x2="378" y2="122" stroke="#64748b" stroke-width="2"/>
+  <line x1="470" y1="122" x2="498" y2="122" stroke="#64748b" stroke-width="2"/>
+
+  <!-- eviction marker -->
+  <text x="512" y="166" class="note" fill="#dc2626">↑ evict from here when full</text>
+
+  <!-- operations -->
+  <rect x="40" y="230" width="700" height="150" rx="8" fill="#eff6ff" stroke="#93c5fd"/>
+  <text x="56" y="254" class="lbl" fill="#2563eb">The three operations (all O(1))</text>
+  <text x="56" y="278" class="op">GET(key):</text><text x="150" y="278" class="note">look up node in the map, move it to the head (now most-recently-used), return its value.</text>
+  <text x="56" y="302" class="op">PUT(key):</text><text x="150" y="302" class="note">insert a new node at the head; add it to the map.</text>
+  <text x="56" y="326" class="op">EVICT:</text><text x="150" y="326" class="note">when full, remove the tail node (least-recently-used) and delete it from the map.</text>
+  <text x="56" y="358" class="note">Because every access moves the item to the head, the tail is always the item untouched for the longest — the LRU victim.</text>
+</svg>

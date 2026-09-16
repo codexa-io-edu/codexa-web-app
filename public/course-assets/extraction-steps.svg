@@ -1,0 +1,53 @@
+<svg viewBox="0 0 800 380" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .num { font-size: 13px; font-weight: 700; fill: #ffffff; }
+    .h { font-size: 11.5px; font-weight: 700; fill: #1e293b; }
+    .note { font-size: 9.5px; fill: #64748b; }
+  </style>
+
+  <text x="24" y="30" class="title">Extracting one service, step by step</text>
+
+  <!-- step 1 -->
+  <circle cx="48" cy="76" r="16" fill="#2563eb"/><text x="48" y="81" text-anchor="middle" class="num">1</text>
+  <text x="76" y="72" class="h">Identify a seam</text>
+  <text x="76" y="90" class="note">Pick a bounded context / module with a clear boundary and loose coupling (the "what to extract" step).</text>
+
+  <!-- step 2 -->
+  <circle cx="48" cy="136" r="16" fill="#2563eb"/><text x="48" y="141" text-anchor="middle" class="num">2</text>
+  <text x="76" y="132" class="h">Build the new service — with its own data</text>
+  <text x="76" y="150" class="note">Stand up the service (containerized) and give it its OWN datastore; define its API. Decouple its data (next diagram).</text>
+
+  <!-- step 3 -->
+  <circle cx="48" cy="196" r="16" fill="#2563eb"/><text x="48" y="201" text-anchor="middle" class="num">3</text>
+  <text x="76" y="192" class="h">Redirect traffic incrementally</text>
+  <text x="76" y="210" class="note">At the facade/gateway, route a small % to the new service (canary); keep the monolith path as a fallback for instant rollback.</text>
+
+  <!-- step 4 -->
+  <circle cx="48" cy="256" r="16" fill="#2563eb"/><text x="48" y="261" text-anchor="middle" class="num">4</text>
+  <text x="76" y="252" class="h">Verify, then ramp to 100%</text>
+  <text x="76" y="270" class="note">Compare behavior (optionally a parallel run), watch metrics/traces, then increase to full traffic once confident.</text>
+
+  <!-- step 5 -->
+  <circle cx="48" cy="316" r="16" fill="#059669"/><text x="48" y="321" text-anchor="middle" class="num">5</text>
+  <text x="76" y="312" class="h">Remove the old code from the monolith</text>
+  <text x="76" y="330" class="note">Delete the now-dead module and its tables from the monolith. This step is essential — skipping it leaves duplication &amp; coupling.</text>
+
+  <!-- connecting line -->
+  <line x1="48" y1="92" x2="48" y2="120" stroke="#cbd5e1" stroke-width="2"/>
+  <line x1="48" y1="152" x2="48" y2="180" stroke="#cbd5e1" stroke-width="2"/>
+  <line x1="48" y1="212" x2="48" y2="240" stroke="#cbd5e1" stroke-width="2"/>
+  <line x1="48" y1="272" x2="48" y2="300" stroke="#cbd5e1" stroke-width="2"/>
+
+  <!-- loop note -->
+  <rect x="520" y="150" width="256" height="120" rx="10" fill="#eff6ff" stroke="#bfdbfe"/>
+  <text x="536" y="176" class="h">Then repeat</text>
+  <text x="536" y="198" class="note">Each extraction is one full pass of</text>
+  <text x="536" y="212" class="note">these five steps. Do them one service</text>
+  <text x="536" y="226" class="note">at a time so risk stays small and the</text>
+  <text x="536" y="240" class="note">system keeps running throughout.</text>
+  <text x="536" y="262" class="note" font-weight="700" fill="#1e40af">Small, reversible, repeatable.</text>
+  <path d="M 490 316 C 620 316, 648 300, 648 272" fill="none" stroke="#94a3b8" stroke-width="1.6" stroke-dasharray="5,4" marker-end="url(#a)"/>
+
+  <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#94a3b8"/></marker></defs>
+</svg>

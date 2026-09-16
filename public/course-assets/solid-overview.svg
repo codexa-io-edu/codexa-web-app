@@ -1,0 +1,44 @@
+<svg viewBox="0 0 820 480" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <rect width="820" height="480" fill="#f8fafc"/>
+  <text x="410" y="38" text-anchor="middle" font-size="24" font-weight="700" fill="#0f172a">The SOLID Principles</text>
+  <text x="410" y="64" text-anchor="middle" font-size="14" fill="#64748b">Five guidelines for classes that are easy to change and hard to break</text>
+
+  <!-- S -->
+  <rect x="40" y="88" width="740" height="58" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <rect x="52" y="97" width="40" height="40" rx="8" fill="#2563eb"/>
+  <text x="72" y="125" text-anchor="middle" font-size="24" font-weight="700" fill="#ffffff">S</text>
+  <text x="108" y="115" font-size="15" font-weight="700" fill="#1d4ed8">Single Responsibility</text>
+  <text x="108" y="135" font-size="12.5" fill="#334155">One class, one reason to change (serve one actor).</text>
+
+  <!-- O -->
+  <rect x="40" y="156" width="740" height="58" rx="10" fill="#f0fdf4" stroke="#059669" stroke-width="2"/>
+  <rect x="52" y="165" width="40" height="40" rx="8" fill="#059669"/>
+  <text x="72" y="193" text-anchor="middle" font-size="24" font-weight="700" fill="#ffffff">O</text>
+  <text x="108" y="183" font-size="15" font-weight="700" fill="#047857">Open / Closed</text>
+  <text x="108" y="203" font-size="12.5" fill="#334155">Open to extension, closed to modification &#8212; add code, don't edit it.</text>
+
+  <!-- L -->
+  <rect x="40" y="224" width="740" height="58" rx="10" fill="#fff7ed" stroke="#d97706" stroke-width="2"/>
+  <rect x="52" y="233" width="40" height="40" rx="8" fill="#d97706"/>
+  <text x="72" y="261" text-anchor="middle" font-size="24" font-weight="700" fill="#ffffff">L</text>
+  <text x="108" y="251" font-size="15" font-weight="700" fill="#b45309">Liskov Substitution</text>
+  <text x="108" y="271" font-size="12.5" fill="#334155">A subtype must work anywhere its base type is expected.</text>
+
+  <!-- I -->
+  <rect x="40" y="292" width="740" height="58" rx="10" fill="#fdf4ff" stroke="#c026d3" stroke-width="2"/>
+  <rect x="52" y="301" width="40" height="40" rx="8" fill="#c026d3"/>
+  <text x="72" y="329" text-anchor="middle" font-size="24" font-weight="700" fill="#ffffff">I</text>
+  <text x="108" y="319" font-size="15" font-weight="700" fill="#a21caf">Interface Segregation</text>
+  <text x="108" y="339" font-size="12.5" fill="#334155">Many small, focused interfaces beat one fat one.</text>
+
+  <!-- D -->
+  <rect x="40" y="360" width="740" height="58" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <rect x="52" y="369" width="40" height="40" rx="8" fill="#dc2626"/>
+  <text x="72" y="397" text-anchor="middle" font-size="24" font-weight="700" fill="#ffffff">D</text>
+  <text x="108" y="387" font-size="15" font-weight="700" fill="#b91c1c">Dependency Inversion</text>
+  <text x="108" y="407" font-size="12.5" fill="#334155">Depend on abstractions, not on concrete details.</text>
+
+  <!-- goal banner -->
+  <rect x="40" y="432" width="740" height="34" rx="8" fill="#0f172a"/>
+  <text x="410" y="454" text-anchor="middle" font-size="13.5" font-weight="600" fill="#ffffff">The shared goal: loose coupling + high cohesion = software that absorbs change safely</text>
+</svg>

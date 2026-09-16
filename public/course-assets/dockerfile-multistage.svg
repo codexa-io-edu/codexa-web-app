@@ -1,0 +1,56 @@
+<svg viewBox="0 0 800 420" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .h { font-size: 12px; font-weight: 700; fill: #1e293b; }
+    .mono { font-size: 9.5px; font-family: 'Consolas','Courier New',monospace; fill: #1e293b; }
+    .note { font-size: 9.5px; fill: #64748b; }
+    .box { font-size: 10px; font-weight: 700; fill: #ffffff; }
+  </style>
+
+  <text x="24" y="30" class="title">Dockerfiles: layer caching and multi-stage builds</text>
+
+  <!-- caching -->
+  <rect x="24" y="48" width="360" height="220" rx="10" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="40" y="70" class="h">Layer ordering for cache hits</text>
+  <rect x="40" y="82" width="328" height="20" rx="3" fill="#c4b5fd"/><text x="48" y="97" class="mono">FROM node:20-slim</text>
+  <rect x="40" y="106" width="328" height="20" rx="3" fill="#a78bfa"/><text x="48" y="121" class="mono">WORKDIR /app</text>
+  <rect x="40" y="130" width="328" height="20" rx="3" fill="#8b5cf6"/><text x="48" y="145" class="mono" fill="#fff">COPY package.json .   ← deps manifest first</text>
+  <rect x="40" y="154" width="328" height="20" rx="3" fill="#8b5cf6"/><text x="48" y="169" class="mono" fill="#fff">RUN npm install       ← cached if deps unchanged</text>
+  <rect x="40" y="178" width="328" height="20" rx="3" fill="#dc2626"/><text x="48" y="193" class="mono" fill="#fff">COPY . .              ← code changes often</text>
+  <rect x="40" y="202" width="328" height="20" rx="3" fill="#dc2626"/><text x="48" y="217" class="mono" fill="#fff">CMD ["node","server.js"]</text>
+  <text x="40" y="240" class="note">Put slow, stable steps (install deps) BEFORE fast-changing</text>
+  <text x="40" y="254" class="note">ones (copy code). A code change then only rebuilds the last</text>
+  <text x="40" y="264" class="note" fill="#64748b" font-size="9">layers — npm install stays cached.</text>
+
+  <!-- multi-stage -->
+  <rect x="404" y="48" width="372" height="220" rx="10" fill="#f0fdf4" stroke="#bbf7d0"/>
+  <text x="420" y="70" class="h">Multi-stage build → tiny final image</text>
+
+  <rect x="420" y="84" width="160" height="120" rx="8" fill="#d97706"/>
+  <text x="500" y="104" text-anchor="middle" class="box">Stage 1: builder</text>
+  <text x="432" y="126" class="mono" fill="#fff">FROM golang AS build</text>
+  <text x="432" y="142" class="mono" fill="#fff">COPY . .</text>
+  <text x="432" y="158" class="mono" fill="#fff">RUN go build -o app</text>
+  <text x="432" y="184" class="note" fill="#fff7ed">full SDK, big (~800MB)</text>
+
+  <rect x="616" y="84" width="150" height="120" rx="8" fill="#059669"/>
+  <text x="691" y="104" text-anchor="middle" class="box">Stage 2: runtime</text>
+  <text x="628" y="126" class="mono" fill="#fff">FROM alpine</text>
+  <text x="628" y="142" class="mono" fill="#fff">COPY --from=build</text>
+  <text x="640" y="156" class="mono" fill="#fff">/app /app</text>
+  <text x="628" y="184" class="note" fill="#dcfce7">just the binary (~15MB)</text>
+
+  <line x1="580" y1="144" x2="614" y2="144" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
+  <text x="420" y="228" class="note" fill="#065f46">Only the final stage ships — the SDK, source, and build tools are left</text>
+  <text x="420" y="242" class="note" fill="#065f46">behind, so the deployed image is small, fast to pull, and safer.</text>
+
+  <!-- best practices -->
+  <rect x="24" y="284" width="752" height="128" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="40" y="306" class="h">Image best practices</text>
+  <text x="40" y="328" class="note">• Use a <tspan font-weight="700">small base</tspan> (slim / alpine / distroless).  • <tspan font-weight="700">Multi-stage</tspan> to drop build tooling.  • <tspan font-weight="700">.dockerignore</tspan> to keep junk out of the build context.</text>
+  <text x="40" y="348" class="note">• Order layers <tspan font-weight="700">stable → volatile</tspan> for cache hits.  • Run as a <tspan font-weight="700">non-root USER</tspan>.  • Pin versions (avoid <tspan font-family="'Consolas'">:latest</tspan>); reference by digest for reproducibility.</text>
+  <text x="40" y="368" class="note">• <tspan font-weight="700">One concern per container</tspan> (one main process).  • Add a <tspan font-family="'Consolas'">HEALTHCHECK</tspan>.  • Keep secrets OUT of images (inject at runtime).</text>
+  <text x="40" y="392" class="note">• <tspan font-weight="700">CMD vs ENTRYPOINT</tspan>: ENTRYPOINT sets the executable, CMD sets default args — together they define what the container runs.</text>
+
+  <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#334155"/></marker></defs>
+</svg>

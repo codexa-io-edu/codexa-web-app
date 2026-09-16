@@ -1,0 +1,50 @@
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .h { font-size: 11px; font-weight: 700; fill: #ffffff; }
+    .sys { font-size: 11px; font-weight: 700; fill: #1e293b; }
+    .v { font-size: 10px; fill: #334155; }
+  </style>
+
+  <text x="24" y="30" class="title">The pub/sub landscape — pick by durability, ordering, and filtering</text>
+
+  <!-- header -->
+  <rect x="24" y="48" width="150" height="36" fill="#1e293b"/><text x="34" y="71" class="h">System</text>
+  <rect x="174" y="48" width="120" height="36" fill="#334155"/><text x="184" y="71" class="h">Style</text>
+  <rect x="294" y="48" width="130" height="36" fill="#334155"/><text x="304" y="71" class="h">Durable?</text>
+  <rect x="424" y="48" width="150" height="36" fill="#334155"/><text x="434" y="71" class="h">Filtering</text>
+  <rect x="574" y="48" width="202" height="36" fill="#334155"/><text x="584" y="71" class="h">Best for</text>
+
+  <g>
+    <rect x="24" y="84" width="752" height="38" fill="#f8fafc"/>
+    <text x="34" y="108" class="sys">Kafka</text>
+    <text x="184" y="108" class="v">log</text><text x="304" y="108" class="v">yes (replay)</text><text x="434" y="108" class="v">topic + partition</text><text x="584" y="108" class="v">streaming, EDA, high volume</text>
+
+    <rect x="24" y="122" width="752" height="38" fill="#ffffff"/>
+    <text x="34" y="146" class="sys">RabbitMQ</text>
+    <text x="184" y="146" class="v">broker fanout</text><text x="304" y="146" class="v">yes (durable q)</text><text x="434" y="146" class="v">topic / headers</text><text x="584" y="146" class="v">rich routing, task fan-out</text>
+
+    <rect x="24" y="160" width="752" height="38" fill="#f8fafc"/>
+    <text x="34" y="184" class="sys">Redis Pub/Sub</text>
+    <text x="184" y="184" class="v">in-memory</text><text x="304" y="184" class="v">no (drops)</text><text x="434" y="184" class="v">channel / pattern</text><text x="584" y="184" class="v">low-latency fire-and-forget</text>
+
+    <rect x="24" y="198" width="752" height="38" fill="#ffffff"/>
+    <text x="34" y="222" class="sys">NATS</text>
+    <text x="184" y="222" class="v">in-memory</text><text x="304" y="222" class="v">JetStream = yes</text><text x="434" y="222" class="v">subject wildcards</text><text x="584" y="222" class="v">lightweight, microservices</text>
+
+    <rect x="24" y="236" width="752" height="38" fill="#f8fafc"/>
+    <text x="34" y="260" class="sys">AWS SNS</text>
+    <text x="184" y="260" class="v">cloud fanout</text><text x="304" y="260" class="v">via SQS/retry</text><text x="434" y="260" class="v">filter policies</text><text x="584" y="260" class="v">fan-out to queues/lambdas</text>
+
+    <rect x="24" y="274" width="752" height="38" fill="#ffffff"/>
+    <text x="34" y="298" class="sys">MQTT brokers</text>
+    <text x="184" y="298" class="v">IoT protocol</text><text x="304" y="298" class="v">retained + QoS</text><text x="434" y="298" class="v">topic wildcards</text><text x="584" y="298" class="v">IoT / mobile telemetry</text>
+
+    <rect x="24" y="312" width="752" height="38" fill="#f8fafc"/>
+    <text x="34" y="336" class="sys">Google Pub/Sub</text>
+    <text x="184" y="336" class="v">cloud</text><text x="304" y="336" class="v">yes</text><text x="434" y="336" class="v">attribute filters</text><text x="584" y="336" class="v">global managed messaging</text>
+  </g>
+  <rect x="24" y="84" width="752" height="266" fill="none" stroke="#e2e8f0"/>
+
+  <text x="24" y="376" class="v">"Durable?" = does an offline subscriber still get messages published while it was away? The single most decision-shaping property.</text>
+</svg>

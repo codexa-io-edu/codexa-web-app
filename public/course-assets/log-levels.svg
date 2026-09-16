@@ -1,0 +1,53 @@
+<svg viewBox="0 0 800 380" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .lvl { font-size: 12px; font-weight: 700; fill: #ffffff; }
+    .desc { font-size: 10px; fill: #334155; }
+    .note { font-size: 10px; fill: #64748b; }
+  </style>
+
+  <text x="24" y="30" class="title">Log levels: severity from noisy detail to catastrophe</text>
+
+  <!-- FATAL -->
+  <rect x="24" y="50" width="150" height="40" rx="6" fill="#7f1d1d"/><text x="99" y="75" text-anchor="middle" class="lvl">FATAL / CRITICAL</text>
+  <text x="190" y="68" class="desc" font-weight="700">The app cannot continue — it's crashing.</text>
+  <text x="190" y="83" class="note">e.g. can't connect to the database at startup; unrecoverable state.</text>
+
+  <!-- ERROR -->
+  <rect x="24" y="98" width="150" height="40" rx="6" fill="#dc2626"/><text x="99" y="123" text-anchor="middle" class="lvl">ERROR</text>
+  <text x="190" y="116" class="desc" font-weight="700">An operation failed and needs attention.</text>
+  <text x="190" y="131" class="note">e.g. a request threw an exception; a payment call failed. Include a stack trace + context.</text>
+
+  <!-- WARN -->
+  <rect x="24" y="146" width="150" height="40" rx="6" fill="#d97706"/><text x="99" y="171" text-anchor="middle" class="lvl">WARN</text>
+  <text x="190" y="164" class="desc" font-weight="700">Unexpected but handled — a potential problem.</text>
+  <text x="190" y="179" class="note">e.g. retrying after a timeout; deprecated API used; cache miss storm; nearing a quota.</text>
+
+  <!-- INFO -->
+  <rect x="24" y="194" width="150" height="40" rx="6" fill="#059669"/><text x="99" y="219" text-anchor="middle" class="lvl">INFO</text>
+  <text x="190" y="212" class="desc" font-weight="700">Normal, significant events.</text>
+  <text x="190" y="227" class="note">e.g. service started; request handled; order placed. The usual production baseline.</text>
+
+  <!-- DEBUG -->
+  <rect x="24" y="242" width="150" height="40" rx="6" fill="#2563eb"/><text x="99" y="267" text-anchor="middle" class="lvl">DEBUG</text>
+  <text x="190" y="260" class="desc" font-weight="700">Diagnostic detail for developers.</text>
+  <text x="190" y="275" class="note">e.g. variable values, branch taken. Usually OFF in production (too noisy).</text>
+
+  <!-- TRACE -->
+  <rect x="24" y="290" width="150" height="40" rx="6" fill="#64748b"/><text x="99" y="315" text-anchor="middle" class="lvl">TRACE</text>
+  <text x="190" y="308" class="desc" font-weight="700">Finest-grained, step-by-step detail.</text>
+  <text x="190" y="323" class="note">e.g. every loop iteration or function entry/exit. Rarely enabled; extremely verbose.</text>
+
+  <!-- side note -->
+  <rect x="560" y="242" width="216" height="90" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="576" y="264" class="desc" font-weight="700">Levels are thresholds</text>
+  <text x="576" y="284" class="note">Set a minimum level (e.g. INFO)</text>
+  <text x="576" y="299" class="note">and everything at that severity or</text>
+  <text x="576" y="314" class="note">higher is emitted; lower is dropped.</text>
+  <text x="576" y="329" class="note">Tune per environment / at runtime.</text>
+
+  <!-- arrow -->
+  <line x1="12" y1="330" x2="12" y2="52" stroke="#94a3b8" stroke-width="2" marker-end="url(#a)"/>
+  <text x="8" y="345" class="note" transform="rotate(-90 8,345)"></text>
+  <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#94a3b8"/></marker></defs>
+</svg>

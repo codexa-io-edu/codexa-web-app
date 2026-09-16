@@ -1,0 +1,89 @@
+<svg viewBox="0 0 800 480" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .stage { font-size: 13px; font-weight: 700; fill: #ffffff; }
+    .desc { font-size: 11px; fill: #475569; }
+    .note { font-size: 11px; fill: #64748b; }
+    .lbl { font-size: 12px; font-weight: 700; fill: #1e293b; }
+    .code { font-size: 12px; fill: #1e293b; font-family: 'SFMono-Regular', Consolas, monospace; }
+  </style>
+
+  <text x="24" y="30" class="title">How a query travels from SQL text to result</text>
+
+  <!-- client -->
+  <rect x="24" y="56" width="150" height="44" rx="8" fill="#1e293b"/>
+  <text x="40" y="76" class="stage">Client / App</text>
+  <text x="40" y="93" class="desc" fill="#cbd5e1">sends SQL</text>
+
+  <text x="24" y="128" class="code">SELECT * FROM orders WHERE customer_id = 42;</text>
+
+  <!-- pipeline stages -->
+  <!-- 1 parse -->
+  <rect x="24" y="150" width="170" height="70" rx="8" fill="#2563eb"/>
+  <text x="40" y="176" class="stage">1 · Parser</text>
+  <text x="40" y="196" class="desc" fill="#e0e7ff">check syntax, build</text>
+  <text x="40" y="210" class="desc" fill="#e0e7ff">a parse tree</text>
+
+  <!-- 2 planner -->
+  <rect x="220" y="150" width="170" height="70" rx="8" fill="#2563eb"/>
+  <text x="236" y="176" class="stage">2 · Planner /</text>
+  <text x="236" y="192" class="stage">Optimizer</text>
+  <text x="236" y="210" class="desc" fill="#e0e7ff">pick cheapest plan</text>
+
+  <!-- 3 executor -->
+  <rect x="416" y="150" width="170" height="70" rx="8" fill="#2563eb"/>
+  <text x="432" y="176" class="stage">3 · Executor</text>
+  <text x="432" y="196" class="desc" fill="#e0e7ff">run the plan,</text>
+  <text x="432" y="210" class="desc" fill="#e0e7ff">fetch rows</text>
+
+  <!-- arrows across -->
+  <path d="M 194 185 L 218 185" stroke="#64748b" stroke-width="2"/><polygon points="214,180 224,185 214,190" fill="#64748b"/>
+  <path d="M 390 185 L 414 185" stroke="#64748b" stroke-width="2"/><polygon points="410,180 420,185 410,190" fill="#64748b"/>
+
+  <!-- planner uses stats -->
+  <rect x="220" y="250" width="170" height="40" rx="6" fill="#fef3c7" stroke="#d97706"/>
+  <text x="236" y="275" class="desc" fill="#92400e">uses table statistics + indexes</text>
+  <path d="M 305 250 L 305 222" stroke="#d97706" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+  <!-- executor down to storage -->
+  <path d="M 500 220 L 500 250" stroke="#64748b" stroke-width="2"/><polygon points="495,246 500,256 505,246" fill="#64748b"/>
+
+  <!-- storage engine block -->
+  <rect x="24" y="256" width="170" height="200" rx="8" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="40" y="280" class="lbl">Storage engine</text>
+
+  <rect x="416" y="256" width="360" height="200" rx="8" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="432" y="280" class="lbl">Data access path</text>
+
+  <!-- buffer pool -->
+  <rect x="432" y="296" width="160" height="56" rx="6" fill="#dbeafe" stroke="#2563eb"/>
+  <text x="446" y="318" class="lbl">Buffer pool (RAM)</text>
+  <text x="446" y="338" class="note">cached pages — fast</text>
+
+  <!-- disk -->
+  <rect x="608" y="296" width="150" height="56" rx="6" fill="#e2e8f0" stroke="#94a3b8"/>
+  <text x="622" y="318" class="lbl">Data files (disk)</text>
+  <text x="622" y="338" class="note">on cache miss</text>
+
+  <path d="M 592 324 L 606 324" stroke="#64748b" stroke-width="2"/><polygon points="602,319 612,324 602,329" fill="#64748b"/>
+
+  <!-- WAL -->
+  <rect x="432" y="372" width="326" height="66" rx="6" fill="#dcfce7" stroke="#059669"/>
+  <text x="446" y="396" class="lbl">Write-Ahead Log (WAL)</text>
+  <text x="446" y="416" class="note">writes are appended here FIRST, then applied →</text>
+  <text x="446" y="431" class="note">this is what makes COMMIT durable &amp; crash-safe.</text>
+
+  <!-- result back to client -->
+  <path d="M 460 150 C 400 60, 250 60, 176 78" fill="none" stroke="#059669" stroke-width="2" stroke-dasharray="5,4"/>
+  <polygon points="180,72 168,80 182,86" fill="#059669"/>
+  <text x="250" y="52" class="note" fill="#059669">rows returned to client ↑</text>
+
+  <!-- storage engine internal note -->
+  <text x="40" y="308" class="note">Manages pages,</text>
+  <text x="40" y="324" class="note">the buffer pool,</text>
+  <text x="40" y="340" class="note">and the WAL.</text>
+  <text x="40" y="372" class="note">Examples:</text>
+  <text x="40" y="390" class="note">InnoDB (MySQL),</text>
+  <text x="40" y="408" class="note">the Postgres</text>
+  <text x="40" y="426" class="note">storage layer.</text>
+</svg>

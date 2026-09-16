@@ -1,0 +1,51 @@
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .h { font-size: 12px; font-weight: 700; fill: #ffffff; }
+    .item { font-size: 10px; fill: #334155; }
+    .note { font-size: 9.5px; fill: #64748b; }
+  </style>
+
+  <text x="24" y="30" class="title">What actually makes a container: three Linux kernel features</text>
+
+  <!-- namespaces -->
+  <rect x="24" y="50" width="245" height="240" rx="10" fill="#2563eb"/>
+  <text x="40" y="74" class="h">Namespaces</text>
+  <text x="40" y="94" class="note" fill="#dbeafe">isolate what a process can SEE</text>
+  <rect x="40" y="106" width="213" height="24" rx="3" fill="#3b82f6"/><text x="50" y="123" class="item" fill="#fff">pid — its own process tree</text>
+  <rect x="40" y="134" width="213" height="24" rx="3" fill="#3b82f6"/><text x="50" y="151" class="item" fill="#fff">net — own interfaces &amp; ports</text>
+  <rect x="40" y="162" width="213" height="24" rx="3" fill="#3b82f6"/><text x="50" y="179" class="item" fill="#fff">mnt — own filesystem mounts</text>
+  <rect x="40" y="190" width="213" height="24" rx="3" fill="#3b82f6"/><text x="50" y="207" class="item" fill="#fff">uts — own hostname</text>
+  <rect x="40" y="218" width="213" height="24" rx="3" fill="#3b82f6"/><text x="50" y="235" class="item" fill="#fff">ipc — own shared memory</text>
+  <rect x="40" y="246" width="213" height="24" rx="3" fill="#3b82f6"/><text x="50" y="263" class="item" fill="#fff">user — own uid/gid mapping</text>
+  <text x="40" y="284" class="note" fill="#dbeafe">"a private view of the system"</text>
+
+  <!-- cgroups -->
+  <rect x="279" y="50" width="245" height="240" rx="10" fill="#059669"/>
+  <text x="295" y="74" class="h">cgroups (control groups)</text>
+  <text x="295" y="94" class="note" fill="#dcfce7">limit what a process can USE</text>
+  <rect x="295" y="106" width="213" height="30" rx="3" fill="#10b981"/><text x="305" y="125" class="item" fill="#fff">CPU — shares / quota</text>
+  <rect x="295" y="140" width="213" height="30" rx="3" fill="#10b981"/><text x="305" y="159" class="item" fill="#fff">memory — hard limit (OOM)</text>
+  <rect x="295" y="174" width="213" height="30" rx="3" fill="#10b981"/><text x="305" y="193" class="item" fill="#fff">block I/O — throughput</text>
+  <rect x="295" y="208" width="213" height="30" rx="3" fill="#10b981"/><text x="305" y="227" class="item" fill="#fff">pids — max process count</text>
+  <text x="295" y="262" class="note" fill="#dcfce7">Enforce resource limits &amp;</text>
+  <text x="295" y="278" class="note" fill="#dcfce7">accounting per container.</text>
+
+  <!-- union fs -->
+  <rect x="534" y="50" width="242" height="240" rx="10" fill="#7c3aed"/>
+  <text x="550" y="74" class="h">Union / overlay filesystem</text>
+  <text x="550" y="94" class="note" fill="#ede9fe">layered, copy-on-write files</text>
+  <rect x="560" y="108" width="190" height="24" rx="3" fill="#c4b5fd"/><text x="655" y="125" text-anchor="middle" class="note" fill="#1e293b">writable layer (this container)</text>
+  <rect x="560" y="136" width="190" height="22" rx="3" fill="#a78bfa"/><text x="655" y="151" text-anchor="middle" class="note" fill="#fff">read-only: app code</text>
+  <rect x="560" y="162" width="190" height="22" rx="3" fill="#8b5cf6"/><text x="655" y="177" text-anchor="middle" class="note" fill="#fff">read-only: dependencies</text>
+  <rect x="560" y="188" width="190" height="22" rx="3" fill="#7c3aed"/><text x="655" y="203" text-anchor="middle" class="note" fill="#fff">read-only: base OS files</text>
+  <text x="550" y="240" class="note" fill="#ede9fe">Image layers are read-only and</text>
+  <text x="550" y="256" class="note" fill="#ede9fe">shared; each container adds a thin</text>
+  <text x="550" y="272" class="note" fill="#ede9fe">writable layer (OverlayFS).</text>
+
+  <!-- security footer -->
+  <rect x="24" y="304" width="752" height="80" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="40" y="328" class="item" font-weight="700">Plus a security layer on top</text>
+  <text x="40" y="350" class="note">• <tspan font-weight="700">Capabilities</tspan> — drop root privileges the container doesn't need.  • <tspan font-weight="700">seccomp</tspan> — restrict which syscalls it can make.</text>
+  <text x="40" y="370" class="note">• <tspan font-weight="700">AppArmor / SELinux</tspan> — mandatory access control.  A container is just an ordinary Linux process — these features fence it in.</text>
+</svg>

@@ -1,0 +1,39 @@
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <rect width="800" height="400" fill="#f8fafc"/>
+  <text x="400" y="34" text-anchor="middle" font-size="21" font-weight="700" fill="#0f172a">State: Behavior Changes With Internal State</text>
+  <text x="400" y="58" text-anchor="middle" font-size="13" fill="#64748b">Each state is its own class; the same action behaves differently in each state</text>
+
+  <defs>
+    <marker id="sm_arr" markerWidth="11" markerHeight="11" refX="8" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#7c3aed"/>
+    </marker>
+  </defs>
+
+  <!-- states as a machine -->
+  <rect x="60" y="150" width="150" height="64" rx="10" fill="#faf5ff" stroke="#7c3aed" stroke-width="2"/>
+  <text x="135" y="178" text-anchor="middle" font-size="13" font-weight="700" fill="#6d28d9">Draft</text>
+  <text x="135" y="197" text-anchor="middle" font-size="9" fill="#6d28d9">edit ok · publish&#8594;Review</text>
+
+  <rect x="325" y="150" width="150" height="64" rx="10" fill="#faf5ff" stroke="#7c3aed" stroke-width="2"/>
+  <text x="400" y="178" text-anchor="middle" font-size="13" font-weight="700" fill="#6d28d9">In Review</text>
+  <text x="400" y="197" text-anchor="middle" font-size="9" fill="#6d28d9">approve&#8594;Published</text>
+
+  <rect x="590" y="150" width="150" height="64" rx="10" fill="#f0fdf4" stroke="#059669" stroke-width="2"/>
+  <text x="665" y="178" text-anchor="middle" font-size="13" font-weight="700" fill="#047857">Published</text>
+  <text x="665" y="197" text-anchor="middle" font-size="9" fill="#065f46">edit? &#8594; rejected</text>
+
+  <line x1="210" y1="182" x2="323" y2="182" stroke="#7c3aed" stroke-width="2" marker-end="url(#sm_arr)"/>
+  <text x="266" y="173" text-anchor="middle" font-size="9.5" fill="#6d28d9">publish()</text>
+  <line x1="475" y1="182" x2="588" y2="182" stroke="#7c3aed" stroke-width="2" marker-end="url(#sm_arr)"/>
+  <text x="531" y="173" text-anchor="middle" font-size="9.5" fill="#6d28d9">approve()</text>
+
+  <!-- reject loop -->
+  <path d="M400,214 C400,260 210,260 210,216" fill="none" stroke="#dc2626" stroke-width="1.6" marker-end="url(#sm_arr)"/>
+  <text x="305" y="258" text-anchor="middle" font-size="9.5" fill="#b91c1c">reject()</text>
+
+  <!-- same call, different result -->
+  <rect x="120" y="300" width="560" height="70" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="400" y="322" text-anchor="middle" font-size="12" font-weight="700" fill="#334155">Calling the SAME method <tspan font-family="monospace" fill="#6d28d9">document.edit()</tspan> does different things:</text>
+  <text x="400" y="344" text-anchor="middle" font-size="10.5" fill="#334155">Draft &#8594; allows editing   |   In Review &#8594; locked   |   Published &#8594; throws / creates new version</text>
+  <text x="400" y="362" text-anchor="middle" font-size="10" fill="#64748b">No giant if/switch on a status field — each state class handles its own behavior and transitions.</text>
+</svg>

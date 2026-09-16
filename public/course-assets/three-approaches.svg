@@ -1,0 +1,55 @@
+<svg viewBox="0 0 820 440" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <rect width="820" height="440" fill="#f8fafc"/>
+  <text x="410" y="34" text-anchor="middle" font-size="21" font-weight="700" fill="#0f172a">Three Ways to Share a Collection Across Threads</text>
+  <text x="410" y="58" text-anchor="middle" font-size="13" fill="#64748b">Only one of them is both safe and fast under real concurrency</text>
+
+  <!-- Option 1: plain -->
+  <rect x="30" y="82" width="250" height="330" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="155" y="108" text-anchor="middle" font-size="14" font-weight="700" fill="#b91c1c">1 · Plain collection</text>
+  <text x="155" y="126" text-anchor="middle" font-size="10.5" fill="#991b1b">HashMap, ArrayList</text>
+  <rect x="50" y="140" width="210" height="40" rx="6" fill="#ffffff" stroke="#fca5a5"/>
+  <text x="155" y="165" text-anchor="middle" font-size="10.5" fill="#334155" font-family="monospace">new HashMap&lt;&gt;()</text>
+  <text x="155" y="210" text-anchor="middle" font-size="11" font-weight="700" fill="#b91c1c">NOT thread-safe</text>
+  <text x="45" y="240" font-size="10" fill="#991b1b">&#10007; Lost updates, corruption</text>
+  <text x="45" y="262" font-size="10" fill="#991b1b">&#10007; Can even infinite-loop</text>
+  <text x="45" y="284" font-size="10" fill="#991b1b">&#10007; ConcurrentModification-</text>
+  <text x="58" y="300" font-size="10" fill="#991b1b">Exception on iterate+modify</text>
+  <rect x="50" y="330" width="210" height="66" rx="8" fill="#fee2e2"/>
+  <text x="155" y="354" text-anchor="middle" font-size="10.5" font-weight="700" fill="#b91c1c">Verdict:</text>
+  <text x="155" y="374" text-anchor="middle" font-size="10" fill="#991b1b">Fine single-threaded.</text>
+  <text x="155" y="390" text-anchor="middle" font-size="10" fill="#991b1b">Unsafe when shared.</text>
+
+  <!-- Option 2: synchronized wrapper -->
+  <rect x="290" y="82" width="250" height="330" rx="12" fill="#fff7ed" stroke="#d97706" stroke-width="2"/>
+  <text x="415" y="108" text-anchor="middle" font-size="14" font-weight="700" fill="#b45309">2 · Synchronized wrapper</text>
+  <text x="415" y="126" text-anchor="middle" font-size="10.5" fill="#7c2d12">Collections.synchronizedMap</text>
+  <rect x="310" y="140" width="210" height="40" rx="6" fill="#ffffff" stroke="#fdba74"/>
+  <text x="415" y="160" text-anchor="middle" font-size="8.5" fill="#334155" font-family="monospace">synchronizedMap(new HashMap)</text>
+  <text x="415" y="174" text-anchor="middle" font-size="8.5" fill="#334155" font-family="monospace">/ Vector, Hashtable</text>
+  <text x="415" y="210" text-anchor="middle" font-size="11" font-weight="700" fill="#b45309">Safe but slow</text>
+  <text x="305" y="240" font-size="10" fill="#7c2d12">&#10003; Thread-safe (one big lock)</text>
+  <text x="305" y="262" font-size="10" fill="#7c2d12">&#10007; ONE lock = no concurrency</text>
+  <text x="305" y="284" font-size="10" fill="#7c2d12">&#10007; Every op serialized</text>
+  <text x="305" y="306" font-size="10" fill="#7c2d12">&#10007; Compound ops still race</text>
+  <rect x="310" y="330" width="210" height="66" rx="8" fill="#fed7aa"/>
+  <text x="415" y="354" text-anchor="middle" font-size="10.5" font-weight="700" fill="#b45309">Verdict:</text>
+  <text x="415" y="374" text-anchor="middle" font-size="10" fill="#7c2d12">Legacy fallback. Correct,</text>
+  <text x="415" y="390" text-anchor="middle" font-size="10" fill="#7c2d12">but a bottleneck at scale.</text>
+
+  <!-- Option 3: concurrent -->
+  <rect x="550" y="82" width="250" height="330" rx="12" fill="#f0fdf4" stroke="#059669" stroke-width="2.4"/>
+  <text x="675" y="108" text-anchor="middle" font-size="14" font-weight="700" fill="#047857">3 · Concurrent collection</text>
+  <text x="675" y="126" text-anchor="middle" font-size="10.5" fill="#065f46">ConcurrentHashMap, etc.</text>
+  <rect x="570" y="140" width="210" height="40" rx="6" fill="#ffffff" stroke="#34d399"/>
+  <text x="675" y="160" text-anchor="middle" font-size="8.5" fill="#334155" font-family="monospace">new ConcurrentHashMap</text>
+  <text x="675" y="174" text-anchor="middle" font-size="8.5" fill="#334155" font-family="monospace">&lt;&gt;()</text>
+  <text x="675" y="210" text-anchor="middle" font-size="11" font-weight="700" fill="#047857">Safe AND fast</text>
+  <text x="565" y="240" font-size="10" fill="#065f46">&#10003; Fine-grained / lock-free</text>
+  <text x="565" y="262" font-size="10" fill="#065f46">&#10003; High read concurrency</text>
+  <text x="565" y="284" font-size="10" fill="#065f46">&#10003; Atomic compound methods</text>
+  <text x="565" y="306" font-size="10" fill="#065f46">&#10003; Safe iteration (no CME)</text>
+  <rect x="570" y="330" width="210" height="66" rx="8" fill="#dcfce7"/>
+  <text x="675" y="354" text-anchor="middle" font-size="10.5" font-weight="700" fill="#047857">Verdict:</text>
+  <text x="675" y="374" text-anchor="middle" font-size="10" fill="#065f46">The right tool for shared</text>
+  <text x="675" y="390" text-anchor="middle" font-size="10" fill="#065f46">mutable collections.</text>
+</svg>

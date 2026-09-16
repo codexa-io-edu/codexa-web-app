@@ -1,0 +1,23 @@
+<svg viewBox="0 0 820 420" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <rect width="820" height="420" fill="#f8fafc"/>
+  <text x="410" y="34" text-anchor="middle" font-size="21" font-weight="700" fill="#0f172a">The Compound-Action Trap</text>
+  <text x="410" y="58" text-anchor="middle" font-size="13" fill="#64748b">Two thread-safe calls in a row are NOT thread-safe together — a gap opens between them</text>
+
+  <!-- code -->
+  <rect x="60" y="82" width="700" height="70" rx="10" fill="#0f172a"/>
+  <text x="80" y="108" font-size="12.5" fill="#93c5fd" font-family="monospace">if (!map.containsKey(k)) {   // call 1: atomic on its own</text>
+  <text x="80" y="132" font-size="12.5" fill="#fca5a5" font-family="monospace">    map.put(k, v);           // call 2: atomic on its own — but the GAP between is not</text>
+  <text x="620" y="132" font-size="11" fill="#94a3b8" font-family="monospace">}</text>
+
+  <!-- interleaving -->
+  <rect x="60" y="180" width="330" height="34" rx="6" fill="#dbeafe" stroke="#2563eb"/><text x="225" y="202" text-anchor="middle" font-size="12" font-weight="700" fill="#1e3a8a">Thread A</text>
+  <rect x="440" y="180" width="330" height="34" rx="6" fill="#fed7aa" stroke="#d97706"/><text x="605" y="202" text-anchor="middle" font-size="12" font-weight="700" fill="#7c2d12">Thread B</text>
+
+  <rect x="60" y="224" width="330" height="40" rx="7" fill="#eff6ff" stroke="#93c5fd"/><text x="225" y="249" text-anchor="middle" font-size="10.5" fill="#1e3a8a" font-family="monospace">containsKey(k)? &#8594; false</text>
+  <rect x="440" y="272" width="330" height="40" rx="7" fill="#fff7ed" stroke="#fdba74"/><text x="605" y="297" text-anchor="middle" font-size="10.5" fill="#7c2d12" font-family="monospace">containsKey(k)? &#8594; false</text>
+  <rect x="60" y="320" width="330" height="40" rx="7" fill="#dbeafe" stroke="#2563eb"/><text x="225" y="345" text-anchor="middle" font-size="10.5" fill="#1e3a8a" font-family="monospace">put(k, vA)</text>
+  <rect x="440" y="320" width="330" height="40" rx="7" fill="#fed7aa" stroke="#d97706"/><text x="605" y="345" text-anchor="middle" font-size="10.5" fill="#7c2d12" font-family="monospace">put(k, vB) &#8594; overwrites vA</text>
+
+  <text x="410" y="392" text-anchor="middle" font-size="11.5" font-weight="700" fill="#b91c1c">Even a ConcurrentHashMap can't save you here — fix with ONE atomic op: putIfAbsent(k, v) / computeIfAbsent.</text>
+  <text x="410" y="412" text-anchor="middle" font-size="10.5" fill="#64748b">Rule: atomicity doesn't compose. A sequence of atomic steps needs its OWN atomicity.</text>
+</svg>

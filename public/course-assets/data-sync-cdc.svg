@@ -1,0 +1,39 @@
+<svg viewBox="0 0 800 380" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .h { font-size: 12px; font-weight: 700; fill: #1e293b; }
+    .box { font-size: 10px; font-weight: 700; fill: #ffffff; }
+    .note { font-size: 9.5px; fill: #64748b; }
+  </style>
+
+  <text x="24" y="30" class="title">Moving the data: sync during transition, then cut over</text>
+
+  <!-- old side -->
+  <rect x="40" y="70" width="150" height="70" rx="8" fill="#2563eb"/><text x="115" y="98" text-anchor="middle" class="box">Monolith</text><text x="115" y="118" text-anchor="middle" class="note" fill="#dbeafe">writes here (for now)</text>
+  <rect x="60" y="180" width="110" height="56" rx="8" fill="#1e40af"/><text x="115" y="212" text-anchor="middle" class="box">Old DB / table</text>
+  <line x1="115" y1="140" x2="115" y2="178" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#a)"/>
+
+  <!-- sync bridge -->
+  <rect x="300" y="182" width="200" height="52" rx="8" fill="#d97706"/><text x="400" y="205" text-anchor="middle" class="box">Sync bridge</text><text x="400" y="222" text-anchor="middle" class="note" fill="#fff7ed">CDC stream / dual-write</text>
+  <line x1="170" y1="208" x2="298" y2="208" stroke="#d97706" stroke-width="2" marker-end="url(#o)"/>
+  <text x="196" y="200" class="note">① backfill + ② stream changes</text>
+
+  <!-- new side -->
+  <rect x="610" y="70" width="150" height="70" rx="8" fill="#059669"/><text x="685" y="98" text-anchor="middle" class="box">New service</text><text x="685" y="118" text-anchor="middle" class="note" fill="#dcfce7">reads here first, then writes</text>
+  <rect x="630" y="180" width="110" height="56" rx="8" fill="#047857"/><text x="685" y="212" text-anchor="middle" class="box">New DB</text>
+  <line x1="500" y1="208" x2="628" y2="208" stroke="#d97706" stroke-width="2" marker-end="url(#o)"/>
+  <line x1="685" y1="140" x2="685" y2="178" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#a)"/>
+
+  <!-- phases -->
+  <rect x="24" y="266" width="752" height="98" rx="10" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="40" y="288" class="h">Cutover sequence (no downtime)</text>
+  <text x="40" y="310" class="note">① <tspan font-weight="700">Backfill</tspan> — bulk-copy existing rows into the new DB.  ② <tspan font-weight="700">Keep in sync</tspan> — stream ongoing changes via <tspan font-weight="700">Change Data Capture</tspan></text>
+  <text x="40" y="326" class="note">(read the DB's transaction log) or dual-writes, until the two are consistent.  ③ <tspan font-weight="700">Shift reads</tspan> to the new service (verify).</text>
+  <text x="40" y="342" class="note">④ <tspan font-weight="700">Shift writes</tspan> to the new service.  ⑤ <tspan font-weight="700">Retire</tspan> the old table once nothing depends on it.</text>
+  <text x="40" y="360" class="note" font-weight="700" fill="#991b1b">⚠ Dual-writes are hard to keep consistent (partial failures) — prefer CDC or a transactional outbox where possible.</text>
+
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#94a3b8"/></marker>
+    <marker id="o" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#d97706"/></marker>
+  </defs>
+</svg>

@@ -1,0 +1,55 @@
+<svg viewBox="0 0 820 420" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <rect width="820" height="420" fill="#f8fafc"/>
+  <text x="410" y="30" text-anchor="middle" font-size="20" font-weight="700" fill="#0f172a">Component Diagram: Modules &amp; Their Interfaces</text>
+  <text x="410" y="52" text-anchor="middle" font-size="12.5" fill="#64748b">Components connect through interfaces they PROVIDE (lollipop) and REQUIRE (socket)</text>
+
+  <!-- Web component -->
+  <rect x="60" y="120" width="180" height="90" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.8"/>
+  <rect x="60" y="120" width="180" height="24" fill="#bfdbfe" stroke="#2563eb" stroke-width="1.8"/>
+  <text x="150" y="137" text-anchor="middle" font-size="11" font-weight="700" fill="#1e3a8a">&#171;component&#187;</text>
+  <text x="150" y="175" text-anchor="middle" font-size="13" font-weight="700" fill="#1e3a8a">Web UI</text>
+  <!-- component icon -->
+  <rect x="216" y="150" width="18" height="14" fill="#ffffff" stroke="#2563eb" stroke-width="1.2"/>
+  <rect x="212" y="153" width="8" height="3" fill="#ffffff" stroke="#2563eb" stroke-width="1"/>
+  <rect x="212" y="159" width="8" height="3" fill="#ffffff" stroke="#2563eb" stroke-width="1"/>
+
+  <!-- OrderService component -->
+  <rect x="320" y="120" width="180" height="90" rx="4" fill="#dcfce7" stroke="#059669" stroke-width="1.8"/>
+  <rect x="320" y="120" width="180" height="24" fill="#bbf7d0" stroke="#059669" stroke-width="1.8"/>
+  <text x="410" y="137" text-anchor="middle" font-size="11" font-weight="700" fill="#065f46">&#171;component&#187;</text>
+  <text x="410" y="175" text-anchor="middle" font-size="13" font-weight="700" fill="#065f46">Order Service</text>
+  <rect x="476" y="150" width="18" height="14" fill="#ffffff" stroke="#059669" stroke-width="1.2"/>
+  <rect x="472" y="153" width="8" height="3" fill="#ffffff" stroke="#059669" stroke-width="1"/>
+  <rect x="472" y="159" width="8" height="3" fill="#ffffff" stroke="#059669" stroke-width="1"/>
+
+  <!-- DB component -->
+  <rect x="600" y="120" width="160" height="90" rx="4" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.8"/>
+  <rect x="600" y="120" width="160" height="24" fill="#ddd6fe" stroke="#7c3aed" stroke-width="1.8"/>
+  <text x="680" y="137" text-anchor="middle" font-size="11" font-weight="700" fill="#5b21b6">&#171;component&#187;</text>
+  <text x="680" y="175" text-anchor="middle" font-size="13" font-weight="700" fill="#5b21b6">Database</text>
+
+  <!-- provided interface (lollipop) on OrderService -->
+  <line x1="280" y1="165" x2="245" y2="165" stroke="#334155" stroke-width="1.6"/>
+  <circle cx="290" cy="165" r="10" fill="#ffffff" stroke="#059669" stroke-width="1.8"/>
+  <text x="305" y="150" font-size="8.5" fill="#047857">IOrderAPI</text>
+  <text x="305" y="162" font-size="7.5" fill="#64748b">(provided)</text>
+
+  <!-- required interface (socket) on Web UI toward OrderService -->
+  <path d="M240,190 A14 14 0 0 0 268 190" fill="none" stroke="#2563eb" stroke-width="1.8"/>
+  <line x1="254" y1="190" x2="290" y2="180" stroke="#334155" stroke-width="1.2" stroke-dasharray="3 2"/>
+
+  <!-- OrderService requires DB -->
+  <path d="M500,165 A14 14 0 0 1 528 165" fill="none" stroke="#059669" stroke-width="1.8"/>
+  <circle cx="580" cy="165" r="10" fill="#ffffff" stroke="#7c3aed" stroke-width="1.8"/>
+  <line x1="590" y1="165" x2="600" y2="165" stroke="#334155" stroke-width="1.6"/>
+  <line x1="528" y1="165" x2="570" y2="165" stroke="#334155" stroke-width="1.2" stroke-dasharray="3 2"/>
+  <text x="548" y="150" font-size="8.5" fill="#5b21b6">IPersist</text>
+
+  <rect x="90" y="270" width="640" height="120" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="410" y="292" text-anchor="middle" font-size="11.5" font-weight="700" fill="#334155">The two interface symbols</text>
+  <circle cx="180" cy="322" r="9" fill="#ffffff" stroke="#059669" stroke-width="1.8"/><line x1="150" y1="322" x2="171" y2="322" stroke="#334155" stroke-width="1.6"/>
+  <text x="205" y="326" font-size="10" fill="#334155"><tspan font-weight="700">Provided (lollipop):</tspan> "I offer this interface"</text>
+  <path d="M150,352 A12 12 0 0 0 174 352" fill="none" stroke="#2563eb" stroke-width="1.8"/>
+  <text x="205" y="356" font-size="10" fill="#334155"><tspan font-weight="700">Required (socket):</tspan> "I need this interface"</text>
+  <text x="410" y="380" text-anchor="middle" font-size="9.5" font-style="italic" fill="#64748b">A socket plugging into a lollipop = one component using another's interface (an assembly connector)</text>
+</svg>

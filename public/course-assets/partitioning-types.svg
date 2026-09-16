@@ -1,0 +1,83 @@
+<svg viewBox="0 0 800 480" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .sub { font-size: 13px; font-weight: 700; fill: #475569; }
+    .tbl { font-size: 11px; font-weight: 700; fill: #ffffff; }
+    .h { font-size: 10.5px; font-weight: 700; fill: #1e293b; }
+    .c { font-size: 10.5px; fill: #334155; }
+    .note { font-size: 10.5px; fill: #64748b; }
+    .cap { font-size: 11px; font-weight: 700; fill: #1e293b; }
+  </style>
+
+  <text x="24" y="30" class="title">Two axes of partitioning, and three ways to split rows</text>
+
+  <!-- ===== TOP: vertical vs horizontal ===== -->
+  <text x="24" y="60" class="sub">Axis 1 — which direction do you cut?</text>
+
+  <!-- vertical partitioning -->
+  <text x="40" y="84" class="cap">Vertical (split columns)</text>
+  <rect x="40" y="92" width="150" height="96" rx="6" fill="#ffffff" stroke="#93c5fd"/>
+  <rect x="40" y="92" width="75" height="96" fill="#dbeafe"/>
+  <line x1="115" y1="92" x2="115" y2="188" stroke="#2563eb" stroke-width="2" stroke-dasharray="4,3"/>
+  <text x="52" y="110" class="h">id·name</text>
+  <text x="126" y="110" class="h">bio·photo</text>
+  <text x="52" y="130" class="c">hot,</text>
+  <text x="52" y="144" class="c">small</text>
+  <text x="126" y="130" class="c">large,</text>
+  <text x="126" y="144" class="c">rarely</text>
+  <text x="126" y="158" class="c">read</text>
+  <text x="40" y="206" class="note">Separate frequently-used columns</text>
+  <text x="40" y="220" class="note">from big/rare ones.</text>
+
+  <!-- horizontal partitioning -->
+  <text x="300" y="84" class="cap">Horizontal (split rows)</text>
+  <rect x="300" y="92" width="180" height="96" rx="6" fill="#ffffff" stroke="#86efac"/>
+  <line x1="300" y1="124" x2="480" y2="124" stroke="#059669" stroke-width="2" stroke-dasharray="4,3"/>
+  <line x1="300" y1="156" x2="480" y2="156" stroke="#059669" stroke-width="2" stroke-dasharray="4,3"/>
+  <text x="312" y="112" class="c">rows 1–1000</text>
+  <text x="312" y="144" class="c">rows 1001–2000</text>
+  <text x="312" y="176" class="c">rows 2001–3000</text>
+  <text x="300" y="206" class="note">Same columns, different sets of</text>
+  <text x="300" y="220" class="note">rows. This is what sharding uses.</text>
+
+  <text x="560" y="120" class="note">Vertical = fewer/narrower</text>
+  <text x="560" y="136" class="note">columns per partition.</text>
+  <text x="560" y="164" class="note">Horizontal = fewer rows</text>
+  <text x="560" y="180" class="note">per partition — the common</text>
+  <text x="560" y="196" class="note">one for scaling.</text>
+
+  <line x1="24" y1="240" x2="776" y2="240" stroke="#e2e8f0"/>
+
+  <!-- ===== BOTTOM: horizontal strategies ===== -->
+  <text x="24" y="266" class="sub">Axis 2 — how do you decide which row goes to which partition? (the partition key)</text>
+
+  <!-- RANGE -->
+  <rect x="30" y="284" width="230" height="150" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+  <rect x="30" y="284" width="230" height="28" rx="8" fill="#2563eb"/>
+  <text x="44" y="303" class="tbl">Range</text>
+  <text x="44" y="332" class="note">by contiguous ranges of the key</text>
+  <rect x="44" y="342" width="200" height="20" rx="3" fill="#eff6ff"/><text x="52" y="357" class="c">A–H  →  partition 1</text>
+  <rect x="44" y="366" width="200" height="20" rx="3" fill="#eff6ff"/><text x="52" y="381" class="c">I–P  →  partition 2</text>
+  <rect x="44" y="390" width="200" height="20" rx="3" fill="#eff6ff"/><text x="52" y="405" class="c">Q–Z  →  partition 3</text>
+  <text x="44" y="426" class="note">✓ range scans  ✗ hotspots if skewed</text>
+
+  <!-- HASH -->
+  <rect x="285" y="284" width="230" height="150" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+  <rect x="285" y="284" width="230" height="28" rx="8" fill="#059669"/>
+  <text x="299" y="303" class="tbl">Hash</text>
+  <text x="299" y="332" class="note">hash(key) then mod / bucket</text>
+  <rect x="299" y="342" width="200" height="20" rx="3" fill="#f0fdf4"/><text x="307" y="357" class="c">hash%3 = 0 → partition 1</text>
+  <rect x="299" y="366" width="200" height="20" rx="3" fill="#f0fdf4"/><text x="307" y="381" class="c">hash%3 = 1 → partition 2</text>
+  <rect x="299" y="390" width="200" height="20" rx="3" fill="#f0fdf4"/><text x="307" y="405" class="c">hash%3 = 2 → partition 3</text>
+  <text x="299" y="426" class="note">✓ even spread  ✗ range scans hit all</text>
+
+  <!-- LIST -->
+  <rect x="540" y="284" width="230" height="150" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+  <rect x="540" y="284" width="230" height="28" rx="8" fill="#7c3aed"/>
+  <text x="554" y="303" class="tbl">List</text>
+  <text x="554" y="332" class="note">by explicit value membership</text>
+  <rect x="554" y="342" width="200" height="20" rx="3" fill="#f5f3ff"/><text x="562" y="357" class="c">region IN (IN, LK) → p1</text>
+  <rect x="554" y="366" width="200" height="20" rx="3" fill="#f5f3ff"/><text x="562" y="381" class="c">region IN (US, CA) → p2</text>
+  <rect x="554" y="390" width="200" height="20" rx="3" fill="#f5f3ff"/><text x="562" y="405" class="c">region IN (UK, DE) → p3</text>
+  <text x="554" y="426" class="note">✓ natural grouping (e.g. by geo)</text>
+</svg>

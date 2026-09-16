@@ -1,0 +1,52 @@
+<svg viewBox="0 0 800 420" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .box { font-size: 11px; font-weight: 700; fill: #ffffff; }
+    .note { font-size: 10.5px; fill: #64748b; }
+    .lbl { font-size: 10.5px; font-weight: 700; fill: #1e293b; }
+    .part { font-size: 10px; font-weight: 700; fill: #ffffff; }
+  </style>
+
+  <text x="24" y="30" class="title">Consumer groups: parallelism within a group, broadcast across groups</text>
+
+  <!-- topic partitions -->
+  <text x="24" y="66" class="lbl">Topic "orders" — 3 partitions</text>
+  <rect x="24" y="76" width="150" height="34" rx="5" fill="#7c3aed"/><text x="99" y="98" text-anchor="middle" class="part">Partition 0</text>
+  <rect x="24" y="118" width="150" height="34" rx="5" fill="#7c3aed"/><text x="99" y="140" text-anchor="middle" class="part">Partition 1</text>
+  <rect x="24" y="160" width="150" height="34" rx="5" fill="#7c3aed"/><text x="99" y="182" text-anchor="middle" class="part">Partition 2</text>
+
+  <!-- group A -->
+  <rect x="260" y="66" width="240" height="140" rx="8" fill="#f0fdf4" stroke="#059669"/>
+  <text x="276" y="86" class="lbl">Consumer Group A (order processors)</text>
+  <rect x="276" y="96" width="200" height="28" rx="5" fill="#059669"/><text x="376" y="115" text-anchor="middle" class="box">Consumer A1 ← P0</text>
+  <rect x="276" y="130" width="200" height="28" rx="5" fill="#059669"/><text x="376" y="149" text-anchor="middle" class="box">Consumer A2 ← P1</text>
+  <rect x="276" y="164" width="200" height="28" rx="5" fill="#059669"/><text x="376" y="183" text-anchor="middle" class="box">Consumer A3 ← P2</text>
+
+  <line x1="174" y1="93" x2="274" y2="110" stroke="#059669" stroke-width="1.6" marker-end="url(#g)"/>
+  <line x1="174" y1="135" x2="274" y2="144" stroke="#059669" stroke-width="1.6" marker-end="url(#g)"/>
+  <line x1="174" y1="177" x2="274" y2="178" stroke="#059669" stroke-width="1.6" marker-end="url(#g)"/>
+
+  <!-- group B -->
+  <rect x="560" y="66" width="216" height="140" rx="8" fill="#eff6ff" stroke="#2563eb"/>
+  <text x="576" y="86" class="lbl">Consumer Group B (analytics)</text>
+  <rect x="576" y="104" width="184" height="28" rx="5" fill="#2563eb"/><text x="668" y="123" text-anchor="middle" class="box">Consumer B1 ← P0,P1</text>
+  <rect x="576" y="150" width="184" height="28" rx="5" fill="#2563eb"/><text x="668" y="169" text-anchor="middle" class="box">Consumer B2 ← P2</text>
+
+  <line x1="174" y1="93" x2="574" y2="118" stroke="#2563eb" stroke-width="1.4" stroke-dasharray="4,3" marker-end="url(#b)"/>
+  <line x1="174" y1="177" x2="574" y2="164" stroke="#2563eb" stroke-width="1.4" stroke-dasharray="4,3" marker-end="url(#b)"/>
+
+  <!-- rules -->
+  <rect x="24" y="230" width="752" height="176" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="40" y="254" class="lbl">The rules that make this work</text>
+  <text x="40" y="278" class="note">• <tspan font-weight="700">Within one group</tspan>, each partition is consumed by exactly one consumer — so a group's max parallelism = number of partitions.</text>
+  <text x="40" y="300" class="note">• <tspan font-weight="700">More consumers than partitions</tspan> → the extras sit idle. Scaling means adding partitions, not just consumers.</text>
+  <text x="40" y="322" class="note">• <tspan font-weight="700">Across groups</tspan>, every group independently receives all messages and tracks its own offsets (Group A and Group B both see everything).</text>
+  <text x="40" y="344" class="note">• <tspan font-weight="700">Ordering</tspan> is guaranteed only within a partition — pick a partition key (e.g. order_id) so related events stay ordered.</text>
+  <text x="40" y="366" class="note">• If a consumer dies, its partitions are <tspan font-weight="700">rebalanced</tspan> onto the surviving members of its group.</text>
+  <text x="40" y="392" class="note">This "one group = shared work, many groups = broadcast" model is how Kafka serves both queue-like and pub/sub-like use (see Pub/Sub topic).</text>
+
+  <defs>
+    <marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#059669"/></marker>
+    <marker id="b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#2563eb"/></marker>
+  </defs>
+</svg>

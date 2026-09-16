@@ -1,0 +1,57 @@
+<svg viewBox="0 0 800 420" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .h { font-size: 12px; font-weight: 700; fill: #ffffff; }
+    .dim { font-size: 11px; font-weight: 700; fill: #1e293b; }
+    .v { font-size: 10.5px; fill: #334155; }
+  </style>
+
+  <text x="24" y="30" class="title">RabbitMQ vs. Kafka — two tools for two jobs</text>
+
+  <!-- header -->
+  <rect x="24" y="48" width="180" height="40" fill="#1e293b"/><text x="38" y="73" class="h">Dimension</text>
+  <rect x="204" y="48" width="286" height="40" fill="#d97706"/><text x="218" y="73" class="h">RabbitMQ — message broker</text>
+  <rect x="490" y="48" width="286" height="40" fill="#7c3aed"/><text x="504" y="73" class="h">Kafka — event log</text>
+
+  <g>
+    <rect x="24" y="88" width="752" height="40" fill="#f8fafc"/>
+    <text x="38" y="113" class="dim">Core model</text>
+    <text x="218" y="113" class="v">smart broker routes to queues</text>
+    <text x="504" y="113" class="v">append-only partitioned log</text>
+
+    <rect x="24" y="128" width="752" height="40" fill="#ffffff"/>
+    <text x="38" y="153" class="dim">After consume</text>
+    <text x="218" y="153" class="v">message deleted on ack</text>
+    <text x="504" y="153" class="v">retained; replayable by offset</text>
+
+    <rect x="24" y="168" width="752" height="40" fill="#f8fafc"/>
+    <text x="38" y="193" class="dim">Consumption</text>
+    <text x="218" y="193" class="v">competing consumers (push)</text>
+    <text x="504" y="193" class="v">consumer groups + offsets (pull)</text>
+
+    <rect x="24" y="208" width="752" height="40" fill="#ffffff"/>
+    <text x="38" y="233" class="dim">Ordering</text>
+    <text x="218" y="233" class="v">per queue</text>
+    <text x="504" y="233" class="v">per partition</text>
+
+    <rect x="24" y="248" width="752" height="40" fill="#f8fafc"/>
+    <text x="38" y="273" class="dim">Throughput</text>
+    <text x="218" y="273" class="v">high (tens of thousands/s)</text>
+    <text x="504" y="273" class="v">very high (millions/s)</text>
+
+    <rect x="24" y="288" width="752" height="40" fill="#ffffff"/>
+    <text x="38" y="313" class="dim">Routing</text>
+    <text x="218" y="313" class="v">rich (direct/topic/fanout/headers)</text>
+    <text x="504" y="313" class="v">simple (partition by key)</text>
+
+    <rect x="24" y="328" width="752" height="46" fill="#f8fafc"/>
+    <text x="38" y="349" class="dim">Best for</text>
+    <text x="218" y="349" class="v">task queues, RPC, complex</text>
+    <text x="218" y="365" class="v">routing, per-message workflows</text>
+    <text x="504" y="349" class="v">streaming, analytics, event</text>
+    <text x="504" y="365" class="v">sourcing, high-volume pipelines</text>
+  </g>
+  <rect x="24" y="88" width="752" height="286" fill="none" stroke="#e2e8f0"/>
+
+  <text x="24" y="398" class="v">Not either/or — many systems run both: RabbitMQ for work distribution and Kafka for the event backbone.</text>
+</svg>

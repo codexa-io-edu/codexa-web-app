@@ -1,0 +1,62 @@
+<svg viewBox="0 0 760 500" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .vertex { font-size: 15px; font-weight: 700; fill: #1e293b; }
+    .vsub { font-size: 11px; fill: #64748b; }
+    .edge { font-size: 13px; font-weight: 700; fill: #ffffff; }
+    .note { font-size: 11px; fill: #64748b; }
+    .db { font-size: 11px; fill: #334155; }
+    .lbl { font-size: 12px; font-weight: 700; fill: #1e293b; }
+  </style>
+
+  <text x="24" y="30" class="title">CAP theorem: under a network partition, pick two of three</text>
+  <text x="24" y="50" class="note">A distributed data store can't guarantee all three at once. Since partitions are unavoidable, the real choice during one is C vs A.</text>
+
+  <polygon points="380,88 176,340 584,340" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+
+  <!-- edges -->
+  <g transform="rotate(51 278 214)">
+    <rect x="216" y="200" width="120" height="26" rx="13" fill="#2563eb"/>
+    <text x="252" y="218" class="edge">CP</text>
+  </g>
+  <g transform="rotate(-51 482 214)">
+    <rect x="422" y="200" width="120" height="26" rx="13" fill="#059669"/>
+    <text x="458" y="218" class="edge">AP</text>
+  </g>
+  <rect x="316" y="327" width="130" height="26" rx="13" fill="#94a3b8"/>
+  <text x="330" y="345" class="edge" font-size="11">CA (single node)</text>
+
+  <!-- vertices -->
+  <circle cx="380" cy="88" r="8" fill="#1e293b"/>
+  <text x="326" y="78" class="vertex">Consistency</text>
+  <text x="300" y="62" class="vsub">every read sees the latest write</text>
+
+  <circle cx="176" cy="340" r="8" fill="#1e293b"/>
+  <text x="60" y="368" class="vertex">Partition tolerance</text>
+  <text x="60" y="384" class="vsub">keeps working despite network splits</text>
+
+  <circle cx="584" cy="340" r="8" fill="#1e293b"/>
+  <text x="540" y="368" class="vertex">Availability</text>
+  <text x="536" y="384" class="vsub">every request gets a response</text>
+
+  <!-- explanation boxes -->
+  <rect x="24" y="410" width="235" height="82" rx="8" fill="#eff6ff" stroke="#2563eb"/>
+  <text x="38" y="432" class="lbl" fill="#2563eb">CP — consistency first</text>
+  <text x="38" y="452" class="note">During a partition, refuse/pause</text>
+  <text x="38" y="468" class="note">requests rather than serve stale data.</text>
+  <text x="38" y="486" class="db">HBase · MongoDB* · etcd · ZooKeeper</text>
+
+  <rect x="269" y="410" width="235" height="82" rx="8" fill="#f0fdf4" stroke="#059669"/>
+  <text x="283" y="432" class="lbl" fill="#059669">AP — availability first</text>
+  <text x="283" y="452" class="note">Keep serving during a partition;</text>
+  <text x="283" y="468" class="note">reconcile later (eventual consistency).</text>
+  <text x="283" y="486" class="db">Cassandra · DynamoDB* · Riak</text>
+
+  <rect x="514" y="410" width="222" height="82" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+  <text x="528" y="432" class="lbl">CA — not really an option</text>
+  <text x="528" y="452" class="note">"Consistent + available, no partition</text>
+  <text x="528" y="468" class="note">tolerance" describes a single machine,</text>
+  <text x="528" y="486" class="note">not a distributed system.</text>
+
+  <text x="24" y="404" class="note">* Modern systems are often tunable and don't sit cleanly in one corner — treat CAP as a lens, not a rigid label.</text>
+</svg>

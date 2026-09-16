@@ -1,0 +1,52 @@
+<svg viewBox="0 0 780 400" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .edge { font-size: 14px; font-weight: 700; fill: #ffffff; }
+    .esub { font-size: 10px; fill: #dbeafe; }
+    .cap { font-size: 12px; font-weight: 700; fill: #ffffff; }
+    .csub { font-size: 9.5px; fill: #1e293b; }
+    .end { font-size: 11px; font-weight: 700; fill: #1e293b; }
+    .note { font-size: 11px; fill: #64748b; }
+  </style>
+
+  <text x="24" y="30" class="title">A modern CDN edge does much more than cache files</text>
+
+  <!-- users -->
+  <rect x="30" y="170" width="90" height="50" rx="8" fill="#1e293b"/><text x="56" y="200" class="edge">Users</text>
+
+  <!-- edge (center) -->
+  <rect x="300" y="130" width="180" height="130" rx="12" fill="#2563eb"/>
+  <text x="330" y="162" class="edge">CDN Edge</text>
+  <text x="322" y="182" class="esub">the layer nearest users</text>
+  <text x="322" y="200" class="esub">— a smart proxy in front</text>
+  <text x="322" y="216" class="esub">of your origin</text>
+
+  <!-- origin -->
+  <rect x="660" y="170" width="90" height="50" rx="8" fill="#64748b"/><text x="682" y="200" class="edge">Origin</text>
+
+  <line x1="120" y1="195" x2="298" y2="195" stroke="#059669" stroke-width="2.5"/>
+  <line x1="482" y1="195" x2="658" y2="195" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="150" y="186" class="note">fast, nearby</text>
+  <text x="510" y="186" class="note">only on miss</text>
+
+  <!-- capability chips around edge -->
+  <rect x="40" y="70" width="200" height="40" rx="8" fill="#3b82f6"/><text x="52" y="88" class="cap">Static caching</text><text x="52" y="103" class="csub">images, CSS, JS, video chunks</text>
+  <rect x="290" y="60" width="200" height="40" rx="8" fill="#3b82f6"/><text x="302" y="78" class="cap">Dynamic acceleration</text><text x="302" y="93" class="csub">optimized routes to origin</text>
+  <rect x="540" y="70" width="210" height="40" rx="8" fill="#3b82f6"/><text x="552" y="88" class="cap">Edge compute</text><text x="552" y="103" class="csub">run code at the edge, near users</text>
+
+  <rect x="40" y="290" width="200" height="40" rx="8" fill="#059669"/><text x="52" y="308" class="cap">TLS termination</text><text x="52" y="323" class="csub">HTTPS handshakes at the edge</text>
+  <rect x="290" y="300" width="200" height="40" rx="8" fill="#059669"/><text x="302" y="318" class="cap">DDoS &amp; WAF</text><text x="302" y="333" class="csub">absorb/filter attacks (Security topic)</text>
+  <rect x="540" y="290" width="210" height="40" rx="8" fill="#059669"/><text x="552" y="308" class="cap">Image / video optimization</text><text x="552" y="323" class="csub">resize, compress, adapt</text>
+
+  <!-- connectors -->
+  <g stroke="#cbd5e1" stroke-width="1.3">
+    <line x1="140" y1="110" x2="330" y2="130"/>
+    <line x1="390" y1="100" x2="390" y2="128"/>
+    <line x1="640" y1="110" x2="452" y2="130"/>
+    <line x1="140" y1="290" x2="330" y2="258"/>
+    <line x1="390" y1="300" x2="390" y2="260"/>
+    <line x1="640" y1="290" x2="452" y2="258"/>
+  </g>
+
+  <text x="24" y="370" class="note">Because the edge already sits in the request path near every user, it's the natural place to also handle security, TLS, and lightweight compute.</text>
+</svg>

@@ -1,0 +1,51 @@
+<svg viewBox="0 0 780 430" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .panel { font-size: 14px; font-weight: 700; fill: #1e293b; }
+    .mono { font-size: 12px; font-family: 'Consolas','Courier New',monospace; fill: #1e293b; }
+    .tag { font-size: 10px; font-weight: 700; fill: #ffffff; }
+    .note { font-size: 10.5px; fill: #64748b; }
+  </style>
+
+  <text x="24" y="30" class="title">Anatomy of an HTTP request &amp; response (same in every version)</text>
+
+  <!-- REQUEST -->
+  <rect x="24" y="48" width="366" height="330" rx="10" fill="#eff6ff" stroke="#93c5fd"/>
+  <text x="44" y="72" class="panel" fill="#2563eb">Request (client → server)</text>
+
+  <rect x="44" y="86" width="60" height="20" rx="4" fill="#2563eb"/><text x="54" y="101" class="tag">method</text>
+  <rect x="112" y="86" width="70" height="20" rx="4" fill="#7c3aed"/><text x="126" y="101" class="tag">path</text>
+  <text x="44" y="128" class="mono">GET /users/42 HTTP/1.1</text>
+
+  <text x="44" y="158" class="note">headers →</text>
+  <text x="44" y="178" class="mono">Host: api.example.com</text>
+  <text x="44" y="198" class="mono">Accept: application/json</text>
+  <text x="44" y="218" class="mono">Authorization: Bearer eyJ…</text>
+
+  <text x="44" y="252" class="note">body → (empty for GET; JSON for POST/PUT)</text>
+  <rect x="44" y="264" width="322" height="96" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="56" y="286" class="note">POST example body:</text>
+  <text x="56" y="308" class="mono">{ "name": "Asha",</text>
+  <text x="56" y="328" class="mono">  "role": "admin" }</text>
+
+  <!-- RESPONSE -->
+  <rect x="410" y="48" width="366" height="330" rx="10" fill="#f0fdf4" stroke="#86efac"/>
+  <text x="430" y="72" class="panel" fill="#059669">Response (server → client)</text>
+
+  <rect x="430" y="86" width="90" height="20" rx="4" fill="#059669"/><text x="440" y="101" class="tag">status code</text>
+  <text x="430" y="128" class="mono">HTTP/1.1 200 OK</text>
+
+  <text x="430" y="158" class="note">headers →</text>
+  <text x="430" y="178" class="mono">Content-Type: application/json</text>
+  <text x="430" y="198" class="mono">Cache-Control: max-age=60</text>
+  <text x="430" y="218" class="mono">ETag: "a1b2c3"</text>
+
+  <text x="430" y="252" class="note">body →</text>
+  <rect x="430" y="264" width="322" height="96" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="442" y="286" class="mono">{ "id": 42,</text>
+  <text x="442" y="306" class="mono">  "name": "Asha",</text>
+  <text x="442" y="326" class="mono">  "role": "admin" }</text>
+
+  <text x="24" y="402" class="note">Methods: GET · POST · PUT · PATCH · DELETE · HEAD · OPTIONS.   Status classes: 1xx info · 2xx success · 3xx redirect · 4xx client error · 5xx server error.</text>
+  <text x="24" y="420" class="note">HTTP is stateless: each request stands alone; cookies / tokens add session state (auth is a Security-topic concern).</text>
+</svg>

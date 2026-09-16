@@ -1,0 +1,35 @@
+<svg viewBox="0 0 820 400" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <rect width="820" height="400" fill="#f8fafc"/>
+  <text x="410" y="34" text-anchor="middle" font-size="21" font-weight="700" fill="#0f172a">Which Diagram, When?</text>
+  <text x="410" y="58" text-anchor="middle" font-size="13" fill="#64748b">Use the smallest diagram that answers the question you actually have — never draw all of them</text>
+
+  <!-- header -->
+  <rect x="30" y="78" width="250" height="30" rx="5" fill="#e0e7ff" stroke="#6366f1"/><text x="155" y="98" text-anchor="middle" font-size="12" font-weight="700" fill="#4338ca">Question you're asking</text>
+  <rect x="290" y="78" width="240" height="30" rx="5" fill="#e0e7ff" stroke="#6366f1"/><text x="410" y="98" text-anchor="middle" font-size="12" font-weight="700" fill="#4338ca">Reach for</text>
+  <rect x="540" y="78" width="250" height="30" rx="5" fill="#e0e7ff" stroke="#6366f1"/><text x="665" y="98" text-anchor="middle" font-size="12" font-weight="700" fill="#4338ca">Family</text>
+
+  <g font-size="10.5">
+    <rect x="30" y="114" width="250" height="42" rx="5" fill="#ffffff" stroke="#cbd5e1"/><text x="44" y="140" fill="#334155">"What classes &amp; how related?"</text>
+    <rect x="290" y="114" width="240" height="42" rx="5" fill="#eff6ff" stroke="#93c5fd"/><text x="304" y="140" font-weight="700" fill="#1d4ed8">Class diagram</text>
+    <rect x="540" y="114" width="250" height="42" rx="5" fill="#eff6ff" stroke="#93c5fd"/><text x="554" y="140" fill="#1e3a8a">Structural</text>
+
+    <rect x="30" y="162" width="250" height="42" rx="5" fill="#ffffff" stroke="#cbd5e1"/><text x="44" y="188" fill="#334155">"How do objects interact for X?"</text>
+    <rect x="290" y="162" width="240" height="42" rx="5" fill="#f0fdf4" stroke="#6ee7b7"/><text x="304" y="188" font-weight="700" fill="#047857">Sequence diagram</text>
+    <rect x="540" y="162" width="250" height="42" rx="5" fill="#f0fdf4" stroke="#6ee7b7"/><text x="554" y="188" fill="#065f46">Behavioral</text>
+
+    <rect x="30" y="210" width="250" height="42" rx="5" fill="#ffffff" stroke="#cbd5e1"/><text x="44" y="236" fill="#334155">"What's the workflow / logic?"</text>
+    <rect x="290" y="210" width="240" height="42" rx="5" fill="#f0fdf4" stroke="#6ee7b7"/><text x="304" y="236" font-weight="700" fill="#047857">Activity diagram</text>
+    <rect x="540" y="210" width="250" height="42" rx="5" fill="#f0fdf4" stroke="#6ee7b7"/><text x="554" y="236" fill="#065f46">Behavioral</text>
+
+    <rect x="30" y="258" width="250" height="42" rx="5" fill="#ffffff" stroke="#cbd5e1"/><text x="44" y="284" fill="#334155">"What states can this object be in?"</text>
+    <rect x="290" y="258" width="240" height="42" rx="5" fill="#f0fdf4" stroke="#6ee7b7"/><text x="304" y="284" font-weight="700" fill="#047857">State machine</text>
+    <rect x="540" y="258" width="250" height="42" rx="5" fill="#f0fdf4" stroke="#6ee7b7"/><text x="554" y="284" fill="#065f46">Behavioral</text>
+
+    <rect x="30" y="306" width="250" height="42" rx="5" fill="#ffffff" stroke="#cbd5e1"/><text x="44" y="332" fill="#334155">"Who uses the system &amp; why?"</text>
+    <rect x="290" y="306" width="240" height="42" rx="5" fill="#f0fdf4" stroke="#6ee7b7"/><text x="304" y="332" font-weight="700" fill="#047857">Use case diagram</text>
+    <rect x="540" y="306" width="250" height="42" rx="5" fill="#f0fdf4" stroke="#6ee7b7"/><text x="554" y="332" fill="#065f46">Behavioral</text>
+  </g>
+
+  <rect x="30" y="358" width="760" height="34" rx="8" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.6"/>
+  <text x="410" y="379" text-anchor="middle" font-size="11" font-weight="700" fill="#6d28d9">For LLD interviews &amp; design, the big two are Class (structure) and Sequence (interaction). Master those first.</text>
+</svg>

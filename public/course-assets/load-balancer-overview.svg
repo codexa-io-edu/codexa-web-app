@@ -1,0 +1,51 @@
+<svg viewBox="0 0 800 420" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .box { font-size: 13px; font-weight: 700; fill: #ffffff; }
+    .lbl { font-size: 11px; font-weight: 700; fill: #1e293b; }
+    .note { font-size: 10.5px; fill: #64748b; }
+    .hc { font-size: 9.5px; font-weight: 700; fill: #059669; }
+  </style>
+
+  <text x="24" y="30" class="title">A load balancer: one entry point, many servers behind it</text>
+
+  <!-- clients -->
+  <text x="60" y="70" class="lbl">Clients</text>
+  <rect x="40" y="80" width="90" height="30" rx="6" fill="#64748b"/><text x="62" y="100" class="box">user</text>
+  <rect x="40" y="120" width="90" height="30" rx="6" fill="#64748b"/><text x="62" y="140" class="box">user</text>
+  <rect x="40" y="160" width="90" height="30" rx="6" fill="#64748b"/><text x="62" y="180" class="box">user</text>
+  <rect x="40" y="200" width="90" height="30" rx="6" fill="#64748b"/><text x="62" y="220" class="box">user</text>
+
+  <!-- arrows to LB -->
+  <line x1="130" y1="95" x2="298" y2="150" stroke="#94a3b8" stroke-width="1.6"/>
+  <line x1="130" y1="135" x2="298" y2="160" stroke="#94a3b8" stroke-width="1.6"/>
+  <line x1="130" y1="175" x2="298" y2="170" stroke="#94a3b8" stroke-width="1.6"/>
+  <line x1="130" y1="215" x2="298" y2="180" stroke="#94a3b8" stroke-width="1.6"/>
+
+  <!-- LB -->
+  <rect x="300" y="120" width="150" height="90" rx="10" fill="#2563eb"/>
+  <text x="375" y="155" text-anchor="middle" class="box">Load Balancer</text>
+  <text x="375" y="176" text-anchor="middle" font-size="10.5" fill="#dbeafe">single virtual IP</text>
+  <text x="375" y="192" text-anchor="middle" font-size="10.5" fill="#dbeafe">+ health checks</text>
+
+  <!-- servers -->
+  <rect x="620" y="70" width="140" height="46" rx="8" fill="#059669"/><text x="690" y="98" text-anchor="middle" class="box">Server 1 ✓</text>
+  <rect x="620" y="132" width="140" height="46" rx="8" fill="#059669"/><text x="690" y="160" text-anchor="middle" class="box">Server 2 ✓</text>
+  <rect x="620" y="194" width="140" height="46" rx="8" fill="#dc2626"/><text x="690" y="222" text-anchor="middle" class="box">Server 3 ✗ down</text>
+  <rect x="620" y="256" width="140" height="46" rx="8" fill="#059669"/><text x="690" y="284" text-anchor="middle" class="box">Server 4 ✓</text>
+
+  <!-- LB to servers -->
+  <line x1="450" y1="150" x2="616" y2="93" stroke="#059669" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="450" y1="160" x2="616" y2="155" stroke="#059669" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="450" y1="175" x2="616" y2="217" stroke="#dc2626" stroke-width="2" stroke-dasharray="5,4"/>
+  <line x1="450" y1="185" x2="616" y2="279" stroke="#059669" stroke-width="2" marker-end="url(#a)"/>
+  <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#059669"/></marker></defs>
+
+  <text x="470" y="212" class="hc">✗ failed health check → removed from pool</text>
+
+  <!-- footer -->
+  <rect x="24" y="330" width="752" height="72" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="40" y="354" class="note">The load balancer sits between clients and a pool of identical servers. It gives clients <tspan font-weight="700">one address</tspan> to reach,</text>
+  <text x="40" y="374" class="note">spreads incoming requests across healthy servers, and continuously <tspan font-weight="700">health-checks</tspan> the pool — quietly routing around Server 3</text>
+  <text x="40" y="394" class="note">until it recovers. This is what lets you add servers to handle more load (horizontal scaling) and survive individual failures.</text>
+</svg>

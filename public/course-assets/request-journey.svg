@@ -1,0 +1,61 @@
+<svg viewBox="0 0 960 420" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="im" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2563eb"/>
+    </marker>
+    <marker id="im2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0d9488"/>
+    </marker>
+    <marker id="imd" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#b45309"/>
+    </marker>
+  </defs>
+  <rect width="960" height="420" fill="#ffffff"/>
+  <text x="480" y="32" text-anchor="middle" fill="#0f172a" font-size="18" font-weight="700">The Journey of a Web Request</text>
+
+  <!-- DNS box -->
+  <rect x="30" y="58" width="180" height="52" rx="10" fill="#f59e0b"/>
+  <text x="120" y="80" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">DNS Resolver</text>
+  <text x="120" y="98" text-anchor="middle" fill="#fef3c7" font-size="11">the internet's phone book</text>
+
+  <!-- Browser -->
+  <rect x="30" y="180" width="180" height="100" rx="12" fill="#1e293b"/>
+  <text x="120" y="222" text-anchor="middle" fill="#fff" font-size="15" font-weight="700">Your Browser</text>
+  <text x="120" y="244" text-anchor="middle" fill="#cbd5e1" font-size="12">(client / device)</text>
+
+  <!-- DNS lookup arrows -->
+  <line x1="120" y1="180" x2="120" y2="114" stroke="#b45309" stroke-width="2" marker-end="url(#imd)"/>
+  <line x1="150" y1="114" x2="150" y2="176" stroke="#b45309" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#imd)"/>
+  <text x="228" y="140" text-anchor="start" fill="#b45309" font-size="12" font-weight="600">1. name → IP address</text>
+
+  <!-- Internet cloud -->
+  <rect x="360" y="150" width="300" height="160" rx="70" fill="#e0f2fe" stroke="#38bdf8" stroke-width="1.6"/>
+  <text x="510" y="180" text-anchor="middle" fill="#0369a1" font-size="14" font-weight="700">THE INTERNET</text>
+  <text x="510" y="300" text-anchor="middle" fill="#0369a1" font-size="11">ISPs · routers · backbone</text>
+  <circle cx="430" cy="230" r="12" fill="#0ea5e9"/><circle cx="500" cy="205" r="12" fill="#0ea5e9"/>
+  <circle cx="560" cy="245" r="12" fill="#0ea5e9"/><circle cx="480" cy="265" r="12" fill="#0ea5e9"/>
+  <circle cx="590" cy="200" r="12" fill="#0ea5e9"/>
+  <line x1="430" y1="230" x2="500" y2="205" stroke="#7dd3fc" stroke-width="2"/>
+  <line x1="500" y1="205" x2="590" y2="200" stroke="#7dd3fc" stroke-width="2"/>
+  <line x1="500" y1="205" x2="480" y2="265" stroke="#7dd3fc" stroke-width="2"/>
+  <line x1="480" y1="265" x2="560" y2="245" stroke="#7dd3fc" stroke-width="2"/>
+  <line x1="560" y1="245" x2="590" y2="200" stroke="#7dd3fc" stroke-width="2"/>
+
+  <!-- Web server -->
+  <rect x="780" y="180" width="160" height="100" rx="12" fill="#0d9488"/>
+  <text x="860" y="222" text-anchor="middle" fill="#fff" font-size="15" font-weight="700">Web Server</text>
+  <text x="860" y="244" text-anchor="middle" fill="#ccfbf1" font-size="12">(hosts the site)</text>
+
+  <!-- Request path (top, blue) -->
+  <line x1="210" y1="205" x2="356" y2="205" stroke="#2563eb" stroke-width="2.4" marker-end="url(#im)"/>
+  <line x1="662" y1="205" x2="776" y2="205" stroke="#2563eb" stroke-width="2.4" marker-end="url(#im)"/>
+  <text x="285" y="196" text-anchor="middle" fill="#2563eb" font-size="11" font-weight="600">2. connect (TCP/TLS)</text>
+  <text x="720" y="196" text-anchor="middle" fill="#2563eb" font-size="11" font-weight="600">3. HTTP request</text>
+
+  <!-- Response path (bottom, teal) -->
+  <line x1="776" y1="255" x2="662" y2="255" stroke="#0d9488" stroke-width="2.4" marker-end="url(#im2)"/>
+  <line x1="356" y1="255" x2="210" y2="255" stroke="#0d9488" stroke-width="2.4" marker-end="url(#im2)"/>
+  <text x="500" y="345" text-anchor="middle" fill="#0d9488" font-size="12" font-weight="600">4. Server sends the response back → browser renders the page</text>
+
+  <text x="480" y="392" text-anchor="middle" fill="#64748b" font-size="12">Name is resolved to an address, a connection is opened, the request travels across many networks, and the reply returns.</text>
+</svg>

@@ -1,0 +1,44 @@
+<svg viewBox="0 0 820 430" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <rect width="820" height="430" fill="#f8fafc"/>
+  <text x="410" y="34" text-anchor="middle" font-size="21" font-weight="700" fill="#0f172a">The Four Coffman Conditions</text>
+  <text x="410" y="58" text-anchor="middle" font-size="13" fill="#64748b">ALL four must hold for deadlock — break any ONE and deadlock becomes impossible</text>
+
+  <!-- 1 Mutual Exclusion -->
+  <rect x="40" y="82" width="360" height="140" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <circle cx="80" cy="118" r="18" fill="#2563eb"/><text x="80" y="123" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">1</text>
+  <text x="112" y="115" font-size="14" font-weight="700" fill="#1d4ed8">Mutual Exclusion</text>
+  <text x="60" y="146" font-size="10.5" fill="#334155">A resource can be held by only one thread</text>
+  <text x="60" y="164" font-size="10.5" fill="#334155">at a time (the whole point of a lock).</text>
+  <text x="60" y="192" font-size="10" font-weight="700" fill="#047857">Break it: use lock-free / immutable /</text>
+  <text x="60" y="208" font-size="10" fill="#047857">shareable resources where possible.</text>
+
+  <!-- 2 Hold and Wait -->
+  <rect x="420" y="82" width="360" height="140" rx="12" fill="#fff7ed" stroke="#d97706" stroke-width="2"/>
+  <circle cx="460" cy="118" r="18" fill="#d97706"/><text x="460" y="123" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">2</text>
+  <text x="492" y="115" font-size="14" font-weight="700" fill="#b45309">Hold and Wait</text>
+  <text x="440" y="146" font-size="10.5" fill="#334155">A thread holds one resource while waiting</text>
+  <text x="440" y="164" font-size="10.5" fill="#334155">to acquire another.</text>
+  <text x="440" y="192" font-size="10" font-weight="700" fill="#047857">Break it: acquire ALL locks at once, or</text>
+  <text x="440" y="208" font-size="10" fill="#047857">hold none while waiting.</text>
+
+  <!-- 3 No Preemption -->
+  <rect x="40" y="234" width="360" height="140" rx="12" fill="#faf5ff" stroke="#7c3aed" stroke-width="2"/>
+  <circle cx="80" cy="270" r="18" fill="#7c3aed"/><text x="80" y="275" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">3</text>
+  <text x="112" y="267" font-size="14" font-weight="700" fill="#6d28d9">No Preemption</text>
+  <text x="60" y="298" font-size="10.5" fill="#334155">A resource can't be forcibly taken away;</text>
+  <text x="60" y="316" font-size="10.5" fill="#334155">it's released only voluntarily.</text>
+  <text x="60" y="344" font-size="10" font-weight="700" fill="#047857">Break it: tryLock with timeout &#8594; give up</text>
+  <text x="60" y="360" font-size="10" fill="#047857">and release what you hold, then retry.</text>
+
+  <!-- 4 Circular Wait -->
+  <rect x="420" y="234" width="360" height="140" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <circle cx="460" cy="270" r="18" fill="#dc2626"/><text x="460" y="275" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">4</text>
+  <text x="492" y="267" font-size="14" font-weight="700" fill="#b91c1c">Circular Wait</text>
+  <text x="440" y="298" font-size="10.5" fill="#334155">A cycle of threads each waiting for a</text>
+  <text x="440" y="316" font-size="10.5" fill="#334155">resource held by the next.</text>
+  <text x="440" y="344" font-size="10" font-weight="700" fill="#047857">Break it: global lock ordering &#8212; the</text>
+  <text x="440" y="360" font-size="10" fill="#047857">most practical cure (acquire in fixed order).</text>
+
+  <rect x="150" y="388" width="520" height="34" rx="8" fill="#ecfdf5" stroke="#059669" stroke-width="1.4"/>
+  <text x="410" y="409" text-anchor="middle" font-size="11" font-weight="700" fill="#047857">In practice: break Circular Wait with consistent lock ordering. It's the easiest of the four to eliminate.</text>
+</svg>

@@ -1,0 +1,40 @@
+<svg viewBox="0 0 760 380" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .box { font-size: 13px; font-weight: 700; fill: #ffffff; }
+    .bsub { font-size: 10px; fill: #e2e8f0; }
+    .step { font-size: 11px; font-weight: 700; fill: #1e293b; }
+    .note { font-size: 11px; fill: #64748b; }
+    .ok { font-size: 11px; font-weight: 700; fill: #059669; }
+    .risk { font-size: 11px; font-weight: 700; fill: #dc2626; }
+  </style>
+
+  <text x="24" y="30" class="title">Write-Back: ack from cache instantly, flush to DB later</text>
+
+  <rect x="40" y="100" width="120" height="56" rx="8" fill="#1e293b"/><text x="72" y="126" class="box">App</text><text x="52" y="144" class="bsub">1000 increments</text>
+  <rect x="320" y="100" width="140" height="56" rx="8" fill="#059669"/><text x="352" y="126" class="box">Cache</text><text x="332" y="144" class="bsub">counter += 1 (fast)</text>
+  <rect x="620" y="100" width="120" height="56" rx="8" fill="#64748b"/><text x="646" y="126" class="box">Database</text><text x="640" y="144" class="bsub">updated later</text>
+
+  <!-- 1 write cache -->
+  <path d="M 160 118 L 318 118" stroke="#334155" stroke-width="2"/><polygon points="314,113 324,118 314,123" fill="#334155"/>
+  <text x="185" y="110" class="step">1 · write to cache</text>
+  <!-- ack immediate -->
+  <path d="M 320 140 C 250 165, 220 165, 162 145" fill="none" stroke="#059669" stroke-width="2"/><polygon points="166,140 156,146 167,151" fill="#059669"/>
+  <text x="170" y="180" class="ok">2 · ack immediately ✓ (no DB wait)</text>
+
+  <!-- async flush -->
+  <path d="M 460 128 L 618 128" stroke="#d97706" stroke-width="2" stroke-dasharray="6,4"/><polygon points="614,123 624,128 614,133" fill="#d97706"/>
+  <text x="470" y="110" class="step" fill="#d97706">3 · background flush (batched/coalesced)</text>
+  <text x="470" y="176" class="note">1000 increments → one DB write.</text>
+
+  <!-- risk window -->
+  <rect x="320" y="210" width="140" height="40" rx="6" fill="#fee2e2" stroke="#dc2626"/>
+  <text x="336" y="234" class="risk">💥 crash here</text>
+  <path d="M 390 156 L 390 208" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="3,3"/>
+
+  <rect x="24" y="272" width="712" height="98" rx="8" fill="#fef2f2" stroke="#fca5a5"/>
+  <text x="40" y="296" class="step" fill="#b91c1c">The trade</text>
+  <text x="40" y="318" class="note">✓ Writes are as fast as the cache, and batching turns thousands of DB writes into a few — a massive win for hot counters.</text>
+  <text x="40" y="336" class="risk">✗ If the cache node crashes before the flush, the un-persisted writes are lost (e.g. the last few seconds of increments).</text>
+  <text x="40" y="356" class="note">Mitigate with cache replication, a durable write queue, and frequent flushes. Never use for money or data you can't lose.</text>
+</svg>
